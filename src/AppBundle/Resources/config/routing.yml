@@ -1,0 +1,12 @@
+app_homepage:
+    path:     /
+    defaults: { _controller: AppBundle:Default:index }
+    
+filrouge_user:
+    resource: "@AppBundle/Resources/config/user.yml"
+    prefix:   /user
+    
+filrouge_project:
+    resource: "@AppBundle/Resources/config/project.yml"
+    prefix:   /project
+

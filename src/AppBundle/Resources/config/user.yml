@@ -1,0 +1,7 @@
+user_list:
+    path:     /
+    defaults: { _controller: AppBundle:User:list }
+    
+user_detail:
+    path:     /
+    defaults: { _controller: AppBundle:User:index }
