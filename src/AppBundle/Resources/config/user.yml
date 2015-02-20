@@ -1,7 +1,22 @@
-user_list:
-    path:     /
-    defaults: { _controller: AppBundle:User:list }
-    
-user_detail:
-    path:     /
-    defaults: { _controller: AppBundle:User:index }
+filrouge_user_list:
+    path: /
+    defaults: {_controller:AppBundle:User:list}
+
+filrouge_user_detail:
+    path: /detail/{id}
+    defaults: {_controller:AppBundle:User:detail, id :1}
+    requirements:
+        id: \d+
+
+filrouge_user_update:
+    path: /update/{id}
+    defaults: {_controller:AppBundle:User:update, id :1}
+    requirements:
+        id: \d+
+
+filrouge_user_remove:
+    path: /remove/{id}
+    defaults: {_controller:AppBundle:User:remove, id :1}
+    requirements:
+        id: \d+
+

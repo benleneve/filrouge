@@ -2,12 +2,63 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        <title>{% block title %}Bienvenue{% endblock title %}</title>
+        {% block stylesheets %}
+            <link rel="stylesheet" href=" {{ asset('bundles/blog/css/bootstrap.min.css') }} ">
+            <link rel="stylesheet" href=" {{ asset('bundles/blog/css/styles.css') }} ">
+        {% endblock stylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+
+        <header>
+            <div class="container">
+                {% block header %}
+                {% endblock header %}
+            </div>
+        </header>
+            
+        <nav>
+            <div class="container">
+                {% block menu %}
+                    <ul id="menu">
+                        <li role="presentation">
+                            <a href="{{path('blog_homepage')}}">Accueil</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="{{path('blog_article_add')}}">Projets</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="{{path('blog_article_add')}}">Profils</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="{{path('blog_article_add')}}">Administration</a>
+                        </li>
+                    </ul>
+                {% endblock menu %}
+            </div>
+        </nav>
+            
+        <div class="container">
+            <div class="breadcrumb">
+                {% block breadcrumb %} 
+                {% endblock breadcrumb %} 
+            </div>
+        </div>  
+   
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer>
+            <div class="container">
+            </div>
+        </footer>
+
+        {% block javascripts %}
+            <script src=" {{ asset('bundles/blog/js/bootstrap.min.js') }} "></script>
+        {% endblock %}
+   
     </body>
 </html>

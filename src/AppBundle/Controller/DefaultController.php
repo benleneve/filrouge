@@ -3,11 +3,13 @@
 namespace AppBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
-class DefaultController extends Controller
-{
-    public function indexAction($name)
+class DefaultController extends Controller {
+    
+    public function indexAction(Request $req) 
     {
-        return $this->render('AppBundle:Default:index.html.twig', array('name' => $name));
+        return new Response('Page index du site');
     }
 }

@@ -1,0 +1,25 @@
+filrouge_project_list:
+    path: /
+    defaults: {_controller:AppBundle:Project:list}
+
+filrouge_project_detail:
+    path: /detail/{id}
+    defaults: {_controller:AppBundle:Project:detail, id :1}
+    requirements:
+        id: \d+
+
+filrouge_project_add:
+    path: /add
+    defaults: {_controller:AppBundle:Project:add}
+
+filrouge_project_update:
+    path: /update/{id}
+    defaults: {_controller:AppBundle:Project:update, id :1}
+    requirements:
+        id: \d+
+
+filrouge_project_remove:
+    path: /remove/{id}
+    defaults: {_controller:AppBundle:Project:remove, id :1}
+    requirements:
+        id: \d+
