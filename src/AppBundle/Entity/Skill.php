@@ -2,13 +2,15 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Skill
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\SkillRepository")
+ * @ORM\Entity(repositoryClass="SkillRepository")
  */
 class Skill
 {
@@ -31,11 +33,34 @@ class Skill
     /**
      * @var array
      * 
-     * @ORM\ManyToOne(targetEntity="Skill", mappedBy="skill")
+     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="skill")
      */
     private $userSkills;
+    
+    /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="skills")
+     */
+    private $projects;
+    
+    /**
+     * @var Category
+     * 
+     * @ORM\ManyToOne(targetEntity="Category", inversedBy="skills")
+     */
+    private $category;
 
-
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->userSkills = new ArrayCollection();
+        $this->projects = new ArrayCollection();
+    }
+     
     /**
      * Get id
      *
@@ -67,5 +92,94 @@ class Skill
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Add userSkills
+     *
+     * @param UserSkill $userSkills
+     * @return Skill
+     */
+    public function addUserSkill(UserSkill $userSkills)
+    {
+        $this->userSkills[] = $userSkills;
+
+        return $this;
+    }
+
+    /**
+     * Remove userSkills
+     *
+     * @param UserSkill $userSkills
+     */
+    public function removeUserSkill(UserSkill $userSkills)
+    {
+        $this->userSkills->removeElement($userSkills);
+    }
+
+    /**
+     * Get userSkills
+     *
+     * @return Collection 
+     */
+    public function getUserSkills()
+    {
+        return $this->userSkills;
+    }
+
+    /**
+     * Add projects
+     *
+     * @param Project $projects
+     * @return Skill
+     */
+    public function addProject(Project $projects)
+    {
+        $this->projects[] = $projects;
+
+        return $this;
+    }
+
+    /**
+     * Remove projects
+     *
+     * @param Project $projects
+     */
+    public function removeProject(Project $projects)
+    {
+        $this->projects->removeElement($projects);
+    }
+
+    /**
+     * Get projects
+     *
+     * @return Collection 
+     */
+    public function getProjects()
+    {
+        return $this->projects;
+    }
+
+    /**
+     * Set category
+     *
+     * @param Category $category
+     * @return Skill
+     */
+    public function setCategory(Category $category = null)
+    {
+        $this->category = $category;
+
+        return $this;
+    }
+
+    /**
+     * Get category
+     *
+     * @return Category 
+     */
+    public function getCategory()
+    {
+        return $this->category;
     }
 }

@@ -2,13 +2,15 @@
 
 namespace AppBundle\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Status
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\StatusRepository")
+ * @ORM\Entity(repositoryClass="StatusRepository")
  */
 class Status
 {
@@ -27,7 +29,21 @@ class Status
      * @ORM\Column(name="name", type="string", length=255)
      */
     private $name;
-
+    
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="status")
+     */
+    private $projects;
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->projects = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -60,5 +76,38 @@ class Status
     public function getName()
     {
         return $this->name;
+    }
+    
+    /**
+     * Add projects
+     *
+     * @param Project $projects
+     * @return Status
+     */
+    public function addProject(Project $projects)
+    {
+        $this->projects[] = $projects;
+
+        return $this;
+    }
+
+    /**
+     * Remove projects
+     *
+     * @param Project $projects
+     */
+    public function removeProject(Project $projects)
+    {
+        $this->projects->removeElement($projects);
+    }
+
+    /**
+     * Get projects
+     *
+     * @return Collection 
+     */
+    public function getProjects()
+    {
+        return $this->projects;
     }
 }

@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Step
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\StepRepository")
+ * @ORM\Entity(repositoryClass="StepRepository")
  */
 class Step
 {
@@ -34,6 +34,13 @@ class Step
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="steps")
      */
     private $project;
+    
+    /**
+     * @var Status
+     *
+     * @ORM\ManyToOne(targetEntity="Status")
+     */
+    private $status;
 
 
     /**
@@ -67,5 +74,51 @@ class Step
     public function getName()
     {
         return $this->name;
+    }
+
+    /**
+     * Set project
+     *
+     * @param Project $project
+     * @return Step
+     */
+    public function setProject(Project $project = null)
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return Project 
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * Set status
+     *
+     * @param Status $status
+     * @return Step
+     */
+    public function setStatus(Status $status = null)
+    {
+        $this->status = $status;
+
+        return $this;
+    }
+
+    /**
+     * Get status
+     *
+     * @return Status 
+     */
+    public function getStatus()
+    {
+        return $this->status;
     }
 }

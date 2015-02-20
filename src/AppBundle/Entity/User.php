@@ -2,13 +2,16 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * User
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\UserRepository")
+ * @ORM\Entity(repositoryClass="UserRepository")
  */
 class User
 {
@@ -50,7 +53,7 @@ class User
     private $password;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="birthDate", type="date")
      */
@@ -142,11 +145,67 @@ class User
     
     /**
      * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="Promotion", mappedBy="users")
+     */
+    private $promotions;
+    
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Project", mappedBy="projectManager")
+     */
+    private $managesProjects;
+    
+    /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="Project", inversedBy="projectMembers")
+     */
+    private $worksOnProjects;
+    
+    /**
+     * @var array
+     *
+     * @ORM\ManyToMany(targetEntity="Notifications", inversedBy="users")
+     */
+    private $notifications;
+    
+    /**
+     * @var array
      * 
      * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="user")
      */
     private $userSkills;
-
+    
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="recipient")
+     */
+    private $messagesReceived;
+    
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="sender")
+     */
+    private $messagesSent;
+    
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->promotions = new ArrayCollection();
+        $this->managesProjects = new ArrayCollection();
+        $this->worksOnProjects = new ArrayCollection();
+        $this->notifications = new ArrayCollection();
+        $this->userSkills = new ArrayCollection();
+        $this->messagesReceived = new ArrayCollection();
+        $this->messagesSent = new ArrayCollection();
+    }
 
     /**
      * Get id
@@ -253,7 +312,7 @@ class User
     /**
      * Set birthDate
      *
-     * @param \DateTime $birthDate
+     * @param DateTime $birthDate
      * @return User
      */
     public function setBirthDate($birthDate)
@@ -266,7 +325,7 @@ class User
     /**
      * Get birthDate
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getBirthDate()
     {
@@ -524,5 +583,260 @@ class User
     public function getDispoAddress()
     {
         return $this->dispoAddress;
+    }
+    
+
+    /**
+     * Set image
+     *
+     * @param Image $image
+     * @return User
+     */
+    public function setImage(Image $image = null)
+    {
+        $this->image = $image;
+
+        return $this;
+    }
+
+    /**
+     * Get image
+     *
+     * @return Image 
+     */
+    public function getImage()
+    {
+        return $this->image;
+    }
+
+    /**
+     * Add promotions
+     *
+     * @param Promotion $promotions
+     * @return User
+     */
+    public function addPromotion(Promotion $promotions)
+    {
+        $this->promotions[] = $promotions;
+
+        return $this;
+    }
+
+    /**
+     * Remove promotions
+     *
+     * @param Promotion $promotions
+     */
+    public function removePromotion(Promotion $promotions)
+    {
+        $this->promotions->removeElement($promotions);
+    }
+
+    /**
+     * Get promotions
+     *
+     * @return Collection 
+     */
+    public function getPromotions()
+    {
+        return $this->promotions;
+    }
+
+    /**
+     * Add managesProjects
+     *
+     * @param Project $managesProjects
+     * @return User
+     */
+    public function addManagesProject(Project $managesProjects)
+    {
+        $this->managesProjects[] = $managesProjects;
+
+        return $this;
+    }
+
+    /**
+     * Remove managesProjects
+     *
+     * @param Project $managesProjects
+     */
+    public function removeManagesProject(Project $managesProjects)
+    {
+        $this->managesProjects->removeElement($managesProjects);
+    }
+
+    /**
+     * Get managesProjects
+     *
+     * @return Collection 
+     */
+    public function getManagesProjects()
+    {
+        return $this->managesProjects;
+    }
+
+    /**
+     * Add worksOnProjects
+     *
+     * @param Project $worksOnProjects
+     * @return User
+     */
+    public function addWorksOnProject(Project $worksOnProjects)
+    {
+        $this->worksOnProjects[] = $worksOnProjects;
+
+        return $this;
+    }
+
+    /**
+     * Remove worksOnProjects
+     *
+     * @param Project $worksOnProjects
+     */
+    public function removeWorksOnProject(Project $worksOnProjects)
+    {
+        $this->worksOnProjects->removeElement($worksOnProjects);
+    }
+
+    /**
+     * Get worksOnProjects
+     *
+     * @return Collection 
+     */
+    public function getWorksOnProjects()
+    {
+        return $this->worksOnProjects;
+    }
+
+    /**
+     * Add notifications
+     *
+     * @param \AppBundle\Entity\Notifications $notifications
+     * @return User
+     */
+    public function addNotification(\AppBundle\Entity\Notifications $notifications)
+    {
+        $this->notifications[] = $notifications;
+
+        return $this;
+    }
+
+    /**
+     * Remove notifications
+     *
+     * @param \AppBundle\Entity\Notifications $notifications
+     */
+    public function removeNotification(\AppBundle\Entity\Notifications $notifications)
+    {
+        $this->notifications->removeElement($notifications);
+    }
+
+    /**
+     * Get notifications
+     *
+     * @return Collection 
+     */
+    public function getNotifications()
+    {
+        return $this->notifications;
+    }
+
+    /**
+     * Add userSkills
+     *
+     * @param UserSkill $userSkills
+     * @return User
+     */
+    public function addUserSkill(UserSkill $userSkills)
+    {
+        $this->userSkills[] = $userSkills;
+
+        return $this;
+    }
+
+    /**
+     * Remove userSkills
+     *
+     * @param UserSkill $userSkills
+     */
+    public function removeUserSkill(UserSkill $userSkills)
+    {
+        $this->userSkills->removeElement($userSkills);
+    }
+
+    /**
+     * Get userSkills
+     *
+     * @return Collection 
+     */
+    public function getUserSkills()
+    {
+        return $this->userSkills;
+    }
+
+    /**
+     * Add messagesReceived
+     *
+     * @param Message $messagesReceived
+     * @return User
+     */
+    public function addMessagesReceived(Message $messagesReceived)
+    {
+        $this->messagesReceived[] = $messagesReceived;
+
+        return $this;
+    }
+
+    /**
+     * Remove messagesReceived
+     *
+     * @param Message $messagesReceived
+     */
+    public function removeMessagesReceived(Message $messagesReceived)
+    {
+        $this->messagesReceived->removeElement($messagesReceived);
+    }
+
+    /**
+     * Get messagesReceived
+     *
+     * @return Collection 
+     */
+    public function getMessagesReceived()
+    {
+        return $this->messagesReceived;
+    }
+
+    /**
+     * Add messagesSent
+     *
+     * @param Message $messagesSent
+     * @return User
+     */
+    public function addMessagesSent(Message $messagesSent)
+    {
+        $this->messagesSent[] = $messagesSent;
+
+        return $this;
+    }
+
+    /**
+     * Remove messagesSent
+     *
+     * @param Message $messagesSent
+     */
+    public function removeMessagesSent(Message $messagesSent)
+    {
+        $this->messagesSent->removeElement($messagesSent);
+    }
+
+    /**
+     * Get messagesSent
+     *
+     * @return Collection 
+     */
+    public function getMessagesSent()
+    {
+        return $this->messagesSent;
     }
 }

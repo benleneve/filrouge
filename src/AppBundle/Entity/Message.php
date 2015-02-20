@@ -2,13 +2,14 @@
 
 namespace AppBundle\Entity;
 
+use DateTime;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Message
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\MessageRepository")
+ * @ORM\Entity(repositoryClass="MessageRepository")
  */
 class Message
 {
@@ -22,7 +23,7 @@ class Message
     private $id;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="creationDate", type="datetime")
      */
@@ -41,7 +42,29 @@ class Message
      * @ORM\Column(name="type", type="integer")
      */
     private $type;
-
+    
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messagesSent")
+     */
+    private $sender;
+    
+    /**
+     * @var User
+     *
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="messagesReceived")
+     */
+    private $recipient;
+    
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->creationDate = new DateTime();
+    }
 
     /**
      * Get id
@@ -56,7 +79,7 @@ class Message
     /**
      * Set creationDate
      *
-     * @param \DateTime $creationDate
+     * @param DateTime $creationDate
      * @return Message
      */
     public function setCreationDate($creationDate)
@@ -69,7 +92,7 @@ class Message
     /**
      * Get creationDate
      *
-     * @return \DateTime 
+     * @return DateTime 
      */
     public function getCreationDate()
     {
@@ -120,5 +143,51 @@ class Message
     public function getType()
     {
         return $this->type;
+    }
+
+    /**
+     * Set sender
+     *
+     * @param User $sender
+     * @return Message
+     */
+    public function setSender(User $sender = null)
+    {
+        $this->sender = $sender;
+
+        return $this;
+    }
+
+    /**
+     * Get sender
+     *
+     * @return User 
+     */
+    public function getSender()
+    {
+        return $this->sender;
+    }
+
+    /**
+     * Set recipient
+     *
+     * @param User $recipient
+     * @return Message
+     */
+    public function setRecipient(User $recipient = null)
+    {
+        $this->recipient = $recipient;
+
+        return $this;
+    }
+
+    /**
+     * Get recipient
+     *
+     * @return User 
+     */
+    public function getRecipient()
+    {
+        return $this->recipient;
     }
 }
