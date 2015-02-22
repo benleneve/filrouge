@@ -1,0 +1,24 @@
+{% extends "::base.html.twig" %}
+
+{% block title %}IMIE - Fil Rouge{% endblock title %}
+
+{% block breadcrumb %}
+    <a href="{{path('filrouge_homepage')}}">Accueil</a>
+{% endblock breadcrumb %}
+
+{% block content %}
+    <div class="container">
+
+        <div id="left">
+            {% block left %}
+            {% endblock left %}
+        </div>
+        
+        <aside>
+            {% block right %}
+            {% endblock right %} 
+        </aside>
+        
+        <div class="clear"></div>     
+    </div>
+{% endblock content %}

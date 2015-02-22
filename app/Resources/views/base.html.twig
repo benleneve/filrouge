@@ -4,8 +4,7 @@
         <meta charset="UTF-8" />
         <title>{% block title %}Bienvenue{% endblock title %}</title>
         {% block stylesheets %}
-            <link rel="stylesheet" href=" {{ asset('bundles/blog/css/bootstrap.min.css') }} ">
-            <link rel="stylesheet" href=" {{ asset('bundles/blog/css/styles.css') }} ">
+            <link rel="stylesheet" href=" {{ asset('bundles/app/css/styles.css') }} ">
         {% endblock stylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
@@ -14,6 +13,22 @@
         <header>
             <div class="container">
                 {% block header %}
+                    <div id="logoIMIE">
+                        <img alt="Logo_IMIE" src="{{asset('bundles/app/images/logo_imie.png')}}" />
+                    </div>
+                    <div id="logoCity">
+                        <div id="nantes">
+                            Nantes
+                        </div>
+                        <div id="rennes">
+                            Rennes
+                        </div>
+                        <div id="angers">
+                            Angers
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
                 {% endblock header %}
             </div>
         </header>
@@ -21,18 +36,18 @@
         <nav>
             <div class="container">
                 {% block menu %}
-                    <ul id="menu">
-                        <li role="presentation">
-                            <a href="{{path('blog_homepage')}}">Accueil</a>
+                    <ul id="menuHeader">
+                        <li role="presentation" class="first-child">
+                            <a href="{{path('filrouge_homepage')}}">Accueil</a>
                         </li>
                         <li role="presentation">
-                            <a href="{{path('blog_article_add')}}">Projets</a>
+                            <a href="{{path('filrouge_project_detail')}}">Projets</a>
                         </li>
                         <li role="presentation">
-                            <a href="{{path('blog_article_add')}}">Profils</a>
+                            <a href="{{path('filrouge_user_list')}}">Profils</a>
                         </li>
                         <li role="presentation">
-                            <a href="{{path('blog_article_add')}}">Administration</a>
+                            <a href="{{path('filrouge_admin')}}">Administration</a>
                         </li>
                     </ul>
                 {% endblock menu %}
@@ -53,11 +68,23 @@
 
         <footer>
             <div class="container">
+                {% block footer %}
+                    <ul id="menuFooter">
+                        <li role="presentation" class="first-child">
+                            <a href="#">Site de l'imie</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#">Mentions légales</a>
+                        </li>
+                        <li role="presentation">
+                            <a href="#">Contact Administrateur</a>
+                        </li>
+                    </ul>
+                {% endblock footer %}
             </div>
         </footer>
 
         {% block javascripts %}
-            <script src=" {{ asset('bundles/blog/js/bootstrap.min.js') }} "></script>
         {% endblock %}
    
     </body>

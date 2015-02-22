@@ -8,8 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller {
     
-    public function indexAction(Request $req) 
+    public function indexAction() 
     {
-        return new Response('Page index du site');
+        return $this->render('AppBundle:Default:index.html.twig');   
     }
 }
