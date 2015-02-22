@@ -160,7 +160,7 @@ class User
     /**
      * @var array
      *
-     * @ORM\ManyToMany(targetEntity="Project", inversedBy="projectMembers")
+     * @ORM\OneToMany(targetEntity="UserProject", mappedBy="user")
      */
     private $worksOnProjects;
     
@@ -618,6 +618,7 @@ class User
     public function addPromotion(Promotion $promotions)
     {
         $this->promotions[] = $promotions;
+        $promotions->addUser($this);
 
         return $this;
     }

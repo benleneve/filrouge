@@ -158,6 +158,7 @@ class Notification
     public function setProject(Project $project = null)
     {
         $this->project = $project;
+        $project->addNotification($this);
 
         return $this;
     }
@@ -181,6 +182,7 @@ class Notification
     public function addUser(User $users)
     {
         $this->users[] = $users;
+        $users->addNotification($this);
 
         return $this;
     }

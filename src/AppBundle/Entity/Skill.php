@@ -40,9 +40,9 @@ class Skill
     /**
      * @var array
      *
-     * @ORM\ManyToMany(targetEntity="Project", inversedBy="skills")
+     * @ORM\OneToMany(targetEntity="ProjectSkill", mappedBy="skill")
      */
-    private $projects;
+    private $projectSkills;
     
     /**
      * @var Category
@@ -58,7 +58,7 @@ class Skill
     public function __construct()
     {
         $this->userSkills = new ArrayCollection();
-        $this->projects = new ArrayCollection();
+        $this->projectSkills = new ArrayCollection();
     }
      
     /**
@@ -128,36 +128,36 @@ class Skill
     }
 
     /**
-     * Add projects
+     * Add projectSkills
      *
-     * @param Project $projects
+     * @param ProjectSkill $projectSkills
      * @return Skill
      */
-    public function addProject(Project $projects)
+    public function addProjectSkills(ProjectSkill $projectSkills)
     {
-        $this->projects[] = $projects;
+        $this->projectSkills[] = $projectSkills;
 
         return $this;
     }
 
     /**
-     * Remove projects
+     * Remove projectSkills
      *
-     * @param Project $projects
+     * @param ProjectSkill $projectSkills
      */
-    public function removeProject(Project $projects)
+    public function removeProjectSkill(ProjectSkill $projectSkills)
     {
-        $this->projects->removeElement($projects);
+        $this->projectSkills->removeElement($projectSkills);
     }
 
     /**
-     * Get projects
+     * Get projectSkills
      *
      * @return Collection 
      */
-    public function getProjects()
+    public function getProjectSkills()
     {
-        return $this->projects;
+        return $this->projectSkills;
     }
 
     /**
@@ -169,6 +169,7 @@ class Skill
     public function setCategory(Category $category = null)
     {
         $this->category = $category;
+        $category->addSkill($this);
 
         return $this;
     }

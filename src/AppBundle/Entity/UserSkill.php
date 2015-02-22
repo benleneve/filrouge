@@ -12,45 +12,31 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class UserSkill
 {
+    
     /**
      * @var integer
-     *
-     * @ORM\Column(name="id", type="integer")
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="AUTO")
-     */
-    private $id;
-
-    /**
-     * @var integer
-     *
+     * 
      * @ORM\Column(name="level", type="integer")
      */
     private $level;
 
     /**
      * @var User
-     *
+     * 
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="User", inversedBy="userSkills")
      */
     private $user;
     
     /**
      * @var Skill
-     * 
+     *
+     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Skill", inversedBy="userSkills")
      */
     private $skill;
 
-    /**
-     * Get id
-     *
-     * @return integer 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
+
 
     /**
      * Set level
@@ -84,6 +70,7 @@ class UserSkill
     public function setUser(\AppBundle\Entity\User $user = null)
     {
         $this->user = $user;
+        $user->addUserSkill($this);
 
         return $this;
     }
@@ -107,6 +94,7 @@ class UserSkill
     public function setSkill(\AppBundle\Entity\Skill $skill = null)
     {
         $this->skill = $skill;
+        $skill->addUserSkill($this);
 
         return $this;
     }

@@ -154,6 +154,7 @@ class Message
     public function setSender(User $sender = null)
     {
         $this->sender = $sender;
+        $sender->addMessagesSent($this);
 
         return $this;
     }
@@ -177,6 +178,7 @@ class Message
     public function setRecipient(User $recipient = null)
     {
         $this->recipient = $recipient;
+        $recipient->addMessagesReceived($this);
 
         return $this;
     }

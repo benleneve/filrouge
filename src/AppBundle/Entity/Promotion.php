@@ -125,6 +125,7 @@ class Promotion
     public function setSchool(School $school = null)
     {
         $this->school = $school;
+        $school->addPromotion($this);
 
         return $this;
     }

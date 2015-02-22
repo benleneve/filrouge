@@ -76,7 +76,7 @@ class Project
     /**
      * @var array
      *
-     * @ORM\ManyToMany(targetEntity="User", inversedBy="worksOnProjects")
+     * @ORM\OneToMany(targetEntity="UserProject", mappedBy="project")
      */
     private $projectMembers;
     
@@ -97,9 +97,9 @@ class Project
     /**
      * @var array
      *
-     * @ORM\ManyToMany(targetEntity="Skill", mappedBy="projects")
+     * @ORM\OneToMany(targetEntity="ProjectSkill", mappedBy="project")
      */
-    private $skills;
+    private $projectSkills;
     
     /**
      * @var array
@@ -116,7 +116,7 @@ class Project
     {
         $this->projectMembers = new ArrayCollection();
         $this->steps = new ArrayCollection();
-        $this->skills = new ArrayCollection();
+        $this->projectSkills = new ArrayCollection();
         $this->notifications = new ArrayCollection();
         $this->creationDate = new DateTime();
     }
@@ -279,6 +279,7 @@ class Project
     public function setProjectManager(User $projectManager = null)
     {
         $this->projectManager = $projectManager;
+        $projectManager->addManagesProject($this);
 
         return $this;
     }
@@ -368,6 +369,7 @@ class Project
     public function setStatus(Status $status = null)
     {
         $this->status = $status;
+        $status->addProject($this);
 
         return $this;
     }
@@ -383,36 +385,36 @@ class Project
     }
 
     /**
-     * Add skills
+     * Add projectSkills
      *
-     * @param Skill $skills
+     * @param ProjectSkill $projectSkills
      * @return Project
      */
-    public function addSkill(Skill $skills)
+    public function addProjectSkill(ProjectSkill $projectSkills)
     {
-        $this->skills[] = $skills;
+        $this->projectSkills[] = $projectSkills;
 
         return $this;
     }
 
     /**
-     * Remove skills
+     * Remove projectSkills
      *
-     * @param Skill $skills
+     * @param ProjectSkill $projectSkills
      */
-    public function removeSkill(Skill $skills)
+    public function removeProjectSkill(ProjectSkill $projectSkills)
     {
-        $this->skills->removeElement($skills);
+        $this->projectSkills->removeElement($projectSkills);
     }
 
     /**
-     * Get skills
+     * Get projectSkills
      *
      * @return Collection 
      */
-    public function getSkills()
+    public function getProjectSkills()
     {
-        return $this->skills;
+        return $this->projectSkills;
     }
 
     /**
