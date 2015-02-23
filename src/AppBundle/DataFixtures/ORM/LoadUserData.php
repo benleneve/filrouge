@@ -258,7 +258,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setPassword("userpass")
                       ->setBirthDate(20/02/1990)
                       ->setEmail("user11@imie.fr")
-                      ->setAddress("25 boulevard des Cracottes")
+                      ->setAddress("125 boulevard des Cracottes")
                       ->setPostCode("44100")
                       ->setCity("Nantes")
                       ->setPhone(0785412562)
