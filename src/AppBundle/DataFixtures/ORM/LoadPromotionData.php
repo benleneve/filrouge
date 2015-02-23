@@ -12,7 +12,7 @@ class LoadPromotionData extends AbstractFixtures implements OrderedFixtureInterf
         public function load($manager)
             {
                $promotion1 = new Promotion();
-               $promotion1->setName("DL05")
+               $promotion1->setName("DL51")
                           ->setYear(2010)
                           ->setSchool($this->getReference("school1"));
                $manager->persist($promotion1);
