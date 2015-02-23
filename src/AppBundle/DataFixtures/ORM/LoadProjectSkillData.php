@@ -16,20 +16,20 @@ class LoadProjectSkillData extends AbstractFixture implements OrderedFixtureInte
         
         $active1 = new ProjectSkill();
         $active1->setActive(true)
-                ->setProject($project4)
-                ->setSkill($skill5);
+                ->setProject($this->getReference("project4"))
+                ->setSkill($this->getReference("skill5"));
         $manager->persist($active1);
         
         $active2 = new ProjectSkill();
         $active2->setActive(false)
-                ->setProject($project2)
-                ->setSkill($skill8);
+                ->setProject($this->getReference("project2"))
+                ->setSkill($this->getReference("skill8"));
         $manager->persist($active2);
         
         $active3 = new ProjectSkill();
         $active3->setActive(false)
-                ->setProject($project5)
-                ->setSkill($skill20);
+                ->setProject($this->getReference("project5"))
+                ->setSkill($this->getReference("skill20"));
         $manager->persist($active3);
     }
     

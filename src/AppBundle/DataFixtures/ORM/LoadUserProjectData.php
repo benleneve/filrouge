@@ -7,7 +7,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadNotificationData extends AbstractFixture implements OrderedFixtureInterface {
+class LoadUserProjectData extends AbstractFixture implements OrderedFixtureInterface {
     
     /**
      * {@inheritDoc}
@@ -36,13 +36,13 @@ class LoadNotificationData extends AbstractFixture implements OrderedFixtureInte
         $userProject4->setProject($this->getReference('project6'))
                     ->setUser($this->getReference('user5'))
                     ->setSkill('NodeJS');
-        $manager->persist($userProject1);
+        $manager->persist($userProject4);
         
         $userProject5 = new UserProject();
         $userProject5->setProject($this->getReference('project6'))
                     ->setUser($this->getReference('user3'))
                     ->setSkill('Photoshop');
-        $manager->persist($userProject1);
+        $manager->persist($userProject5);
         
         $userProject6 = new UserProject();
         $userProject6->setProject($this->getReference('project6'))

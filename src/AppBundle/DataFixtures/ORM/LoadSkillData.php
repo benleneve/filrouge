@@ -126,28 +126,28 @@ class LoadSkillData extends AbstractFixture implements OrderedFixtureInterface {
         
         $manager->flush();
         
-        $this->addReference('PHP', $skill1);
-        $this->addReference('SQL', $skill2);
-        $this->addReference('Java', $skill3);
-        $this->addReference('ASP', $skill4);
-        $this->addReference('C++', $skill5);
-        $this->addReference('HTML', $skill6);
-        $this->addReference('CSS', $skill7);
-        $this->addReference('Javascript', $skill8);
-        $this->addReference('Securite', $skill9);
-        $this->addReference('Materiel', $skill10);
-        $this->addReference('Protocole de communication', $skill11);
-        $this->addReference('Windows', $skill12);
-        $this->addReference('Linux', $skill13);
-        $this->addReference('Unix', $skill14);
-        $this->addReference('Hardware', $skill15);
-        $this->addReference('Wi-Fi', $skill16);
-        $this->addReference('Virtualisation', $skill17);
-        $this->addReference('Routage', $skill18);
-        $this->addReference('Protocoles', $skill19);
-        $this->addReference('Illustrator', $skill20);
-        $this->addReference('Photoshop', $skill21);
-        $this->addReference('Xpress', $skill22);
+        $this->addReference('skill1', $skill1);
+        $this->addReference('skill2', $skill2);
+        $this->addReference('skill3', $skill3);
+        $this->addReference('skill4', $skill4);
+        $this->addReference('skill5', $skill5);
+        $this->addReference('skill6', $skill6);
+        $this->addReference('skill7', $skill7);
+        $this->addReference('skill8', $skill8);
+        $this->addReference('skill9', $skill9);
+        $this->addReference('skill10', $skill10);
+        $this->addReference('skill11', $skill11);
+        $this->addReference('skill12', $skill12);
+        $this->addReference('skill13', $skill13);
+        $this->addReference('skill14', $skill14);
+        $this->addReference('skill15', $skill15);
+        $this->addReference('skill16', $skill16);
+        $this->addReference('skill17', $skill17);
+        $this->addReference('skill18', $skill18);
+        $this->addReference('skill19', $skill19);
+        $this->addReference('skill20', $skill20);
+        $this->addReference('skill21', $skill21);
+        $this->addReference('skill22', $skill22);
     }
     
     public function getOrder() {
