@@ -18,7 +18,7 @@ class LoadSchoolData extends AbstractFixtures implements OrderedFixtureInterface
                
                 
                 $school2 = new School();
-                $school2->setName("Angers");
+                $school2->setName("Anger");
                 $manager->persist($school2);
                 $this->addReference("school2", $school2);
                

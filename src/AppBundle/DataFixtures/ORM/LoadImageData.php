@@ -13,7 +13,7 @@ class LoadImageData extends AbstractFixtures implements OrderedFixtureInterface
             {
                 $image1 = new Image();
                 $image1->setUrl("http://www.journaldugeek.com/files/2014/01/mr-geek-600x356.jpg")
-                        ->setAlt("Image de profil");
+                        ->setAlt("Image de profil 1");
                 $manager->persist($image1);
                 $this->addReference("image1", $image1);
                 
