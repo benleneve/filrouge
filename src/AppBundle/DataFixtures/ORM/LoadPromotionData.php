@@ -7,9 +7,9 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadPromotionData extends AbstractFixtures implements OrderedFixtureInterface
+class LoadPromotionData extends AbstractFixture implements OrderedFixtureInterface
     {
-        public function load($manager)
+        public function load(ObjectManager $manager)
             {
                $promotion1 = new Promotion();
                $promotion1->setName("DL51")

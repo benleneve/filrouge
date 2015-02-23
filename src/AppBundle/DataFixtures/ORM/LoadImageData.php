@@ -7,9 +7,9 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadImageData extends AbstractFixtures implements OrderedFixtureInterface
+class LoadImageData extends AbstractFixture implements OrderedFixtureInterface
     {
-        public function load($manager)
+        public function load(ObjectManager $manager)
             {
                 $image1 = new Image();
                 $image1->setUrl("http://www.journaldugeek.com/files/2014/01/mr-geek-600x356.jpg")

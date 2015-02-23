@@ -7,9 +7,9 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
+class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
     {
-        public function load($manager)
+        public function load(ObjectManager $manager)
             {
                 $user1 = new User();
                 $user1->setFirstName("Guillaumette")
@@ -31,7 +31,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image1"))
                       ->addPromotion($this->getReference("promotion1"));
                 $manager->persist($user1);
-                $this->addReference("user1" , $user1);
+                $this->addReference("user1", $user1);
                 
                 
                       
@@ -55,7 +55,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image2"))
                       ->addPromotion($this->getReference("promotion2"));
                 $manager->persist($user2);
-                $this->addReference("user2" , $user2);
+                $this->addReference("user2", $user2);
                 
                 
                       
@@ -79,7 +79,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image3"))
                       ->addPromotion($this->getReference("promotion1"));
                 $manager->persist($user3);
-                $this->addReference("user3" , $user3);
+                $this->addReference("user3", $user3);
                 
                 
                       
@@ -103,7 +103,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image4"))
                       ->addPromotion($this->getReference("promotion3"));
                 $manager->persist($user4);
-                $this->addReference("user4" , $user4);
+                $this->addReference("user4", $user4);
                 
                 
                       
@@ -127,7 +127,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image5"))
                       ->addPromotion($this->getReference("promotion6"));
                 $manager->persist($user5);
-                $this->addReference("user5" , $user5);
+                $this->addReference("user5", $user5);
                 
                 
                       
@@ -151,7 +151,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image6"))
                       ->addPromotion($this->getReference("promotion8"));
                 $manager->persist($user6);
-                $this->addReference("user6" , $user6);
+                $this->addReference("user6", $user6);
                 
                 
                       
@@ -175,7 +175,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image7"))
                       ->addPromotion($this->getReference("promotion9"));
                 $manager->persist($user7);
-                $this->addReference("user7" , $user7);
+                $this->addReference("user7", $user7);
                 
                 
                       
@@ -199,7 +199,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image8"))
                       ->addPromotion($this->getReference("promotion10"));
                 $manager->persist($user8);
-                $this->addReference("user8" , $user8);
+                $this->addReference("user8", $user8);
                 
                 
                       
@@ -223,7 +223,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image9"))
                       ->addPromotion($this->getReference("promotion6"));
                 $manager->persist($user9);
-                $this->addReference("user9" , $user9);
+                $this->addReference("user9", $user9);
                 
                 
                       
@@ -247,7 +247,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image10"))
                       ->addPromotion($this->getReference("promotion10"));
                 $manager->persist($user10);
-                $this->addReference("user10" , $user10);
+                $this->addReference("user10", $user10);
                 
                 
                       
@@ -271,7 +271,7 @@ class LoadUserData extends AbstractFixtures implements OrderedFixtureInterface
                       ->setImage($this->getReference("image11"))
                       ->addPromotion($this->getReference("promotion11"));
                 $manager->persist($user11);
-                $this->addReference("user11" , $user11);
+                $this->addReference("user11", $user11);
                 
                 $manager->flush();
                       

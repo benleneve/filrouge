@@ -7,9 +7,9 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadSchoolData extends AbstractFixtures implements OrderedFixtureInterface
+class LoadSchoolData extends AbstractFixture implements OrderedFixtureInterface
     {
-        public function load($manager)
+        public function load(ObjectManager $manager)
             {
                 $school1 = new School();
                 $school1->setName("Nantes");
