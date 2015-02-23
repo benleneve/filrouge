@@ -167,7 +167,7 @@ class User
     /**
      * @var array
      *
-     * @ORM\ManyToMany(targetEntity="Notifications", inversedBy="users")
+     * @ORM\ManyToMany(targetEntity="Notification", inversedBy="users")
      */
     private $notifications;
     
