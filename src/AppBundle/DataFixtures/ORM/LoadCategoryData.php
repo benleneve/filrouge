@@ -33,6 +33,6 @@ class LoadCategoryData extends AbstractFixture implements OrderedFixtureInterfac
         $this->addReference('Graphiste', $category3);
     }
     public function getOrder() {
-        return 1;
+        return 5;
     }
 }

@@ -14,29 +14,41 @@ class LoadUserSkillData extends AbstractFixture implements OrderedFixtureInterfa
      */
     public function load(ObjectManager $manager) {
         
-        $level1 = new Level();
-        $level1->setLevel('0');
-        $manager->persist($level1);
+        $userSkill1 = new UserSkill();
+        $userSkill1->setLevel('0')
+                ->setSkill($this->getReference('PHP'))
+                ->setUser($this->getReference('user1'));
+        $manager->persist($userSkill1);
         
-        $level2 = new Level();
-        $level2->setLevel('1');
-        $manager->persist($level2);
+        $userSkill2 = new UserSkill();
+        $userSkill2->setLevel('0')
+                ->setSkill($this->getReference('Java'))
+                ->setUser($this->getReference('user2'));
+        $manager->persist($userSkill2);
         
-        $level3 = new Level();
-        $level3->setLevel('2');
-        $manager->persist($level3);
+        $userSkill3 = new UserSkill();
+        $userSkill3->setLevel('0')
+                ->setSkill($this->getReference('Protocoles'))
+                ->setUser($this->getReference('user3'));
+        $manager->persist($userSkill3);
         
-        $level4 = new Level();
-        $level4->setLevel('3');
-        $manager->persist($level4);
+        $userSkill4 = new UserSkill();
+        $userSkill4->setLevel('0')
+                ->setSkill($this->getReference('CSS'))
+                ->setUser($this->getReference('user4'));
+        $manager->persist($userSkill4);
         
-        $level5 = new Level();
-        $level5->setLevel('4');
-        $manager->persist($level5);
+        $userSkill5 = new UserSkill();
+        $userSkill5->setLevel('0')
+                ->setSkill($this->getReference('Hardware'))
+                ->setUser($this->getReference('user5'));
+        $manager->persist($userSkill5);
         
-        $level6 = new Level();
-        $level6->setLevel('5');
-        $manager->persist($level6);
+        $userSkill6 = new UserSkill();
+        $userSkill6->setLevel('0')
+                ->setSkill($this->getReference('Photoshop'))
+                ->setUser($this->getReference('user6'));
+        $manager->persist($userSkill6);
         
         $manager->flush();
         
@@ -44,7 +56,7 @@ class LoadUserSkillData extends AbstractFixture implements OrderedFixtureInterfa
     
     public function getOrder(){
         
-        return 27;
+        return 10;
         
     } 
     
