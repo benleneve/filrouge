@@ -14,7 +14,7 @@ class LoadNotificationData extends AbstractFixture implements OrderedFixtureInte
      */
     public function load(ObjectManager $manager) {
        
-        $userProject1 = new UserProject();
+        $userProject1 = new UserProjectg();
         $userProject1->setProject($this->getReference('project'))
                     ->setUser($this->getReference('user'))
                     ->setSkill();
