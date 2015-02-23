@@ -3,8 +3,6 @@
 namespace AppBundle\Entity;
 
 use DateTime;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -52,20 +50,12 @@ class Notification
      */
     private $project;
     
-    /**
-     * @var array
-     *
-     * @ORM\ManyToMany(targetEntity="User", mappedBy="notifications")
-     */
-    private $users;
-
     
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->users = new ArrayCollection();
         $this->creationDate = new DateTime();
     }
 
@@ -172,38 +162,5 @@ class Notification
     {
         return $this->project;
     }
-
-    /**
-     * Add users
-     *
-     * @param User $users
-     * @return Notification
-     */
-    public function addUser(User $users)
-    {
-        $this->users[] = $users;
-        $users->addNotification($this);
-
-        return $this;
-    }
-
-    /**
-     * Remove users
-     *
-     * @param User $users
-     */
-    public function removeUser(User $users)
-    {
-        $this->users->removeElement($users);
-    }
-
-    /**
-     * Get users
-     *
-     * @return Collection 
-     */
-    public function getUsers()
-    {
-        return $this->users;
-    }
+    
 }

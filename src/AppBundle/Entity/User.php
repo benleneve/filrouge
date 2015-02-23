@@ -166,13 +166,6 @@ class User
     
     /**
      * @var array
-     *
-     * @ORM\ManyToMany(targetEntity="Notification", inversedBy="users")
-     */
-    private $notifications;
-    
-    /**
-     * @var array
      * 
      * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="user")
      */
@@ -201,7 +194,6 @@ class User
         $this->promotions = new ArrayCollection();
         $this->managesProjects = new ArrayCollection();
         $this->worksOnProjects = new ArrayCollection();
-        $this->notifications = new ArrayCollection();
         $this->userSkills = new ArrayCollection();
         $this->messagesReceived = new ArrayCollection();
         $this->messagesSent = new ArrayCollection();
@@ -707,39 +699,6 @@ class User
     public function getWorksOnProjects()
     {
         return $this->worksOnProjects;
-    }
-
-    /**
-     * Add notifications
-     *
-     * @param \AppBundle\Entity\Notifications $notifications
-     * @return User
-     */
-    public function addNotification(\AppBundle\Entity\Notifications $notifications)
-    {
-        $this->notifications[] = $notifications;
-
-        return $this;
-    }
-
-    /**
-     * Remove notifications
-     *
-     * @param \AppBundle\Entity\Notifications $notifications
-     */
-    public function removeNotification(\AppBundle\Entity\Notifications $notifications)
-    {
-        $this->notifications->removeElement($notifications);
-    }
-
-    /**
-     * Get notifications
-     *
-     * @return Collection 
-     */
-    public function getNotifications()
-    {
-        return $this->notifications;
     }
 
     /**
