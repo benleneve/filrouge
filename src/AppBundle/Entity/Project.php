@@ -297,10 +297,10 @@ class Project
     /**
      * Add projectMembers
      *
-     * @param User $projectMembers
+     * @param UserProject $projectMembers
      * @return Project
      */
-    public function addProjectMember(User $projectMembers)
+    public function addProjectMember(UserProject $projectMembers)
     {
         $this->projectMembers[] = $projectMembers;
 
@@ -310,9 +310,9 @@ class Project
     /**
      * Remove projectMembers
      *
-     * @param User $projectMembers
+     * @param UserProject $projectMembers
      */
-    public function removeProjectMember(User $projectMembers)
+    public function removeProjectMember(UserProject $projectMembers)
     {
         $this->projectMembers->removeElement($projectMembers);
     }

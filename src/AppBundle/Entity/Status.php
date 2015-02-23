@@ -37,6 +37,14 @@ class Status
      */
     private $projects;
     
+    
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Step", mappedBy="status")
+     */
+    private $steps;
+    
     /**
      * Constructor
      */
@@ -109,5 +117,38 @@ class Status
     public function getProjects()
     {
         return $this->projects;
+    }
+
+    /**
+     * Add steps
+     *
+     * @param \AppBundle\Entity\Step $steps
+     * @return Status
+     */
+    public function addStep(\AppBundle\Entity\Step $steps)
+    {
+        $this->steps[] = $steps;
+
+        return $this;
+    }
+
+    /**
+     * Remove steps
+     *
+     * @param \AppBundle\Entity\Step $steps
+     */
+    public function removeStep(\AppBundle\Entity\Step $steps)
+    {
+        $this->steps->removeElement($steps);
+    }
+
+    /**
+     * Get steps
+     *
+     * @return \Doctrine\Common\Collections\Collection 
+     */
+    public function getSteps()
+    {
+        return $this->steps;
     }
 }

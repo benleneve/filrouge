@@ -671,10 +671,10 @@ class User
     /**
      * Add worksOnProjects
      *
-     * @param Project $worksOnProjects
+     * @param UserProject $worksOnProjects
      * @return User
      */
-    public function addWorksOnProject(Project $worksOnProjects)
+    public function addWorksOnProject(UserProject $worksOnProjects)
     {
         $this->worksOnProjects[] = $worksOnProjects;
 
@@ -684,9 +684,9 @@ class User
     /**
      * Remove worksOnProjects
      *
-     * @param Project $worksOnProjects
+     * @param UserProject $worksOnProjects
      */
-    public function removeWorksOnProject(Project $worksOnProjects)
+    public function removeWorksOnProject(UserProject $worksOnProjects)
     {
         $this->worksOnProjects->removeElement($worksOnProjects);
     }

@@ -35,10 +35,10 @@ class Step
      */
     private $project;
     
-    /**
+     /**
      * @var Status
      *
-     * @ORM\OneToOne(targetEntity="Status")
+     * @ORM\ManyToOne(targetEntity="Status", inversedBy="steps")
      */
     private $status;
 
@@ -109,7 +109,7 @@ class Step
     public function setStatus(Status $status = null)
     {
         $this->status = $status;
-
+        $status->addStep($this);
         return $this;
     }
 
