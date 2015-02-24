@@ -1,0 +1,29 @@
+<div>
+    {{ user.lastName ~ " " ~ user.firstName }}
+    {% if (user.promotions|length != 0) %}
+       {% for promotion in user.promotions %} {{promotion.name ~ ' - ' ~ promotion.school.name}} {% endfor %} 
+    {% else %}
+        Staff
+    {% endif %}
+    {{ user.availability ? 'Disponible' : 'Indisponible' }}
+</div>
+
+
+
+<div>
+    {% if (user.userSkills|length !=0) %}
+       {% for userSkill in user.userSkills %} {{userSkill.skill.name ~ ' - ' ~ userSkill.level}} {% endfor %}
+    {% else %}
+        {{ "Incompétent(e)!" }}  
+    {% endif %}
+</div>
+
+Nombre de projets en cours : {{ user.worksOnProjects|length }}
+
+
+
+<a href="{{path('filrouge_user_detail', {'id': user.id})}}">
+    <button> Voir le profil </button>
+</a>
+
+

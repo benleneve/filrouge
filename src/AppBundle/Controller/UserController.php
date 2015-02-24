@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UserController extends Controller {
     
-    public function listAction(Request $req) 
+    public function listAction() 
         {
              $repo = $this->getDoctrine()
                           ->getManager()
@@ -17,17 +17,18 @@ class UserController extends Controller {
            
              $user = $repo->findAllUsersEager();
              
-             return $this->render('AppBundle:User:allusers.html.twig',
+             return $this->render('AppBundle:User:userslist.html.twig',
                                        array(
                                         'users' => $user
                                         ));
     }
     
-    public function detailAction($id, Request $req) {
-            $prod = $this->getDoctrine()
+    public function detailAction($id) {
+            $user = $this->getDoctrine()
                          ->getRepository('AppBundle:User')
                          ->findOneUserEager($id);
-            
+          
+        
             return $this->render('AppBundle:User:userDetail.html.twig',
                                        array(
                                         'user' => $user
@@ -48,7 +49,7 @@ class UserController extends Controller {
             return new Response("Bientôt, il y aura un super formulaire ici :) ");
         }
     
-    public function removeAction($id, Request $req) 
+    public function removeAction($id) 
         {
             $user = $this->getDoctrine()
                          ->getRepository('AppBundle:User')
@@ -68,5 +69,7 @@ class UserController extends Controller {
             $url = $this->generateUrl('filrouge_user_list');
                             
             return $this->redirect($url);
-    }
+        }
+    
+        
 }

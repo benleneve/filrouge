@@ -1,0 +1,26 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}
+       Tous les profils
+{% endblock title %}
+
+{% block left %}
+    
+    <div class="blocRechercheUser">
+        Ici formulaire de recherche d'utilisateurs
+    </div>
+    
+    
+    
+    <div>
+        <h1> Tous les profils </h1> 
+            
+        {% for user in users %}
+            <ul>
+               {% include('AppBundle:User:userLayout.html.twig') %}
+            </ul>
+        {% endfor%}
+    </div>
+    
+               
+{% endblock left%}

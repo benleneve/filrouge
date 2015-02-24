@@ -88,9 +88,9 @@ class User
     private $city;
 
     /**
-     * @var integer
-     *
-     * @ORM\Column(name="phone", type="integer")
+     * @var string
+     * 
+     * @ORM\Column(name="phone", type="string")
      */
     private $phone;
 
@@ -135,6 +135,14 @@ class User
      * @ORM\Column(name="dispoAddress", type="boolean")
      */
     private $dispoAddress;
+    
+    
+     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="dispoPhone", type="boolean")
+     */
+    private $dispoPhone;
     
     /**
      * @var Image
@@ -419,7 +427,7 @@ class User
     /**
      * Set phone
      *
-     * @param integer $phone
+     * @param string $phone
      * @return User
      */
     public function setPhone($phone)
@@ -432,7 +440,7 @@ class User
     /**
      * Get phone
      *
-     * @return integer 
+     * @return string 
      */
     public function getPhone()
     {
@@ -577,7 +585,28 @@ class User
         return $this->dispoAddress;
     }
     
+    /**
+     * Set dispoPhone
+     *
+     * @param boolean $dispoPhone
+     * @return User
+     */
+    public function setDispoPhone($dispoPhone)
+    {
+        $this->dispoPhone = $dispoPhone;
 
+        return $this;
+    }
+
+    /**
+     * Get dispoPhone
+     *
+     * @return boolean 
+     */
+    public function getDispoPhone()
+    {
+        return $this->dispoPhone;
+    }
     /**
      * Set image
      *
@@ -799,4 +828,12 @@ class User
     {
         return $this->messagesSent;
     }
+    
+    public function getAge()
+        {
+            $today = new \DateTime();
+            $birthDate = $this->getBirthDate();
+            $age = date_diff($today, $birthDate, $absolute = false);
+            return $age;
+        }
 }

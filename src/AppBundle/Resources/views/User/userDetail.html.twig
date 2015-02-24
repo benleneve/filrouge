@@ -1,0 +1,45 @@
+{% extends "AppBundle::Layout.html.twig" %}
+
+{% block title %}
+	Profil de {{ " " ~ user.firstName ~ " " ~ user.lastName }}
+{%endblock title %}
+
+	
+
+{% block left %}
+    <h1> Profil de {{ " " ~ user.firstName ~ " " ~ user.lastName }} </h1>
+
+        <ul>   
+           {% include('AppBundle:User:userLayout.html.twig') %}
+           
+        {% if user.dispoBirth == true %}
+             <li> Age : {{ user.getAge()|date  }} </li> 
+        {% endif %}   
+        
+        {% if user.dispoEmail == true %}
+             <li> Email : {{ user.email }} </li> 
+        {% endif %}
+        
+        {% if user.dispoPhone == true %}
+             <li> Téléphone : {{ user.phone }} </li> 
+        {% endif %}
+         
+        {% if user.dispoAddress == true %}
+             <li> Adresse Postale 
+                 <ul>
+                     <li>{{ user.address }}</li>
+                     <li>{{ user.postCode ~ " " ~ user.city }}</li>
+                 </ul>
+            </li> 
+        {% endif %}
+        
+        {% if user.image %}
+            <img src="{{asset(user.image.url)}}" alt="{{user.image.alt}} " />
+        {% endif %}
+        </ul> <br/><br/><br/>
+         
+           
+           
+           
+{% endblock left %}
+	
