@@ -14,23 +14,49 @@ class LoadProjectSkillData extends AbstractFixture implements OrderedFixtureInte
      */
     public function load(ObjectManager $manager) {
         
-        $active1 = new ProjectSkill();
-        $active1->setActive(true)
+        $projetSkill1 = new ProjectSkill();
+        $projetSkill1->setActive(true)
                 ->setProject($this->getReference("project4"))
                 ->setSkill($this->getReference("skill5"));
-        $manager->persist($active1);
+        $manager->persist($projetSkill1);
         
-        $active2 = new ProjectSkill();
-        $active2->setActive(false)
+        $projetSkill2 = new ProjectSkill();
+        $projetSkill2->setActive(false)
                 ->setProject($this->getReference("project2"))
                 ->setSkill($this->getReference("skill8"));
-        $manager->persist($active2);
+        $manager->persist($projetSkill2);
         
-        $active3 = new ProjectSkill();
-        $active3->setActive(false)
+        $projetSkill3 = new ProjectSkill();
+        $projetSkill3->setActive(false)
                 ->setProject($this->getReference("project5"))
                 ->setSkill($this->getReference("skill20"));
-        $manager->persist($active3);
+        $manager->persist($projetSkill3);
+        
+        $projetSkill4 = new ProjectSkill();
+        $projetSkill4->setActive(true)
+                ->setProject($this->getReference("project4"))
+                ->setSkill($this->getReference("skill10"));
+        $manager->persist($projetSkill4);
+        
+        $projetSkill5 = new ProjectSkill();
+        $projetSkill5->setActive(true)
+                ->setProject($this->getReference("project2"))
+                ->setSkill($this->getReference("skill15"));
+        $manager->persist($projetSkill5);
+        
+        $projetSkill6 = new ProjectSkill();
+        $projetSkill6->setActive(true)
+                ->setProject($this->getReference("project5"))
+                ->setSkill($this->getReference("skill13"));
+        $manager->persist($projetSkill6);
+        
+        $projetSkill7 = new ProjectSkill();
+        $projetSkill7->setActive(true)
+                ->setProject($this->getReference("project4"))
+                ->setSkill($this->getReference("skill6"));
+        $manager->persist($projetSkill7);
+        
+        $manager->flush();
     }
     
     public function getORder(){
