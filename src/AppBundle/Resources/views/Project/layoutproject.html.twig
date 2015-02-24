@@ -1,0 +1,53 @@
+<div class="headerBlock">
+    <div class="buttonAction">
+        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/block_open.png')}}" />
+    </div>
+    <div class="name">
+        <h3><a href=" {{path('filrouge_project_detail', {'id': project.id } )}} ">{{project.name}}</a></h3>
+    </div>
+    <div class="skill">
+        {% if  project.projectSkills|length != 0 %}
+            Recrute :
+            {% for projectSkill in project.projectSkills %}
+                {% if projectSkill.active %}
+                    {{projectSkill.skill.name}}  
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            Recrutement terminé
+        {% endif %}
+    </div>
+    <div class="status">
+        {% if project.status.name == 'En attente' %}
+            {{project.status.name}}
+            <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_orange.png')}}" />
+        {% elseif project.status.name == 'En cours' %}
+            {{project.status.name}}
+            <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_green.png')}}" />
+        {% elseif project.status.name == 'Terminé' %}
+            {{project.status.name}}
+            <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_red.png')}}" />
+        {% endif %}
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="bodyBlock">
+   <h4>Objectif</h4>
+   {{project.purpose}}
+   <h4>Date de début</h4>
+   {{project.startDate|date('d/m/Y')}} 
+   <h4>Date de fin</h4>
+   {{project.endDate|date('d/m/Y')}}
+   <h4>Compétences manquantes</h4>
+   {% for projectSkill in project.projectSkills %}
+        {% if projectSkill.active %}
+            {{projectSkill.skill.name}}
+        {% endif %}
+   {% endfor %}
+   <p>
+        <button class="btnAction">
+            <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} ">> Voir la fiche projet</a>
+        </button>
+   </p>
+</div>

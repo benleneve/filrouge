@@ -11,5 +11,15 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class NotificationRepository extends EntityRepository
-{
+{  
+    //Récupérer tous les messages avec le nom du manager, le projet
+    public function findAllNotificationsEager() {
+        return $this->createQueryBuilder('n')
+                    ->addSelect('n')
+                    ->addSelect('p')
+                    ->leftJoin('n.project', 'p')
+                    ->orderBy('n.creationDate', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

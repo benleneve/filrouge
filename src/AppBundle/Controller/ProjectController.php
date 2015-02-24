@@ -10,12 +10,24 @@ Class ProjectController extends Controller
     {
         public function listAction()
         {
-            return new Response("Ici s'affichera la liste des projets");
+            $repository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:Project');
+            $projects = $repository->findAllPojectsEager();
+            return $this->render('AppBundle:Project:projectslist.html.twig', array(
+                    'projects' => $projects
+            ));
         }
 
         public function detailAction($id)
         {
-            return new Response("Ici s'affichera le détail du projet " . $id);
+            $repository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:Project');
+            $project = $repository->findOneProjectEager($id);
+            return $this->render('AppBundle:Project:project.html.twig', array(
+                    'project' => $project
+            ));
         }
 
         public function addAction()

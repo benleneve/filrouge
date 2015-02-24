@@ -65,12 +65,37 @@ fieldset {
 
 body {
     background: url("../images/background.png") repeat;
-    font-family: "MyriadPro-Regular", arial, sans-serif; 
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    font-size: 12px;
 }
 
 .container {
     width: 980px;
     margin: auto;
+}
+
+h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+h4 {
+    font-weight: bold;
+}
+
+a.button, button.btnAction {
+    color:#fff;
+    background:#000;
+    border:none;
+    padding: 5px;
+}
+
+a.button:hover, button.btnAction:hover {
+    color:#fff;
+}
+
+a.button:visited, button.btnAction:visited {
+    color:#fff;
 }
 
 /*HEADER*/
@@ -165,7 +190,7 @@ nav li a:hover {
     color:#000;
 }
 
-/*Content*/
+/*Content General*/
 
 #content {
    width: 100%;  
@@ -174,15 +199,88 @@ nav li a:hover {
 #content #left {
    width:  700px;
    margin-top: 20px;
-   border: 1px solid black;
    float: left; 
 }
  
 aside {
     width: 250px;
     margin-top: 20px;
-    border: 1px solid black;
     float: right;
+}
+
+/*Content block*/
+
+#content .blockGeneral {
+    width: 100%;
+    margin-bottom: 30px;  
+}
+
+#content .blockGeneral .iconeBlock {
+    float: left;
+    margin-right: 10px;
+}
+
+#content .blockGeneral .titleBlock {
+    float: left;
+}
+
+#content .blockContent {
+    width: 96%;
+    background-color: #FFF;
+    margin-top: 5px;
+    padding: 2%;
+}
+
+#content .headerBlock .buttonAction {
+    float: left;
+    margin-right: 5px;
+}
+
+#content .headerBlock .name {
+    float: left;
+    width: 200px;
+}
+
+#content .headerBlock .skill {
+    float: left;
+}
+
+#content .headerBlock .status {
+    float: right;
+}
+
+#content .headerBlock {
+    border-bottom: 1px solid #000;
+}
+
+#content .bodyBlock {
+    padding: 10px 0;
+}
+
+#content .pagination {
+    float: right;
+}
+
+/*aside*/
+
+aside .oneElement {
+    padding: 5%;
+    border-bottom: 1px solid #000;
+}
+
+aside .oneElement .icon {
+    float: left;
+    width: 15%;
+}
+
+aside .oneElement .content {
+    float: left;
+    width: 85%;
+}
+
+aside .pagination {
+    float: right;
+    padding: 10px 10px 0 0;
 }
 
 /*footer*/

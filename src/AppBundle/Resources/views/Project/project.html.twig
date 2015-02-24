@@ -1,0 +1,68 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    {{parent()}} > 
+        <a href="{{path('filrouge_project_list')}}">Projets</a> >
+        <a href="{{path('filrouge_project_detail', {'id': project.id } )}}">{{project.name}}</a>
+{% endblock breadcrumb %}
+
+{% block left %}
+    
+    <div class="blockGeneral">
+        <div class="iconeBlock">
+            <img alt="Tous mes projets" src="{{asset('bundles/app/images/project.png')}}" />
+        </div>
+        <div class="titleblock">
+            <h2>Projet</h2>
+        </div>
+        <div class="clear"></div>
+        <div class="blockContent">
+            <div class="headerBlock">
+                <div class="name">
+                    <h3>{{project.name}}</h3>
+                </div>
+                <div class="status">
+                    {% if project.status.name == 'En attente' %}
+                        {{project.status.name}}
+                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_orange.png')}}" />
+                    {% elseif project.status.name == 'En cours' %}
+                        {{project.status.name}}
+                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_green.png')}}" />
+                    {% elseif project.status.name == 'Terminé' %}
+                        {{project.status.name}}
+                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_red.png')}}" />
+                    {% endif %}
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="bodyBlock">
+                <h4>Date de début</h4>
+                {{project.startDate|date('d/m/Y')}} 
+                <h4>Date de fin</h4>
+                {{project.endDate|date('d/m/Y')}}
+                <h4>Chef de projet</h4>
+                {{project.projectManager.firstName}} {{project.projectManager.lastName}}
+                <h4>Objectif</h4>
+                {{project.purpose}}
+                <h4>Description</h4>
+                {{project.description}}
+                
+                <h4>Compétences manquantes</h4>
+                {% for projectSkill in project.projectSkills %}
+                    {{projectSkill.skill.name}}
+                {% endfor %}
+                
+                <h4>Avancement du projet</h4>
+                 {% for step in project.steps %}
+                    {{step.name}} {{step.status.name}}
+                {% endfor %}
+                
+                <h4>Membres du projet</h4>
+                 {% for member in project.projectMembers %}
+                    {{member.user.firstName}} {{member.user.LastName}} - {{member.skill}}
+                {% endfor %}    
+            </div>
+        </div>    
+    </div>
+     
+{% endblock left %}

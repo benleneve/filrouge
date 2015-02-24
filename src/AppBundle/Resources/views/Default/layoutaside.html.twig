@@ -1,0 +1,69 @@
+<div class="blockGeneral">
+    <div class="iconeBlock">
+        <img alt="Tous mes projets" src="{{asset('bundles/app/images/recrut.png')}}" />
+    </div>
+    <div class="titleblock">
+        <h2>Recrutement</h2>
+    </div>
+    <div class="clear"></div>
+    <div class="blockContent">
+        {% for message in messages %}
+            <div class="oneElement">
+                <div class="icon">
+                    {% if message.type == 1 %}
+                        <img alt="invitation" src="{{asset('bundles/app/images/recrut_invitation.png')}}" />
+                    {% elseif message.type == 2 %}
+                        <img alt="Candidature acceptée" src="{{asset('bundles/app/images/recrut_accepted.png')}}" />
+                    {% elseif message.type == 3 %}
+                        <img alt="Candidature refusée" src="{{asset('bundles/app/images/recrut_refused.png')}}" />
+                    {% endif %}
+                </div>
+                <div class="content">
+                    <p>{{message.creationDate|date('d/m/Y H:i')}}</p>
+                    <p>{{message.content}}</p>
+                </div>  
+                <div class="clear"></div>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+            <img alt="Page précedente" src="{{asset('bundles/app/images/pag_before.png')}}" />
+            <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>
+
+<div class="blockGeneral">
+    <div class="iconeBlock">
+        <img alt="Tous les projets" src="{{asset('bundles/app/images/notif.png')}}" />
+    </div>
+    <div class="titleblock">
+        <h2>Notifications</h2>
+    </div>
+    <div class="clear"></div>
+    <div class="blockContent">
+        {% for notification in notifications %}
+            <div class="oneElement">
+                <div class="icon">
+                    {% if notification.type == 1 %}
+                        <img alt="invitation" src="{{asset('bundles/app/images/notif_project.png')}}" />
+                    {% elseif notification.type == 2 %}
+                        <img alt="Candidature acceptée" src="{{asset('bundles/app/images/notif_user.png')}}" />
+                    {% elseif notification.type == 3 %}
+                        <img alt="Candidature refusée" src="{{asset('bundles/app/images/notif_skill.png')}}" />
+                    {% endif %}
+                </div>
+                <div class="content">
+                    <p>{{notification.creationDate|date('d/m/Y H:i')}}</p>
+                    <p>{{notification.content}}</p>
+                </div>
+                <div class="clear"></div>
+            </div>
+        {% endfor %}
+        <div class="pagination">
+            <img alt="Page précedente" src="{{asset('bundles/app/images/pag_before.png')}}" />
+            <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
+        </div>
+        <div class="clear"></div>
+    </div>
+</div>

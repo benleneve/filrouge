@@ -12,4 +12,13 @@ use Doctrine\ORM\EntityRepository;
  */
 class MessageRepository extends EntityRepository
 {
+    
+    //Récupérer tous les messages triés par date
+    public function findAllMessagesEager() {
+        return $this->createQueryBuilder('m')
+                    ->addSelect('m')
+                    ->orderBy('m.creationDate', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+    }
 }

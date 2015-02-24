@@ -1,26 +1,21 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block title %} Bienvenue {% endblock title %}
+{% block breadcrumb %}
+    {{parent()}} > <a href="{{path('filrouge_project_list')}}">Projets</a>
+{% endblock breadcrumb %}
 
 {% block left %}
-
+    
     <div class="blockGeneral">
         <div class="iconeBlock">
-            <img alt="Tous mes projets" src="{{asset('bundles/app/images/project.png')}}" />
+            <img alt="Tous mes projets" src="{{asset('bundles/app/images/search.png')}}" />
         </div>
         <div class="titleblock">
-            <h2>Mes projets</h2>
+            <h2>Rechercher un projet</h2>
         </div>
         <div class="clear"></div>
         <div class="blockContent">
-            {% for project in projects %}
-                {% include('AppBundle:Project:layoutproject.html.twig') %}
-            {% endfor %}
-            <div class="pagination">
-                <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
-                <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
-            </div>
-            <div class="clear"></div>
+            Bla bla bla...
         </div>
     </div>
     
@@ -43,7 +38,6 @@
             <div class="clear"></div>
         </div>
     </div>
-  
+    
+    
 {% endblock left %}
-
-
