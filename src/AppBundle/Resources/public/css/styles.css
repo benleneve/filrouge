@@ -171,6 +171,20 @@ nav li a:hover {
    width: 100%;  
 }
 
+#content #left {
+   width:  700px;
+   margin-top: 20px;
+   border: 1px solid black;
+   float: left; 
+}
+ 
+aside {
+    width: 250px;
+    margin-top: 20px;
+    border: 1px solid black;
+    float: right;
+}
+
 /*footer*/
 
 footer {
