@@ -11,5 +11,5 @@ filrouge_project:
     prefix:   /project
 
 filrouge_admin:
-    path: /admin
-    defaults: {_controller:AppBundle:Admin:list }
+    resource: "@AppBundle/Resources/config/admin.yml"
+    prefix:   /admin

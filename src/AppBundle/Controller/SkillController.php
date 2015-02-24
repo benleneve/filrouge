@@ -8,11 +8,11 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class SkillController extends Controller{
     
-    public function listAction($nbkill, $page){
+    public function listAction($nbskill, $page){
         
         $repository = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Skill');
+                            ->getRepository('AppBundle:Skill');
         $newSkill = $repository->getNewSkill();
         
         //Si le formulaire est envoyé, récupère nos valeurs
@@ -39,7 +39,7 @@ class SkillController extends Controller{
         
         //Si articles contient des résultats, on les affiche
         
-        return $this->render('FilRouge:admin.html.twig', array(
+        return $this->render('FilRouge:Admin:admin.html.twig', array(
                     'skill' => $skill,
                     'newSkill' => $newSkill
                ));
@@ -49,11 +49,11 @@ class SkillController extends Controller{
         
         $repository = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Skill');
+                            ->getRepository('AppBundle:Skill');
         $skill = $repository->getSkill($id);
         $newSkill = $repository->getNewSkill();
         
-        return $this->render('FilRouge:admin.html.twig', array(
+        return $this->render('FilRouge:Admin:admin.html.twig', array(
                     'skill' => $skill,
                     'newSkill' => $newSkill
                ));
@@ -64,7 +64,7 @@ class SkillController extends Controller{
         $user = $this->getUser();
         $skill = new Skill();
         $form = $this->createForm(new SkillType(), $skill, array(
-            'action' => $this->generateUrl('FilRouge_skill_add')
+            'action' => $this->generateUrl('AppBundle_skill_add')
         ));
         
         $form->handleRequest($req);
@@ -88,7 +88,7 @@ class SkillController extends Controller{
                             ->getManager()
                             ->getRepository('FilRouge:Skill');
         $newSkill = $repository->getNewSkill();
-        return $this->render('FilRouge:add.html.twig', array(
+        return $this->render('FilRouge:Admin:addskill.html.twig', array(
             'SkillForm' => $form->createView(),
             'newSkill' => $newSkill
         ));        
@@ -98,7 +98,7 @@ class SkillController extends Controller{
         
         $skill = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Skill')
+                            ->getRepository('AppBundle:Skill')
                             ->getSkill($id);
         $em = $this->getDoctrine()->getManager();
         
@@ -124,7 +124,7 @@ class SkillController extends Controller{
         $user = $this->getUser();
         $skill = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Skill')
+                            ->getRepository('AppBundle:Skill')
                             ->getSkill($idSkill);
         $em = $this->getDoctrine()->getManager();
 
@@ -148,17 +148,17 @@ class SkillController extends Controller{
             $em->flush();  
             
             return $this->redirect(
-                $this->generateUrl('FilRouge:admin.html.twig', array('id' => $idSkill))
+                $this->generateUrl('FilRouge:Admin:admin.html.twig', array('id' => $idSkill))
             );
         }
        
         $repository = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Skill');
+                            ->getRepository('AppBundle:Skill');
         $skill = $repository->getSkill($idSkill);
         $newSkill = $repository->getNewSkill();
         
-        return $this->render('FilRouge:admin.html.twig', array(
+        return $this->render('FilRouge:Admin:admin.html.twig', array(
                     'Skill' => $skill,
                     'newSkill' => $newSkill,
                     'skillForm' => $form->createView()

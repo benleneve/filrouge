@@ -12,7 +12,7 @@ class CategoryController extends Controller{
         
         $repository = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Category');
+                            ->getRepository('AppBundle:Category');
         $newCategory = $repository->getNewCategory();
         
         //Si le formulaire est envoyé, récupère nos valeurs
@@ -39,7 +39,7 @@ class CategoryController extends Controller{
         
         //Si articles contient des résultats, on les affiche
         
-        return $this->render('FilRouge:admin.html.twig', array(
+        return $this->render('FilRouge:Admin:admin.html.twig', array(
                     'category' => $category,
                     'newCategory' => $newCategory
                ));
@@ -49,11 +49,11 @@ class CategoryController extends Controller{
         
         $repository = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Skill');
+                            ->getRepository('AppBundle:Category');
         $category = $repository->getCategory($id);
         $newCategory = $repository->getNewCategory();
         
-        return $this->render('FilRouge:admin.html.twig', array(
+        return $this->render('FilRouge:Admin:admin.html.twig', array(
                     'category' => $category,
                     'newCategory' => $newCategory
                ));
@@ -64,7 +64,7 @@ class CategoryController extends Controller{
         $user = $this->getUser();
         $category = new Category();
         $form = $this->createForm(new CategoryType(), $category, array(
-            'action' => $this->generateUrl('FilRouge_category_add')
+            'action' => $this->generateUrl('AppBundle_category_add')
         ));
         
         $form->handleRequest($req);
@@ -88,7 +88,7 @@ class CategoryController extends Controller{
                             ->getManager()
                             ->getRepository('FilRouge:Category');
         $newCategory = $repository->getNewCategory();
-        return $this->render('FilRouge:add.html.twig', array(
+        return $this->render('FilRouge:Admin:addcategory.html.twig', array(
             'CategoryForm' => $form->createView(),
             'newCategory' => $newCategory
         ));        
@@ -98,7 +98,7 @@ class CategoryController extends Controller{
         
         $category = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Skill')
+                            ->getRepository('AppBundle:Category')
                             ->getSkill($id);
         $em = $this->getDoctrine()->getManager();
         
@@ -124,7 +124,7 @@ class CategoryController extends Controller{
         $user = $this->getUser();
         $category = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Skill')
+                            ->getRepository('AppBundle:Category')
                             ->getSkill($idCategory);
         $em = $this->getDoctrine()->getManager();
 
@@ -148,17 +148,17 @@ class CategoryController extends Controller{
             $em->flush();  
             
             return $this->redirect(
-                $this->generateUrl('FilRouge:admin.html.twig', array('id' => $idCategory))
+                $this->generateUrl('FilRouge:Admin:admin.html.twig', array('id' => $idCategory))
             );
         }
        
         $repository = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('FilRouge:Skill');
+                            ->getRepository('AppBundle:Category');
         $category = $repository->getCategory($idCategory);
         $newCategory = $repository->getNewCategory();
         
-        return $this->render('FilRouge:admin.html.twig', array(
+        return $this->render('FilRouge:Admin:admin.html.twig', array(
                     'Category' => $category,
                     'newCategory' => $newCategory,
                     'categoryForm' => $form->createView()

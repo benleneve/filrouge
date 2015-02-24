@@ -1,0 +1,25 @@
+filrouge_skill_list:
+    path: /
+    defaults: {_controller:AppBundle:Admin:list}
+
+filrouge_skill_detail:
+    path: /detail/{id}
+    defaults: {_controller:AppBundle:Skill:detail, id :1}
+    requirements:
+        id: \d+
+
+filrouge_skill_add:
+    path: /add
+    defaults: {_controller:AppBundle:Skill:add}
+
+filrouge_skill_update:
+    path: /update/{id}
+    defaults: {_controller:AppBundle:Skill:update, id :1}
+    requirements:
+        id: \d+
+
+filrouge_skill_remove:
+    path: /remove/{id}
+    defaults: {_controller:AppBundle:Skill:remove, id :1}
+    requirements:
+        id: \d+
