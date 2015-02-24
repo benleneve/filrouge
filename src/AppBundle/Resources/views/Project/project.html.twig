@@ -9,13 +9,7 @@
 {% block left %}
     
     <div class="blockGeneral">
-        <div class="iconeBlock">
-            <img alt="Tous mes projets" src="{{asset('bundles/app/images/project.png')}}" />
-        </div>
-        <div class="titleblock">
-            <h2>Projet</h2>
-        </div>
-        <div class="clear"></div>
+            <h2 class="icoProject">Projet</h2>
         <div class="blockContent">
             <div class="headerBlock">
                 <div class="name">
@@ -35,7 +29,7 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="bodyBlock">
+            <div class="bodyBlock"> 
                 <h4>Date de début</h4>
                 {{project.startDate|date('d/m/Y')}} 
                 <h4>Date de fin</h4>
@@ -49,12 +43,38 @@
                 
                 <h4>Compétences manquantes</h4>
                 {% for projectSkill in project.projectSkills %}
-                    {{projectSkill.skill.name}}
+                    <div class=" projectSkill">
+                        <div class="name">
+                            {{projectSkill.skill.name}}
+                        </div>
+                        <div class="action">
+                        {% if projectSkill.active %}
+                            <a href="" class="btnAction">> Postuler</a>
+                        {% else %}    
+                            Recruté
+                        {% endif %}
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                        
                 {% endfor %}
                 
                 <h4>Avancement du projet</h4>
-                 {% for step in project.steps %}
-                    {{step.name}} {{step.status.name}}
+                {% for step in project.steps %}
+                    <div id=" projectStep">
+                        <div class="name">
+                            {{step.name}}
+                        </div>
+                        <div class="action">
+                            {% if project.status.name == 'En attente' %}
+                                {{step.status.name}}   
+                            {% elseif project.status.name == 'En cours' %}
+                                {{step.status.name}}   
+                            {% elseif project.status.name == 'Terminé' %}
+                                {{step.status.name}}
+                            {% endif %}
+                        </div>  
+                    </div>
                 {% endfor %}
                 
                 <h4>Membres du projet</h4>

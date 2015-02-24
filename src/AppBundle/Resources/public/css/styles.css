@@ -1,4 +1,4 @@
-/*------------------------------RAZ------------------------------*/
+/*------------------------------------RAZ-------------------------------------*/
 
 * {
 	margin:0;padding:0;
@@ -47,7 +47,7 @@ fieldset {
 	padding: 0;
 }
 
-/*------------------------------GENERAL-----------------------------*/
+/*----------------------------------GENERAL-----------------------------------*/
 
 @font-face {
     font-family: 'MyriadPro-Regular';
@@ -60,6 +60,23 @@ fieldset {
     font-style: normal;
 }
 
+h2 {
+    text-transform: uppercase;
+    font-weight: bold;
+    height: 25px;
+    line-height:35px;
+    margin-bottom: 5px;
+}
+
+h2.icoProject {
+    background: url("../images/project.png") left bottom no-repeat;
+    text-indent: 30px;
+}
+
+h4 {
+    font-weight: bold;
+    margin: 20px 0 3px 0;
+}
 
 /*------------------------------STRUCTURE GLOBALE-----------------------------*/
 
@@ -74,31 +91,18 @@ body {
     margin: auto;
 }
 
-h2 {
-    text-transform: uppercase;
-    font-weight: bold;
-}
-
-h4 {
-    font-weight: bold;
-}
-
-a.button, button.btnAction {
+a.btnAction {
+    display:block;
+    width:auto;
+    height:25px;
     color:#fff;
     background:#000;
-    border:none;
-    padding: 5px;
+    padding:0 10px 0 5px;
+    line-height:25px;
+    text-align:center;
 }
 
-a.button:hover, button.btnAction:hover {
-    color:#fff;
-}
-
-a.button:visited, button.btnAction:visited {
-    color:#fff;
-}
-
-/*HEADER*/
+/*------------------HEADER--------------------*/
 
 header {
    width: 100%;
@@ -139,7 +143,7 @@ header #angers {
     float: left;
 }
 
-/*NAV*/
+/*---------------------NAV---------------------*/
 
 nav {
    width: 100%;
@@ -172,12 +176,11 @@ nav li a {
     color:#fff;
 }
 
-nav li a:hover {
-    text-decoration: underline;
-    color:#fff;
+nav ul li a:hover {
+    text-decoration:underline;
 }
 
-/*Fil d'ariane*/
+/*----------------Fil d'ariane----------------*/
 
 .breadcrumb{
     margin-top:10px;
@@ -190,7 +193,7 @@ nav li a:hover {
     color:#000;
 }
 
-/*Content General*/
+/*-------------Content General*----------------*/
 
 #content {
    width: 100%;  
@@ -208,7 +211,7 @@ aside {
     float: right;
 }
 
-/*Content block*/
+/*-------------Content block------------------*/
 
 #content .blockGeneral {
     width: 100%;
@@ -261,7 +264,27 @@ aside {
     float: right;
 }
 
-/*aside*/
+/*------------Content Project----------------*/
+
+
+.projectSkill .name {
+    width: 200px;
+    height: 25px;
+    line-height: 25px;
+    background-color: #e8e8e8;
+    float: left;
+    text-indent: 5px;
+}
+
+.projectSkill .action {
+    width: 80px;
+    height: 25px;
+    background-color: #d13025;
+    float: left;
+}
+
+
+/*------------------aside--------------------*/
 
 aside .oneElement {
     padding: 5%;
@@ -283,7 +306,7 @@ aside .pagination {
     padding: 10px 10px 0 0;
 }
 
-/*footer*/
+/*----------------footer------------------*/
 
 footer {
    width: 100%;
@@ -315,6 +338,6 @@ footer li:last-child {
     border-right: 0; 
 }
 
-footer li a, nav li a:hover {
+footer li a {
     color:#000;
 }
