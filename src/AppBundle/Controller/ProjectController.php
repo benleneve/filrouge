@@ -30,9 +30,26 @@ Class ProjectController extends Controller
             ));
         }
 
-        public function addAction()
+        public function addAction(Request $req)
         {
-            return new Response("Ici, on pourra ajouter un projet");
+            $project = new Project();
+            $form = $this->createForm(new ProjectType(), $project, array(
+                'action' => $this->generateUrl('filrouge_project_add')
+            ));
+            $form->handleRequest($req);
+            if($form->isValid()) {
+                $em = $this->getDoctrine()->getManager(); 
+                if($project->getId() === null) {
+                    $em->persist($project);       
+                }
+                $em->flush();  
+                return $this->redirect(
+                    $this->generateUrl('')
+                );
+            }
+            return $this->render('AppBundle:Project:addorupdateproject.html.twig', array(
+                'projectForm' => $form->createView(),
+            ));  
         }
 
         public function updateAction($id)
@@ -42,6 +59,18 @@ Class ProjectController extends Controller
 
         public function removeAction($id)
         {
-            return new Response("Ici, on pourra supprimer le projet" . $id);
+            $project = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:Project')
+                            ->findOneProjectEager($id);
+            $em = $this->getDoctrine()->getManager();
+            if($project === null) {
+                throw $this->createNotFoundException('ID' . $id . ' impossible.');
+            }
+            $em->remove($project);
+            $em->flush();
+            return $this->redirect(
+                $this->generateUrl('filrouge_project_list')
+            );
         }
     }

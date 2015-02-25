@@ -1,0 +1,13 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    {{parent()}} > 
+        <a href="{{path('filrouge_project_list')}}">Projets</a> >
+        <a href="{{path('filrouge_project_add')}}">Nouveau projet</a>
+{% endblock breadcrumb %}
+
+{% block left %}
+
+    {{ form(form) }}
+    
+{% endblock left %}

@@ -215,7 +215,7 @@ aside {
 
 #content .blockGeneral {
     width: 100%;
-    margin-bottom: 30px;  
+    margin-bottom: 30px; 
 }
 
 #content .blockGeneral .iconeBlock {
@@ -265,6 +265,11 @@ aside {
 }
 
 /*------------Content Project----------------*/
+
+.projectNew  {
+    width: 170px;
+    height: 25px;
+}
 
 .projectSeeMore  {
     width: 150px;
