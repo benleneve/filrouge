@@ -1,0 +1,9 @@
+<div>
+    {{ user.lastName ~ " " ~ user.firstName }}
+    {% if (user.promotions|length != 0) %}
+       {% for promotion in user.promotions %} {{promotion.name ~ ' - ' ~ promotion.school.name}} {% endfor %} 
+    {% else %}
+        Staff
+    {% endif %}
+ 
+</div>

@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Form\UserType;
 use AppBundle\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -35,16 +36,36 @@ class UserController extends Controller {
                                         ));
     }
     
+    public function addAction(Request $req)
+        {
+            $user = new User();
+            $form = $this->createForm(new UserType, $user, array(
+                'action' => $this->generateUrl('filrouge_user_add')
+            ));
+            $form->handleRequest($req);
+            if($form->isValid()) {
+                $em = $this->getDoctrine()->getManager(); 
+                if($user->getId() === null) {
+                    $em->persist($user);
+                    $em->persist($user->getImage());
+                }
+                $em->flush();  
+                return $this->redirect(
+                    $this->generateUrl('')
+                );
+            }
+            return $this->render('AppBundle:User:addormodifyuser.html.twig', array(
+                'userForm' => $form->createView(),
+            ));  
+        }
+    
     public function updateAction($id, Request $req) 
         {
-            $prod = $this->getDoctrine()
-                         ->getRepository('AppBundle:User')
-                         ->findOneUserEager($id);
-
-
-            $action = $this->generateUrl('filrouge_user_update', array('id' => $id));
-
-           // return $this->handleForm($user, $action, $req);  
+            $user = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:User')
+                            ->findOneProjectEager($id);
+            
             
             return new Response("Bientôt, il y aura un super formulaire ici :) ");
         }

@@ -1,14 +1,4 @@
-<div>
-    {{ user.lastName ~ " " ~ user.firstName }}
-    {% if (user.promotions|length != 0) %}
-       {% for promotion in user.promotions %} {{promotion.name ~ ' - ' ~ promotion.school.name}} {% endfor %} 
-    {% else %}
-        Staff
-    {% endif %}
-    {{ user.availability ? 'Disponible' : 'Indisponible' }}
-</div>
-
-
+{% include('AppBundle:User:userHeader.html.twig') %}
 
 <div>
     {% if (user.userSkills|length !=0) %}
