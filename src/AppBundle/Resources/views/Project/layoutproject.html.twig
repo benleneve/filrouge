@@ -20,13 +20,13 @@
     <div class="status">
         {% if project.status.name == 'En attente' %}
             {{project.status.name}}
-            <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_orange.png')}}" />
+            <img alt="En attente" src="{{asset('bundles/app/images/status_orange.png')}}" />
         {% elseif project.status.name == 'En cours' %}
             {{project.status.name}}
-            <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_green.png')}}" />
+            <img alt="En cours" src="{{asset('bundles/app/images/status_green.png')}}" />
         {% elseif project.status.name == 'Terminé' %}
             {{project.status.name}}
-            <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_red.png')}}" />
+            <img alt="Terminé" src="{{asset('bundles/app/images/status_red.png')}}" />
         {% endif %}
     </div>
     <div class="clear"></div>
@@ -45,9 +45,7 @@
             {{projectSkill.skill.name}}
         {% endif %}
    {% endfor %}
-   <p>
-        <button class="btnAction">
-            <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} ">> Voir la fiche projet</a>
-        </button>
-   </p>
+   <div class="projectSeeMore">
+       <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} " class="btnAction">Voir la fiche projet</a>
+   </div>
 </div>

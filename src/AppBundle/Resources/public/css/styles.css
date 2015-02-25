@@ -266,21 +266,42 @@ aside {
 
 /*------------Content Project----------------*/
 
+.projectSeeMore  {
+    width: 150px;
+    height: 25px;
+}
 
-.projectSkill .name {
+.projectSkill .name, .projectStep .name {
     width: 200px;
     height: 25px;
+    margin: 5px 10px 2px 0;
     line-height: 25px;
     background-color: #e8e8e8;
     float: left;
     text-indent: 5px;
 }
 
-.projectSkill .action {
+.projectSkill .action, .projectStep .action {
     width: 80px;
     height: 25px;
+    margin: 5px 10px 2px 0;
+    line-height: 25px;
+    color:#fff;
     background-color: #d13025;
     float: left;
+    text-align:center;
+}
+
+.projectStep .action .onHold {
+    background-color: #f4a22d;  
+}
+
+.projectStep .action .inProgress {
+    background-color: #48be25;   
+}
+
+.projectStep .action .finish {
+    background-color: #d13025; 
 }
 
 

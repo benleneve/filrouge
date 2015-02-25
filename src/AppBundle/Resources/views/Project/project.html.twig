@@ -43,13 +43,13 @@
                 
                 <h4>Compétences manquantes</h4>
                 {% for projectSkill in project.projectSkills %}
-                    <div class=" projectSkill">
+                    <div class="projectSkill">
                         <div class="name">
                             {{projectSkill.skill.name}}
                         </div>
                         <div class="action">
                         {% if projectSkill.active %}
-                            <a href="" class="btnAction">> Postuler</a>
+                            <a href="#" class="btnAction">> Postuler</a>
                         {% else %}    
                             Recruté
                         {% endif %}
@@ -61,19 +61,26 @@
                 
                 <h4>Avancement du projet</h4>
                 {% for step in project.steps %}
-                    <div id=" projectStep">
+                    <div class="projectStep">
                         <div class="name">
                             {{step.name}}
                         </div>
                         <div class="action">
                             {% if project.status.name == 'En attente' %}
-                                {{step.status.name}}   
+                                <div class="onHold">
+                                    {{step.status.name}}
+                                </div>
                             {% elseif project.status.name == 'En cours' %}
-                                {{step.status.name}}   
+                                <div class="inProgress">
+                                    {{step.status.name}}
+                                </div>
                             {% elseif project.status.name == 'Terminé' %}
-                                {{step.status.name}}
+                                <div class="finish">
+                                    {{step.status.name}}
+                                </div>
                             {% endif %}
-                        </div>  
+                        </div>
+                        <div class="clear"></div>
                     </div>
                 {% endfor %}
                 
