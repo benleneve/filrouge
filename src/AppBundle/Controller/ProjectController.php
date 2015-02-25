@@ -2,9 +2,11 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Notification;
+use AppBundle\Entity\Project;
+use AppBundle\Form\ProjectType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\component\HttpFoundation\Request;
-use Symfony\component\HttpFoundation\Response;
 
 Class ProjectController extends Controller
     {
@@ -25,6 +27,9 @@ Class ProjectController extends Controller
                             ->getManager()
                             ->getRepository('AppBundle:Project');
             $project = $repository->findOneProjectEager($id);
+            if($project === null) {
+                throw $this->createNotFoundException('ID ' . $id . ' impossible.');
+            }
             return $this->render('AppBundle:Project:project.html.twig', array(
                     'project' => $project
             ));
@@ -38,23 +43,60 @@ Class ProjectController extends Controller
             ));
             $form->handleRequest($req);
             if($form->isValid()) {
+                
                 $em = $this->getDoctrine()->getManager(); 
                 if($project->getId() === null) {
-                    $em->persist($project);       
+                    $em->persist($project);
+                    var_dump($project);
+                    $em->persist($project->addStep());
                 }
-                $em->flush();  
+                $em->flush();
+                
+                //Réalisation de la notification création de projet
+                $notif = new Notification();
+                $message = $project->getProjectManager()->getFirstName() . ' a créé le projet ';
+                $notif->setProject($project)
+                        ->setType(1)
+                        ->setContent($message);
+                $em->persist($notif);
+                $em->flush();
+                
                 return $this->redirect(
-                    $this->generateUrl('')
+                    $this->generateUrl('filrouge_project_list')
                 );
             }
-            return $this->render('AppBundle:Project:addorupdateproject.html.twig', array(
+            return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
                 'projectForm' => $form->createView(),
             ));  
         }
 
-        public function updateAction($id)
+        public function updateAction($id, Request $req)
         {
-            return new Response("Ici, on pourra mettre à jour les informations du projet " . $id);
+            $project = $this->getDoctrine()
+                                ->getManager()
+                                ->getRepository('AppBundle:Project')
+                                ->findOneProjectEager($id);
+            $em = $this->getDoctrine()->getManager();
+            if($project === null) {
+                throw $this->createNotFoundException('ID ' . $id . ' impossible.');
+            }
+            $form = $this->createForm(new ProjectType(), $project, array(
+                'action' => $this->generateUrl('filrouge_project_update', array('id' => $id))
+            ));
+            $form->handleRequest($req);
+            if($form->isValid()) {
+                $em = $this->getDoctrine()->getManager(); 
+                if($project->getId() === null) {
+                    $em->persist($project);
+                }
+                $em->flush();  
+                return $this->redirect(
+                    $this->generateUrl('filrouge_project_detail', array('id' => $id))
+                );
+            }
+            return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
+                'projectForm' => $form->createView()
+            )); 
         }
 
         public function removeAction($id)

@@ -18,23 +18,30 @@ class ProjectType extends AbstractType
             ->add('name', 'text')
             ->add('startDate', 'date', array(
                 'input'  => 'datetime',
-                'widget' => 'choice'
+                'widget' => 'choice',
+                'format' => 'dd MM yyyy'
             ))
             ->add('endDate', 'date', array(
                 'input'  => 'datetime',
-                'widget' => 'choice'
+                'widget' => 'choice',
+                'format' => 'dd MM yyyy'
             ))
             ->add('purpose', 'text')
             ->add('description', 'textarea')
             ->add('projectManager', 'entity', array(
-                'class' => 'AppBundle:Status',
-                'property' => 'name'
+                'class' => 'AppBundle:User',
+                'property' => 'lastName'
             ))
             ->add('status', 'entity', array(
                 'class' => 'AppBundle:Status',
                 'property' => 'name'
             ))
-            ->add('Valider', 'submit')
+            ->add('steps', 'collection', array(
+                'type'         => new StepType(),
+                'allow_add'    => true,
+                'allow_delete' => true
+            ))
+            ->add('Enregistrer les modifications', 'submit')
         ;
     }
     

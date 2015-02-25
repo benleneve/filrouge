@@ -46,16 +46,19 @@
             <div class="oneElement">
                 <div class="icon">
                     {% if notification.type == 1 %}
-                        <img alt="invitation" src="{{asset('bundles/app/images/notif_project.png')}}" />
+                        <img alt="Création de projet" src="{{asset('bundles/app/images/notif_project.png')}}" />
                     {% elseif notification.type == 2 %}
-                        <img alt="Candidature acceptée" src="{{asset('bundles/app/images/notif_user.png')}}" />
+                        <img alt="Ajout de membre" src="{{asset('bundles/app/images/notif_user.png')}}" />
                     {% elseif notification.type == 3 %}
-                        <img alt="Candidature refusée" src="{{asset('bundles/app/images/notif_skill.png')}}" />
+                        <img alt="Ajout de compétence" src="{{asset('bundles/app/images/notif_skill.png')}}" />
                     {% endif %}
                 </div>
                 <div class="content">
                     <p>{{notification.creationDate|date('d/m/Y H:i')}}</p>
-                    <p>{{notification.content}}</p>
+                    <p>
+                        {{notification.content}}
+                        <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} "> {{notification.project.name}}</a>
+                    </p>
                 </div>
                 <div class="clear"></div>
             </div>

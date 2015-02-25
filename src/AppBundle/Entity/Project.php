@@ -119,6 +119,8 @@ class Project
         $this->projectSkills = new ArrayCollection();
         $this->notifications = new ArrayCollection();
         $this->creationDate = new DateTime();
+        $this->startDate = new DateTime();
+        $this->endDate = new DateTime();
     }
  
     /**
