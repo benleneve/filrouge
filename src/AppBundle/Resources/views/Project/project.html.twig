@@ -85,8 +85,17 @@
                 {% endfor %}
                 
                 <h4>Membres du projet</h4>
-                 {% for member in project.projectMembers %}
-                    {{member.user.firstName}} {{member.user.LastName}} - {{member.skill}}
+                {% for member in project.projectMembers %}
+                    <div class="projectMember">
+                        <div class="nameMember">
+                            {{member.user.firstName}} {{member.user.LastName}}
+                        </div>
+                        <div class="skillMember">
+                            {{member.skill}}
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                    <div class="clear"></div>
                 {% endfor %}    
             </div>
         </div>    

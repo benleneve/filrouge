@@ -304,6 +304,25 @@ aside {
     background-color: #d13025; 
 }
 
+.projectMember {
+    width: 300px;
+    height: 25px;
+    margin: 5px 10px 2px 0;
+    line-height: 25px;
+    background-color: #e8e8e8;
+    float: left;
+    text-indent: 5px;
+}
+
+.projectMember .nameMember {
+    width: 150px;
+    float: left;
+}
+
+.projectMember .skillMember {
+    width: 150px;
+    float: left;
+}
 
 /*------------------aside--------------------*/
 
