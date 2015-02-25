@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class StepType extends AbstractType
+class SkillType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,16 +15,10 @@ class StepType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text', array(
-                'attr' => array('class'=>'stepName')
-            ))
-            ->add('status', 'entity', array(
-                'class' => 'AppBundle:Status',
-                'property' => 'name',
-                'attr' => array('class'=>'stepStatus')
-            ))
-            ->add('Valider', 'submit', array(
-                'attr' => array('class'=>'btnAction')
+            ->add('name', 'text')
+            ->add('category', 'entity', array(
+                'class' => 'AppBundle:Category',
+                'property' => 'name'
             ))
         ;
     }
@@ -35,7 +29,7 @@ class StepType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Step'
+            'data_class' => 'AppBundle\Entity\Skill'
         ));
     }
 
@@ -44,6 +38,6 @@ class StepType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_step';
+        return 'appbundle_skill';
     }
 }

@@ -102,6 +102,17 @@ a.btnAction {
     text-align:center;
 }
 
+button.btnAction {
+    display:block;
+    width:auto;
+    height:25px;
+    color:#fff;
+    background:#000;
+    padding:0 10px 0 5px;
+    line-height:25px;
+    text-align:center;
+}
+
 /*------------------HEADER--------------------*/
 
 header {
@@ -281,6 +292,16 @@ aside {
     height: 25px;
 }
 
+a.newStep {
+    width: 130px;
+    height: 25px;
+}
+
+a.deleteStep {
+    width: 100px;
+    height: 25px;
+}
+
 .projectSkill .name, .projectStep .name {
     width: 200px;
     height: 25px;
@@ -333,6 +354,50 @@ aside {
     width: 150px;
     float: left;
 }
+
+/*------------------Steps--------------------*/
+
+#appbundle_project_steps label.required{
+    display:none;
+}
+
+#appbundle_project_steps input.stepName {
+    float:left;
+    width:200px;
+    height:25px;
+    border:1px solid #000;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+
+#appbundle_project_steps select.stepStatus {
+    float:left;
+    width:100px;
+    height:25px;
+    border:1px solid #000;
+    margin-right:10px;
+}
+
+#appbundle_project_steps button.btnAction {
+    float:left;
+    margin-right:10px;
+    border:none;
+    font-size:12px;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    padding:0 30px;
+}
+
+#appbundle_project_steps a.deleteStep {
+    float:left;
+    display:block;
+}
+
+#appbundle_project_steps a#add_step{
+    float:none;
+    margin-bottom:10px;
+}
+
+
 
 /*------------------aside--------------------*/
 
