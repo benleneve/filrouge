@@ -375,6 +375,14 @@ a.deleteStep {
     float: left;
 }
 
+#formProject button.btnAction {
+    margin-right:10px;
+    border:none;
+    font-size:12px;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    padding:0 15px;
+}
+
 /*------------------Steps--------------------*/
 
 #appbundle_project_steps label.required{

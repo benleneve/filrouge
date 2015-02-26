@@ -36,12 +36,19 @@ class ProjectType extends AbstractType
                 'class' => 'AppBundle:Status',
                 'property' => 'name'
             ))
+            ->add('projectSkills', 'collection', array(
+                'type'         => new ProjectSkillType(),
+                'allow_add'    => true,
+                'allow_delete' => true
+            ))
             ->add('steps', 'collection', array(
                 'type'         => new StepType(),
                 'allow_add'    => true,
                 'allow_delete' => true
             ))
-            ->add('Enregistrer les modifications', 'submit')
+            ->add('Enregistrer les modifications', 'submit', array(
+                'attr' => array('class'=>'btnAction')
+            ))
         ;
     }
     

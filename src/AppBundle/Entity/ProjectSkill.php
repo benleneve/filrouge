@@ -21,9 +21,17 @@ class ProjectSkill
     private $active;
     
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+    
+    /**
      * @var Project
      * 
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="projectSkills")
      */
     private $project;
@@ -31,12 +39,21 @@ class ProjectSkill
     /**
      * @var Skill
      *
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Skill", inversedBy="projectSkills")
      */
     private $skill;
 
-
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+    
     /**
      * Set active
      *
