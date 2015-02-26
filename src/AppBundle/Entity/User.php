@@ -113,7 +113,7 @@ class User
      *
      * @ORM\Column(name="firstLog", type="boolean")
      */
-    private $firstLog;
+    private $firstLog = true;
 
     /**
      * @var boolean

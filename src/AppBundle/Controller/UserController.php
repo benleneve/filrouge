@@ -28,6 +28,7 @@ class UserController extends Controller {
             $user = $this->getDoctrine()
                          ->getRepository('AppBundle:User')
                          ->findOneUserEager($id);
+                         
           
         
             return $this->render('AppBundle:User:userDetail.html.twig',
@@ -51,7 +52,7 @@ class UserController extends Controller {
                 }
                 $em->flush();  
                 return $this->redirect(
-                    $this->generateUrl('')
+                    $this->generateUrl('filrouge_user_list')
                 );
             }
             return $this->render('AppBundle:User:addormodifyuser.html.twig', array(

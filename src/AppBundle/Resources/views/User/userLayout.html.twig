@@ -1,4 +1,4 @@
-{% include('AppBundle:User:userHeader.html.twig') %}
+{% include('AppBundle:User:userHeader.html.twig') %} {{ user.availability ? 'Disponible' : 'Indisponible' }}
 
 <div>
     {% if (user.userSkills|length !=0) %}

@@ -17,9 +17,9 @@
             
         {% for user in users %}
             <ul>
-               {% include('AppBundle:User:userLayout.html.twig') ~ {{ user.availability ? 'Disponible' : 'Indisponible' }}%}
+               {% include('AppBundle:User:userLayout.html.twig')%}  
             </ul>
-        {% endfor%}
+        {% endfor %}
     </div>
     
                

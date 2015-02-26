@@ -17,7 +17,7 @@ class UserRepository extends EntityRepository
                 $query = $this->createQueryBuilder('u')
                         ->leftJoin('u.image', 'i')
                         ->addSelect('i')
-                        ->join('u.promotions', 'p')
+                        ->leftJoin('u.promotions', 'p')
                         ->addSelect('p')
                         ->leftJoin('u.worksOnProjects', 'wp')
                         ->addSelect('wp')

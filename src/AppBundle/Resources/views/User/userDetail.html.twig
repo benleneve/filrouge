@@ -1,16 +1,16 @@
 {% extends "AppBundle::Layout.html.twig" %}
 
 {% block title %}
-	Profil de {{ " " ~ user.firstName ~ " " ~ user.lastName }}
-{%endblock title %}
+   Profil de {{ " " ~ user.firstName ~ " " ~ user.lastName }}
+{% endblock title %}
 
 	
 
 {% block left %}
-    <h1> Profil de {{ " " ~ user.firstName ~ " " ~ user.lastName }} </h1>
+    <h2> Profil de {{ " " ~ user.firstName ~ " " ~ user.lastName }} </h2>
 
         <ul>   
-          {% include('AppBundle:User:userHeader.html.twig') ~ {{ user.availability ? 'Disponible' : 'Indisponible' }} %}
+          {% include('AppBundle:User:userHeader.html.twig')%}  {{ user.availability ? 'Disponible' : 'Indisponible' }} 
            
         {% if user.dispoBirth == true %}
              <li> Age : {{ user.getAge()|date  }} </li> 
