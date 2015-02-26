@@ -7,12 +7,7 @@
 {% block left %}
     
     <div class="blockGeneral">
-        <div class="iconeBlock">
-            <img alt="Tous mes projets" src="{{asset('bundles/app/images/search.png')}}" />
-        </div>
-        <div class="titleblock">
-            <h2>Rechercher un projet</h2>
-        </div>
+        <h2 class="icoSearch">Rechercher un projet</h2>
         <div class="clear"></div>
         <div class="blockContent">
             Bla bla bla...
@@ -20,12 +15,7 @@
     </div>
     
     <div class="blockGeneral">
-        <div class="iconeBlock">
-            <img alt="Tous les projets" src="{{asset('bundles/app/images/project.png')}}" />
-        </div>
-        <div class="titleblock">
-            <h2>Tous les projets</h2>
-        </div>
+        <h2 class="icoProject">Tous les Projets</h2>
         <div class="clear"></div>
         <div class="blockContent">
             {% for project in projects %}

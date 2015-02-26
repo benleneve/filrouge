@@ -73,6 +73,26 @@ h2.icoProject {
     text-indent: 30px;
 }
 
+h2.icoRecrut {
+    background: url("../images/recrut.png") left bottom no-repeat;
+    text-indent: 30px;
+}
+
+h2.icoUser {
+    background: url("../images/user.png") left bottom no-repeat;
+    text-indent: 30px;
+}
+
+h2.icoSearch {
+    background: url("../images/search.png") left bottom no-repeat;
+    text-indent: 30px;
+}
+
+h2.icoNotif {
+    background: url("../images/notif.png") left bottom no-repeat;
+    text-indent: 30px;
+}
+
 h4 {
     font-weight: bold;
     margin: 20px 0 3px 0;
