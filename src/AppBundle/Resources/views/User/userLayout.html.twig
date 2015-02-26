@@ -1,19 +1,35 @@
-{% include('AppBundle:User:userHeader.html.twig') %} {{ user.availability ? 'Disponible' : 'Indisponible' }}
+ <h3>
+    <div class="headerBlock">
+        <div class="buttonAction">
+            <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/block_open.png')}}" />
+        </div>
+        <div class="name">
+            <h4><a href=" {{path('filrouge_user_detail', {'id': user.id } )}} ">{% include('AppBundle:User:userHeader.html.twig') %}</a></h4>
+        </div>
 
-<div>
+        <div class="status">
+            {% if user.availability == true %}
+                Disponible
+                <img alt="Disponible" src="{{asset('bundles/app/images/status_green.png')}}" />
+
+            {% elseif user.availability == false %}
+                Indisponible
+                <img alt="Indisponible" src="{{asset('bundles/app/images/status_red.png')}}" />
+            {% endif %}
+        </div>
+        <div class="clear"></div>
+    </div>
+</h3>
+<div class="bodyBlock">
+   <div>
     {% if (user.userSkills|length !=0) %}
        {% for userSkill in user.userSkills %} {{userSkill.skill.name ~ ' - ' ~ userSkill.level}} {% endfor %}
-    {% else %}
-        {{ "Incompétent(e)!" }}  
     {% endif %}
+    </div>
+    <div>
+        <h4> Nombre de projets en cours :</h4> {{ user.worksOnProjects|length }}
+    </div>
+   <div class="userSeeMore">
+       <a href=" {{path('filrouge_user_detail', {'id': user.id } )}} " class="btnAction">Voir le profil complet</a>
+   </div>
 </div>
-
-Nombre de projets en cours : {{ user.worksOnProjects|length }}
-
-
-
-<a href="{{path('filrouge_user_detail', {'id': user.id})}}">
-    <button> Voir le profil </button>
-</a>
-
-

@@ -4,54 +4,67 @@
    Profil de {{ " " ~ user.firstName ~ " " ~ user.lastName }}
 {% endblock title %}
 
-	
+{% block breadcrumb %}
+    {{parent()}} > 
+        <a href="{{path('filrouge_user_list')}}">Profils</a> >
+        <a href="{{path('filrouge_user_detail', {'id': user.id } )}}">{{user.firstName ~ " " ~ user.lastName}}</a>
+{% endblock breadcrumb %}
 
 {% block left %}
-    <h2> Profil de {{ " " ~ user.firstName ~ " " ~ user.lastName }} </h2>
+    
+    <div class="blockGeneral">
+        <h2 class="icoUser">Profil</h2>
+        <div class="blockContent">
+            <div class="headerBlock">
+                <div class="name">
+                    <h3>{% include('AppBundle:User:userHeader.html.twig')%}</h3>
+                </div>
+                <div class="status">
+                    {% if user.availability == true %}
+                        Disponible
+                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_green.png')}}" />
+                       
+                    {% elseif user.availability == false %}
+                        Indisponible
+                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_red.png')}}" />
+                    {% endif %}
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="bodyBlock"> 
+                
+                {% if user.dispoBirth == true %}
+                    <h4> Age </h4>{{ user.getAge()|date  }}
+                {% endif %}   
 
-        <ul>   
-          {% include('AppBundle:User:userHeader.html.twig')%}  {{ user.availability ? 'Disponible' : 'Indisponible' }} 
-           
-        {% if user.dispoBirth == true %}
-             <li> Age : {{ user.getAge()|date  }} </li> 
-        {% endif %}   
-        
-        {% if user.dispoEmail == true %}
-             <li> Email : {{ user.email }} </li> 
-        {% endif %}
-        
-        {% if user.dispoPhone == true %}
-             <li> Téléphone : {{ user.phone }} </li> 
-        {% endif %}
-         
-        {% if user.dispoAddress == true %}
-             <li> Adresse Postale 
+                {% if user.dispoEmail == true %}
+                   <h4> Email </h4>{{ user.email }}
+                {% endif %}
+
+                {% if user.dispoPhone == true %}
+                   <h4>Téléphone </h4> {{ user.phone }}
+                {% endif %}
+                 
+                {% if user.dispoAddress == true %}
+                <h4>Adresse Postale <h4>
                  <ul>
                      <li>{{ user.address }}</li>
                      <li>{{ user.postCode ~ " " ~ user.city }}</li>
                  </ul>
-            </li> 
-        {% endif %}
-        
-        {% if user.image %}
-            <img src="{{asset(user.image.url)}}" alt="{{user.image.alt}} " />
-        {% endif %}
-        
-            <li>
+                {% endif %}
+                <div>
+                    {% if user.image %}
+                        <img src="{{asset(user.image.url)}}" alt="{{user.image.alt}} " />
+                    {% endif %}
+                </div>
                 {% if (user.userSkills|length !=0) %}
                    {% for userSkill in user.userSkills %} {{userSkill.skill.name ~ ' - ' ~ userSkill.level}} {% endfor %}
-                {% else %}
-                    {{ "Incompétent(e)!" }}  
                 {% endif %}
-            </li>
-            
-             <li>
+                 
                 {% if (user.description|length !=0) %}
-                  Présentation <br/> {{ user.description }}
+                    <h4>Présentation </h4>{{ user.description }}
                 {% endif %}
-            </li>
-            
-             <li>
+                 
                 {% if (user.worksOnProjects|length!=0) %}
                     <table>
                         <tr>
@@ -70,46 +83,42 @@
                               </tr>
                           {% endfor %}
                     </table>
-                        {% endif %}
-            </li>
-            
-            <li>
-                 
+                {% endif %}
+                
                 <form>
                     <fieldset>
-                        <legend> Envoyer un message </legend>
+                        <legend><h4> Envoyer un message </h4></legend>
                             <label for="objet"> Objet </label>
                             <input id ="objet" type="text" value="objet">
                             <label for="message"> Message </label>
                             <textarea id ="message" type="text" value="message"></textarea>
                     </fieldset>
                 </form>
-            </li>
-            
-            <li>
-                <a href="{{path('filrouge_user_detail')}}"> {# /!\ ROUTE A MODIFIER #}
-                    <button> Inviter à rejoindre un projet </button>
-                </a>
-            </li>
-            
-            <li>
-                <form>
-                    <label for="projet"> Projet </label>
-                    <select>
-                        <option value="1"> 1 </option>
-                        <option value="2"> 2 </option>
-                        <option value="3"> 3 </option>
-                    </select>
-                </form>
-                 <a href="{{path('filrouge_user_detail')}}"> {# /!\ ROUTE A MODIFIER #}
-                    <button> Inviter </button>
-                </a>
-            </li>
-         
-        </ul> 
-         
-           
-           
-           
+                
+                <div>
+                    <a href="{{path('filrouge_user_detail')}}"> {# /!\ ROUTE A MODIFIER #}
+                       <button> Inviter à rejoindre un projet </button>
+                    </a>
+                </div>
+                       
+                <div>
+                    <form>
+                        <label for="projet"> Projet </label>
+                        <select>
+                            <option value="1"> 1 </option>
+                            <option value="2"> 2 </option>
+                            <option value="3"> 3 </option>
+                        </select>
+                    </form>
+                     <a href="{{path('filrouge_user_detail')}}"> {# /!\ ROUTE A MODIFIER #}
+                        <button> Inviter </button>
+                    </a>
+                </div>
+                        
+    <div class="userUpdate">
+       <a href=" {{path('filrouge_user_update', {'id': user.id } )}} " class="btnAction">> Modifier mon profil</a>
+    </div>
+       </div>
+        </div>   
+    </div>
 {% endblock left %}
-	

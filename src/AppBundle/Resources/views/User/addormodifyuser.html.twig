@@ -123,3 +123,8 @@
            
            
 {% endblock left %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script  type="text/javascript" src="{{ asset('bundles/app/js/promotion-user.js') }}"></script>
+{% endblock %}

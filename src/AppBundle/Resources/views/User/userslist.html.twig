@@ -4,23 +4,45 @@
        Tous les profils
 {% endblock title %}
 
+{% block breadcrumb %}
+    {{parent()}} > <a href="{{path('filrouge_user_list')}}">Profils</a>
+{% endblock breadcrumb %}
+
 {% block left %}
     
-    <div class="blocRechercheUser">
-        Ici formulaire de recherche d'utilisateurs
+    <div class="blockGeneral">
+        <h2 class="icoSearch">Rechercher un profil</h2>
+        <div class="clear"></div>
+        <div class="blockContent">
+            Bla bla bla...
+        </div>
     </div>
     
-    
-    
-    <div>
-        <h1> Tous les profils </h1> 
-            
-        {% for user in users %}
-            <ul>
-               {% include('AppBundle:User:userLayout.html.twig')%}  
-            </ul>
-        {% endfor %}
+    <div class="blockGeneral">
+        <h2 class="icoProject">Tous les Profils</h2>
+        <div class="clear"></div>
+        <div class="blockContent">
+            <div id='accordion'>
+                {% for user in users %}
+                    {% include('AppBundle:User:userLayout.html.twig') %}
+                {% endfor %}
+            </div>
+            <div class="pagination">
+                <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
+                <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
+            </div>
+            <div class="clear"></div>
+        </div>
     </div>
     
-               
-{% endblock left%}
+      
+{% endblock left %}
+
+{% block javascripts %}
+    {{parent()}}
+            <script>
+          $(function() {
+            $( "#accordion" ).accordion();
+          });
+          </script>
+{% endblock %}

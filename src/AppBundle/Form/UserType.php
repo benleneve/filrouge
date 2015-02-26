@@ -45,14 +45,11 @@ class UserType extends AbstractType
             ->add('dispoPhone', 'choice', array(
                     'choices' => array(true => "Public", false => "Privé")
                  ))
-          /*  ->add('promotion', 'entity', array
-                ('class' => 'AppBundle:Promotion',
-                  'property' => 'name'
-                ))
-            ->add('school', 'entity', array
-                ('class' => 'AppBundle:School',
-                  'property' => 'name'
-                ))*/
+            ->add('promotions', 'collection', array(
+                'type'         => new PromotionType(),
+                'allow_add'    => true,
+                'allow_delete' => true
+            ))
             ->add('image', new ImageType())
             ->add('Valider', 'submit')
         ;
