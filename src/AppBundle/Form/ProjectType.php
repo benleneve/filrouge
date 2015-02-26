@@ -39,12 +39,14 @@ class ProjectType extends AbstractType
             ->add('projectSkills', 'collection', array(
                 'type'         => new ProjectSkillType(),
                 'allow_add'    => true,
-                'allow_delete' => true
+                'allow_delete' => true,
+                'by_reference' => false
             ))
             ->add('steps', 'collection', array(
                 'type'         => new StepType(),
                 'allow_add'    => true,
-                'allow_delete' => true
+                'allow_delete' => true,
+                'by_reference' => false
             ))
             ->add('Enregistrer les modifications', 'submit', array(
                 'attr' => array('class'=>'btnAction')

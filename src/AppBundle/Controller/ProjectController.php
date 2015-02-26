@@ -5,6 +5,7 @@ namespace AppBundle\Controller;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\Project;
 use AppBundle\Form\ProjectType;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\component\HttpFoundation\Request;
 
@@ -47,8 +48,6 @@ Class ProjectController extends Controller
                 $em = $this->getDoctrine()->getManager(); 
                 if($project->getId() === null) {
                     $em->persist($project);
-                    var_dump($project);
-                    $em->persist($project->addStep());
                 }
                 $em->flush();
                 
@@ -80,12 +79,42 @@ Class ProjectController extends Controller
             if($project === null) {
                 throw $this->createNotFoundException('ID ' . $id . ' impossible.');
             }
+            
+            //Effacement des steps
+            $steps = new ArrayCollection();
+            // Crée un tableau contenant les objets Steps courants de BDD
+            foreach ($project->getSteps() as $step) {
+                $steps->add($step);
+            }
+            
+            //Effacement des projectSkills
+            $projectSkills = new ArrayCollection();
+            // Crée un tableau contenant les objets ProjectSkill courants de BDD
+            foreach ($project->getProjectSkills() as $projectSkill) {
+                $projectSkills->add($projectSkill);
+            }
+
             $form = $this->createForm(new ProjectType(), $project, array(
                 'action' => $this->generateUrl('filrouge_project_update', array('id' => $id))
             ));
+            
             $form->handleRequest($req);
             if($form->isValid()) {
                 $em = $this->getDoctrine()->getManager(); 
+                
+                // supprime la relation entre la step et le « project »
+                foreach ($steps as $step) {
+                    if ($project->getSteps()->contains($step) == false) {
+                        $em->remove($step);
+                    }
+                }
+                // supprime la relation entre la step et le « project »
+                foreach ($projectSkills as $projectSkill) {
+                    if ($project->getProjectSkills()->contains($projectSkill) == false) {
+                        $em->remove($projectSkill);
+                    }
+                }
+                
                 if($project->getId() === null) {
                     $em->persist($project);
                 }
@@ -95,7 +124,8 @@ Class ProjectController extends Controller
                 );
             }
             return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
-                'projectForm' => $form->createView()
+                'projectForm' => $form->createView(),
+                'project' => $project
             )); 
         }
 

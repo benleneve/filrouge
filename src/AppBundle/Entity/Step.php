@@ -85,7 +85,6 @@ class Step
     public function setProject(Project $project = null)
     {
         $this->project = $project;
-        $project->addStep($this);
 
         return $this;
     }

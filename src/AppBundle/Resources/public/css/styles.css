@@ -93,6 +93,10 @@ h2.icoNotif {
     text-indent: 30px;
 }
 
+h3 {
+    line-height:30px;
+}
+
 h4 {
     font-weight: bold;
     margin: 20px 0 3px 0;
@@ -312,13 +316,13 @@ aside {
     height: 25px;
 }
 
-a.newStep {
-    width: 130px;
+a.newStep, a.newSkill {
+    width: 150px;
     height: 25px;
 }
 
-a.deleteStep {
-    width: 100px;
+a.deleteStep, a.deleteSkill {
+    width: 80px;
     height: 25px;
 }
 
@@ -375,17 +379,28 @@ a.deleteStep {
     float: left;
 }
 
+#formProject {
+    border-bottom: 1px solid #000;
+    padding-bottom: 10px;
+}
+
 #formProject button.btnAction {
-    margin-right:10px;
+    float: right;
     border:none;
     font-size:12px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 15px;
 }
 
-/*------------------Steps--------------------*/
 
-#appbundle_project_steps label.required{
+
+/*------------------Steps&SkillProject--------------------*/
+
+#appbundle_project_steps {
+    margin-bottom: 10px;
+}
+
+#appbundle_project_steps label.required {
     display:none;
 }
 
@@ -400,7 +415,7 @@ a.deleteStep {
 
 #appbundle_project_steps select.stepStatus {
     float:left;
-    width:100px;
+    width:160px;
     height:25px;
     border:1px solid #000;
     margin-right:10px;
@@ -412,7 +427,7 @@ a.deleteStep {
     border:none;
     font-size:12px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
-    padding:0 30px;
+    padding:0 20px;
 }
 
 #appbundle_project_steps a.deleteStep {
@@ -425,6 +440,47 @@ a.deleteStep {
     margin-bottom:10px;
 }
 
+/*------------------SkillProject--------------------*/
+
+#appbundle_project_projectSkills label.required{
+    display:none;
+}
+
+#appbundle_project_projectSkills select.skillName {
+    float:left;
+    width:200px;
+    height:25px;
+    border:1px solid #000;
+    margin-right:10px;
+    margin-bottom:10px;
+}
+
+#appbundle_project_projectSkills select.skillActive {
+    float:left;
+    width:160px;
+    height:25px;
+    border:1px solid #000;
+    margin-right:10px;
+}
+
+#appbundle_project_projectSkills button.btnAction {
+    float:left;
+    margin-right:10px;
+    border:none;
+    font-size:12px;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    padding:0 20px;
+}
+
+#appbundle_project_projectSkills a.deleteSkill {
+    float:left;
+    display:block;
+}
+
+#appbundle_project_projectSkills a#add_projectSkills{
+    float:none;
+    margin-bottom:10px;
+}
 
 
 /*------------------aside--------------------*/

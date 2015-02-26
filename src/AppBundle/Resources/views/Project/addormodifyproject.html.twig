@@ -3,7 +3,11 @@
 {% block breadcrumb %}
     {{parent()}} > 
         <a href="{{path('filrouge_project_list')}}">Projets</a> >
-        <a href="{{path('filrouge_project_add')}}">Nouveau projet</a>
+        {% if project.id is defined %}
+            <a href=" {{path('filrouge_project_update', {'id': project.id } )}} ">Modifer {{project.name}}</a>
+        {% else %}
+            <a href="{{path('filrouge_project_add')}}">Nouveau projet</a>
+        {% endif%}
 {% endblock breadcrumb %}
 
 {% block left %}
@@ -46,15 +50,31 @@
                     <h4>{{ form_label(projectForm.description, "Description") }}</h4>
                     {{ form_widget(projectForm.description, { 'attr': {'class': ''} }) }}
                     
-                    <h4>{{ form_label(projectForm.projectSkills, "") }}</h4>
-                    {{ form_widget(projectForm.steps) }}
+                    <h4>{{ form_label(projectForm.projectSkills, "Compétences requises") }}</h4>
+                    {{ form_widget(projectForm.projectSkills) }}
                     
                     <h4>{{ form_label(projectForm.steps, "Avancement du projet") }}</h4>
                     {{ form_widget(projectForm.steps) }}
-
-
                 {{ form_end(projectForm) }}
+                <div class="clear"></div>
             </div>
+            <div id="myMember">
+                <h4>Membres du projet</h4>
+                {% if project.projectMembers is defined %} 
+                    {% for member in project.projectMembers %}
+                        <div class="projectMember">
+                            <div class="nameMember">
+                                {{member.user.firstName}} {{member.user.LastName}}
+                            </div>
+                            <div class="skillMember">
+                                {{member.skill}}
+                            </div>
+                            <div class="clear"></div>
+                        </div>
+                        <div class="clear"></div>
+                    {% endfor %}
+                {% endif %}
+            </div>    
         </div>    
     </div>
     

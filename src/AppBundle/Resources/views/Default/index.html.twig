@@ -8,9 +8,11 @@
         <h2 class="icoProject">Mes projets</h2>
         <div class="clear"></div>
         <div class="blockContent">
-            {% for project in projects %}
-                {% include('AppBundle:Project:layoutproject.html.twig') %}
-            {% endfor %}
+            <div id="accordionMyProject">
+                {% for project in projects %}
+                    {% include('AppBundle:Project:layoutproject.html.twig') %}
+                {% endfor %}
+            </div>
             <div class="pagination">
                 <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
                 <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
@@ -23,9 +25,11 @@
         <h2 class="icoProject">Tous les projets</h2>
         <div class="clear"></div>
         <div class="blockContent">
-            {% for project in projects %}
-                {% include('AppBundle:Project:layoutproject.html.twig') %}
-            {% endfor %}
+            <div id="accordionAllProjects">
+                {% for project in projects %}
+                    {% include('AppBundle:Project:layoutproject.html.twig') %}
+                {% endfor %}
+            </div>
             <div class="pagination">
                 <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
                 <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
@@ -35,5 +39,11 @@
     </div>
   
 {% endblock left %}
+
+{% block javascripts %}
+    {{parent()}}
+    <script>$(function() { $( "#accordionMyProject" ).accordion(); });</script>
+    <script>$(function() { $( "#accordionAllProjects" ).accordion(); });</script>
+{% endblock %}
 
 

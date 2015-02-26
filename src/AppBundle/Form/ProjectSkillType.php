@@ -24,9 +24,6 @@ class ProjectSkillType extends AbstractType
                 'choices' => array(true => "Recrutement Actif", false => "Recrutement Terminé" ),
                 'attr' => array('class'=>'skillActive')
             ))
-            ->add('Valider', 'submit', array(
-                'attr' => array('class'=>'btnAction')
-            ))
         ;
     }
     

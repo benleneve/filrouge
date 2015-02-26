@@ -86,7 +86,6 @@ class ProjectSkill
     public function setProject(Project $project)
     {
         $this->project = $project;
-        $project->addProjectSkill($this);
 
         return $this;
     }

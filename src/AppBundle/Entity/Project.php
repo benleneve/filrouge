@@ -83,7 +83,7 @@ class Project
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="Step", mappedBy="project", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Step", mappedBy="project", cascade={"persist"})
      */
     private $steps;
     
@@ -97,7 +97,7 @@ class Project
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="ProjectSkill", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="ProjectSkill", mappedBy="project", cascade={"persist"})
      */
     private $projectSkills;
     
@@ -337,7 +337,9 @@ class Project
      */
     public function addStep(Step $steps)
     {
+        
         $this->steps[] = $steps;
+        $steps->setProject($this);
 
         return $this;
     }
@@ -395,6 +397,7 @@ class Project
     public function addProjectSkill(ProjectSkill $projectSkills)
     {
         $this->projectSkills[] = $projectSkills;
+        $projectSkills->setProject($this);
 
         return $this;
     }

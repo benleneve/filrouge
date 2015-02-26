@@ -1,54 +1,52 @@
 $(document).ready(function() {
+    
     // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
-    var $container = $('div#appbundle_project_steps');
+    var $containerSkill = $('div#appbundle_project_projectSkills');
 
-    // On ajoute un lien pour ajouter une nouvelle étape
-    var $addLink = $('<a href="#add_step" id="add_step" class="btnAction newStep">> Ajouter une étape</a>');
-    $container.append($addLink);
+    // On ajoute un lien pour ajouter une nouvelle compétence
+    var $addLinkSkill = $('<a href="#add_projectSkills" id="add_projectSkills" class="btnAction newSkill">> Ajouter une compétence</a>');
+    $containerSkill.append($addLinkSkill);
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
-    $addLink.click(function(e) {
-        addStep($container);
+    $addLinkSkill.click(function(e) {
+        addSkill($containerSkill);
         e.preventDefault(); // évite qu'un # apparaisse dans l'URL
         return false;
     });
 
     // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
-    var index = $container.find(':input').length;
+    var indexSkill = $containerSkill.find(':input').length;
 
-    // On ajoute un premier champ automatiquement s'il n'en existe pas déjà un (cas d'une nouvelle annonce par exemple).
-    if (index == 0) {
-        addCategory($container);
-    } else {
+
     // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
-        $container.children('div').each(function() {
-            addDeleteLink($(this));
-        });
-    }
+    $containerSkill.children('div').each(function() {
+        addDeleteLinkSkill($(this));
+    });
 
-    // La fonction qui ajoute un formulaire Step
-    function addStep($container) {
+
+    // La fonction qui ajoute un formulaire Skill
+    function addSkill($containerSkill) {
         // Dans le contenu de l'attribut « data-prototype », on remplace :
         // - le texte "__name__label__" qu'il contient par le label du champ
         // - le texte "__name__" qu'il contient par le numéro du champ
-        var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Etape n°' + (index+1))
-        .replace(/__name__/g, index));
+        var $prototype = $($containerSkill.attr('data-prototype').replace(/__name__label__/g, 'Etape n°' + (indexSkill+1))
+        .replace(/__name__/g, indexSkill));
         // On ajoute au prototype un lien pour pouvoir supprimer la catégorie
-        addDeleteLink($prototype);
+        addDeleteLinkSkill($prototype);
         // On ajoute le prototype modifié à la fin de la balise <div>
-        $container.append($prototype);
+        $containerSkill.append($prototype);
         // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
-        index++;
+        indexSkill++;
     }
 
     // La fonction qui ajoute un lien de suppression d'une étape
-    function addDeleteLink($prototype) {
+    function addDeleteLinkSkill($prototype) {
         // Création du lien
-        $deleteLink = $('<a href="#" class="btnAction deleteStep">> Supprimer</a><div class="clear"></div>');
+        $deleteLinkSkill = $('<a href="#" class="btnAction deleteSkill">> Supprimer</a><div class="clear"></div>');
         // Ajout du lien
-        $prototype.append($deleteLink);
+        $prototype.append($deleteLinkSkill);
         // Ajout du listener sur le clic du lien
-        $deleteLink.click(function(e) {
+        $deleteLinkSkill.click(function(e) {
             $prototype.remove();
             e.preventDefault(); // évite qu'un # apparaisse dans l'URL
             return false;

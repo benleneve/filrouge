@@ -23,9 +23,6 @@ class StepType extends AbstractType
                 'property' => 'name',
                 'attr' => array('class'=>'stepStatus')
             ))
-            ->add('Valider', 'submit', array(
-                'attr' => array('class'=>'btnAction')
-            ))
         ;
     }
     

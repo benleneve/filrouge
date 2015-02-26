@@ -22,7 +22,7 @@
         <h2 class="icoProject">Tous les Profils</h2>
         <div class="clear"></div>
         <div class="blockContent">
-            <div id='accordion'>
+            <div id='accordionUserList'>
                 {% for user in users %}
                     {% include('AppBundle:User:userLayout.html.twig') %}
                 {% endfor %}
@@ -40,9 +40,5 @@
 
 {% block javascripts %}
     {{parent()}}
-            <script>
-          $(function() {
-            $( "#accordion" ).accordion();
-          });
-          </script>
+    <script>$(function() { $( "#accordionUserList" ).accordion(); });</script>
 {% endblock %}
