@@ -14,7 +14,7 @@
                     {% endif %}
                 </div>
                 <div class="content">
-                    <p>{{message.creationDate|date('d/m/Y H:i')}}</p>
+                    <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
                     <p>{{message.content}}</p>
                 </div>  
                 <div class="clear"></div>
@@ -44,7 +44,7 @@
                     {% endif %}
                 </div>
                 <div class="content">
-                    <p>{{notification.creationDate|date('d/m/Y H:i')}}</p>
+                    <p><span class="dateAside">{{notification.creationDate|date('d/m/Y H:i')}}<span></p>
                     <p>
                         {{notification.content}}
                         <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} "> {{notification.project.name}}</a>

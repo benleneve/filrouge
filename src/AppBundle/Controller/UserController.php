@@ -16,11 +16,11 @@ class UserController extends Controller {
                           ->getManager()
                           ->getRepository('AppBundle:User');
            
-             $user = $repo->findAllUsersEager();
+             $users = $repo->findAllUsersEager();
              
              return $this->render('AppBundle:User:userslist.html.twig',
                                        array(
-                                        'users' => $user
+                                        'users' => $users
                                         ));
     }
     

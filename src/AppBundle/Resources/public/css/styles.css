@@ -62,9 +62,9 @@ fieldset {
 
 h2 {
     text-transform: uppercase;
-    font-weight: bold;
-    height: 25px;
-    line-height:35px;
+    font-size: 20px;
+    height: 30px;
+    line-height: 45px;
     margin-bottom: 5px;
 }
 
@@ -75,12 +75,12 @@ h2.icoProject {
 
 h2.icoRecrut {
     background: url("../images/recrut.png") left bottom no-repeat;
-    text-indent: 30px;
+    text-indent: 40px;
 }
 
 h2.icoUser {
     background: url("../images/user.png") left bottom no-repeat;
-    text-indent: 30px;
+    text-indent: 25px;
 }
 
 h2.icoSearch {
@@ -90,16 +90,17 @@ h2.icoSearch {
 
 h2.icoNotif {
     background: url("../images/notif.png") left bottom no-repeat;
-    text-indent: 30px;
+    text-indent: 40px;
 }
 
 h3 {
     line-height:30px;
 }
 
+
 h4 {
-    font-weight: bold;
-    margin: 20px 0 3px 0;
+    font-size: 14px;
+    margin: 15px 0 3px 0;
 }
 
 /*------------------------------STRUCTURE GLOBALE-----------------------------*/
@@ -248,9 +249,14 @@ aside {
 
 /*-------------Content block------------------*/
 
+
 #content .blockGeneral {
     width: 100%;
     margin-bottom: 30px; 
+}
+
+#content .blockGeneral .bodyBlock {
+    text-align: justify;
 }
 
 #content .blockGeneral .iconeBlock {
@@ -269,17 +275,22 @@ aside {
     padding: 2%;
 }
 
-#content .headerBlock .buttonAction {
+#content .headerBlock .ico {
     float: left;
-    margin-right: 5px;
+    width: 15px;
 }
 
 #content .headerBlock .name {
     float: left;
-    width: 200px;
+    width: 250px;
 }
 
-#content .headerBlock .skill {
+.name .nameStrong {
+    font-size: 14px;
+    line-height: 20px;
+}
+
+#content .headerBlock .information {
     float: left;
 }
 
@@ -291,13 +302,44 @@ aside {
     border-bottom: 1px solid #000;
 }
 
-#content .bodyBlock {
-    padding: 10px 0;
-}
 
 #content .pagination {
+    margin-top: 10px;
     float: right;
 }
+
+
+/*------------Content User----------------*/
+
+.userSeeMore  {
+    width: 110px;
+    height: 25px;
+    margin-top: 10px; 
+}
+
+
+.userSkill .name {
+    width: 150px;
+    height: 25px;
+    margin: 5px 0px 2px 0;
+    line-height: 25px;
+    background-color: #e8e8e8;
+    float: left;
+    text-indent: 5px;
+
+}
+
+.userSkill .level {
+    width: 100px;
+    height: 22px;
+    margin: 5px 5px 2px 0;
+    padding-top: 3px;
+    line-height: 25px;
+    background-color: #e8e8e8;
+    float: left;
+
+}
+
 
 /*------------Content Project----------------*/
 
@@ -312,8 +354,9 @@ aside {
 }
 
 .projectSeeMore  {
-    width: 150px;
+    width: 120px;
     height: 25px;
+    margin-top: 10px; 
 }
 
 a.newStep, a.newSkill {
@@ -324,6 +367,16 @@ a.newStep, a.newSkill {
 a.deleteStep, a.deleteSkill {
     width: 80px;
     height: 25px;
+}
+
+.dateProject .startDate {
+    float: left;
+    width: 150px; 
+} 
+
+.dateProject .endDate {
+    float: left;
+    width: 150px;
 }
 
 .projectSkill .name, .projectStep .name {
@@ -337,7 +390,7 @@ a.deleteStep, a.deleteSkill {
 }
 
 .projectSkill .action, .projectStep .action {
-    width: 80px;
+    width: 90px;
     height: 25px;
     margin: 5px 10px 2px 0;
     line-height: 25px;
@@ -379,9 +432,76 @@ a.deleteStep, a.deleteSkill {
     float: left;
 }
 
+/*----------------------FormProject-----------------------*/
+
+
 #formProject {
     border-bottom: 1px solid #000;
     padding-bottom: 10px;
+}
+
+.nameProject h4, .statusProject h4 {
+    margin-top: 0;
+}
+
+#formProject .nameProject {
+    float: left;
+}
+
+#formProject .nameProject input {
+    float: left;
+    width: 460px;
+    height: 25px;
+    border: 1px solid #000;
+    margin-bottom: 5px;
+    padding: 0 5px;
+}
+
+#formProject .statusProject {
+    float: right;
+}
+
+#formProject .statusProject select {
+    float: left;
+    width: 100px;
+    height: 27px;
+    border: 1px solid #000;
+}
+
+#formProject .startDateProject {
+    float: left;
+    width: 200px;
+    padding-right: 20px;
+}
+
+#formProject .endDateProject {
+    float: left;
+    width: 200px;
+}
+
+#formProject select.managerProject {
+    width: 150px;
+    height: 27px;
+    border: 1px solid #000;
+}
+
+#formProject input.purposeProject {
+    width: 460px;
+    height: 25px;
+    border: 1px solid #000;
+    margin-bottom: 5px;
+    padding: 0 5px;
+}
+
+#formProject textarea.descriptionProject {
+    width: 460px;
+    height: 150px;
+    border: 1px solid #000;
+    margin-bottom: 5px;
+    font-size:13px;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    padding: 0 5px;
+    resize: none;
 }
 
 #formProject button.btnAction {
@@ -392,96 +512,43 @@ a.deleteStep, a.deleteSkill {
     padding:0 15px;
 }
 
-
-
 /*------------------Steps&SkillProject--------------------*/
 
 #appbundle_project_steps {
     margin-bottom: 10px;
 }
 
-#appbundle_project_steps label.required {
-    display:none;
+#appbundle_project_steps label.required, #appbundle_project_projectSkills label.required {
+    display: none;
 }
 
-#appbundle_project_steps input.stepName {
-    float:left;
-    width:200px;
-    height:25px;
-    border:1px solid #000;
-    margin-right:10px;
-    margin-bottom:10px;
+#appbundle_project_steps input.stepName, #appbundle_project_projectSkills select.skillName {
+    float: left;
+    width: 200px;
+    height: 25px;
+    border: 1px solid #000;
+    margin-right: 10px;
+    margin-bottom: 10px;
+    padding: 0 5px;
 }
 
-#appbundle_project_steps select.stepStatus {
-    float:left;
-    width:160px;
-    height:25px;
-    border:1px solid #000;
-    margin-right:10px;
+#appbundle_project_steps select.stepStatus, #appbundle_project_projectSkills select.skillActive {
+    float: left;
+    width: 160px;
+    height: 25px;
+    border: 1px solid #000;
+    margin-right: 10px;
 }
 
-#appbundle_project_steps button.btnAction {
-    float:left;
-    margin-right:10px;
-    border:none;
-    font-size:12px;
-    font-family: "MyriadPro-Regular", arial, sans-serif;
-    padding:0 20px;
+#appbundle_project_steps a.deleteStep, #appbundle_project_projectSkills a.deleteSkill {
+    float: left;
+    display: block;
 }
 
-#appbundle_project_steps a.deleteStep {
-    float:left;
-    display:block;
+#appbundle_project_steps a#add_step, #appbundle_project_projectSkills a#add_projectSkills {
+    float: none;
+    margin-bottom: 10px;
 }
-
-#appbundle_project_steps a#add_step{
-    float:none;
-    margin-bottom:10px;
-}
-
-/*------------------SkillProject--------------------*/
-
-#appbundle_project_projectSkills label.required{
-    display:none;
-}
-
-#appbundle_project_projectSkills select.skillName {
-    float:left;
-    width:200px;
-    height:25px;
-    border:1px solid #000;
-    margin-right:10px;
-    margin-bottom:10px;
-}
-
-#appbundle_project_projectSkills select.skillActive {
-    float:left;
-    width:160px;
-    height:25px;
-    border:1px solid #000;
-    margin-right:10px;
-}
-
-#appbundle_project_projectSkills button.btnAction {
-    float:left;
-    margin-right:10px;
-    border:none;
-    font-size:12px;
-    font-family: "MyriadPro-Regular", arial, sans-serif;
-    padding:0 20px;
-}
-
-#appbundle_project_projectSkills a.deleteSkill {
-    float:left;
-    display:block;
-}
-
-#appbundle_project_projectSkills a#add_projectSkills{
-    float:none;
-    margin-bottom:10px;
-}
-
 
 /*------------------aside--------------------*/
 
@@ -503,6 +570,10 @@ aside .oneElement .content {
 aside .pagination {
     float: right;
     padding: 10px 10px 0 0;
+}
+
+aside .dateAside {
+    font-weight: bold;
 }
 
 /*----------------footer------------------*/

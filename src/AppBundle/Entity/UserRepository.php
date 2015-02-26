@@ -39,7 +39,7 @@ class UserRepository extends EntityRepository
                         ->leftjoin('u.promotions', 'p')
                         ->addSelect('p')
                         ->orderBy('u.lastName');
-
+                
                 return $query->getQuery()->getResult();
 
             }

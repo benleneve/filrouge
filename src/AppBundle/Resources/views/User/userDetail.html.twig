@@ -16,14 +16,11 @@
         <h2 class="icoUser">Profil</h2>
         <div class="blockContent">
             <div class="headerBlock">
-                <div class="name">
-                    <h3>{% include('AppBundle:User:userHeader.html.twig')%}</h3>
-                </div>
+                {% include('AppBundle:User:userHeader.html.twig')%}
                 <div class="status">
                     {% if user.availability == true %}
                         Disponible
-                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_green.png')}}" />
-                       
+                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_green.png')}}" /> 
                     {% elseif user.availability == false %}
                         Indisponible
                         <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_red.png')}}" />
@@ -31,34 +28,33 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="bodyBlock"> 
-                
+            <div class="bodyBlock">   
                 {% if user.dispoBirth == true %}
-                    <h4> Age </h4>{{ user.getAge()|date  }}
+                    <h4> Age </h4>
+                    {{ user.getAge()|date  }}
                 {% endif %}   
-
                 {% if user.dispoEmail == true %}
-                   <h4> Email </h4>{{ user.email }}
+                   <h4> Email </h4>
+                   {{ user.email }}
                 {% endif %}
-
                 {% if user.dispoPhone == true %}
-                   <h4>Téléphone </h4> {{ user.phone }}
-                {% endif %}
-                 
+                   <h4>Téléphone </h4> 
+                   {{ user.phone }}
+                {% endif %}                 
                 {% if user.dispoAddress == true %}
                 <h4>Adresse Postale <h4>
-                 <ul>
-                     <li>{{ user.address }}</li>
-                     <li>{{ user.postCode ~ " " ~ user.city }}</li>
-                 </ul>
+                    <ul>
+                        <li>{{ user.address }}</li>
+                        <li>{{ user.postCode ~ " " ~ user.city }}</li>
+                    </ul>
                 {% endif %}
                 <div>
                     {% if user.image %}
-                        <img src="{{asset(user.image.url)}}" alt="{{user.image.alt}} " />
+                        <img src="{{asset(user.image.url)}}" alt="{{user.image.alt}} " width="200px" />
                     {% endif %}
                 </div>
                 {% if (user.userSkills|length !=0) %}
-                   {% for userSkill in user.userSkills %} {{userSkill.skill.name ~ ' - ' ~ userSkill.level}} {% endfor %}
+                    {% for userSkill in user.userSkills %} {{userSkill.skill.name ~ ' - ' ~ userSkill.level}} {% endfor %}
                 {% endif %}
                  
                 {% if (user.description|length !=0) %}
@@ -68,20 +64,19 @@
                 {% if (user.worksOnProjects|length!=0) %}
                     <table>
                         <tr>
-                            <th> Projet </th>
-                            <th> Compétence </th>
-                            <th> Date de début </th>
-                            <th> Date de fin </th>
+                            <th>Projet</th>
+                            <th>Compétence</th>
+                            <th>Date de début</th>
+                            <th>Date de fin</th>
                         </tr>
-
-                          {% for worksOnProject in user.worksOnProjects %} 
-                              <tr>
-                                <td> {{ worksOnProject.project.name }} </td>
-                                <td> {{ worksOnProject.skill }} </td>
-                                <td> {{ worksOnProject.project.startDate|date }} </td>
-                                <td> {{ worksOnProject.project.endDate|date }} </td>
-                              </tr>
-                          {% endfor %}
+                            {% for worksOnProject in user.worksOnProjects %} 
+                                <tr>
+                                    <td> {{ worksOnProject.project.name }} </td>
+                                    <td> {{ worksOnProject.skill }} </td>
+                                    <td> {{ worksOnProject.project.startDate|date }} </td>
+                                    <td> {{ worksOnProject.project.endDate|date }} </td>
+                                </tr>
+                            {% endfor %}
                     </table>
                 {% endif %}
                 

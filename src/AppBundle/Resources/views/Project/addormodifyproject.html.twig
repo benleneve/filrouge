@@ -18,37 +18,38 @@
             <div id="formProject">
                 {{ form_start(projectForm) }}
                     {{ form_errors(projectForm) }}
-                    <div>
-                        <div>
-                            <h4>{{ form_label(projectForm.name, "Nom du projet") }}</h4>
-                            {{ form_widget(projectForm.name, { 'attr': {'class': ''} }) }}
-                            {{ form_errors(projectForm.name) }}
-                        </div>
-                        <div>
-                            <h4>{{ form_label(projectForm.name, "Etat du projet") }}</h4>
-                            {{ form_widget(projectForm.status, { 'attr': {'class': ''} }) }}
-                        </div>
+
+                    <div class="nameProject">
+                        <h4>{{ form_label(projectForm.name, "Nom du projet") }}</h4>
+                        {{ form_widget(projectForm.name) }}
+                        {{ form_errors(projectForm.name) }}
                     </div>
-                    <div>
-                        <div>
-                            <h4>{{ form_label(projectForm.startDate, "Date de début") }}</h4>
-                            {{ form_widget(projectForm.startDate, { 'attr': {'class': ''} }) }}
-                            {{ form_errors(projectForm.startDate) }}
-                        </div>
-                        <div>
-                            <h4>{{ form_label(projectForm.endDate, "Date de fin") }}</h4>
-                            {{ form_widget(projectForm.endDate, { 'attr': {'class': ''} }) }}
-                            {{ form_errors(projectForm.endDate) }}
-                        </div>
+                    <div class="statusProject">
+                        <h4>{{ form_label(projectForm.name, "Etat du projet") }}</h4>
+                        {{ form_widget(projectForm.status) }}
                     </div>
+                    <div class="clear"></div>
+                    <div class="startDateProject">
+                        <h4>{{ form_label(projectForm.startDate, "Date de début") }}</h4>
+                        {{ form_widget(projectForm.startDate) }}
+                        {{ form_errors(projectForm.startDate) }}
+                    </div>
+                    <div class="endDateProject">
+                        <h4>{{ form_label(projectForm.endDate, "Date de fin") }}</h4>
+                        {{ form_widget(projectForm.endDate) }}
+                        {{ form_errors(projectForm.endDate) }}
+                    </div>
+                    <div class="clear"></div>
+
+
                     <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
-                    {{ form_widget(projectForm.projectManager, { 'attr': {'class': ''} }) }}
+                    {{ form_widget(projectForm.projectManager, { 'attr': {'class': 'managerProject'} }) }}
                     {{ form_errors(projectForm.projectManager) }}
                     <h4>{{ form_label(projectForm.purpose, "Objectif") }}</h4>
-                    {{ form_widget(projectForm.purpose, { 'attr': {'class': ''} }) }}
+                    {{ form_widget(projectForm.purpose, { 'attr': {'class': 'purposeProject'} }) }}
                     {{ form_errors(projectForm.purpose) }}
                     <h4>{{ form_label(projectForm.description, "Description") }}</h4>
-                    {{ form_widget(projectForm.description, { 'attr': {'class': ''} }) }}
+                    {{ form_widget(projectForm.description, { 'attr': {'class': 'descriptionProject'} }) }}
                     
                     <h4>{{ form_label(projectForm.projectSkills, "Compétences requises") }}</h4>
                     {{ form_widget(projectForm.projectSkills) }}

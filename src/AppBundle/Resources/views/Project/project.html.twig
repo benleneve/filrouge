@@ -18,22 +18,29 @@
                 <div class="status">
                     {% if project.status.name == 'En attente' %}
                         {{project.status.name}}
-                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_orange.png')}}" />
+                        <img alt="En attente" src="{{asset('bundles/app/images/status_orange.png')}}" />
                     {% elseif project.status.name == 'En cours' %}
                         {{project.status.name}}
-                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_green.png')}}" />
+                        <img alt="En Cours" src="{{asset('bundles/app/images/status_green.png')}}" />
                     {% elseif project.status.name == 'Terminé' %}
                         {{project.status.name}}
-                        <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/status_red.png')}}" />
+                        <img alt="Terminé" src="{{asset('bundles/app/images/status_red.png')}}" />
                     {% endif %}
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="bodyBlock"> 
-                <h4>Date de début</h4>
-                {{project.startDate|date('d/m/Y')}} 
-                <h4>Date de fin</h4>
-                {{project.endDate|date('d/m/Y')}}
+            <div class="bodyBlock">
+                <div class="dateProject">
+                    <div class="startDate">
+                        <h4>Date de début</h4>
+                        {{project.startDate|date('d/m/Y')}} 
+                    </div>
+                    <div class="endDate">
+                        <h4>Date de fin</h4>
+                        {{project.endDate|date('d/m/Y')}}
+                    </div>
+                    <div class="clear"></div>
+                </div>
                 <h4>Chef de projet</h4>
                 {{project.projectManager.firstName}} {{project.projectManager.lastName}}
                 <h4>Objectif</h4>
@@ -55,8 +62,7 @@
                         {% endif %}
                         </div>
                         <div class="clear"></div>
-                    </div>
-                        
+                    </div>         
                 {% endfor %}
                 
                 <h4>Avancement du projet</h4>
