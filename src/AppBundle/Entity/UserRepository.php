@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * UserRepository
@@ -33,14 +34,18 @@ class UserRepository extends EntityRepository
                 return $query->getQuery()->getOneOrNullResult();
             }
     
-        public function findAllUsersEager()
+        public function findAllUsersEager($page= 1, $maxPerPage = 5)
             {
                 $query = $this->createQueryBuilder('u')
                         ->leftjoin('u.promotions', 'p')
                         ->addSelect('p')
                         ->orderBy('u.lastName');
-                
-                return $query->getQuery()->getResult();
+                $query->setFirstResult(($page-1)*$maxPerPage)
+                      ->setMaxResults($maxPerPage);
+                        
+                return new Paginator($query);
 
             }
+            
+               
     }

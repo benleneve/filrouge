@@ -10,17 +10,31 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class UserController extends Controller {
     
-    public function listAction() 
+    public function listAction($page) 
         {
+            $maxUsers = 5;
+            
              $repo = $this->getDoctrine()
                           ->getManager()
                           ->getRepository('AppBundle:User');
+             
+             $users = $repo->findAllUsersEager($page, $maxUsers);
+             
+             $numberOfUsers = count($users);
+             
+             $pagination = array(
+                    "page" => $page,
+                    "route" => "filrouge_user_list",
+                    "pages_count" => ceil($numberOfUsers/$maxUsers),
+                    "route_params" => array()
+                            );
            
-             $users = $repo->findAllUsersEager();
+            
              
              return $this->render('AppBundle:User:userslist.html.twig',
                                        array(
-                                        'users' => $users
+                                        'users' => $users,
+                                        'pagination' => $pagination
                                         ));
     }
     

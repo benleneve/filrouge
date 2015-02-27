@@ -1,5 +1,6 @@
 {% extends "AppBundle::layout.html.twig" %}
 
+
 {% block title %}
        Tous les profils
 {% endblock title %}
@@ -19,26 +20,29 @@
     </div>
     
     <div class="blockGeneral">
-        <h2 class="icoUser">Tous les Profils</h2>
+        <h2 class="icoProject">Tous les Profils</h2>
         <div class="clear"></div>
         <div class="blockContent">
-            <div id='accordionUserList'>
+            <div id='accordion'>
                 {% for user in users %}
                     {% include('AppBundle:User:userLayout.html.twig') %}
                 {% endfor %}
             </div>
             <div class="pagination">
-                <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
-                <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
+                {% include 'AppBundle::pagination.html.twig' %}
             </div>
             <div class="clear"></div>
         </div>
     </div>
     
-      
+   
 {% endblock left %}
 
 {% block javascripts %}
     {{parent()}}
-    <script>$(function() { $( "#accordionUserList" ).accordion(); });</script>
+            <script>
+          $(function() {
+            $( "#accordion" ).accordion();
+          });
+          </script>
 {% endblock %}
