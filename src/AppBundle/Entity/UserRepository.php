@@ -37,10 +37,22 @@ class UserRepository extends EntityRepository
         public function findAllUsersEager($page= 1, $maxPerPage = 5)
             {
                 $query = $this->createQueryBuilder('u')
-                        ->leftjoin('u.promotions', 'p')
+                        ->leftJoin('u.image', 'i')
+                        ->addSelect('i')
+                        ->leftJoin('u.promotions', 'p')
                         ->addSelect('p')
+                        ->leftJoin('u.worksOnProjects', 'wp')
+                        ->addSelect('wp')
+                        ->leftJoin('wp.project', 'pr')
+                        ->addSelect('pr')
+                        ->leftJoin('u.userSkills', 'us')
+                        ->addSelect('us')
+                        ->leftJoin('us.skill', 's')
+                        ->addSelect('s')
                         ->orderBy('u.lastName');
-                $query->setFirstResult(($page-1)*$maxPerPage)
+                
+                $firstResult = ($page-1)*$maxPerPage;
+                $query->setFirstResult($firstResult)                        
                       ->setMaxResults($maxPerPage);
                         
                 return new Paginator($query);

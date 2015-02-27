@@ -11,7 +11,7 @@
     
      {{ form_errors(userForm) }}
      
-     {% if(userForm.vars.value.id is null) %}
+     
         <div>
             <h4>{{ form_label(userForm.lastName, 'Nom') }}</h4>
                 {{ form_errors(userForm.lastName) }}
@@ -25,38 +25,38 @@
        </div>
        
        {# promotions + écoles #}
-       
-    {% else %}
+ {#      
+    {% else %} #}
         {% include('AppBundle:User:userHeader.html.twig') %} 
         {{ form_errors(userForm.availability) }}
         {{ form_widget(userForm.availability) }}
-    {% endif %}
+   {#  {% endif %} #}
     <div>
-        {% if(userForm.vars.value.id is null) %}
-            <h4>{{ form_label(userForm.login, 'Login') }}</h4>
-                {{ form_errors(userForm.login) }}
-                {{ form_widget(userForm.login) }}
-        {% endif %}
+        {# {% if(userForm.vars.value.id is null) %}#}
+            <h4>{{ form_label(userForm.username, "Login") }}</h4>
+                {{ form_errors(userForm.username) }}
+                {{ form_widget(userForm.username) }}
+       {#  {% endif %} #}
     </div>
     
-   
-    {% if(userForm.vars.value.id is null) %}
+  
+   {# {% if(userForm.vars.value.id is null) %}#}
          <div>
             <h4>{{ form_label(userForm.password, 'Mot de passe') }}</h4>
                 {{ form_errors(userForm.password) }}
                 {{ form_widget(userForm.password) }}
         </div>
-    {% endif %}
+   {# {% endif %}#}
     
     
     <div>
-        {% if(userForm.vars.value.id is null) %}
+        {# {% if(userForm.vars.value.id is null) %}#}
             <h4>{{ form_label(userForm.birthDate, 'Date de naissance') }}</h4>
                 {{ form_errors(userForm.birthDate) }}
                 {{ form_widget(userForm.birthDate) }}
-        {% else %}
+       {#  {% else %}
             <h4>Age : {{ user.getAge()|date}}</h4>
-        {% endif %}
+        {% endif %}#}
             {{ form_errors(userForm.dispoBirth) }}
             {{ form_widget(userForm.dispoBirth) }}
     </div> 
@@ -127,4 +127,6 @@
 {% block javascripts %}
     {{parent()}}
     <script  type="text/javascript" src="{{ asset('bundles/app/js/promotion-user.js') }}"></script>
+    <script  type="text/javascript" src="{{ asset('bundles/app/js/skill-user.js') }}"></script>
 {% endblock %}
+

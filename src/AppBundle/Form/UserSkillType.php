@@ -1,12 +1,13 @@
 <?php
-
 namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ProjectSkillType extends AbstractType
+
+
+class UserSkillType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -23,11 +24,7 @@ class ProjectSkillType extends AbstractType
             ->add('level', 'choice', array(
                 'choices' => array(1 => "1", 2 => "2", 3 => "3", 4 => "4", 5 => "5" ),
                 'attr' => array('class'=>'skillLevel')
-            ))
-            ->add('Valider', 'submit', array(
-                'attr' => array('class'=>'btnAction')
-            ))
-        ;
+            ));
     }
     
     /**
