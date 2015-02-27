@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table()
  * @ORM\Entity(repositoryClass="UserRepository")
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var integer
@@ -41,9 +42,9 @@ class User
     /**
      * @var string
      *
-     * @ORM\Column(name="login", type="string", length=255)
+     * @ORM\Column(name="username", type="string", length=255)
      */
-    private $login;
+    private $username;
 
     /**
      * @var string
@@ -51,6 +52,18 @@ class User
      * @ORM\Column(name="password", type="string", length=255)
      */
     private $password;
+    
+    /**
+     * 
+     * @ORM\Column(name="salt", type="string", length=255)
+     */
+    private $salt;
+
+    /**
+     * 
+     * @ORM\Column(name="roles", type="array")
+     */
+    private $roles;
 
     /**
      * @var DateTime
@@ -199,12 +212,22 @@ class User
      */
     public function __construct()
     {
+        $this->roles = array();
         $this->promotions = new ArrayCollection();
         $this->managesProjects = new ArrayCollection();
         $this->worksOnProjects = new ArrayCollection();
         $this->userSkills = new ArrayCollection();
         $this->messagesReceived = new ArrayCollection();
         $this->messagesSent = new ArrayCollection();
+    }
+    
+//    public function __toString() {
+//        return $this->username;
+//    }
+//    
+    public function isEqualTo(UserInterface $user)
+    {
+        return $this->username === $user->getUsername();
     }
 
     /**
@@ -264,26 +287,26 @@ class User
     }
 
     /**
-     * Set login
+     * Set username
      *
-     * @param string $login
+     * @param string $username
      * @return User
      */
-    public function setLogin($login)
+    public function setUsername($username)
     {
-        $this->login = $login;
+        $this->username = $username;
 
         return $this;
     }
 
     /**
-     * Get login
+     * Get username
      *
      * @return string 
      */
-    public function getLogin()
+    public function getUsername()
     {
-        return $this->login;
+        return $this->username;
     }
 
     /**
@@ -307,6 +330,28 @@ class User
     public function getPassword()
     {
         return $this->password;
+    }
+    
+    public function setSalt($salt) {
+        $this->salt = $salt;
+        return $this;
+    }
+
+    public function getSalt() {
+        return $this->salt;
+    }
+
+    public function addRoles($roles) {
+        $this->roles[] = $roles;
+        return $this;
+    }
+
+    public function getRoles() {
+        return $this->roles;
+    }
+
+    public function eraseCredentials() {
+        
     }
 
     /**
