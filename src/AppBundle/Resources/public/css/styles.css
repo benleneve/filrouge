@@ -318,25 +318,26 @@ aside {
 }
 
 
-.userSkill .name {
-    width: 150px;
+.userSkill .skillContenant {
+    width: 300px;
     height: 25px;
-    margin: 5px 0px 2px 0;
-    line-height: 25px;
     background-color: #e8e8e8;
-    float: left;
-    text-indent: 5px;
-
+    margin: 5px 0px 2px 0;
 }
 
-.userSkill .level {
-    width: 100px;
-    height: 22px;
-    margin: 5px 5px 2px 0;
-    padding-top: 3px;
+
+.skillContenant .name {
+    height: 25px;
     line-height: 25px;
-    background-color: #e8e8e8;
     float: left;
+    text-indent: 5px;
+}
+
+.skillContenant .level {
+    height: 22px;
+    padding: 3px 5px 0 0;
+    line-height: 25px;
+    float: right;
 
 }
 
