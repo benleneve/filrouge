@@ -167,7 +167,7 @@ class User implements UserInterface
     /**
      * @var array
      *
-     * @ORM\ManyToMany(targetEntity="Promotion", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="Promotion", mappedBy="users", cascade={"persist"})
      */
     private $promotions;
     
@@ -188,7 +188,7 @@ class User implements UserInterface
     /**
      * @var array
      * 
-     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="user", cascade={"persist"})
      */
     private $userSkills;
     
@@ -784,6 +784,7 @@ class User implements UserInterface
     public function addUserSkill(UserSkill $userSkills)
     {
         $this->userSkills[] = $userSkills;
+        $userSkills->setUser($this);
 
         return $this;
     }

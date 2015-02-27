@@ -17,7 +17,7 @@ class UserType extends AbstractType
         $builder
             ->add('firstName', 'text')
             ->add('lastName', 'text')
-            ->add('login', 'text')
+            ->add('username', 'text')
             ->add('password', 'text')
             ->add('birthDate', 'date',  array(
                 'input'  => 'datetime',
@@ -48,7 +48,14 @@ class UserType extends AbstractType
             ->add('promotions', 'collection', array(
                 'type'         => new PromotionType(),
                 'allow_add'    => true,
-                'allow_delete' => true
+                'allow_delete' => true,
+                'by_reference' => false
+            ))
+            ->add('UserSkills', 'collection', array(
+                'type'         => new UserSkillType(),
+                'allow_add'    => true,
+                'allow_delete' => true,
+                'by_reference' => false
             ))
             ->add('image', new ImageType())
             ->add('Valider', 'submit')

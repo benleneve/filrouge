@@ -86,7 +86,7 @@ class UserSkill
     public function setUser(\AppBundle\Entity\User $user = null)
     {
         $this->user = $user;
-        $user->addUserSkill($this);
+      
 
         return $this;
     }

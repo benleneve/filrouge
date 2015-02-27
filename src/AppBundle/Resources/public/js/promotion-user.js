@@ -1,47 +1,54 @@
 $(document).ready(function() {
-   
-    var $container = $('div#appbundle_user_promotions');
+    
+    // On récupère la balise <div> en question qui contient l'attribut « data-prototype » qui nous intéresse.
+    var $containerPromotion = $('div#appbundle_user_promotions');
 
-    var $addLink = $('<a href="#add_promotion" id="add_promotion" class="btnAction newPromotion">> Ajouter une promotion</a>');
-    $container.append($addLink);
+    // On ajoute un lien pour ajouter une nouvelle promotion
+    var $addLinkPromotion = $('<a href="#add_userPromotions" id="add_userPromotions" class="btnAction newPromotion">> Ajouter une promotion</a>');
+    $containerPromotion.append($addLinkPromotion);
 
-    $addLink.click(function(e) {
-        addPromotion($container);
-        e.preventDefault(); 
+    // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
+    $addLinkPromotion.click(function(e) {
+        addPromotion($containerPromotion);
+        e.preventDefault(); // évite qu'un # apparaisse dans l'URL
         return false;
     });
 
-    var index = $container.find(':input').length;
+    // On définit un compteur unique pour nommer les champs qu'on va ajouter dynamiquement
+    var indexPromotion = $containerPromotion.find(':input').length;
 
-    if (index == 0) {
-        addSchool($container);
-    } else {
-           $container.children('div').each(function() {
-            addDeleteLink($(this));
-        });
+
+    // Pour chaque catégorie déjà existante, on ajoute un lien de suppression
+    $containerPromotion.children('div').each(function() {
+        addDeleteLinkPromotion($(this));
+    });
+
+
+    // La fonction qui ajoute un formulaire promotion
+    function addPromotion($containerPromotion) {
+        // Dans le contenu de l'attribut « data-prototype », on remplace :
+        // - le texte "__name__label__" qu'il contient par le label du champ
+        // - le texte "__name__" qu'il contient par le numéro du champ
+        var $prototype = $($containerPromotion.attr('data-prototype').replace(/__name__label__/g, 'Etape n°' + (indexPromotion+1))
+        .replace(/__name__/g, indexPromotion));
+        // On ajoute au prototype un lien pour pouvoir supprimer la promotion
+        addDeleteLinkPromotion($prototype);
+        // On ajoute le prototype modifié à la fin de la balise <div>
+        $containerPromotion.append($prototype);
+        // Enfin, on incrémente le compteur pour que le prochain ajout se fasse avec un autre numéro
+        indexPromotion++;
     }
 
-    function addPromotion($container) {
-        
-        var $prototype = $($container.attr('data-prototype').replace(/__name__label__/g, 'Etape n°' + (index+1))
-        .replace(/__name__/g, index));
-      
-        addDeleteLink($prototype);
-       
-        $container.append($prototype);
-      
-        index++;
-    }
-
-    function addDeleteLink($prototype) {
-        
-        $deleteLink = $('<a href="#" class="btnAction deletePromotion">> Supprimer</a><div class="clear"></div>');
-   
-        $prototype.append($deleteLink);
-       
-        $deleteLink.click(function(e) {
+    // La fonction qui ajoute un lien de suppression d'une promotion
+    function addDeleteLinkPromotion($prototype) {
+        // Création du lien
+        $deleteLinkPromotion = $('<a href="#" class="btnAction deletePromotion">> Supprimer</a><div class="clear"></div>');
+        // Ajout du lien
+        $prototype.append($deleteLinkPromotion);
+        // Ajout du listener sur le clic du lien
+        $deleteLinkPromotion.click(function(e) {
             $prototype.remove();
-            e.preventDefault(); 
+            e.preventDefault(); // évite qu'un # apparaisse dans l'URL
             return false;
         });
     }
