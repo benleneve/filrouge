@@ -122,7 +122,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                 $user5 = new User();
                 $user5->setFirstName("Julien")
                       ->setLastName("Strapontin")
-                      ->setUsername("user1")
+                      ->setUsername("user5")
                       ->setPassword("userpass")
                       ->setSalt('')
                       ->addRoles('ROLE_USER')

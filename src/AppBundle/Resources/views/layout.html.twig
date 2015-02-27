@@ -14,11 +14,16 @@
             {% endblock left %}
         </div>
         
-        <aside>
-            {% block right %}
-                {{ render(controller('AppBundle:Default:aside')) }}
-            {% endblock right %} 
-        </aside>
+        {% if is_granted('ROLE_USER') %}
+            <aside>
+                {% block right %}
+                    {{ render(controller('AppBundle:Default:aside', {
+                        'nbRecrut': 5,
+                        'nbNotif': 5
+                    })) }}
+                {% endblock right %} 
+            </aside>
+        {% endif %}
         
         <div class="clear"></div>     
     </div>

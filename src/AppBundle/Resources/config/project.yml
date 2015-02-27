@@ -1,10 +1,12 @@
 filrouge_project_list:
-    path: /
-    defaults: {_controller:AppBundle:Project:list}
+    path: /{page}
+    defaults: {_controller:AppBundle:Project:list, page:1 }
+    requirements:
+        page: \d+
 
 filrouge_project_detail:
     path: /detail/{id}
-    defaults: {_controller:AppBundle:Project:detail, id :1}
+    defaults: {_controller:AppBundle:Project:detail, id:1 }
     requirements:
         id: \d+
 
@@ -14,12 +16,24 @@ filrouge_project_add:
 
 filrouge_project_update:
     path: /update/{id}
-    defaults: {_controller:AppBundle:Project:update, id :1}
+    defaults: {_controller:AppBundle:Project:update, id:1 }
     requirements:
         id: \d+
 
 filrouge_project_remove:
     path: /remove/{id}
-    defaults: {_controller:AppBundle:Project:remove, id :1}
+    defaults: {_controller:AppBundle:Project:remove, id:1 }
+    requirements:
+        id: \d+
+        
+filrouge_project_apply:
+    path: /detail/{id}/apply
+    defaults: {_controller:AppBundle:Message:apply, id:1 }
+    requirements:
+        id: \d+
+       
+filrouge_project_response:
+    path: /update/{id}/response
+    defaults: {_controller:AppBundle:Message:response, id:1 }
     requirements:
         id: \d+

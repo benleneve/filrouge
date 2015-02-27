@@ -59,5 +59,8 @@
     {% endif %} 
     <div class="projectSeeMore">
         <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} " class="btnAction">Voir la fiche projet</a>
+        {% if app.user.id == project.projectManager.id %} 
+            <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">Modifier le projet</a>
+        {% endif %}
     </div>
 </div>

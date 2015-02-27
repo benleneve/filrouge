@@ -1,10 +1,12 @@
 filrouge_user_list:
     path: /{page}
-    defaults: {_controller:AppBundle:User:list, page:1}
+    defaults: {_controller:AppBundle:User:list, page:1 }
+    requirements:
+        page: \d+
 
 filrouge_user_detail:
     path: /detail/{id}
-    defaults: {_controller:AppBundle:User:detail, id :1}
+    defaults: {_controller:AppBundle:User:detail, id:1 }
     requirements:
         id: \d+
 filrouge_user_add:
@@ -13,13 +15,19 @@ filrouge_user_add:
            
 filrouge_user_update:
     path: /update/{id}
-    defaults: {_controller:AppBundle:User:update, id :1}
+    defaults: {_controller:AppBundle:User:update, id:1 }
     requirements:
         id: \d+
 
 filrouge_user_remove:
     path: /remove/{id}
-    defaults: {_controller:AppBundle:User:remove, id :1}
+    defaults: {_controller:AppBundle:User:remove, id:1 }
+    requirements:
+        id: \d+
+        
+filrouge_user_invite:
+    path: /detail/{id}/invite
+    defaults: {_controller:AppBundle:Message:response, id:1 }
     requirements:
         id: \d+
 

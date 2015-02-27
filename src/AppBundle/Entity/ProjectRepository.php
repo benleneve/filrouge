@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * ProjectRepository
@@ -13,7 +14,46 @@ use Doctrine\ORM\EntityRepository;
 class ProjectRepository extends EntityRepository
 {
     
-   //Récupérer tous les projet avec le status et compétences triés par date
+    //Récupérer tous les projet avec le status et compétences
+    //triés par date et pagination
+    public function findAllPojectsPageEager($page= 1, $maxPerPage = 5) {
+        $query = $this->createQueryBuilder('p')
+                    ->addSelect('st')
+                    ->addSelect('ps')
+                    ->addSelect('sk')
+                    ->LeftJoin('p.status', 'st')
+                    ->LeftJoin('p.projectSkills', 'ps')
+                    ->LeftJoin('ps.skill', 'sk')
+                    ->orderBy('p.creationDate', 'DESC');
+        $query->setFirstResult(($page-1)*$maxPerPage)
+              ->setMaxResults($maxPerPage);
+        return new Paginator($query);        
+    }
+    
+    //Récupérer tous les projet d'un utilisateur
+    //triés par date et pagination
+    public function findAllPojectsByUserPageEager($page= 1, $maxPerPage = 5, $id) {
+        $query = $this->createQueryBuilder('p')
+                    ->addSelect('st')
+                    ->addSelect('ps')
+                    ->addSelect('sk')
+                    ->addSelect('u')
+                    ->LeftJoin('p.status', 'st')
+                    ->LeftJoin('p.projectSkills', 'ps')
+                    ->LeftJoin('ps.skill', 'sk')
+                    ->LeftJoin('p.projectManager', 'u')
+                    ->LeftJoin('p.projectMembers', 'up')
+                    ->leftJoin('up.user', 'u')
+                    ->where('u.id = :id')
+                    ->setParameter('id', $id)
+                    ->orderBy('p.creationDate', 'DESC');
+        $query->setFirstResult(($page-1)*$maxPerPage)
+              ->setMaxResults($maxPerPage);
+        return new Paginator($query);        
+    }
+    
+    //Récupérer tous les projet avec le status et compétences
+    //triés par date
     public function findAllPojectsEager() {
         return $this->createQueryBuilder('p')
                     ->addSelect('st')
@@ -24,7 +64,31 @@ class ProjectRepository extends EntityRepository
                     ->LeftJoin('ps.skill', 'sk')
                     ->orderBy('p.creationDate', 'DESC')
                     ->getQuery()
-                    ->getResult();
+                    ->getResult();       
+    }
+    
+    //Récupérer tous les projet d'un utilisateur
+    //triés par date
+    public function findAllPojectsByUserEager($id) {
+        return $this->createQueryBuilder('p')
+                    ->addSelect('st')
+                    ->addSelect('ps')
+                    ->addSelect('sk')
+                    ->addSelect('u')
+                    ->addSelect('up')
+                    ->addSelect('upu')
+                    ->LeftJoin('p.status', 'st')
+                    ->LeftJoin('p.projectSkills', 'ps')
+                    ->LeftJoin('ps.skill', 'sk')
+                    ->LeftJoin('p.projectManager', 'u')
+                    ->LeftJoin('p.projectMembers', 'up')
+                    ->leftJoin('up.user', 'upu')
+                    ->where('u.id = :id')
+                    ->orWhere('upu.id = :id')
+                    ->setParameter('id', $id)
+                    ->orderBy('p.creationDate', 'DESC')
+                    ->getQuery()
+                    ->getResult();    
     }
     
     //Récupérer un projet avec son status, ses étape...

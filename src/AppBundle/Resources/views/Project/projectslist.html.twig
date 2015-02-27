@@ -24,8 +24,7 @@
                 {% endfor %}
             </div>
             <div class="pagination">
-                <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
-                <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
+                {% include 'AppBundle::pagination.html.twig' %}
             </div>
             <div class="clear"></div>
         </div>

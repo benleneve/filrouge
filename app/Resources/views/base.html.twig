@@ -35,22 +35,32 @@
             
         <nav>
             <div class="container">
-                {% block menu %}
-                    <ul id="menuHeader">
-                        <li class="first-child">
-                            <a href="{{path('filrouge_homepage')}}">Accueil</a>
-                        </li>
-                        <li>
-                            <a href="{{path('filrouge_project_list')}}">Projets</a>
-                        </li>
-                        <li>
-                            <a href="{{path('filrouge_user_list')}}">Profils</a>
-                        </li>
-                        <li>
-                            <a href="{{path('filrouge_admin')}}">Administration</a>
-                        </li>
-                    </ul>
-                {% endblock menu %}
+                {% if is_granted('ROLE_USER') %}
+                    {% block menu %}
+                        <ul id="menuHeader">
+                            <li class="first-child">
+                                <a href="{{path('filrouge_homepage')}}">Accueil</a>
+                            </li>
+                            <li>
+                                <a href="{{path('filrouge_project_list')}}">Projets</a>
+                            </li>
+                            <li>
+                                <a href="{{path('filrouge_user_list')}}">Profils</a>
+                            </li>
+                            <li>
+                                <a href="{{path('filrouge_admin')}}">Administration</a>
+                            </li>
+                        </ul>
+                        <div class="connexionBlock">
+                            <div class="myProfilBlock">
+                                <a href="{{path('filrouge_user_update')}}"><h4>{{ app.user.firstName }} {{ app.user.lastName }}</h4></a>
+                            </div>
+                            <div class="deconnexionBlock">
+                                <a href="{{path('logout')}}"><h4 class="deconnexion">Déconnexion</h4></a>
+                            </div> 
+                        </div>
+                    {% endblock menu %}
+                {% endif %}
             </div>
         </nav>
             
@@ -66,23 +76,25 @@
             {% endblock %}
         </div>
 
-        <footer>
-            <div class="container">
-                {% block footer %}
-                    <ul id="menuFooter">
-                        <li role="presentation" class="first-child">
-                            <a href="#">Site de l'imie</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#">Mentions légales</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="#">Contact Administrateur</a>
-                        </li>
-                    </ul>
-                {% endblock footer %}
-            </div>
-        </footer>
+        {% if is_granted('ROLE_USER') %}
+            <footer>
+                <div class="container">
+                    {% block footer %}
+                        <ul id="menuFooter">
+                            <li role="presentation" class="first-child">
+                                <a href="#">Site de l'imie</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#">Mentions légales</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#">Contact Administrateur</a>
+                            </li>
+                        </ul>
+                    {% endblock footer %}
+                </div>
+            </footer>
+        {% endif %}
 
         {% block javascripts %}
             <script  type="text/javascript" src=" {{ asset('bundles/app/js/jquery-2.1.3.min.js') }}"></script>

@@ -23,9 +23,16 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
         # the login page has to be accessible for everybody
+        
+        # On crée un pare-feu uniquement pour le formulaire
+        filrouge_login:
+            # Cette expression régulière permet de prendre /login (mais pas /login_check !)
+            pattern:   ^/login$
+            anonymous: true
+        
         filrouge_firewall:
             pattern: ^/
-            anonymous: true
+            anonymous: false
             provider: filrouge_db
             form_login:
                 login_path: login

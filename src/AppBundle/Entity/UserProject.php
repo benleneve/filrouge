@@ -20,6 +20,13 @@ class UserProject
      */
     private $skill;
     
+     /**
+     * @var boolean
+     *
+     * @ORM\Column(name="active", type="boolean")
+     */
+    private $active;
+    
     /**
      * @var User
      * 
@@ -58,6 +65,29 @@ class UserProject
     public function getSkill()
     {
         return $this->skill;
+    }
+    
+    /**
+     * Set active
+     *
+     * @param boolean $active
+     * @return UserProject
+     */
+    public function setActive($active)
+    {
+        $this->active = $active;
+
+        return $this;
+    }
+
+    /**
+     * Get active
+     *
+     * @return boolean 
+     */
+    public function getActive()
+    {
+        return $this->active;
     }
 
     /**

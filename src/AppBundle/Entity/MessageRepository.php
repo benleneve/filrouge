@@ -14,10 +14,11 @@ class MessageRepository extends EntityRepository
 {
     
     //Récupérer tous les messages triés par date
-    public function findAllMessagesEager() {
+    public function findAllMessagesEager($nb) {
         return $this->createQueryBuilder('m')
                     ->addSelect('m')
                     ->orderBy('m.creationDate', 'DESC')
+                    ->setMaxResults($nb)
                     ->getQuery()
                     ->getResult();
     }

@@ -216,6 +216,18 @@ nav ul li a:hover {
     text-decoration:underline;
 }
 
+nav .connexionBlock {
+    float: right;
+}
+
+nav .connexionBlock .myProfilBlock {
+    float: left;
+}
+
+nav .connexionBlock .deconnexionBlockBlock {
+    float: left;
+}
+
 /*----------------Fil d'ariane----------------*/
 
 .breadcrumb{
@@ -531,6 +543,10 @@ a.deleteStep, a.deleteSkill {
     margin-right: 10px;
     margin-bottom: 10px;
     padding: 0 5px;
+}
+
+#appbundle_project_steps input.stepName {
+    width: 190px;
 }
 
 #appbundle_project_steps select.stepStatus, #appbundle_project_projectSkills select.skillActive {

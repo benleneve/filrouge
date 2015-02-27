@@ -11,14 +11,24 @@ use Symfony\component\HttpFoundation\Request;
 
 Class ProjectController extends Controller
     {
-        public function listAction()
+        public function listAction($page)
         {
+            $maxProjects = 5;
+            
             $repository = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('AppBundle:Project');
-            $projects = $repository->findAllPojectsEager();
+            $projects = $repository->findAllPojectsPageEager($page, $maxProjects);
+            $numberOfProject = count($projects);
+            $pagination = array(
+                    'page' => $page,
+                    'route' => 'filrouge_project_list',
+                    'pages_count' => ceil($numberOfProject/$maxProjects),
+                    'route_params' => array()
+            );
             return $this->render('AppBundle:Project:projectslist.html.twig', array(
-                    'projects' => $projects
+                    'projects' => $projects,
+                    'pagination' => $pagination
             ));
         }
 
@@ -108,7 +118,7 @@ Class ProjectController extends Controller
                         $em->remove($step);
                     }
                 }
-                // supprime la relation entre la step et le « project »
+                // supprime la relation entre la skill et le « project »
                 foreach ($projectSkills as $projectSkill) {
                     if ($project->getProjectSkills()->contains($projectSkill) == false) {
                         $em->remove($projectSkill);
