@@ -45,7 +45,7 @@ class UserController extends Controller {
                          
           
         
-            return $this->render('AppBundle:User:userDetail.html.twig',
+            return $this->render('AppBundle:User:userdetail.html.twig',
                                        array(
                                         'user' => $user
                                         ));

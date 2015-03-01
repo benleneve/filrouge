@@ -1,0 +1,30 @@
+<div class="userSkill">
+    {% if (user.userSkills|length !=0) %}
+        <h4>Compétences</h4>
+        {% for userSkill in user.userSkills %}
+            <div class="skillContenant">
+                <div class="name">
+                    {{userSkill.skill.name}}
+                </div>
+                <div class="level">
+                    {% if userSkill.level == 0 %}
+                        <img alt="Disponible" src="{{asset('bundles/app/images/star_0.png')}}" />
+                    {% elseif userSkill.level == 1 %}
+                        <img alt="Disponible" src="{{asset('bundles/app/images/star_1.png')}}" />
+                    {% elseif userSkill.level == 2 %}  
+                        <img alt="Disponible" src="{{asset('bundles/app/images/star_2.png')}}" />
+                    {% elseif userSkill.level == 3 %}
+                        <img alt="Disponible" src="{{asset('bundles/app/images/star_3.png')}}" />
+                    {% elseif userSkill.level == 4 %}  
+                        <img alt="Disponible" src="{{asset('bundles/app/images/star_4.png')}}" />
+                    {% elseif userSkill.level == 5 %}  
+                        <img alt="Disponible" src="{{asset('bundles/app/images/star_5.png')}}" />
+                    {% endif %}
+                </div>
+            </div>
+            <div class="clear"></div>
+        {% endfor %}
+    {% else %}
+        <h4>Aucune compétence</h4>
+    {% endif %}
+</div>
