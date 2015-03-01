@@ -22,7 +22,13 @@
     <div>
         <h4> Nombre de projets en cours : {{ user.worksOnProjects|length }}</h4>
     </div>
-    <div class="userSeeMore">
-       <a href=" {{path('filrouge_user_detail', {'id': user.id } )}} " class="btnAction">> Voir le profil</a>
+    <div class="btnLeft userSeeMore">
+       <a href=" {{path('filrouge_user_detail', {'id': user.id } )}} " class="btnAction">Voir le profil</a>
     </div>
+    <div class="btnRight userUpdate">
+       {% if app.user.id == user.id %} 
+            <a href=" {{path('filrouge_user_update', {'id': user.id } )}} " class="btnAction" >Modifier mon profil</a>
+       {% endif %}
+    </div>
+    <div class="clear"></div>
 </div>

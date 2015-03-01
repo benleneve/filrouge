@@ -58,7 +58,9 @@ class UserType extends AbstractType
                 'by_reference' => false
             ))
             ->add('image', new ImageType())
-            ->add('Valider', 'submit')
+            ->add('Enregistrer les modifications', 'submit', array(
+                'attr' => array('class'=>'btnAction')
+            ))
         ;
     }
     

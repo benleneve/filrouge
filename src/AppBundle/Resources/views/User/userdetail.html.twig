@@ -28,92 +28,73 @@
                 </div>
                 <div class="clear"></div>
             </div>
-            <div class="bodyBlock">   
-                {% if user.dispoBirth == true %}
-                    <h4> Age </h4>
-                    {{ user.getAge()|date  }}
-                {% endif %}   
-                {% if user.dispoEmail == true %}
-                   <h4> Email </h4>
-                   {{ user.email }}
-                {% endif %}
-                {% if user.dispoPhone == true %}
-                   <h4>Téléphone </h4> 
-                   {{ user.phone }}
-                {% endif %}                 
-                {% if user.dispoAddress == true %}
-                <h4>Adresse Postale <h4>
-                    <ul>
-                        <li>{{ user.address }}</li>
-                        <li>{{ user.postCode ~ " " ~ user.city }}</li>
-                    </ul>
-                {% endif %}
-                <div>
+            <div class="bodyBlock">
+                <div class="leftProfil">
+                    {% if user.dispoBirth == true %}
+                        <h4>Age</h4>
+                        {{ user.getAge()|date  }}
+                    {% endif %}   
+                    {% if user.dispoEmail == true %}
+                       <h4>Email</h4>
+                       {{ user.email }}
+                    {% endif %}
+                    {% if user.dispoPhone == true %}
+                       <h4>Téléphone</h4> 
+                       {{ user.phone }}
+                    {% endif %}                 
+                    {% if user.dispoAddress == true %}
+                    <h4>Adresse Postale<h4>
+                        <ul>
+                            <li>{{ user.address }}</li>
+                            <li>{{ user.postCode ~ " " ~ user.city }}</li>
+                        </ul>
+                    {% endif %}
+                    {% include('AppBundle:User:userskilllayout.html.twig') %}  
+                    
+                    {% if (user.description|length !=0) %}
+                        <h4>Présentation</h4>
+                        {{ user.description }}
+                    {% endif %}
+                    
+                    <h4>Projets en cours</h4>
+                    {% if (user.worksOnProjects|length!=0) %}
+                        <table class="projectsMember">
+                            <tr>
+                                <th>Projet</th>
+                                <th>Compétence</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                            </tr>
+                                {% for worksOnProject in user.worksOnProjects %} 
+                                    <tr>
+                                        <td> {{ worksOnProject.project.name }} </td>
+                                        <td> {{ worksOnProject.skill }} </td>
+                                        <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
+                                        <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
+                                    </tr>
+                                {% endfor %}
+                        </table>
+                    {% endif %}
+
+                    <div>
+                        <a href="{{path('filrouge_user_detail')}}">
+                           <button class="btnAction">> Inviter à rejoindre un projet</button>
+                        </a>
+                    </div>
+
+                </div>
+                <div class="imageProfil">
                     {% if user.image %}
-                        <img src="{{asset(user.image.url)}}" alt="{{user.image.alt}} " width="200px" />
+                        <img src="{{asset(user.image.url)}}" alt="{{user.image.alt}} " width="200px" height="200px" />
                     {% endif %}
                 </div>
-                {% if (user.userSkills|length !=0) %}
-                    {% for userSkill in user.userSkills %} {{userSkill.skill.name ~ ' - ' ~ userSkill.level}} {% endfor %}
-                {% endif %}
-                 
-                {% if (user.description|length !=0) %}
-                    <h4>Présentation </h4>{{ user.description }}
-                {% endif %}
-                 
-                {% if (user.worksOnProjects|length!=0) %}
-                    <table>
-                        <tr>
-                            <th>Projet</th>
-                            <th>Compétence</th>
-                            <th>Date de début</th>
-                            <th>Date de fin</th>
-                        </tr>
-                            {% for worksOnProject in user.worksOnProjects %} 
-                                <tr>
-                                    <td> {{ worksOnProject.project.name }} </td>
-                                    <td> {{ worksOnProject.skill }} </td>
-                                    <td> {{ worksOnProject.project.startDate|date }} </td>
-                                    <td> {{ worksOnProject.project.endDate|date }} </td>
-                                </tr>
-                            {% endfor %}
-                    </table>
-                {% endif %}
-                
-                <form>
-                    <fieldset>
-                        <legend><h4> Envoyer un message </h4></legend>
-                            <label for="objet"> Objet </label>
-                            <input id ="objet" type="text" value="objet">
-                            <label for="message"> Message </label>
-                            <textarea id ="message" type="text" value="message"></textarea>
-                    </fieldset>
-                </form>
-                
-                <div>
-                    <a href="{{path('filrouge_user_detail')}}"> {# /!\ ROUTE A MODIFIER #}
-                       <button> Inviter à rejoindre un projet </button>
-                    </a>
-                </div>
-                       
-                <div>
-                    <form>
-                        <label for="projet"> Projet </label>
-                        <select>
-                            <option value="1"> 1 </option>
-                            <option value="2"> 2 </option>
-                            <option value="3"> 3 </option>
-                        </select>
-                    </form>
-                     <a href="{{path('filrouge_user_detail')}}"> {# /!\ ROUTE A MODIFIER #}
-                        <button> Inviter </button>
-                    </a>
-                </div>
-                        
-    <div class="userUpdate">
-       <a href=" {{path('filrouge_user_update', {'id': user.id } )}} " class="btnAction">> Modifier mon profil</a>
-    </div>
-       </div>
+                <div class="clear"></div>           
+            </div>
         </div>   
+    </div>
+    <div class="userUpdate">
+        {% if app.user.id == user.id %} 
+            <a href=" {{path('filrouge_user_update', {'id': user.id } )}} " class="btnAction">> Modifier mon profil</a>
+        {% endif %}
     </div>
 {% endblock left %}

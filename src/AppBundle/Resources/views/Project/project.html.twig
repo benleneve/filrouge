@@ -72,15 +72,15 @@
                             {{step.name}}
                         </div>
                         <div class="action">
-                            {% if project.status.name == 'En attente' %}
+                            {% if step.status.name == 'En attente' %}
                                 <div class="onHold">
                                     {{step.status.name}}
                                 </div>
-                            {% elseif project.status.name == 'En cours' %}
+                            {% elseif step.status.name == 'En cours' %}
                                 <div class="inProgress">
                                     {{step.status.name}}
                                 </div>
-                            {% elseif project.status.name == 'Terminé' %}
+                            {% elseif step.status.name == 'Terminé' %}
                                 <div class="finish">
                                     {{step.status.name}}
                                 </div>

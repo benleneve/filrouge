@@ -15,12 +15,17 @@ class PromotionType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text')
-            ->add('year', 'text')
+            ->add('name', 'text', array(
+                'attr' => array('class'=>'promotionName', 'placeholder'=>'Promo')
+            ))
+            ->add('year', 'text', array(
+                'attr' => array('class'=>'promotionYear', 'placeholder'=>'Année')
+            ))
             ->add('school', 'entity', array
                 ('class' => 'AppBundle:School',
-                  'property' => 'name'
-                ))
+                    'property' => 'name',
+                    'attr' => array('class'=>'promotionSchool')
+            ))
         ;
         
     }

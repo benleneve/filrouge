@@ -4,124 +4,134 @@
 	{{ userForm.vars.value.id is null? "Ajout d'un profil" : "Modification du profil" }}
 {%endblock title %}
 
+{% block breadcrumb %}
+    {{parent()}} > 
+        <a href="{{path('filrouge_user_list')}}">Profils</a> >
+        {% if user.id is defined %}
+            <a href="{{path('filrouge_user_update', {'id': user.id } )}}">{{user.firstName ~ " " ~ user.lastName}}</a>
+        {% else %}
+            <a href="{{path('filrouge_user_add')}}">Nouveau profil</a>
+        {% endif%}
+{% endblock breadcrumb %}
+
 {% block left %}
-    <h2> {{ userForm.vars.value.id is null? "Ajout d'un profil" : "Modification du profil" }}</h2>
+    
+    <div class="blockGeneral">
+        <h2 class="icoUser">Profil</h2>
+        <div class="blockContent">
+            <div class="formUser"> 
+                {{ form_start(userForm) }}
 
-    {{ form_start(userForm) }}
-    
-     {{ form_errors(userForm) }}
-     
-     
-        <div>
-            <h4>{{ form_label(userForm.lastName, 'Nom') }}</h4>
-                {{ form_errors(userForm.lastName) }}
-                {{ form_widget(userForm.lastName) }}
-        </div>
+                    <div class="headerFormUser">
+                        {{ form_errors(userForm.firstName) }}
+                        {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'placeholder': 'Prénom'} }) }}
+                        {{ form_errors(userForm.lastName) }}
+                        {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'placeholder': 'Nom'} }) }}  
+                        {{ form_errors(userForm.availability) }}
+                        {{ form_widget(userForm.availability, { 'attr': {'class': 'availability'} }) }}
+                    </div>
 
-        <div>
-            <h4>{{ form_label(userForm.firstName, 'Prénom') }}</h4>
-                {{ form_errors(userForm.firstName) }}
-                {{ form_widget(userForm.firstName) }}
-       </div>
-       
-       {# promotions + écoles #}
- {#      
-    {% else %} #}
-        {% include('AppBundle:User:userheaderlayout.html.twig') %} 
-        {{ form_errors(userForm.availability) }}
-        {{ form_widget(userForm.availability) }}
-   {#  {% endif %} #}
-    <div>
-        {# {% if(userForm.vars.value.id is null) %}#}
-            <h4>{{ form_label(userForm.username, "Login") }}</h4>
-                {{ form_errors(userForm.username) }}
-                {{ form_widget(userForm.username) }}
-       {#  {% endif %} #}
-    </div>
-    
-  
-   {# {% if(userForm.vars.value.id is null) %}#}
-         <div>
-            <h4>{{ form_label(userForm.password, 'Mot de passe') }}</h4>
-                {{ form_errors(userForm.password) }}
-                {{ form_widget(userForm.password) }}
-        </div>
-   {# {% endif %}#}
-    
-    
-    <div>
-        {# {% if(userForm.vars.value.id is null) %}#}
-            <h4>{{ form_label(userForm.birthDate, 'Date de naissance') }}</h4>
-                {{ form_errors(userForm.birthDate) }}
-                {{ form_widget(userForm.birthDate) }}
-       {#  {% else %}
-            <h4>Age : {{ user.getAge()|date}}</h4>
-        {% endif %}#}
-            {{ form_errors(userForm.dispoBirth) }}
-            {{ form_widget(userForm.dispoBirth) }}
-    </div> 
-    
-    <div>
-        <h4>{{ form_label(userForm.email, 'Email') }}</h4>
-            {{ form_errors(userForm.email) }}
-            {{ form_widget(userForm.email) }}
-        
-        {{ form_errors(userForm.dispoEmail) }}
-        {{ form_widget(userForm.dispoEmail) }}
-    </div>
-    
-    <div>
-        <h4>{{ form_label(userForm.address, 'Adresse postale') }}</h4>
-            {{ form_errors(userForm.address) }}
-            {{ form_widget(userForm.address) }}
+                    <div class="birthFormUser containerForm">
+                        <div class="fieldForm">
+                            <h4>{{ form_label(userForm.birthDate, 'Date de naissance') }}</h4>
+                            {{ form_errors(userForm.birthDate) }}
+                            {{ form_widget(userForm.birthDate, { 'attr': {'class': 'birthdate'} }) }}
+                        </div>
+                        {{ form_errors(userForm.dispoBirth) }}
+                        {{ form_widget(userForm.dispoBirth, { 'attr': {'class': 'dispoBirthdate  dispo'} }) }}
+                    </div> 
 
-            {{ form_errors(userForm.dispoAddress) }}
-            {{ form_widget(userForm.dispoAddress) }}
-    </div>
-    
-    <div>
-        <h4>{{ form_label(userForm.postCode, 'Code postal') }}</h4>
-            {{ form_errors(userForm.postCode) }}
-            {{ form_widget(userForm.postCode) }}
-    </div>
-    
-    <div>
-        <h4>{{ form_label(userForm.city, 'Commune') }}</h4>
-            {{ form_errors(userForm.city) }}
-            {{ form_widget(userForm.city) }}
-    </div>
-    
-    <div>
-        <h4>{{ form_label(userForm.phone, 'Téléphone') }}</h4>
-            {{ form_errors(userForm.phone) }}
-            {{ form_widget(userForm.phone) }}
-        
-            {{ form_errors(userForm.dispoPhone) }}
-            {{ form_widget(userForm.dispoPhone) }}
-    </div>
-    
-    <div>
-        <h4>{{ form_label(userForm.description, 'Présentation') }}</h4>
-            {{ form_errors(userForm.description) }}
-            {{ form_widget(userForm.description) }}
-    </div>
-   
-    <div>
-        <h4>{{ form_label(userForm.image.alt, "Description de l'image") }}</h4>
-            {{ form_errors(userForm.image.alt) }}
-            {{ form_widget(userForm.image.alt) }}
-    </div>
-    
-    <div>
-        <h4>{{ form_label(userForm.image.url, "URL de l'image") }}</h4>
-            {{ form_errors(userForm.image.url) }}
-            {{ form_widget(userForm.image.url) }}
-    </div>
-    {{ form_end(userForm) }}
+                    <div class="emailFormUser containerForm">
+                        <div class="fieldForm">
+                            <h4>{{ form_label(userForm.email, 'Email') }}</h4>
+                            {{ form_errors(userForm.email) }}
+                            {{ form_widget(userForm.email, { 'attr': {'class': 'email', 'placeholder': 'Email'} }) }}
+                        </div>
+                        {{ form_errors(userForm.dispoEmail) }}
+                        {{ form_widget(userForm.dispoEmail,  { 'attr': {'class': 'dispoEmail dispo'} }) }}
+                    </div>
 
-           
-           
-           
+                    <div class="phoneFormUser containerForm">
+                        <div class="fieldForm">
+                            <h4>{{ form_label(userForm.phone, 'Téléphone') }}</h4>
+                            {{ form_errors(userForm.phone) }}
+                            {{ form_widget(userForm.phone,  { 'attr': {'class': 'phone', 'placeholder': 'Téléphone'} }) }}
+                        </div>
+                        {{ form_errors(userForm.dispoPhone) }}
+                        {{ form_widget(userForm.dispoPhone, { 'attr': {'class': 'dispoPhone  dispo'} }) }}
+                    </div>        
+
+                    <div class="addressFormUser containerForm">
+                        <div class="fieldForm">
+                            <h4>Adresse Postale</h4>
+                            {{ form_errors(userForm.address) }}
+                            {{ form_widget(userForm.address, { 'attr': {'class': 'address', 'placeholder': 'Adresse'} }) }}
+                            {{ form_errors(userForm.postCode) }}
+                            {{ form_widget(userForm.postCode, { 'attr': {'class': 'postcode', 'placeholder': 'Code Postal'} }) }}
+                            {{ form_errors(userForm.city) }}
+                            {{ form_widget(userForm.city, { 'attr': {'class': 'city', 'placeholder': 'Ville'} }) }}      
+                            <div class="clear"></div>
+                        </div>
+                        {{ form_errors(userForm.dispoAddress) }}
+                        {{ form_widget(userForm.dispoAddress, { 'attr': {'class': 'dispoAddress  dispo'} }) }}
+                    </div>
+                    
+                    <div class="clear"></div>
+
+                    <h4>{{ form_label(userForm.username, "Login") }}</h4>
+                    {{ form_errors(userForm.username) }}
+                    {{ form_widget(userForm.username, { 'attr': {'class': 'username'} }) }}
+
+                    <h4>{{ form_label(userForm.password, 'Mot de passe') }}</h4>
+                    {{ form_errors(userForm.password) }}
+                    {{ form_widget(userForm.password, { 'attr': {'class': 'password'} }) }}
+
+                    <h4>{{ form_label(userForm.promotions, "Promotions") }}</h4>
+                    <div class="promotionContainer">
+                        {{ form_widget(userForm.promotions) }}
+                    </div>
+
+                    <h4>{{ form_label(userForm.UserSkills, "Compétences") }}</h4>
+                    <div class="userSkillContainer">
+                        {{ form_widget(userForm.UserSkills) }}
+                    </div>
+
+                    <h4>{{ form_label(userForm.description, 'Présentation') }}</h4>
+                    {{ form_errors(userForm.description) }}
+                    {{ form_widget(userForm.description, { 'attr': {'class': 'description'} }) }}
+
+                    <h4>{{ form_label(userForm.image.alt, "Description de l'image") }}</h4>
+                    {{ form_errors(userForm.image.alt) }}
+                    {{ form_widget(userForm.image.alt, { 'attr': {'class': 'altImage'} }) }}
+
+                    <h4>{{ form_label(userForm.image.url, "URL de l'image") }}</h4>
+                    {{ form_errors(userForm.image.url) }}
+                    {{ form_widget(userForm.image.url, { 'attr': {'class': 'urlImage'} }) }}
+                {{ form_end(userForm) }}
+                <div class="clear"></div>
+            </div>
+
+            {% if (user.worksOnProjects|length!=0) %}
+                <h4>Projets en cours</h4>
+                <table class="projectsMember addOrModify">
+                    <tr>
+                        <th>Projet</th>
+                        <th>Compétence</th>
+                        <th>Date de début</th>
+                        <th>Date de fin</th>
+                    </tr>
+                        {% for worksOnProject in user.worksOnProjects %} 
+                            <tr>
+                                <td> {{ worksOnProject.project.name }} </td>
+                                <td> {{ worksOnProject.skill }} </td>
+                                <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
+                                <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
+                            </tr>
+                        {% endfor %}
+                </table>
+            {% endif %}
+        </div>    
+    </div>                         
 {% endblock left %}
 
 {% block javascripts %}

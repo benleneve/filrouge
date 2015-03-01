@@ -59,9 +59,10 @@
                 {{ form_end(projectForm) }}
                 <div class="clear"></div>
             </div>
+   
             <div id="myMember">
-                <h4>Membres du projet</h4>
                 {% if project.projectMembers is defined %} 
+                <h4>Membres du projet</h4>
                     {% for member in project.projectMembers %}
                         <div class="projectMember">
                             <div class="nameMember">

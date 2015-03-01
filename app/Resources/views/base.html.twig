@@ -53,12 +53,13 @@
                         </ul>
                         <div class="connexionBlock">
                             <div class="myProfilBlock">
-                                <a href="{{path('filrouge_user_update')}}"><h4>{{ app.user.firstName }} {{ app.user.lastName }}</h4></a>
+                                <a href="{{path('filrouge_user_update', {'id': app.user.id })}}" class="icoDecoUser">{{ app.user.firstName }} {{ app.user.lastName }}</a>
                             </div>
                             <div class="deconnexionBlock">
-                                <a href="{{path('logout')}}"><h4 class="deconnexion">Déconnexion</h4></a>
+                                <a href="{{path('logout')}}" class="icoDeconnexion">Déconnexion</a>
                             </div> 
                         </div>
+                        <div class="clear"></div>
                     {% endblock menu %}
                 {% endif %}
             </div>
