@@ -28,12 +28,20 @@ filrouge_project_remove:
         
 filrouge_project_apply:
     path: /detail/{id}/apply/{name}
-    defaults: {_controller:AppBundle:Message:apply, id:1 }
+    defaults: {_controller:AppBundle:Project:apply, id:1 }
     requirements:
         id: \d+
        
-filrouge_project_response:
-    path: /update/{id}/response
-    defaults: {_controller:AppBundle:Message:response, id:1 }
+filrouge_project_accept:
+    path: /update/{id}/accept/{idMember}
+    defaults: {_controller:AppBundle:Project:accept, id:1 }
     requirements:
         id: \d+
+        idMember: \d+
+        
+filrouge_project_refuse:
+    path: /update/{id}/refuse/{idMember}
+    defaults: {_controller:AppBundle:Project:refuse, id:1 }
+    requirements:
+        id: \d+
+        idMember: \d+

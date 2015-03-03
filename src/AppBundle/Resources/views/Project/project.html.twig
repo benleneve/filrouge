@@ -94,22 +94,26 @@
                 
                 <h4>Membres du projet</h4>
                 {% for member in project.projectMembers %}
-                    <div class="projectMember">
-                        <div class="nameMember">
-                            {{member.user.firstName}} {{member.user.LastName}}
-                        </div>
-                        <div class="skillMember">
-                            {{member.skill}}
+                    {% if member.active %}
+                        <div class="projectMember">
+                            <div class="nameMember">
+                                {{member.user.firstName}} {{member.user.LastName}}
+                            </div>
+                            <div class="skillMember">
+                                {{member.skill}}
+                            </div>
+                            <div class="clear"></div>
                         </div>
                         <div class="clear"></div>
-                    </div>
-                    <div class="clear"></div>
+                    {% endif %}
                 {% endfor %}    
             </div>
         </div>    
     </div>
-    <div class="projectUpdate">
-       <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">> Modifier mon projet</a>
-    </div>
+    {% if app.user.id == project.projectManager.id %} 
+        <div class="projectUpdate">
+           <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">> Modifier mon projet</a>
+        </div>
+    {% endif %}
      
 {% endblock left %}

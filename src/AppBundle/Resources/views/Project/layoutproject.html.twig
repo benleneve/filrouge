@@ -58,9 +58,10 @@
         <h4>Recrutement terminé</h4>
     {% endif %} 
     <div class="projectSeeMore">
-        <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} " class="btnAction">Voir la fiche projet</a>
         {% if app.user.id == project.projectManager.id %} 
-            <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">Modifier le projet</a>
+            <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">Gérer mon projet</a>  
+        {% else %}
+            <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} " class="btnAction">Voir la fiche projet</a>
         {% endif %}
     </div>
 </div>

@@ -71,9 +71,22 @@
                             <div class="skillMember">
                                 {{member.skill}}
                             </div>
+                            <div class="statusMember">
+                                {% if member.active %}
+                                    Recruté
+                                {% else %}   
+                                    En attente
+                                {% endif %}          
+                            </div>
                             <div class="clear"></div>
                         </div>
-                        <div class="clear"></div>
+                        <div class="confirmation">
+                            {% if member.active == 0 %}
+                                <a href=" {{path('filrouge_project_accept', {'id': project.id, 'idMember': member.id } )}} " class="btnAction accepted">> Accepter</a>
+                                <a href=" {{path('filrouge_project_refuse', {'id': project.id, 'idMember': member.id } )}} " class="btnAction refused">> Refuser</a>
+                            {% endif %}
+                        </div>
+                        <div class="clear"></div> 
                     {% endfor %}
                 {% endif %}
             </div>    

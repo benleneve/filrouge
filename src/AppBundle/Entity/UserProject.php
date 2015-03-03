@@ -14,6 +14,15 @@ class UserProject
 {
 
     /**
+     * @var integer
+     *
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     */
+    private $id;
+     
+    /**
      * @var string
      *
      * @ORM\Column(name="skill", type="string", length=255)
@@ -30,7 +39,6 @@ class UserProject
     /**
      * @var User
      * 
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="User", inversedBy="worksOnProjects")
      */
     private $user;
@@ -38,11 +46,20 @@ class UserProject
     /**
      * @var Project
      * 
-     * @ORM\Id
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="projectMembers")
      */
     private $project;
 
+    
+    /**
+     * Get id
+     *
+     * @return integer 
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
 
     /**
      * Set skill

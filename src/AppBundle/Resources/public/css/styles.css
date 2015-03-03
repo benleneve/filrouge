@@ -114,6 +114,10 @@ body {
     font-size: 13px;
 }
 
+#global {
+    padding-bottom: 50px;
+}
+
 .container {
     width: 980px;
     margin: auto;
@@ -623,6 +627,10 @@ a.deleteStep, a.deleteSkill {
     text-align:center;
 }
 
+.projectSkill .action .finish {
+    background-color: #d13025; 
+}
+
 .projectStep .action .onHold {
     background-color: #f4a22d;  
 }
@@ -645,14 +653,50 @@ a.deleteStep, a.deleteSkill {
     text-indent: 5px;
 }
 
+#myMember .projectMember {
+    width: 400px;
+    float:left;
+}
+
 .projectMember .nameMember {
     width: 150px;
     float: left;
+    height:25px;
 }
 
 .projectMember .skillMember {
     width: 150px;
     float: left;
+    height:25px;
+}
+
+.projectMember .statusMember {
+    width: 100px;
+    float: left;
+    height:25px;
+}
+
+#myMember .confirmation {
+    float: left;
+    width:260px;
+    margin-top:5px;
+}
+
+#myMember .confirmation a{
+    display:block;
+    float:left;
+    width:110px;
+    height:25px;
+}
+
+#myMember .confirmation a.accepted{
+    background-color:#48be25;
+    margin-right:10px;
+}
+
+
+#myMember .confirmation a.refused{
+    background-color: #d13025; 
 }
 
 /*----------------------FormProject-----------------------*/
@@ -813,6 +857,8 @@ footer {
    text-transform:uppercase;
    height:40px;
    margin-top:20px;
+   position: fixed;
+   bottom: 0;
 }
 
 footer ul {

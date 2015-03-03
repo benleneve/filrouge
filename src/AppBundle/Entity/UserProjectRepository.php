@@ -11,5 +11,18 @@ use Doctrine\ORM\EntityRepository;
  * repository methods below.
  */
 class UserProjectRepository extends EntityRepository
-{
+{  
+    //Récupérer tous les membres d'un projet avec leurs compétences
+    //En fonction de l'ID UserProject
+    public function findOneUserProjectEager($id) {
+        return $this->createQueryBuilder('us')
+                    ->addSelect('u')
+                    ->addSelect('p')
+                    ->LeftJoin('us.user', 'u')
+                    ->LeftJoin('us.project', 'p')
+                    ->where('us.id = :id')
+                    ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getOneOrNullResult();   
+    }
 }

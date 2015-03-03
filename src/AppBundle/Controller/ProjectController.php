@@ -2,8 +2,10 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Message;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\Project;
+use AppBundle\Entity\UserProject;
 use AppBundle\Form\ProjectType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -155,4 +157,132 @@ Class ProjectController extends Controller
                 $this->generateUrl('filrouge_project_list')
             );
         }
+        
+        public function applyAction($id, $name) {
+            
+            $repository = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:Project');
+            $project = $repository->findOneProjectEager($id);
+            if($project === null) {
+                throw $this->createNotFoundException('ID ' . $id . ' impossible.');
+            }
+            
+            $em = $this->getDoctrine()->getManager();
+            
+            $user = $this->getUser();
+            
+            $userProject = new UserProject();
+            $userProject->setActive(0);
+            $userProject->setSkill($name);
+            $userProject->setProject($project);
+            $userProject->setUser($user);
+            $em->persist($userProject);
+            
+            $content = $user->getFirstName() . ' a postulé à votre projet ' . $project->getName();
+            
+            $message = new Message();
+            $message->setSender($user);
+            $message->setRecipient($project->getProjectManager());
+            $message->setContent($content);
+            $message->setType(1);
+            $em->persist($message);
+            
+            $em->flush();
+            
+            $validation = true;
+            
+            return $this->render('AppBundle:Project:project.html.twig', array(
+                    'project' => $project,
+                    'message' => $validation          
+            ));
+        }
+        
+        public function acceptAction($id, $idMember) {
+      
+            $user = $this->getUser();
+
+            $repoUser = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:Project');
+            $project = $repoUser->findOneProjectEager($id);
+            
+            $repoUserProject = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:UserProject');
+            $userProject = $repoUserProject->findOneUserProjectEager($idMember);
+            
+            $em = $this->getDoctrine()->getManager();
+            
+            $userProject->setActive(1);  
+            $em->persist($userProject);
+   
+            $content =  'Votre candidature au projet ' . $project->getName() . 'a été acceptée.';
+           
+            $message = new Message();
+            $message->setSender($user);
+            $message->setRecipient($userProject->getUSer());
+            $message->setContent($content);
+            $message->setType(2);
+            $em->persist($message);
+            
+            //Réalisation de la notification création de projet
+            $notif = new Notification();
+            $message = $userProject->getUser()->getFirstName() . ' a rejoint le projet ';
+            $notif->setProject($project)
+                    ->setType(2)
+                    ->setContent($message);
+            $em->persist($notif);
+            
+            $em->flush();
+            
+            $form = $this->createForm(new ProjectType(), $project, array(
+                'action' => $this->generateUrl('filrouge_project_update', array('id' => $id))
+            ));
+            
+            return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
+                'projectForm' => $form->createView(),
+                'project' => $project,
+            ));     
+        }    
+        
+        public function refuseAction($id, $idMember) {
+      
+            $user = $this->getUser();
+
+            $repoUser = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:Project');
+            $project = $repoUser->findOneProjectEager($id);
+            
+            $repoUserProject = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:UserProject');
+            $userProject = $repoUserProject->findOneUserProjectEager($idMember);
+            
+            $em = $this->getDoctrine()->getManager();
+             
+            $em->remove($userProject);
+   
+            $content =  'Votre candidature au projet ' . $project->getName() . ' a été refusée.';
+           
+            $message = new Message();
+            $message->setSender($user);
+            $message->setRecipient($userProject->getUSer());
+            $message->setContent($content);
+            $message->setType(3);
+            $em->persist($message);
+            
+            $em->flush();
+            
+            
+            $form = $this->createForm(new ProjectType(), $project, array(
+                'action' => $this->generateUrl('filrouge_project_update', array('id' => $id))
+            ));
+            
+            return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
+                'projectForm' => $form->createView(),
+                'project' => $project,
+            ));     
+        } 
     }
