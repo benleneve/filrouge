@@ -401,7 +401,7 @@ class Project
         $projectSkills->setProject($this);
         
         $notif = new Notification();
-                $message = 'La compétence a été ajouté au projet ';
+                $message = 'La compétence a été ajoutée au projet ';
                 $notif->setProject($this)
                         ->setType(2)
                         ->setContent($message);
