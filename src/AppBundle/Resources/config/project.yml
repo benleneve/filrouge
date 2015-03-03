@@ -27,7 +27,7 @@ filrouge_project_remove:
         id: \d+
         
 filrouge_project_apply:
-    path: /detail/{id}/apply
+    path: /detail/{id}/apply/{name}
     defaults: {_controller:AppBundle:Message:apply, id:1 }
     requirements:
         id: \d+

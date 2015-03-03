@@ -56,9 +56,11 @@
                         </div>
                         <div class="action">
                         {% if projectSkill.active %}
-                            <a href="#" class="btnAction">> Postuler</a>
-                        {% else %}    
-                            Recruté
+                            <a href=" {{path('filrouge_project_apply', {'id': project.id, 'name': projectSkill.skill.name } )}}" class="btnAction">> Postuler</a>
+                        {% else %}
+                            <div class="finish">
+                                Recruté
+                            </div>
                         {% endif %}
                         </div>
                         <div class="clear"></div>
