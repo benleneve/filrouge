@@ -6,6 +6,7 @@ use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use AppBundle\Entity\Notification;
 
 /**
  * Project
@@ -104,7 +105,7 @@ class Project
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="Notification", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="project", cascade={"persist"})
      */
     private $notifications;
     
@@ -398,7 +399,12 @@ class Project
     {
         $this->projectSkills[] = $projectSkills;
         $projectSkills->setProject($this);
-
+        
+        $notif = new Notification();
+                $message = 'La compétence a été ajouté au projet ';
+                $notif->setProject($this)
+                        ->setType(2)
+                        ->setContent($message);
         return $this;
     }
 
