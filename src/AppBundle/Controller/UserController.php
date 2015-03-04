@@ -2,6 +2,7 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Message;
 use AppBundle\Entity\User;
 use AppBundle\Form\UserType;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -177,6 +178,40 @@ class UserController extends Controller {
             $url = $this->generateUrl('filrouge_user_list');
                             
             return $this->redirect($url);
+        }
+        
+    public function inviteAction($id)      
+        {
+            $idProject = $_POST['idProject'];
+            $actualUser = $this->getUser();
+ 
+            $user = $this->getDoctrine()
+                         ->getRepository('AppBundle:User')
+                         ->findOneUserEager($id);
+            
+            $project = $this->getDoctrine()
+                            ->getRepository('AppBundle:Project')
+                            ->findOneProjectEager($idProject);
+            
+            $em = $this->getDoctrine()->getManager();
+                         
+            $content =  $actualUser->getFirstName() . ' vous invite à rejoindre le projet ' . $project->getName(); 
+            
+            $message = new Message();
+            $message->setSender($actualUser);
+            $message->setRecipient($user);
+            $message->setContent($content);
+            $message->setType(1);
+            $em->persist($message);
+            
+            $em->flush();
+            
+            $validation = true;
+        
+            return $this->render('AppBundle:User:userdetail.html.twig', array(
+                        'user' => $user,
+                        'message' => $validation
+            ));
         }
     
         

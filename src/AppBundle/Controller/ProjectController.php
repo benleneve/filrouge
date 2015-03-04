@@ -194,7 +194,8 @@ Class ProjectController extends Controller
             
             return $this->render('AppBundle:Project:project.html.twig', array(
                     'project' => $project,
-                    'message' => $validation          
+                    'message' => $validation, 
+                    'skillName' => $name
             ));
         }
         

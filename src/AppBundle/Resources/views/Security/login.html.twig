@@ -7,19 +7,28 @@
 {% endblock breadcrumb %}
 
 {% block left %}
-
-    {% if error %}
-        <div>{{ error.message }}</div>
-    {% endif %}
-    <form class="form-horizontal" action="{{ path('login_check') }}" method="post">
-        <label for="username">Login :</label>
-        <input type="text" id="username" name="_username" value="{{ last_username }}" />
-
-        <label for="password">Mot de passe :</label>
-        <input type="password" id="password" name="_password" />
-
-        <button type="submit">login</button>
-    </form>
     
+    <div id="contentFormLogin">
+        <h2 class="icoLogin">CONNEXION</h2>
+        <div id="formLogin"> 
+            <form action="{{ path('login_check') }}" method="post">
+
+                <p>
+                    <label for="username">Login</label>
+                    <input type="text" id="username" name="_username" value="{{ last_username }}" />
+                </p>
+                <p>
+                    <label for="password">Mot de passe</label>
+                    <input type="password" id="password" name="_password" />
+                </p>
+                <button type="submit" class="btnAction login">> se connecter</button>
+                <div class="clear"></div>
+            </form>
+            {% if error %}
+                <div>{{ error.message }}</div>
+            {% endif %}
+        </div>
+    </div> 
+           
 {% endblock left %}
 

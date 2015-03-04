@@ -55,14 +55,19 @@
                             {{projectSkill.skill.name}}
                         </div>
                         <div class="action">
-                        {% if projectSkill.active %}
-                            <a href=" {{path('filrouge_project_apply', {'id': project.id, 'name': projectSkill.skill.name } )}}" class="btnAction">> Postuler</a>
+                        {% if projectSkill.active %}  
+                                <a href=" {{path('filrouge_project_apply', {'id': project.id, 'name': projectSkill.skill.name } )}}" class="btnAction">> Postuler</a>
                         {% else %}
                             <div class="finish">
                                 Recruté
                             </div>
                         {% endif %}
                         </div>
+                        {% if  message is defined and skillName == projectSkill.skill.name %}
+                        <div class="postulate">  
+                            Votre candidature a bien été envoyée  
+                        </div>
+                        {% endif %}
                         <div class="clear"></div>
                     </div>         
                 {% endfor %}

@@ -27,7 +27,8 @@ filrouge_user_remove:
         
 filrouge_user_invite:
     path: /detail/{id}/invite
-    defaults: {_controller:AppBundle:Message:response, id:1 }
+    defaults: {_controller:AppBundle:User:invite }
     requirements:
         id: \d+
+    methods: [POST]
 

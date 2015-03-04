@@ -93,6 +93,11 @@ h2.icoNotif {
     text-indent: 40px;
 }
 
+h2.icoLogin {
+    background: url("../images/lock.png") left bottom no-repeat;
+    text-indent: 40px;
+}
+
 h3 {
     line-height:30px;
 }
@@ -100,6 +105,7 @@ h3 {
 h4 {
     font-size: 14px;
     margin: 15px 0 3px 0;
+    font-weight: bold;
 }
 
 input, select, textarea{
@@ -352,6 +358,62 @@ aside {
     float: right;
 }
 
+/*----------------------FormLogin-----------------------*/
+
+#contentFormLogin{
+    width:555px;
+    margin:0 0 0 110px;
+}
+
+#formLogin {
+    width:555px;
+    background-color: #FFF;
+    padding:30px 0;
+}
+
+#formLogin label{
+    float:left;
+    width:180px;
+    text-transform:uppercase;
+    font-size:20px;
+    margin-right:10px;
+    text-align:right;
+    line-height:40px;
+}
+
+#formLogin input{
+    height:40px;
+    line-height:40px;
+    border:1px solid #000;
+    margin-right:10px;
+    width:335px;
+    padding-left:5px;
+    background: #FFF;
+    float:left;
+    font-size:20px;
+}
+
+#formLogin .login {
+    width: 150px;
+    height:35px;
+    margin-top: 15px;
+    float:right;
+    display:block;
+    font-size:15px;
+    line-height:30px;
+    margin-right:22px;
+}
+
+#formLogin input:-webkit-autofill{
+    background:none;
+}
+
+#formLogin p{
+    clear:left;
+    height:40px;
+    margin-bottom:10px;
+}
+
 
 /*------------Content User----------------*/
 
@@ -424,6 +486,40 @@ table.projectsMember th {
 table.projectsMember td {
     border-top: 1px solid #e8e8e8;
     padding-left: 5px;
+}
+
+#formUserInvite{
+    background-color:#e8e8e8;
+    width:650px;
+    padding: 5px 0 20px 20px;
+    margin-top:20px;
+}
+
+#formUserInvite h4{
+    text-transform:uppercase;
+    font-size:15px;
+    margin-bottom:10px;
+}
+
+#formUserInvite label, #formUserInvite select, #formUserInvite button{
+    float:left;
+    height:25px;
+    line-height:25px;
+}
+
+#formUserInvite label{
+    width:100px;
+}
+
+#formUserInvite select{
+    width:300px;
+    margin-right:10px;
+}
+
+#formUserInvite .invite{
+    display:block;
+    margin-top:20px;
+    color:red;
 }
 
 /*----------------------FormUser-----------------------*/
@@ -631,6 +727,16 @@ a.deleteStep, a.deleteSkill {
     background-color: #d13025; 
 }
 
+.projectSkill .postulate {
+    width: 220px;
+    height: 25px;
+    margin: 5px 10px 2px 0;
+    line-height: 25px;
+    float: left;
+    text-indent: 5px;
+    color: red;
+}
+
 .projectStep .action .onHold {
     background-color: #f4a22d;  
 }
@@ -701,8 +807,26 @@ a.deleteStep, a.deleteSkill {
 
 /*----------------------FormProject-----------------------*/
 
+#formProject input{
+    height:23px;
+    border:1px solid #000;
+    margin-right:10px;
+    width:260px;
+    padding-left:5px;
+}
 
-#formProject {
+#formProject select{
+    height:25px;
+    border:1px solid #000;
+}
+
+#formProject textarea{
+    border:1px solid #000;
+    padding-left:5px;
+}
+
+
+formProject {
     border-bottom: 1px solid #000;
     padding-bottom: 10px;
 }
