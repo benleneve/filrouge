@@ -9,6 +9,7 @@ filrouge_user_detail:
     defaults: {_controller:AppBundle:User:detail, id:1 }
     requirements:
         id: \d+
+        
 filrouge_user_add:
     path: /add
     defaults: {_controller:AppBundle:User:add }

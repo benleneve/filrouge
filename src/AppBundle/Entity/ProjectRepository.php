@@ -16,7 +16,7 @@ class ProjectRepository extends EntityRepository
     
     //Récupérer tous les projet avec le status et compétences
     //triés par date et pagination
-    public function findAllPojectsPageEager($page= 1, $maxPerPage = 5) {
+    public function findAllProjectsPageEager($page= 1, $maxPerPage = 5) {
         $query = $this->createQueryBuilder('p')
                     ->addSelect('st')
                     ->addSelect('ps')
@@ -32,7 +32,7 @@ class ProjectRepository extends EntityRepository
     
     //Récupérer tous les projet d'un utilisateur
     //triés par date et pagination
-    public function findAllPojectsByUserPageEager($page= 1, $maxPerPage = 5, $id) {
+    public function findAllProjectsByUserPageEager($page= 1, $maxPerPage = 5, $id) {
         $query = $this->createQueryBuilder('p')
                     ->addSelect('st')
                     ->addSelect('ps')
@@ -54,7 +54,7 @@ class ProjectRepository extends EntityRepository
     
     //Récupérer tous les projet avec le status et compétences
     //triés par date
-    public function findAllPojectsEager() {
+    public function findAllProjectsEager() {
         return $this->createQueryBuilder('p')
                     ->addSelect('st')
                     ->addSelect('ps')
@@ -69,7 +69,7 @@ class ProjectRepository extends EntityRepository
     
     //Récupérer tous les projet d'un utilisateur
     //triés par date
-    public function findAllPojectsByUserEager($id) {
+    public function findAllProjectsByUserEager($id) {
         return $this->createQueryBuilder('p')
                     ->addSelect('st')
                     ->addSelect('ps')

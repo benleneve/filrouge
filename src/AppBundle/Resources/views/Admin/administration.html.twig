@@ -1,0 +1,21 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block title %}Administration{% endblock title %}
+
+{% block left %}
+
+    <div class="blockGeneral">
+        <h2 class="icoUser">Tous les profils</h2>
+        {{ render(controller('AppBundle:User:admin')) }}
+    </div>
+    
+    <div class="blockGeneral">
+        <h2 class="icoProject">Tous les projets</h2>
+        {{ render(controller('AppBundle:Project:admin')) }}
+    </div>
+  
+{% endblock left %}
+
+{% block javascripts %}
+    {{parent()}}
+{% endblock %}

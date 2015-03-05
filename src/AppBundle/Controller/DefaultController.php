@@ -11,10 +11,10 @@ class DefaultController extends Controller {
         $repository = $this->getDoctrine()
                         ->getManager()
                         ->getRepository('AppBundle:Project'); 
-        $projects = $repository->findAllPojectsEager();
+        $projects = $repository->findAllProjectsEager();
         
         $idUser = $this->getUser()->getId();
-        $myProjects = $repository->findAllPojectsByUserEager($idUser);
+        $myProjects = $repository->findAllProjectsByUserEager($idUser);
         
         return $this->render('AppBundle:Default:index.html.twig', array(
                 'projects' => $projects,
@@ -33,6 +33,11 @@ class DefaultController extends Controller {
                 'messages' => $messages,
                 'notifications' => $notifications
         ));			
-    }   
+    }
+    
+    public function adminAction() 
+    {
+        return $this->render('AppBundle:Admin:administration.html.twig');			
+    } 
     
 }

@@ -77,14 +77,14 @@ class Project
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="UserProject", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="UserProject", mappedBy="project", cascade={"remove"})
      */
     private $projectMembers;
     
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="Step", mappedBy="project", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Step", mappedBy="project", cascade={"persist", "remove"})
      */
     private $steps;
     
@@ -98,14 +98,14 @@ class Project
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="ProjectSkill", mappedBy="project", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="ProjectSkill", mappedBy="project", cascade={"persist", "remove"})
      */
     private $projectSkills;
     
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="Notification", mappedBy="project", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="Notification", mappedBy="project", cascade={"persist", "remove"})
      */
     private $notifications;
     

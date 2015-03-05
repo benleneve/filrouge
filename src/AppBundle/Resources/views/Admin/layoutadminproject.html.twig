@@ -1,0 +1,38 @@
+<div class="blockContent">
+    {% for project in projects %}
+        <div class="adminContent">
+            <div class="adminName">
+                {{ project.name }}
+            </div>
+            <div class="adminInfo">
+                {% if project.status.name == 'En attente' %}
+                    <img alt="En attente" src="{{asset('bundles/app/images/status_orange.png')}}" />
+                    {{project.status.name}}
+                {% elseif project.status.name == 'En cours' %}
+                    <img alt="En cours" src="{{asset('bundles/app/images/status_green.png')}}" />
+                    {{project.status.name}}
+                {% elseif project.status.name == 'Terminé' %}
+                    <img alt="Terminé" src="{{asset('bundles/app/images/status_red.png')}}" />
+                    {{project.status.name}}
+                {% endif %}
+            </div>
+            <div class="adminSee">
+                <a href="{{path('filrouge_project_detail', {'id': project.id })}}">
+                    <img alt="Voir le projet" src="{{asset('bundles/app/images/see.png')}}" />
+                </a>
+            </div>
+            <div class="adminEdit">
+                <a href="{{path('filrouge_project_update', {'id': project.id })}}">
+                    <img alt="Modifier le projet" src="{{asset('bundles/app/images/modify.png')}}" />
+                </a>
+            </div>
+            <div class="adminDelete">
+                <a href="{{path('filrouge_project_remove', {'id': project.id })}}">
+                    <img alt="Supprimer le projet" src="{{asset('bundles/app/images/delete.png')}}" />
+                </a>
+            </div> 
+            <div class="clear"></div>
+        </div>
+        <div class="clear"></div> 
+    {% endfor %}   
+</div>

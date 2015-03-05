@@ -20,7 +20,7 @@ Class ProjectController extends Controller
             $repository = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('AppBundle:Project');
-            $projects = $repository->findAllPojectsPageEager($page, $maxProjects);
+            $projects = $repository->findAllProjectsPageEager($page, $maxProjects);
             $numberOfProject = count($projects);
             $pagination = array(
                     'page' => $page,
@@ -285,5 +285,16 @@ Class ProjectController extends Controller
                 'projectForm' => $form->createView(),
                 'project' => $project,
             ));     
-        } 
+        }
+        
+        public function adminAction()
+        {  
+            $projects = $this->getDoctrine()
+                             ->getRepository('AppBundle:Project')
+                             ->findAllProjectsEager();
+
+            return $this->render('AppBundle:Admin:layoutadminproject.html.twig', array(
+                    'projects' => $projects
+            ));
+        }
     }

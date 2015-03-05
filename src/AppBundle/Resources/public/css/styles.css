@@ -418,9 +418,9 @@ aside {
 /*------------Content User----------------*/
 
 .userSeeMore  {
-    width: 110px;
+    width: 160px;
     height: 25px;
-    margin: 10px;
+    margin: 10px 0;
 }
 
 .btnLeft {
@@ -945,7 +945,59 @@ formProject {
     margin-bottom: 10px;
 }
 
-/*------------------aside--------------------*/
+
+/*------------------Administration--------------------*/
+
+.adminContent {
+    width: 650px;
+    height:25px;
+    line-height:27px;
+    margin: 3px 0 3px 10px;
+    background-color: #e8e8e8; 
+}
+
+.adminContent .adminName {
+    float: left;
+    width: 190px;
+    height:25px;
+    line-height:27px;
+    padding-left: 5px;
+}
+
+.adminContent .adminInfo {
+    float: left;
+    width: 330px;
+    height:25px;
+    line-height:27px;
+}
+
+.adminContent .adminSee {
+    float: left;
+    width: 40px;
+    text-indent: 10px;
+    height:25px;
+    line-height:30px;
+    border-right: 1px solid #000;
+}
+
+.adminContent .adminEdit {
+    float: left;
+    width: 40px;
+    text-indent: 15px;
+    height:25px;
+    line-height:35px;
+    border-right: 1px solid #000;
+}
+
+.adminContent .adminDelete {
+    float: left;;
+    width: 40px;
+    text-indent: 15px;
+    height:25px;
+    line-height:37px;
+}
+
+/*------------------Aside--------------------*/
 
 aside .oneElement {
     padding: 5%;

@@ -1,0 +1,40 @@
+filrouge_admin_list:
+    path: /
+    defaults: {_controller:AppBundle:Default:admin}
+
+filrouge_admin_add_skill:
+    path: /skill/add
+    defaults: {_controller:AppBundle:Skill:add }
+    requirements:
+        id: \d+
+        
+filrouge_admin_update_skill:
+    path: /skill/update/{id}
+    defaults: {_controller:AppBundle:Skill:update }
+    requirements:
+        id: \d+
+        
+filrouge_admin_remove_skill:
+    path: /skill/remove/{id}
+    defaults: {_controller:AppBundle:Skill:remove }
+    requirements:
+        id: \d+
+
+filrouge_admin_add_category:
+    path: /category/add
+    defaults: {_controller:AppBundle:Category:add }
+    requirements:
+        id: \d+
+        
+filrouge_admin_update_category:
+    path: /category/update/{id}
+    defaults: {_controller:AppBundle:Category:update }
+    requirements:
+        id: \d+
+        
+filrouge_admin_remove_category:
+    path: /category/remove/{id}
+    defaults: {_controller:AppBundle:Category:remove }
+    requirements:
+        id: \d+
+

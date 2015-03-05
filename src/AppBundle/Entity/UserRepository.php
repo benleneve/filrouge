@@ -33,8 +33,28 @@ class UserRepository extends EntityRepository
 
                 return $query->getQuery()->getOneOrNullResult();
             }
+            
+        public function findAllUsersEager()
+            {
+                $query = $this->createQueryBuilder('u')
+                        ->leftJoin('u.image', 'i')
+                        ->addSelect('i')
+                        ->leftJoin('u.promotions', 'p')
+                        ->addSelect('p')
+                        ->leftJoin('u.worksOnProjects', 'wp')
+                        ->addSelect('wp')
+                        ->leftJoin('wp.project', 'pr')
+                        ->addSelect('pr')
+                        ->leftJoin('u.userSkills', 'us')
+                        ->addSelect('us')
+                        ->leftJoin('us.skill', 's')
+                        ->addSelect('s')
+                        ->orderBy('u.lastName');
+                
+                return $query->getQuery()->getResult();
+            }
     
-        public function findAllUsersEager($page= 1, $maxPerPage = 5)
+        public function findAllUsersPageEager($page= 1, $maxPerPage = 5)
             {
                 $query = $this->createQueryBuilder('u')
                         ->leftJoin('u.image', 'i')

@@ -80,7 +80,7 @@ class User implements UserInterface
     private $email;
 
     /**
-     * @var string
+     * 
      *
      * @ORM\Column(name="address", type="string", length=255)
      */
@@ -160,7 +160,7 @@ class User implements UserInterface
     /**
      * @var Image
      *
-     * @ORM\OneToOne(targetEntity="Image")
+     * @ORM\OneToOne(targetEntity="Image", cascade={"persist", "remove"})
      */
     private $image;
     
@@ -181,28 +181,28 @@ class User implements UserInterface
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="UserProject", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="UserProject", mappedBy="user", cascade={"remove"})
      */
     private $worksOnProjects;
     
     /**
      * @var array
      * 
-     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="user", cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="UserSkill", mappedBy="user", cascade={"persist", "remove"})
      */
     private $userSkills;
     
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="recipient")
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="recipient", cascade={"remove"})
      */
     private $messagesReceived;
     
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="Message", mappedBy="sender")
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="sender", cascade={"remove"})
      */
     private $messagesSent;
     

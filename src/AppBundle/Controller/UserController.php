@@ -19,7 +19,7 @@ class UserController extends Controller {
                           ->getManager()
                           ->getRepository('AppBundle:User');
              
-             $users = $repo->findAllUsersEager($page, $maxUsers);
+             $users = $repo->findAllUsersPageEager($page, $maxUsers);
              
              $numberOfUsers = count($users);
              
@@ -29,9 +29,7 @@ class UserController extends Controller {
                     "pages_count" => ceil($numberOfUsers/$maxUsers),
                     "route_params" => array()
                             );
-           
-            
-             
+                  
              return $this->render('AppBundle:User:userslist.html.twig',
                                        array(
                                         'users' => $users,
@@ -43,12 +41,14 @@ class UserController extends Controller {
             $user = $this->getDoctrine()
                          ->getRepository('AppBundle:User')
                          ->findOneUserEager($id);
-                         
-          
-        
+            
+            $dateInterval = $user->getBirthDate()->diff(new \DateTime());
+            $age = $dateInterval->y;
+                        
             return $this->render('AppBundle:User:userdetail.html.twig',
                                        array(
-                                        'user' => $user
+                                        'user' => $user,
+                                        'age' => $age
                                         ));
     }
     
@@ -96,21 +96,15 @@ class UserController extends Controller {
                 }
             
             //Effacement des userSkills
-            $promotions = new ArrayCollection();
-           
-            
+            $promotions = new ArrayCollection();           
             // Crée un tableau contenant les objets UserSkill courants de BDD
             foreach ($user->getPromotions() as $promotion) 
                 {
                     $promotions->add($promotion);
                 }
-           
-          
-            
+ 
             //Effacement des userSkills
             $userSkills = new ArrayCollection();
-           
-            
             // Crée un tableau contenant les objets UserSkill courants de BDD
             foreach ($user->getUserSkills() as $userSkill) 
                 {
@@ -144,6 +138,7 @@ class UserController extends Controller {
                     if($user->getId() === null) 
                         {
                             $em->persist($user);
+                            $em->persist($user->getImage());
                         }
                     
                         $em->flush();  
@@ -166,18 +161,22 @@ class UserController extends Controller {
                
             $em = $this->getDoctrine()
                        ->getManager();
-            
-            $em->remove($user);
-           
-            if ($user->getImage() !== null)
-                {
-                    $em->remove($user->getImage());
-                }
-            $em->flush();
-            
-            $url = $this->generateUrl('filrouge_user_list');
-                            
-            return $this->redirect($url);
+  
+            if($user->getManagesProjects() === null) {
+                $message = $user->getFirstName() . ' ' . $user->getLastName() . ' vient d\'être effacé';
+                $em->remove($user);
+                if ($user->getImage() !== null)
+                    {
+                        $em->remove($user->getImage());
+                    }
+                $em->flush();
+            } else {
+                $message = $user->getFirstName() . ' ' . $user->getLastName() . ' ne peut être supprimé car il est en charge d\'un projet';
+            }
+   
+            return $this->render('AppBundle:Admin:Administration.html.twig', array(
+                        'message' => $message
+            ));
         }
         
     public function inviteAction($id)      
@@ -213,6 +212,16 @@ class UserController extends Controller {
                         'message' => $validation
             ));
         }
-    
         
+    public function adminAction()
+    {  
+        $users = $this->getDoctrine()
+                         ->getRepository('AppBundle:User')
+                         ->findAllUsersEager();
+        
+        return $this->render('AppBundle:Admin:layoutadminuser.html.twig', array(
+                'users' => $users
+        ));
+    }
+           
 }

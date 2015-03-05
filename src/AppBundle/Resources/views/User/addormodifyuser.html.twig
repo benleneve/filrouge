@@ -74,8 +74,7 @@
                         </div>
                         {{ form_errors(userForm.dispoAddress) }}
                         {{ form_widget(userForm.dispoAddress, { 'attr': {'class': 'dispoAddress  dispo'} }) }}
-                    </div>
-                    
+                    </div>                  
                     <div class="clear"></div>
 
                     <h4>{{ form_label(userForm.username, "Login") }}</h4>
@@ -85,6 +84,7 @@
                     <h4>{{ form_label(userForm.password, 'Mot de passe') }}</h4>
                     {{ form_errors(userForm.password) }}
                     {{ form_widget(userForm.password, { 'attr': {'class': 'password'} }) }}
+                    
 
                     <h4>{{ form_label(userForm.promotions, "Promotions") }}</h4>
                     <div class="promotionContainer">
