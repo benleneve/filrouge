@@ -1,0 +1,30 @@
+{% if projects |length != 0 %}
+    {% for project in projects %}
+        {% include('AppBundle:Project:layoutproject.html.twig') %}
+    {% endfor %}
+{% else %}
+    <h4>Il n'y a aucun projet sur le site.</h4>
+{% endif %}
+
+<div class="pagination">
+    <div class="pagination-buttons">
+        {% if pagination.page>1 %}
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': 1})) }}"><<</a>
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}">
+                <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
+            </a>
+        {% endif %}
+        {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
+        {% for p in range(max(pagination.page-4, 1), min(pagination.page+4, pagination.pages_count)) %}
+            <a{% if p == pagination.page %} class="current-page"{% endif %} href="{{ path(pagination.route, pagination.route_params|merge({'page': p})) }}">{{ p }}</a>
+        {% endfor %}
+
+        {% if pagination.page<pagination.pages_count %}
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page+1})) }}">
+                <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
+            </a>
+            <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.pages_count})) }}">>></a>
+        {% endif %}
+    </div>
+</div>
+<div class="clear"></div>

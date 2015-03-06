@@ -1,33 +1,31 @@
-<div class="blockContent">
-    {% for user in users %}
-        <div class="adminContent">
-            <div class="adminName">
-                {{ user.lastName ~ " " ~ user.firstName }}
-            </div>
-            <div class="adminInfo">
-                {% if (user.promotions|length != 0) %}
-                    {% for promotion in user.promotions %} {{promotion.name ~ ' - ' ~ promotion.school.name}} {% endfor %} 
-                {% else %}
-                    Staff
-                {% endif %}
-            </div>
-            <div class="adminSee">
-                <a href="{{path('filrouge_user_detail', {'id': user.id })}}">
-                    <img alt="Voir le profil" src="{{asset('bundles/app/images/see.png')}}" />
-                </a>
-            </div>
-            <div class="adminEdit">
-                <a href="{{path('filrouge_user_update', {'id': user.id })}}">
-                    <img alt="Modifier le profil" src="{{asset('bundles/app/images/modify.png')}}" />
-                </a>
-            </div>
-            <div class="adminDelete">
-                <a href="{{path('filrouge_user_remove', {'id': user.id })}}">
-                    <img alt="Supprimer le profil" src="{{asset('bundles/app/images/delete.png')}}" />
-                </a>
-            </div> 
-            <div class="clear"></div>    
+   {% for user in users %}
+    <div class="adminContent">
+        <div class="adminName">
+            {{ user.lastName ~ " " ~ user.firstName }}
         </div>
-        <div class="clear"></div> 
-    {% endfor %}      
-</div>
+        <div class="adminInfo">
+            {% if (user.promotions|length != 0) %}
+                {% for promotion in user.promotions %} {{promotion.name ~ ' - ' ~ promotion.school.name}} {% endfor %} 
+            {% else %}
+                Staff
+            {% endif %}
+        </div>
+        <div class="adminSee">
+            <a href="{{path('filrouge_user_detail', {'id': user.id })}}">
+                <img alt="Voir le profil" src="{{asset('bundles/app/images/see.png')}}" />
+            </a>
+        </div>
+        <div class="adminEdit">
+            <a href="{{path('filrouge_user_update', {'id': user.id })}}">
+                <img alt="Modifier le profil" src="{{asset('bundles/app/images/modify.png')}}" />
+            </a>
+        </div>
+        <div class="adminDelete">
+            <a href="{{path('filrouge_user_remove', {'id': user.id })}}">
+                <img alt="Supprimer le profil" src="{{asset('bundles/app/images/delete.png')}}" />
+            </a>
+        </div> 
+        <div class="clear"></div>    
+    </div>
+    <div class="clear"></div> 
+{% endfor %}      

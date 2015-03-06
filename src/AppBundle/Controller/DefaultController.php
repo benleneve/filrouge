@@ -6,22 +6,36 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class DefaultController extends Controller {
     
-    public function indexAction()
+    public function indexAction($pageMP, $page)
     {
+        $maxProjects = 5;
+            
         $repository = $this->getDoctrine()
                         ->getManager()
-                        ->getRepository('AppBundle:Project'); 
-        $projects = $repository->findAllProjectsEager();
+                        ->getRepository('AppBundle:Project');
+        $projects = $repository->findAllProjectsPageEager($page, $maxProjects);
+        $numberOfProject = count($projects);
         
         $idUser = $this->getUser()->getId();
         $myProjects = $repository->findAllProjectsByUserEager($idUser);
+        $numberOfMyProject = count($myProjects);
+        
+        $pagination = array(
+                'page' => $page,
+                'pageMP' => $pageMP,
+                'route' => 'filrouge_homepage',
+                'pages_count' => ceil($numberOfProject/$maxProjects),
+                'pagesMP_count' => ceil($numberOfMyProject/$maxProjects),
+                'route_params' => array()
+        );
         
         return $this->render('AppBundle:Default:index.html.twig', array(
                 'projects' => $projects,
+                'pagination' => $pagination,
                 'myProjects' => $myProjects
         ));
     }
-    
+
     public function asideAction($nbRecrut, $nbNotif) 
     {
         $em = $this->getDoctrine()->getManager();

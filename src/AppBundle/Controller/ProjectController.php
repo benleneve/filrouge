@@ -33,6 +33,8 @@ Class ProjectController extends Controller
                     'pagination' => $pagination
             ));
         }
+        
+        
 
         public function detailAction($id)
         {
@@ -151,11 +153,12 @@ Class ProjectController extends Controller
             if($project === null) {
                 throw $this->createNotFoundException('ID' . $id . ' impossible.');
             }
+            $message = 'Le projet ' . $project->getName() . ' vient d\'être effacé';
             $em->remove($project);
             $em->flush();
-            return $this->redirect(
-                $this->generateUrl('filrouge_project_list')
-            );
+            return $this->render('AppBundle:Admin:Administration.html.twig', array(
+                        'messageProject' => $message
+            ));
         }
         
         public function applyAction($id, $name) {

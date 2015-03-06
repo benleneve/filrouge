@@ -48,70 +48,82 @@
                 <h4>Description</h4>
                 {{project.description}}
                 
-                <h4>Compétences manquantes</h4>
-                {% for projectSkill in project.projectSkills %}
-                    <div class="projectSkill">
-                        <div class="name">
-                            {{projectSkill.skill.name}}
-                        </div>
-                        <div class="action">
-                        {% if projectSkill.active %}  
-                                <a href=" {{path('filrouge_project_apply', {'id': project.id, 'name': projectSkill.skill.name } )}}" class="btnAction">> Postuler</a>
-                        {% else %}
-                            <div class="finish">
-                                Recruté
+                {% if (project.projectSkills|length !=0) %}
+                    <h4>Compétences manquantes</h4>
+                    {% for projectSkill in project.projectSkills %}
+                        <div class="projectSkill">
+                            <div class="name">
+                                {{projectSkill.skill.name}}
                             </div>
-                        {% endif %}
-                        </div>
-                        {% if  message is defined and skillName == projectSkill.skill.name %}
-                        <div class="postulate">  
-                            Votre candidature a bien été envoyée  
-                        </div>
-                        {% endif %}
-                        <div class="clear"></div>
-                    </div>         
-                {% endfor %}
-                
-                <h4>Avancement du projet</h4>
-                {% for step in project.steps %}
-                    <div class="projectStep">
-                        <div class="name">
-                            {{step.name}}
-                        </div>
-                        <div class="action">
-                            {% if step.status.name == 'En attente' %}
-                                <div class="onHold">
-                                    {{step.status.name}}
-                                </div>
-                            {% elseif step.status.name == 'En cours' %}
-                                <div class="inProgress">
-                                    {{step.status.name}}
-                                </div>
-                            {% elseif step.status.name == 'Terminé' %}
+                            <div class="action">
+                            {% if projectSkill.active %}  
+                                    <a href=" {{path('filrouge_project_apply', {'id': project.id, 'name': projectSkill.skill.name } )}}" class="btnAction">> Postuler</a>
+                            {% else %}
                                 <div class="finish">
-                                    {{step.status.name}}
+                                    Recruté
                                 </div>
                             {% endif %}
-                        </div>
-                        <div class="clear"></div>
-                    </div>
-                {% endfor %}
-                
-                <h4>Membres du projet</h4>
-                {% for member in project.projectMembers %}
-                    {% if member.active %}
-                        <div class="projectMember">
-                            <div class="nameMember">
-                                {{member.user.firstName}} {{member.user.LastName}}
                             </div>
-                            <div class="skillMember">
-                                {{member.skill}}
+                            {% if  message is defined and skillName == projectSkill.skill.name %}
+                            <div class="postulate">  
+                                Votre candidature a bien été envoyée  
+                            </div>
+                            {% endif %}
+                            <div class="clear"></div>
+                        </div>         
+                    {% endfor %}
+                {% else %}
+                    <h4>Aucune compétence demandée pour ce projet</h4>
+                {% endif %}
+                
+                {% if (project.steps|length !=0) %}
+                    <h4>Avancement du projet</h4>
+                    {% for step in project.steps %}
+                        <div class="projectStep">
+                            <div class="name">
+                                {{step.name}}
+                            </div>
+                            <div class="action">
+                                {% if step.status.name == 'En attente' %}
+                                    <div class="onHold">
+                                        {{step.status.name}}
+                                    </div>
+                                {% elseif step.status.name == 'En cours' %}
+                                    <div class="inProgress">
+                                        {{step.status.name}}
+                                    </div>
+                                {% elseif step.status.name == 'Terminé' %}
+                                    <div class="finish">
+                                        {{step.status.name}}
+                                    </div>
+                                {% endif %}
                             </div>
                             <div class="clear"></div>
                         </div>
-                        <div class="clear"></div>
-                    {% endif %}
-                {% endfor %}    
+                    {% endfor %}
+                {% else %}
+                    <h4>Aucune étape renseignée pour ce projet</h4>
+                {% endif %}
+                
+                {% if (project.projectMembers|length !=0) %}
+                    <h4>Membres du projet</h4>
+                    {% for member in project.projectMembers %}
+                        {% if member.active %}
+                            <div class="projectMember">
+                                <div class="nameMember">
+                                    {{member.user.firstName}} {{member.user.LastName}}
+                                </div>
+                                <div class="skillMember">
+                                    {{member.skill}}
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>
+                        {% endif %}
+                    {% endfor %} 
+                {% else %}
+                    <h4>Aucun membre n'a rejoint ce projet</h4>
+                {% endif %}
             </div>
         </div>    
     </div>

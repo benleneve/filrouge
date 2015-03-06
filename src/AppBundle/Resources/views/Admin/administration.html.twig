@@ -6,12 +6,22 @@
 
     <div class="blockGeneral">
         <h2 class="icoUser">Tous les profils</h2>
-        {{ render(controller('AppBundle:User:admin')) }}
+        <div class="blockContent">
+            {% if messageUser is defined %}
+                {{ messageUser }}
+            {% endif %}
+            {{ render(controller('AppBundle:User:admin')) }}
+        </div>
     </div>
     
     <div class="blockGeneral">
         <h2 class="icoProject">Tous les projets</h2>
-        {{ render(controller('AppBundle:Project:admin')) }}
+        <div class="blockContent">
+            {% if messageProject is defined %}
+                {{ messageProject }}
+            {% endif %}
+            {{ render(controller('AppBundle:Project:admin')) }}
+        </div>
     </div>
   
 {% endblock left %}

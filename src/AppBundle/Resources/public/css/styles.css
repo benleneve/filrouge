@@ -322,40 +322,77 @@ aside {
     padding: 2%;
 }
 
-#content .headerBlock .ico {
-    float: left;
-    width: 15px;
-}
-
 #content .headerBlock .name {
     float: left;
+    height:30px;
+    line-height: 35px;
     width: 250px;
-}
-
-.name .nameStrong {
-    font-size: 14px;
-    line-height: 20px;
 }
 
 #content .headerBlock .information {
     float: left;
+    height: 30px;
+    line-height: 35px;
 }
 
 #content .headerBlock .status {
     float: right;
+    height:30px;
+    line-height: 35px;
 }
 
 #content .headerBlock {
     border-bottom: 1px solid #000;
 }
 
-#accordionProjectList .headerBlock{
-    cursor:pointer;
-}
-
 #content .pagination {
     margin-top: 10px;
     float: right;
+}
+
+/*----------------------Collapsing-----------------------*/
+
+.collapsible {
+    height:30px;
+    cursor:pointer;
+}
+
+.collapsible .ico span {
+    float: left;
+    height:30px;
+    line-height: 30px;
+    width:25px;
+}
+
+.collapsible .name {
+    float: left;
+    height:30px;
+    line-height: 35px;
+    width: 250px;
+}
+
+.collapsible .information {
+    float: left;
+    height: 30px;
+    line-height: 35px;
+}
+
+.collapsible .status {
+    float: right;
+    height:30px;
+    line-height: 35px;
+}
+
+.collapsible {
+    border-bottom: 1px solid #000;
+}
+
+.collapse-open span {
+    background: url("../images/block_open.png") left center no-repeat;
+}
+
+.collapse-close span {
+    background: url("../images/block_close.png") left center no-repeat;
 }
 
 /*----------------------FormLogin-----------------------*/
@@ -680,7 +717,7 @@ table.addOrModify {
 .projectSeeMore  {
     width: 120px;
     height: 25px;
-    margin-top: 10px; 
+    margin: 10px 0; 
 }
 
 a.newStep, a.newSkill {
@@ -1021,6 +1058,20 @@ aside .pagination {
 
 aside .dateAside {
     font-weight: bold;
+}
+
+.recrutSeeMore  {
+    float: right;
+    width: 80px;
+    height: 25px;
+    margin: 10px 0;
+}
+
+.notifSeeMore {
+    float: right;
+    width: 80px;
+    height: 25px;
+    margin: 10px 0;
 }
 
 /*----------------footer------------------*/

@@ -7,49 +7,31 @@
     <div class="blockGeneral">
         <h2 class="icoProject">Mes projets</h2>
         <div class="blockContent">
-            <div id="accordionMyProject">
-                {% if myProjects |length != 0 %}
-                    {% for project in myProjects %}
-                        {% include('AppBundle:Project:layoutproject.html.twig') %}
-                    {% endfor %}
-                {% else %}
-                    <h4>Vous ne travaillez sur aucun projet.</h4>
-                {% endif %}
-            </div>
-            <div class="pagination">
-                <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
-                <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
-            </div>
-            <div class="clear"></div>
+            {% include('AppBundle:Default:layoutmyprojectindex.html.twig') %}
         </div>
     </div>
     
     <div class="blockGeneral">
         <h2 class="icoProject">Tous les projets</h2>
         <div class="blockContent">
-            <div id="accordionAllProjects">
-                {% if projects |length != 0 %}
-                    {% for project in projects %}
-                        {% include('AppBundle:Project:layoutproject.html.twig') %}
-                    {% endfor %}
-                {% else %}
-                    <h4>Il n'y a aucun projet sur le site.</h4>
-                {% endif %}
-            </div>
-            <div class="pagination">
-                <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
-                <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
-            </div>
-            <div class="clear"></div>
+            {% include('AppBundle:Default:layoutprojectsindex.html.twig') %}
         </div>
     </div>
+       
   
 {% endblock left %}
 
 {% block javascripts %}
     {{parent()}}
-    <script>$(function() { $( "#accordionMyProject" ).accordion(); });</script>
-    <script>$(function() { $( "#accordionAllProjects" ).accordion(); });</script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.collapsible').collapsible({
+            defaultOpen: 'section1',
+            speed: 300
+        });
+    });
+    </script>
+
 {% endblock %}
 
 

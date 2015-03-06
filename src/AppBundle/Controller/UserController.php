@@ -161,8 +161,8 @@ class UserController extends Controller {
                
             $em = $this->getDoctrine()
                        ->getManager();
-  
-            if($user->getManagesProjects() === null) {
+            
+            if(count($user->getManagesProjects()) === 0) {
                 $message = $user->getFirstName() . ' ' . $user->getLastName() . ' vient d\'être effacé';
                 $em->remove($user);
                 if ($user->getImage() !== null)
@@ -175,7 +175,7 @@ class UserController extends Controller {
             }
    
             return $this->render('AppBundle:Admin:Administration.html.twig', array(
-                        'message' => $message
+                        'messageUser' => $message
             ));
         }
         

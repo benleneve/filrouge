@@ -22,11 +22,9 @@
         <h2 class="icoProject">Tous les Profils</h2>
         <div class="clear"></div>
         <div class="blockContent">
-            <div id='accordion'>
                 {% for user in users %}
                     {% include('AppBundle:User:userlayout.html.twig') %}
                 {% endfor %}
-            </div>
             <div class="pagination">
                 {% include 'AppBundle::pagination.html.twig' %}
             </div>
@@ -39,9 +37,12 @@
 
 {% block javascripts %}
     {{parent()}}
-            <script>
-          $(function() {
-            $( "#accordion" ).accordion();
-          });
-          </script>
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.collapsible').collapsible({
+            defaultOpen: 'section1',
+            speed: 300
+        });
+    });
+    </script>
 {% endblock %}

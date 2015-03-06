@@ -1,5 +1,5 @@
 <div class="name">
-    <span class="nameStrong">{{ user.lastName ~ " " ~ user.firstName }}</span>
+    {{ user.lastName ~ " " ~ user.firstName }}
 </div>
 <div class="information">
     {% if (user.promotions|length != 0) %}

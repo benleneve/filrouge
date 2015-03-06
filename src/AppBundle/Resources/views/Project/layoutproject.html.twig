@@ -1,67 +1,89 @@
-<h3>
-    <div class="headerBlock">
-        <div class="ico">
-            <img alt="Voir plus d'informations" src="{{asset('bundles/app/images/block_close.png')}}" />
-        </div>
-        <div class="name">
-            <span class="nameStrong">{{project.name}}</span>
-        </div>
-        <div class="information">
+<div class="collapsible" id="section{{loop.index}}">
+    <div class="ico">
+        <span></span> 
+    </div>
+    <div class="name">
+        {{project.name}}
+    </div>
+    <div class="information">
+        {% if active is defined %}
+            {% if  app.user.id == project.projectManager.id %}
+                Chef de projet
+            {% else %}
+                {% for userProject in app.user.worksOnProjects %}
+                    {% if loop.index < 5 %}
+                        {{ userProject.skill }} /
+                    {% elseif loop.index == 5 %}
+                        ...
+                    {% endif %}
+                {% endfor %}    
+            {% endif %}   
+        {% else %}    
             {% if  project.projectSkills|length != 0 %}
                 Recrute :
                 {% for projectSkill in project.projectSkills %}
                     {% if projectSkill.active %}
-                        {{projectSkill.skill.name}} /  
+                        {% if loop.index < 5 %}
+                            {{projectSkill.skill.name}} /
+                        {% elseif loop.index == 5 %}
+                            ...
+                        {% endif %}  
                     {% endif %}
                 {% endfor %}
             {% else %}
                 Recrutement terminé
             {% endif %}
-        </div>
-        <div class="status">
-            {% if project.status.name == 'En attente' %}
-                {{project.status.name}}
-                <img alt="En attente" src="{{asset('bundles/app/images/status_orange.png')}}" />
-            {% elseif project.status.name == 'En cours' %}
-                {{project.status.name}}
-                <img alt="En cours" src="{{asset('bundles/app/images/status_green.png')}}" />
-            {% elseif project.status.name == 'Terminé' %}
-                {{project.status.name}}
-                <img alt="Terminé" src="{{asset('bundles/app/images/status_red.png')}}" />
-            {% endif %}
-        </div>
-        <div class="clear"></div>
-    </div>
-</h3>
-<div class="bodyBlock">
-    <h4>Objectif</h4>
-    {{project.purpose}}
-    <div class="dateProject">
-        <div class="startDate">
-            <h4>Date de début</h4>
-            {{project.startDate|date('d/m/Y')}} 
-        </div>
-        <div class="endDate">
-            <h4>Date de fin</h4>
-            {{project.endDate|date('d/m/Y')}}
-        </div>
-        <div class="clear"></div>
-    </div>     
-    {% if  project.projectSkills|length != 0 %}
-        <h4>Compétences manquantes</h4>
-        {% for projectSkill in project.projectSkills %}
-             {% if projectSkill.active %}
-                {{projectSkill.skill.name}} /
-             {% endif %}
-        {% endfor %}
-    {% else %}
-        <h4>Recrutement terminé</h4>
-    {% endif %} 
-    <div class="projectSeeMore">
-        {% if app.user.id == project.projectManager.id %} 
-            <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">Gérer mon projet</a>  
-        {% else %}
-            <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} " class="btnAction">Voir la fiche projet</a>
         {% endif %}
+    </div>
+    <div class="status">
+        {% if project.status.name == 'En attente' %}
+            {{project.status.name}}
+            <img alt="En attente" src="{{asset('bundles/app/images/status_orange.png')}}" />
+        {% elseif project.status.name == 'En cours' %}
+            {{project.status.name}}
+            <img alt="En cours" src="{{asset('bundles/app/images/status_green.png')}}" />
+        {% elseif project.status.name == 'Terminé' %}
+            {{project.status.name}}
+            <img alt="Terminé" src="{{asset('bundles/app/images/status_red.png')}}" />
+        {% endif %}
+    </div>
+    <div class="clear"></div>
+</div>
+
+<div class="container">
+    <div class="content"> 
+        <div class="bodyBlock">
+            <h4>Objectif</h4>
+            {{project.purpose}}
+            <div class="dateProject">
+                <div class="startDate">
+                    <h4>Date de début</h4>
+                    {{project.startDate|date('d/m/Y')}} 
+                </div>
+                <div class="endDate">
+                    <h4>Date de fin</h4>
+                    {{project.endDate|date('d/m/Y')}}
+                </div>
+                <div class="clear"></div>
+            </div>     
+            {% if  project.projectSkills|length != 0 %}
+                <h4>Compétences manquantes</h4>
+                {% for projectSkill in project.projectSkills %}
+                     {% if projectSkill.active %}
+                        {{projectSkill.skill.name}} /
+                     {% endif %}
+                {% endfor %}
+            {% else %}
+                <h4>Recrutement terminé</h4>
+            {% endif %} 
+            <div class="projectSeeMore">
+                {% if app.user.id == project.projectManager.id %} 
+                    <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">Gérer mon projet</a>  
+                {% else %}
+                    <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} " class="btnAction">Voir la fiche projet</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="clear"></div>
     </div>
 </div>

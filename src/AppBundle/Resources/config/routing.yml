@@ -1,6 +1,9 @@
 filrouge_homepage:
-    path:     /
-    defaults: { _controller: AppBundle:Default:index }
+    path:     /{pageMP}/{page}
+    defaults: { _controller: AppBundle:Default:index, pageMP:1 , page:1 }
+    requirements:
+        pageMP: \d+
+        page: \d+
     
 filrouge_user:
     resource: "@AppBundle/Resources/config/user.yml"
@@ -13,6 +16,14 @@ filrouge_project:
 filrouge_admin:
     resource: "@AppBundle/Resources/config/admin.yml"
     prefix:   /admin
+    
+filrouge_message:
+    path: /message
+    defaults: {_controller: AppBundle:default:listMessage }
+    
+filrouge_notification:
+    path: /notification
+    defaults: {_controller: AppBundle:default:listNotification }
     
 filrouge_generalCondition:
     path: /gc
