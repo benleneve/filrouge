@@ -1,27 +1,31 @@
 <div class="blockGeneral">
     <h2 class="icoRecrut">Recrutement</h2>
     <div class="blockContent">
-        {% for message in messages %}
-            <div class="oneElement">
-                <div class="icon">
-                    {% if message.type == 1 %}
-                        <img alt="invitation" src="{{asset('bundles/app/images/recrut_invitation.png')}}" />
-                    {% elseif message.type == 2 %}
-                        <img alt="Candidature acceptée" src="{{asset('bundles/app/images/recrut_accepted.png')}}" />
-                    {% elseif message.type == 3 %}
-                        <img alt="Candidature refusée" src="{{asset('bundles/app/images/recrut_refused.png')}}" />
-                    {% endif %}
+        {% if messages |length != 0 %}
+            {% for message in messages %}
+                <div class="oneElement">
+                    <div class="icon">
+                        {% if message.type == 1 %}
+                            <img alt="invitation" src="{{asset('bundles/app/images/recrut_invitation.png')}}" />
+                        {% elseif message.type == 2 %}
+                            <img alt="Candidature acceptée" src="{{asset('bundles/app/images/recrut_accepted.png')}}" />
+                        {% elseif message.type == 3 %}
+                            <img alt="Candidature refusée" src="{{asset('bundles/app/images/recrut_refused.png')}}" />
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
+                        <p>{{message.content}}</p>
+                    </div>  
+                    <div class="clear"></div>
                 </div>
-                <div class="content">
-                    <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
-                    <p>{{message.content}}</p>
-                </div>  
-                <div class="clear"></div>
+            {% endfor %}
+            <div class="recrutSeeMore">
+                <a href=" {{path('filrouge_message_list', {'id': app.user.id})}} " class="btnAction">Voir tout</a>  
             </div>
-        {% endfor %}
-        <div class="recrutSeeMore">
-            <a href=" {{path('filrouge_homepage')}} " class="btnAction">Voir tout</a>  
-        </div>
+        {% else %}    
+           <h4>Vous n'avez aucun message</h4>  
+        {% endif %}
         <div class="clear"></div>
     </div>
 </div>
@@ -30,30 +34,34 @@
     <h2 class="icoNotif">Notifications</h2>
     <div class="clear"></div>
     <div class="blockContent">
-        {% for notification in notifications %}
-            <div class="oneElement">
-                <div class="icon">
-                    {% if notification.type == 1 %}
-                        <img alt="Création de projet" src="{{asset('bundles/app/images/notif_project.png')}}" />
-                    {% elseif notification.type == 2 %}
-                        <img alt="Ajout de membre" src="{{asset('bundles/app/images/notif_user.png')}}" />
-                    {% elseif notification.type == 3 %}
-                        <img alt="Ajout de compétence" src="{{asset('bundles/app/images/notif_skill.png')}}" />
-                    {% endif %}
+        {% if notifications |length != 0 %}
+            {% for notification in notifications %}
+                <div class="oneElement">
+                    <div class="icon">
+                        {% if notification.type == 1 %}
+                            <img alt="Création de projet" src="{{asset('bundles/app/images/notif_project.png')}}" />
+                        {% elseif notification.type == 2 %}
+                            <img alt="Ajout de membre" src="{{asset('bundles/app/images/notif_user.png')}}" />
+                        {% elseif notification.type == 3 %}
+                            <img alt="Ajout de compétence" src="{{asset('bundles/app/images/notif_skill.png')}}" />
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <p><span class="dateAside">{{notification.creationDate|date('d/m/Y H:i')}}<span></p>
+                        <p>
+                            {{notification.content}}
+                            <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} "> {{notification.project.name}}</a>
+                        </p>
+                    </div>
+                    <div class="clear"></div>
                 </div>
-                <div class="content">
-                    <p><span class="dateAside">{{notification.creationDate|date('d/m/Y H:i')}}<span></p>
-                    <p>
-                        {{notification.content}}
-                        <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} "> {{notification.project.name}}</a>
-                    </p>
-                </div>
-                <div class="clear"></div>
+            {% endfor %}
+            <div class="notifSeeMore">
+                <a href=" {{path('filrouge_notification')}} " class="btnAction">Voir tout</a>  
             </div>
-        {% endfor %}
-        <div class="notifSeeMore">
-            <a href=" {{path('filrouge_homepage')}} " class="btnAction">Voir tout</a>  
-        </div>
+        {% else %}    
+            <h4>Aucune notification</h4> 
+        {% endif %}
         <div class="clear"></div>
     </div>
 </div>

@@ -20,7 +20,9 @@
                 {% include('AppBundle:Project:layoutproject.html.twig') %}
             {% endfor %}
             <div class="pagination">
-                {% include 'AppBundle::pagination.html.twig' %}
+                {% if projects |length != 0 %}
+                    {% include 'AppBundle::pagination.html.twig' %}
+                {% endif %}
             </div>
             <div class="clear"></div>
         </div>

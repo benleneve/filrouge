@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * NotificationRepository
@@ -12,15 +13,27 @@ use Doctrine\ORM\EntityRepository;
  */
 class NotificationRepository extends EntityRepository
 {  
-    //Récupérer tous les messages avec le nom du manager, le projet
-    public function findAllNotificationsEager($nb) {
+    //Récupérer tous les 5 dernières notifications par date
+    public function findLastNotificationsEager() {
         return $this->createQueryBuilder('n')
                     ->addSelect('n')
                     ->addSelect('p')
                     ->leftJoin('n.project', 'p')
                     ->orderBy('n.creationDate', 'DESC')
-                    ->setMaxResults($nb)
+                    ->setMaxResults(5)
                     ->getQuery()
                     ->getResult();
+    }
+    
+    //Récupérer toutes les notifications avec pagination
+    public function findAllMessagesPageEager($page= 1, $maxPerPage = 20) {
+        $query = $this->createQueryBuilder('n')
+                    ->addSelect('n')
+                    ->addSelect('p')
+                    ->leftJoin('n.project', 'p')
+                    ->orderBy('n.creationDate', 'DESC');
+        $query->setFirstResult(($page-1)*$maxPerPage)
+              ->setMaxResults($maxPerPage);
+        return new Paginator($query);      
     }
 }

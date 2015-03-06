@@ -1,0 +1,12 @@
+filrouge_message_list:
+    path: /{id}/{page}
+    defaults: {_controller: AppBundle:Message:list, page:1 }
+    requirements:
+        id: \d+
+        page: \d+
+        
+filrouge_message_remove:
+    path: /remove/{id}
+    defaults: {_controller:AppBundle:Message:remove }
+    requirements:
+        id: \d+

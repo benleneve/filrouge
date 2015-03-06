@@ -2,6 +2,10 @@
 
 {% block title %}Administration{% endblock title %}
 
+{% block breadcrumb %}
+    {{parent()}} > <a href="{{path('filrouge_admin_list')}}">Administration</a>
+{% endblock breadcrumb %}
+
 {% block left %}
 
     <div class="blockGeneral">

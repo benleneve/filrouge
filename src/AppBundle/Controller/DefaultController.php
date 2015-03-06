@@ -36,17 +36,37 @@ class DefaultController extends Controller {
         ));
     }
 
-    public function asideAction($nbRecrut, $nbNotif) 
+    public function asideAction($id) 
     {
         $em = $this->getDoctrine()->getManager();
         $repoMess = $em->getRepository('AppBundle:Message');
         $repoNoti = $em->getRepository('AppBundle:Notification');
-        $messages = $repoMess->findAllMessagesEager($nbRecrut);
-        $notifications = $repoNoti->findAllNotificationsEager($nbNotif);
+        $messages = $repoMess->findLastMessagesByUserEager($id);
+        $notifications = $repoNoti->findLastNotificationsEager();
         return $this->render('AppBundle:Default:layoutaside.html.twig', array(
                 'messages' => $messages,
                 'notifications' => $notifications
         ));			
+    }
+    
+    public function listNotificationAction($page) {
+        $maxNotifications = 20;
+
+        $repository = $this->getDoctrine()
+                        ->getManager()
+                        ->getRepository('AppBundle:Notification');
+        $notifications = $repository->findAllMessagesPageEager($page, $maxNotifications);
+        $numberOfNotifications = count($notifications);
+        $pagination = array(
+                'page' => $page,
+                'route' => 'filrouge_notification',
+                'pages_count' => ceil($numberOfNotifications/$maxNotifications),
+                'route_params' => array()
+        );
+        return $this->render('AppBundle:Default:notification.html.twig', array(
+                'notifications' => $notifications,
+                'pagination' => $pagination
+        ));
     }
     
     public function adminAction() 

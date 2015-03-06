@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * MessageRepository
@@ -13,13 +14,50 @@ use Doctrine\ORM\EntityRepository;
 class MessageRepository extends EntityRepository
 {
     
-    //Récupérer tous les messages triés par date
-    public function findAllMessagesEager($nb) {
+    //Récupérer les 5 derniers messages triés par date pour un destinataire
+    public function findLastMessagesByUserEager($id) {
         return $this->createQueryBuilder('m')
                     ->addSelect('m')
+                    ->addSelect('us')
+                    ->addSelect('ur')
+                    ->LeftJoin('m.sender', 'us')
+                    ->LeftJoin('m.recipient', 'ur')
+                    ->where('ur.id = :id')
+                    ->setParameter('id', $id)
                     ->orderBy('m.creationDate', 'DESC')
-                    ->setMaxResults($nb)
+                    ->setMaxResults(5)
                     ->getQuery()
                     ->getResult();
     }
+    
+    //Récupérer un message particulier
+    public function findOneMessageEager($id) {
+        return $this->createQueryBuilder('m')
+                    ->addSelect('m')
+                    ->addSelect('us')
+                    ->addSelect('ur')
+                    ->LeftJoin('m.sender', 'us')
+                    ->LeftJoin('m.recipient', 'ur')
+                    ->where('m.id = :id')
+                    ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getOneOrNullResult();
+    }
+    
+    //Récupérer tous les messages par destinataire avec pagination
+    public function findAllMessagesPageEager($page= 1, $maxPerPage = 20, $id) {
+        $query = $this->createQueryBuilder('m')
+                    ->addSelect('m')
+                    ->addSelect('us')
+                    ->addSelect('ur')
+                    ->LeftJoin('m.sender', 'us')
+                    ->LeftJoin('m.recipient', 'ur')
+                    ->where('ur.id = :id')
+                    ->setParameter('id', $id)
+                    ->orderBy('m.creationDate', 'DESC');
+        $query->setFirstResult(($page-1)*$maxPerPage)
+              ->setMaxResults($maxPerPage);
+        return new Paginator($query);      
+    }
+    
 }

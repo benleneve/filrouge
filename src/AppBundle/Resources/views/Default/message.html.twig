@@ -1,0 +1,46 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    {{parent()}} > <a href="{{path('filrouge_message_list', {'id': app.user.id})}}">Message</a>
+{% endblock breadcrumb %}
+
+{% block left %}
+
+    <div class="blockGeneral">
+        <h2 class="icoRecrut">Tous les messages</h2>
+        <div class="blockContent">
+            {% for message in messages %}
+                <div class="oneElement">
+                    <div class="icon">
+                        {% if message.type == 1 %}
+                            <img alt="invitation" src="{{asset('bundles/app/images/recrut_invitation.png')}}" />
+                        {% elseif message.type == 2 %}
+                            <img alt="Candidature acceptée" src="{{asset('bundles/app/images/recrut_accepted.png')}}" />
+                        {% elseif message.type == 3 %}
+                            <img alt="Candidature refusée" src="{{asset('bundles/app/images/recrut_refused.png')}}" />
+                        {% endif %}
+                    </div>
+                    <div class="content">
+                        <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
+                        <p>{{message.content}}</p>
+                    </div>
+                    <a href="{{path('filrouge_message_remove', {'id': message.id })}}">
+                        <img alt="Supprimer le projet" src="{{asset('bundles/app/images/delete.png')}}" />
+                    </a>
+                    <div class="clear"></div>
+                </div>
+            {% endfor %}
+            <div class="pagination">
+                {% if messages |length != 0 %}
+                    {% include 'AppBundle::pagination.html.twig' %}
+                {% endif %}
+            </div>
+            <div class="clear"></div> 
+        </div>
+    </div>
+  
+{% endblock left %}
+
+{% block javascripts %}
+    {{parent()}}
+{% endblock %}

@@ -18,11 +18,10 @@
             <aside>
                 {% block right %}
                     {{ render(controller('AppBundle:Default:aside', {
-                        'nbRecrut': 5,
-                        'nbNotif': 5
+                        'id': app.user.id
                     })) }}
                 {% endblock right %} 
-            </aside>
+            </aside>           
         {% endif %}
         
         <div class="clear"></div>     

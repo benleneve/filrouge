@@ -9,23 +9,26 @@
 
 <div class="pagination">
     <div class="pagination-buttons">
-        {% if pagination.pageMP>1 %}
-            <a href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': 1})) }}"><<</a>
-            <a href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': pagination.pageMP-1})) }}">
-                <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
-            </a>
-        {% endif %}
-        {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
-        {% for p in range(max(pagination.pageMP-4, 1), min(pagination.pageMP+4, pagination.pagesMP_count)) %}
-            <a{% if p == pagination.pageMP %} class="current-page"{% endif %} href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': p})) }}">{{ p }}</a>
-        {% endfor %}
+        {% if myProjects |length != 0 %}
+            {% if pagination.pageMP>1 %}
+                <a href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': 1})) }}"><<</a>
+                <a href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': pagination.pageMP-1})) }}">
+                    <img alt="Page précédente" src="{{asset('bundles/app/images/pag_before.png')}}" />
+                </a>
+            {% endif %}
+            {#display p numbers only from p-4 to p+4 but don't go <1 or >pages_count#}
+            {% for p in range(max(pagination.pageMP-4, 1), min(pagination.pageMP+4, pagination.pagesMP_count)) %}
+                <a{% if p == pagination.pageMP %} class="current-page"{% endif %} href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': p})) }}">{{ p }}</a>
+            {% endfor %}
 
-        {% if pagination.pageMP<pagination.pagesMP_count %}
-            <a href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': pagination.pageMP+1})) }}">
-                <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
-            </a>
-            <a href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': pagination.pagesMP_count})) }}">>></a>
+            {% if pagination.pageMP<pagination.pagesMP_count %}
+                <a href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': pagination.pageMP+1})) }}">
+                    <img alt="Page suivante" src="{{asset('bundles/app/images/pag_after.png')}}" />
+                </a>
+                <a href="{{ path(pagination.route, pagination.route_params|merge({'pageMP': pagination.pagesMP_count})) }}">>></a>
+            {% endif %}
         {% endif %}
     </div>
 </div>
+
 <div class="clear"></div>

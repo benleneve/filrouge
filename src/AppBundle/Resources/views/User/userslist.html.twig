@@ -20,13 +20,14 @@
     
     <div class="blockGeneral">
         <h2 class="icoProject">Tous les Profils</h2>
-        <div class="clear"></div>
         <div class="blockContent">
                 {% for user in users %}
                     {% include('AppBundle:User:userlayout.html.twig') %}
                 {% endfor %}
             <div class="pagination">
-                {% include 'AppBundle::pagination.html.twig' %}
+                {% if users |length != 0 %}
+                    {% include 'AppBundle::pagination.html.twig' %}
+                {% endif %}
             </div>
             <div class="clear"></div>
         </div>

@@ -170,8 +170,8 @@ header .logoCity {
 
 header #nantes {
     text-transform:uppercase;
-    padding: 30px 3% 0 3%;
-    font-size: 45px;
+    padding: 30px 3% 0 5%;
+    font-size: 60px;
     color: #ee3124;
     float: left;
 }
@@ -179,15 +179,15 @@ header #nantes {
 header #rennes {
     text-transform:uppercase;
     padding: 30px 3% 0 3%;
-    font-size: 45px;
+    font-size: 60px;
     color: #82bec7;
     float: left;
 }
 
 header #angers {
     text-transform:uppercase;
-    padding: 30px 3% 0 3%;
-    font-size: 45px;
+    padding: 30px 0 0 3%;
+    font-size: 60px;
     color: #fdb55e;
     float: left;
 }
