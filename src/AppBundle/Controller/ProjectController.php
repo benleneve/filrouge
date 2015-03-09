@@ -59,6 +59,10 @@ Class ProjectController extends Controller
             $form->handleRequest($req);
             if($form->isValid()) {
                 
+                if ($this->get('security.context')->isGranted('ROLE_USER')) {
+                    $project->setProjectManager($this->getUser());
+                }
+                
                 $em = $this->getDoctrine()->getManager(); 
                 if($project->getId() === null) {
                     $em->persist($project);
@@ -161,12 +165,18 @@ Class ProjectController extends Controller
             ));
         }
         
-        public function applyAction($id, $name) {
+        public function applyAction($id, $idProjectSkill) {
             
-            $repository = $this->getDoctrine()
+            $project = $this->getDoctrine()
                             ->getManager()
-                            ->getRepository('AppBundle:Project');
-            $project = $repository->findOneProjectEager($id);
+                            ->getRepository('AppBundle:Project')
+                            ->findOneProjectEager($id);
+            
+            $projectSkill = $this->getDoctrine()
+                            ->getManager()
+                            ->getRepository('AppBundle:ProjectSkill')
+                            ->findOneProjectSkillEager($idProjectSkill);
+              
             if($project === null) {
                 throw $this->createNotFoundException('ID ' . $id . ' impossible.');
             }
@@ -174,6 +184,10 @@ Class ProjectController extends Controller
             $em = $this->getDoctrine()->getManager();
             
             $user = $this->getUser();
+            
+            $projectSkill->addApplicants($user->getId());
+            
+            $name = $projectSkill->getSkill()->getName();
             
             $userProject = new UserProject();
             $userProject->setActive(0);

@@ -58,6 +58,7 @@ class UserController extends Controller {
             $form = $this->createForm(new UserType, $user, array(
                 'action' => $this->generateUrl('filrouge_user_add')
             ));
+            
             $form->handleRequest($req);
             if($form->isValid()) {
                 $em = $this->getDoctrine()->getManager(); 

@@ -10,14 +10,20 @@
             {% if  app.user.id == project.projectManager.id %}
                 Chef de projet
             {% else %}
-                {% for userProject in app.user.worksOnProjects %}
-                    {% if loop.index < 5 %}
-                        {{ userProject.skill }} /
-                    {% elseif loop.index == 5 %}
-                        ...
+                {% for userProject in app.user.worksOnProjects %} 
+                    {% if userProject.active == 1 %}
+                        {% if loop.index < 5 %}
+                            {{ userProject.skill }} /
+                        {% elseif loop.index == 5 %}
+                            ...
+                        {% endif %}
+                    {% else %} 
+                        {% if loop.index == 1 %}
+                            En cours de validation
+                        {% endif %}
                     {% endif %}
                 {% endfor %}    
-            {% endif %}   
+            {% endif %}               
         {% else %}    
             {% if  project.projectSkills|length != 0 %}
                 Recrute :

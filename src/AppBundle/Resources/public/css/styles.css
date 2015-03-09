@@ -604,11 +604,17 @@ table.projectsMember td {
 }
 
 .formUser input.lastname{
+    float:left;
     width:292px;
 }
 
 .formUser input.firstname{
+    float:left;
     width:240px;
+}
+
+.formUser .availability {
+   float: right;
 }
 
 .formUser input.address{
@@ -751,7 +757,7 @@ a.deleteStep, a.deleteSkill {
 }
 
 .projectSkill .action, .projectStep .action {
-    width: 90px;
+    width: 130px;
     height: 25px;
     margin: 5px 10px 2px 0;
     line-height: 25px;
@@ -762,6 +768,14 @@ a.deleteStep, a.deleteSkill {
 
 .projectSkill .action .finish {
     background-color: #d13025; 
+}
+
+.projectSkill .action .validateOnHold {
+    float: left;
+    background-color: #f4a22d;
+    width: 130px;
+    height: 25px;
+    line-height: 25px;
 }
 
 .projectSkill .postulate {
@@ -1033,6 +1047,32 @@ formProject {
     height:25px;
     line-height:37px;
 }
+
+/*------------------Mentions Légales--------------------*/
+
+.generalCondition {
+    text-align: justify;
+    padding-bottom: 10px;
+}
+
+.generalCondition p {
+    margin-bottom: 5px;
+}
+
+.generalCondition .object {
+    color: #ee3124;
+}
+
+.generalCondition .copyright {
+    color: #82bec7;
+    padding-top: 20px;
+}
+
+.generalCondition .liberty {
+    color: #fdb55e;
+    padding-top: 20px;
+}
+
 
 /*------------------Aside--------------------*/
 

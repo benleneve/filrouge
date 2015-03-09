@@ -63,13 +63,15 @@
                                 <th>Date de début</th>
                                 <th>Date de fin</th>
                             </tr>
-                                {% for worksOnProject in user.worksOnProjects %} 
-                                    <tr>
-                                        <td> {{ worksOnProject.project.name }} </td>
-                                        <td> {{ worksOnProject.skill }} </td>
-                                        <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
-                                        <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
-                                    </tr>
+                                {% for worksOnProject in user.worksOnProjects %}
+                                    {% if worksOnProject.active == 1 %}                                    
+                                        <tr>
+                                            <td> {{ worksOnProject.project.name }} </td>
+                                            <td> {{ worksOnProject.skill }} </td>
+                                            <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
+                                            <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
+                                        </tr>
+                                    {% endif %}
                                 {% endfor %}
                         </table>
                     {% else %}

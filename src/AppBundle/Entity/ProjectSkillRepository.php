@@ -12,4 +12,15 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProjectSkillRepository extends EntityRepository
 {
+    //Récupérer une compétence de projet avec son nom
+    public function findOneProjectSkillEager($id) {
+        return $this->createQueryBuilder('ps')
+                    ->addSelect('s')
+                    ->LeftJoin('ps.skill', 's')
+                    ->where('ps.id = :id')
+                    ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getOneOrNullResult();
+    }
+    
 }

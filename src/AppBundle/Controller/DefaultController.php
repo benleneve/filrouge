@@ -17,7 +17,7 @@ class DefaultController extends Controller {
         $numberOfProject = count($projects);
         
         $idUser = $this->getUser()->getId();
-        $myProjects = $repository->findAllProjectsByUserEager($idUser);
+        $myProjects = $repository->findAllProjectsByUserPageEager($pageMP, $maxProjects, $idUser);
         $numberOfMyProject = count($myProjects);
         
         $pagination = array(
@@ -69,9 +69,12 @@ class DefaultController extends Controller {
         ));
     }
     
-    public function adminAction() 
-    {
+    public function adminAction() {
         return $this->render('AppBundle:Admin:administration.html.twig');			
     } 
+    
+    public function generalConditionAction() {
+        return $this->render('AppBundle:Default:generalcondition.html.twig');
+    }
     
 }

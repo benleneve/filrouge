@@ -56,8 +56,18 @@
                                 {{projectSkill.skill.name}}
                             </div>
                             <div class="action">
-                            {% if projectSkill.active %}  
-                                    <a href=" {{path('filrouge_project_apply', {'id': project.id, 'name': projectSkill.skill.name } )}}" class="btnAction">> Postuler</a>
+                            {% if projectSkill.active %}
+                                {% if (projectSkill.applicants|length !=0) %}
+                                    {% if app.user.id in projectSkill.applicants %}
+                                        <div class="validateOnHold">   
+                                            Validation en cours
+                                        </div>
+                                    {% else %}    
+                                        <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">> Postuler</a>
+                                    {% endif %}
+                                {% else %}
+                                    <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">> Postuler</a>
+                                {% endif %}     
                             {% else %}
                                 <div class="finish">
                                     Recruté

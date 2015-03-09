@@ -27,10 +27,11 @@ filrouge_project_remove:
         id: \d+
         
 filrouge_project_apply:
-    path: /detail/{id}/apply/{name}
+    path: /detail/{id}/apply/{idProjectSkill}
     defaults: {_controller:AppBundle:Project:apply, id:1 }
     requirements:
         id: \d+
+        idProjectSkill: \d+
        
 filrouge_project_accept:
     path: /update/{id}/accept/{idMember}

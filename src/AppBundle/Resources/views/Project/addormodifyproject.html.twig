@@ -41,10 +41,16 @@
                     </div>
                     <div class="clear"></div>
 
-
-                    <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
-                    {{ form_widget(projectForm.projectManager, { 'attr': {'class': 'managerProject'} }) }}
-                    {{ form_errors(projectForm.projectManager) }}
+                    {% if is_granted('ROLE_ADMIN') %}   
+                        <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
+                        {{ form_widget(projectForm.projectManager, { 'attr': {'class': 'managerProject'} }) }}
+                        {{ form_errors(projectForm.projectManager) }}
+                    {% else %}
+                        <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
+                        {{ app.user.firstName }} {{ app.user.lastName }}
+                        {{ form_widget(projectForm.projectManager, { 'attr': {'style': 'display:none'} }) }}
+                    {% endif %}
+                    
                     <h4>{{ form_label(projectForm.purpose, "Objectif") }}</h4>
                     {{ form_widget(projectForm.purpose, { 'attr': {'class': 'purposeProject'} }) }}
                     {{ form_errors(projectForm.purpose) }}

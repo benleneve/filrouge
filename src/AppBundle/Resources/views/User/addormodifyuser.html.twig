@@ -22,13 +22,20 @@
             <div class="formUser"> 
                 {{ form_start(userForm) }}
 
-                    <div class="headerFormUser">
-                        {{ form_errors(userForm.firstName) }}
-                        {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'placeholder': 'Prénom'} }) }}
-                        {{ form_errors(userForm.lastName) }}
-                        {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'placeholder': 'Nom'} }) }}  
+                    <div class="headerFormUser headerBlock">
+                        {% if is_granted('ROLE_ADMIN') %}  
+                            {{ form_errors(userForm.firstName) }}
+                            {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'placeholder': 'Prénom'} }) }}
+                            {{ form_errors(userForm.lastName) }}
+                            {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'placeholder': 'Nom'} }) }} 
+                        {% else %}
+                            {% include('AppBundle:User:userheaderlayout.html.twig')%}
+                            {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'style': 'display:none'} }) }}
+                            {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'style': 'display:none'} }) }} 
+                        {% endif %}
                         {{ form_errors(userForm.availability) }}
                         {{ form_widget(userForm.availability, { 'attr': {'class': 'availability'} }) }}
+                        <div class="clear"></div>
                     </div>
 
                     <div class="birthFormUser containerForm">
@@ -77,13 +84,18 @@
                     </div>                  
                     <div class="clear"></div>
 
-                    <h4>{{ form_label(userForm.username, "Login") }}</h4>
-                    {{ form_errors(userForm.username) }}
-                    {{ form_widget(userForm.username, { 'attr': {'class': 'username'} }) }}
+                    {% if is_granted('ROLE_ADMIN') %} 
+                        <h4>{{ form_label(userForm.username, "Login") }}</h4>
+                        {{ form_errors(userForm.username) }}
+                        {{ form_widget(userForm.username, { 'attr': {'class': 'username'} }) }}
 
-                    <h4>{{ form_label(userForm.password, 'Mot de passe') }}</h4>
-                    {{ form_errors(userForm.password) }}
-                    {{ form_widget(userForm.password, { 'attr': {'class': 'password'} }) }}
+                        <h4>{{ form_label(userForm.password, 'Mot de passe') }}</h4>
+                        {{ form_errors(userForm.password) }}
+                        {{ form_widget(userForm.password, { 'attr': {'class': 'password'} }) }}
+                    {% else %}
+                        {{ form_widget(userForm.username, { 'attr': {'class': 'username', 'style': 'display:none'} }) }}
+                        {{ form_widget(userForm.password, { 'attr': {'class': 'password', 'style': 'display:none'} }) }}
+                    {% endif %}
                     
 
                     <h4>{{ form_label(userForm.promotions, "Promotions") }}</h4>
@@ -102,11 +114,19 @@
 
                     <h4>{{ form_label(userForm.image.alt, "Description de l'image") }}</h4>
                     {{ form_errors(userForm.image.alt) }}
-                    {{ form_widget(userForm.image.alt, { 'attr': {'class': 'altImage'} }) }}
+                    {% if user.image is null %}
+                        {{ form_widget(userForm.image.alt, { 'attr': {'class': 'altImage', 'value': 'Image du profil' } }) }}
+                    {% else %}
+                        {{ form_widget(userForm.image.alt, { 'attr': {'class': 'altImage'} }) }}
+                    {% endif %}
 
                     <h4>{{ form_label(userForm.image.url, "URL de l'image") }}</h4>
                     {{ form_errors(userForm.image.url) }}
-                    {{ form_widget(userForm.image.url, { 'attr': {'class': 'urlImage'} }) }}
+                    {% if user.image is null %}
+                        {{ form_widget(userForm.image.url, { 'attr': {'class': 'urlImage', 'value': 'bundles/app/images/avatar.png' } }) }}
+                    {% else %}
+                        {{ form_widget(userForm.image.url, { 'attr': {'class': 'urlImage'} }) }}
+                    {% endif %}
                 {{ form_end(userForm) }}
                 <div class="clear"></div>
             </div>
@@ -121,12 +141,14 @@
                         <th>Date de fin</th>
                     </tr>
                         {% for worksOnProject in user.worksOnProjects %} 
-                            <tr>
-                                <td> {{ worksOnProject.project.name }} </td>
-                                <td> {{ worksOnProject.skill }} </td>
-                                <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
-                                <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
-                            </tr>
+                            {% if worksOnProject.active == 1 %}   
+                                <tr>
+                                    <td> {{ worksOnProject.project.name }} </td>
+                                    <td> {{ worksOnProject.skill }} </td>
+                                    <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
+                                    <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
+                                </tr>
+                            {% endif %}
                         {% endfor %}
                 </table>
             {% endif %}

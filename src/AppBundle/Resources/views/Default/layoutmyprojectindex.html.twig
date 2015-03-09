@@ -1,6 +1,6 @@
 {% if myProjects |length != 0 %}
     {% set active = true %}
-    {% for project in myProjects %}
+    {% for project in myProjects %} 
         {% include('AppBundle:Project:layoutproject.html.twig') %}
     {% endfor %}
 {% else %}

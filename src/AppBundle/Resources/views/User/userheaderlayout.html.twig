@@ -2,8 +2,14 @@
     {{ user.lastName ~ " " ~ user.firstName }}
 </div>
 <div class="information">
-    {% if (user.promotions|length != 0) %}
-       {% for promotion in user.promotions %} {{promotion.name ~ ' - ' ~ promotion.school.name}} {% endfor %} 
+    {% if (user.promotions|length != 0) %}      
+        {% for promotion in user.promotions %} 
+            {% if loop.index < 3 %} 
+                {{promotion.name ~ ' - ' ~ promotion.school.name}} /
+            {% elseif loop.index == 3 %}
+                ...
+            {% endif %}
+        {% endfor %} 
     {% else %}
         Staff
     {% endif %}

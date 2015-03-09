@@ -42,7 +42,21 @@ class ProjectSkill
      * @ORM\ManyToOne(targetEntity="Skill", inversedBy="projectSkills")
      */
     private $skill;
-
+    
+    /**
+     * 
+     * @ORM\Column(name="applicants", type="array")
+     */
+    private $applicants;
+    
+    
+    /**
+     * Constructor
+     */
+    public function __construct()
+    {
+        $this->applicants = array();
+    }
     
     /**
      * Get id
@@ -122,5 +136,14 @@ class ProjectSkill
     public function getSkill()
     {
         return $this->skill;
+    }
+    
+    public function addApplicants($applicants) {
+        $this->applicants[] = $applicants;
+        return $this;
+    }
+
+    public function getApplicants() {
+        return $this->applicants;
     }
 }

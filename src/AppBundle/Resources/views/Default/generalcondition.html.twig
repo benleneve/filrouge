@@ -1,0 +1,73 @@
+{% extends "AppBundle::layout.html.twig" %}
+
+{% block breadcrumb %}
+    {{parent()}} > <a href="{{path('filrouge_generalCondition')}}">Mentions légales</a>
+{% endblock breadcrumb %}
+
+{% block left %}
+
+    <div class="blockGeneral">
+        <h2 class="icoRecrut">Mentions Légales</h2>
+        <div class="blockContent">
+            <div class="generalCondition">
+                <h4 class="object">OBJET</h4>
+                <p>
+                    Conformément aux dispositions de l’article 6 III 1° de la loi n°2004-575 
+                    du 21 juin 2004 pour la confiance dans l’économie numérique, nous vous informons que :
+                </p>
+                <p>
+                    Ce site est édité par la société IMIE, SARL au capital de 85000 € immatriculée au RCS Nantes (numéro 508 422 979) 
+                    dont le siège social se situe 1 Rue Victor Hugo Immeuble Agora 44400 REZE - Téléphone : 02 28 01 37 54
+                </p>
+                <p>Le directeur de la publication est Vincent Plançon.</p>
+
+                <h4 class="copyright">DROITS D'AUTEUR SUR LES DOCUMENTS FIGURANT SUR LE SITE DE L'IMIE</h4>
+                <p>
+                    Les documents publiés sur le site sont couverts par le droit d'auteur. 
+                    Toute reprise est conditionnée au respect du droit de la propriété intellectuelle
+                    au regard des auteurs et ayant-droits des photographies, infographies, œuvres d'art... 
+                    éventuellement inclus dans les documents ou sur le site de l'IMIE.
+                </p>
+                <p>
+                    Les droits pour ces documents n’ont été acquittés que pour l’utilisation qui en est faite.
+                    Toute utilisation ultérieure pourrait entrer en conflit avec les droits de propriété intellectuelle préexistants.
+                </p>
+
+                <h4 class="liberty">INFORMATIQUE ET LIBERTÉS</h4>
+                <p>Plusieurs services du site nécessite, pour l’internaute, de renseigner des données personnelles par le biais de formulaires en ligne.</p>
+                <p>
+                    Les informations demandées, signalées par un astérisque sont nécessaires au traitement des demandes. 
+                    Les autres informations sont destinées à mieux connaître nos internautes et sont, par conséquent, facultatives.
+                </p>
+                <p>
+                    Ces informations sont destinées à l'IMIE, responsable du traitement, aux fins de gestion des comptes clients, 
+                    d’études marketing et statistiques dans le but de fournir les services les plus adaptées et de suivi de qualité de nos services.
+                </p>
+                <p>
+                    Dans le cas où l’internaute ne s’y sera pas opposé explicitement lors du recueil de ses coordonnées, 
+                    l'IMIE pourra lui adresser ses offres commerciales par mail, téléphone ou par voie postale.
+                </p>
+                <p>
+                    A tout moment, l’internaute garde la possibilité de s’opposer sans frais à la prospection commerciale de l'IMIE, 
+                    en contactant le webmestre du site à l’adresse contact@imie.fr
+                </p>
+                <p>
+                    Les informations recueillies pourront éventuellement être communiquées à des tiers liés à l'IMIE
+                    par contrat en raison de sous-traitance partielle des prestataires. Ces prestataires s’engagent contractuellement
+                    à garantir un niveau de sécurité, de confidentialité et de protection suffisant de la vie privée et des droits fondamentaux.
+                </p>
+                <p>
+                    Conformément à la loi n° 2004-801 du 6 août 2004 relative à la protection des personnes physiques
+                    à l’égard des traitements de données à caractère personnel modifiant la loi n°78-17 du 6 janvier 1978, 
+                    les internautes disposent d’un droit d’accès, de rectification et de suppression des données les concernant 
+                    et d’opposition à leur traitement en contactant le Correspondant informatique et liberté de l'IMIE à l’adresse contact@imie.fr.
+                </p>
+            </div>
+        </div>
+    </div>
+  
+{% endblock left %}
+
+{% block javascripts %}
+    {{parent()}}
+{% endblock %}
