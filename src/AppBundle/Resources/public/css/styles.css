@@ -98,6 +98,11 @@ h2.icoLogin {
     text-indent: 40px;
 }
 
+h2.icoSkill {
+    background: url("../images/skill.png") left bottom no-repeat;
+    text-indent: 30px;
+}
+
 h3 {
     line-height:30px;
 }
@@ -110,6 +115,19 @@ h4 {
 
 input, select, textarea{
     font-family: 'MyriadPro-Regular',arial,sans-serif;
+}
+
+input{
+    height:23px;
+    border:1px solid #000;
+    margin-right:10px;
+    width:260px;
+    padding-left:5px;
+}
+
+select{
+    height:25px;
+    border:1px solid #000;
 }
 
 /*------------------------------STRUCTURE GLOBALE-----------------------------*/
@@ -561,19 +579,6 @@ table.projectsMember td {
 
 /*----------------------FormUser-----------------------*/
 
-.formUser input{
-    height:23px;
-    border:1px solid #000;
-    margin-right:10px;
-    width:260px;
-    padding-left:5px;
-}
-
-.formUser select{
-    height:25px;
-    border:1px solid #000;
-}
-
 .formUser textarea{
     border:1px solid #000;
     padding-left:5px;
@@ -858,18 +863,6 @@ a.deleteStep, a.deleteSkill {
 
 /*----------------------FormProject-----------------------*/
 
-#formProject input{
-    height:23px;
-    border:1px solid #000;
-    margin-right:10px;
-    width:260px;
-    padding-left:5px;
-}
-
-#formProject select{
-    height:25px;
-    border:1px solid #000;
-}
 
 #formProject textarea{
     border:1px solid #000;
@@ -1000,16 +993,16 @@ formProject {
 /*------------------Administration--------------------*/
 
 .adminContent {
-    width: 650px;
+    width: 670px;
     height:25px;
     line-height:27px;
-    margin: 3px 0 3px 10px;
+    margin: 3px 0 ;
     background-color: #e8e8e8; 
 }
 
 .adminContent .adminName {
     float: left;
-    width: 190px;
+    width: 220px;
     height:25px;
     line-height:27px;
     padding-left: 5px;
@@ -1017,7 +1010,14 @@ formProject {
 
 .adminContent .adminInfo {
     float: left;
-    width: 330px;
+    width: 320px;
+    height:25px;
+    line-height:27px;
+}
+
+.adminContent .adminInfoSkill {
+    float: left;
+    width: 360px;
     height:25px;
     line-height:27px;
 }
@@ -1046,6 +1046,66 @@ formProject {
     text-indent: 15px;
     height:25px;
     line-height:37px;
+}
+
+/*------------------Form Administration--------------------*/
+
+.search {
+    float: left;
+    height: 40px;
+    width: 280px;
+    margin-bottom: 10px;
+}
+
+.csvImport {
+    float: left;
+    width: 125px;
+    height: 25px;
+    margin-top:35px;
+}
+
+.csvImport a.btnAction{
+   width:100px;
+}
+
+.newUser {
+    float: left;
+    width: 125px;
+    height: 25px;
+    margin-top:34px;
+    margin-bottom:10px;
+}
+
+.newProject {
+    float: left;
+    width: 125px;
+    height: 25px;
+    margin-top:35px;
+    margin-bottom:10px;
+}
+
+#formSkill .skillName, #formCategory .categoryName {
+    float: left;
+    width: 260px;
+    height: 23px;
+    border: 1px solid #000;
+    margin-bottom: 10px;
+    padding: 0 5px;
+}
+
+#formSkill .skillCategory {
+    float: left;
+    width: 200px;
+    height: 25px;
+    border: 1px solid #000;
+    margin-right: 5px;
+}
+
+#formSkill button.btnAction, #formCategory button.btnAction {
+    float: left;
+    font-size:13px;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    padding:0 15px;
 }
 
 /*------------------Mentions Légales--------------------*/

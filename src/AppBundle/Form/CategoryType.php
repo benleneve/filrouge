@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SkillType extends AbstractType
+class CategoryType extends AbstractType
 {
     /**
      * @param FormBuilderInterface $builder
@@ -15,11 +15,7 @@ class SkillType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text')
-            ->add('category', 'entity', array(
-                'class' => 'AppBundle:Category',
-                'property' => 'name'
-            ))
+            ->add('name')
             ->add('Valider', 'submit', array(
                 'attr' => array('class'=>'btnAction')
             ))
@@ -32,7 +28,7 @@ class SkillType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'AppBundle\Entity\Skill'
+            'data_class' => 'AppBundle\Entity\Category'
         ));
     }
 
@@ -41,6 +37,6 @@ class SkillType extends AbstractType
      */
     public function getName()
     {
-        return 'appbundle_skill';
+        return 'appbundle_category';
     }
 }

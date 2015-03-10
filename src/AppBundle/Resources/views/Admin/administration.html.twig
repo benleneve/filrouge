@@ -7,23 +7,99 @@
 {% endblock breadcrumb %}
 
 {% block left %}
+    
+    <div class="blockGeneral" id="adminSkill">
+        <h2 class="icoSkill">Toutes les compétences</h2>
+        <div class="blockContent">
+            {% if messageSkill is defined %}
+                {{ messageSkill }}
+            {% endif %}
+            <div class="search">
+                <h4>Rechercher une compétence</h4>
+                <input type="text" id="searchSkill" placeholder="Entrer la compétence recherchée" />
+            </div>
+            <div class="clear"></div>
+            <div id="formSkill">
+                <h4>Ajouter une compétence</h4>
+                {{ form_start(skillForm) }}
+                    {{ form_errors(skillForm) }}
+                    <div class="nameProject">
+                        {{ form_widget(skillForm.name, { 'attr': {'class': 'skillName', 'placeholder': 'Nom de la compétence'} }) }}
+                        {{ form_errors(skillForm.name) }}
+                    </div>
+                    <div class="statusProject">
+                        {{ form_widget(skillForm.category, { 'attr': {'class': 'skillCategory'} }) }}
+                    </div>
+                {{ form_end(skillForm) }}
+                <div class="clear"></div>
+            </div>
+            {{ render(controller('AppBundle:Skill:list')) }}
+        </div>
+    </div>
+        
+    <div class="blockGeneral" id="adminCategory">
+        <h2 class="icoCategory">Toutes les catégories</h2>
+        <div class="blockContent">
+            {% if messageCategory is defined %}
+                {{ messageCategory }}
+            {% endif %}
+            <div class="search">
+                <h4>Rechercher une catégorie</h4>
+                <input type="text" id="searchCategory" placeholder="Entrer la catégorie recherchée" />
+            </div>
+            <div class="clear"></div>
+            <div id="formCategory">
+                <h4>Ajouter une catégorie</h4>
+                {{ form_start(categoryForm) }}
+                    {{ form_errors(categoryForm) }}
+                    <div class="nameProject">
+                        {{ form_widget(categoryForm.name, { 'attr': {'class': 'categoryName', 'placeholder': 'Nom de la catégorie'} }) }}
+                        {{ form_errors(categoryForm.name) }}
+                    </div>
+                {{ form_end(categoryForm) }}
+                <div class="clear"></div>
+            </div> 
+            {{ render(controller('AppBundle:Category:list')) }}
+        </div>
+    </div>
 
-    <div class="blockGeneral">
+    <div class="blockGeneral" id="adminUser">
         <h2 class="icoUser">Tous les profils</h2>
         <div class="blockContent">
             {% if messageUser is defined %}
                 {{ messageUser }}
             {% endif %}
+            <div class="search">
+                <h4>Rechercher un profil</h4>
+                <input type="text" id="searchUser" placeholder="Entrer le profil recherché" />
+            </div>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}  
+            <div class="csvImport">
+                <a href=" {{path('filrouge_user_add')}} " class="btnAction">Import CSV</a>
+            </div>
+            {% endif %}
+            <div class="newUser">
+                <a href=" {{path('filrouge_user_add')}} " class="btnAction">Nouveau profil</a>
+            </div>
+            <div class="clear"></div>
             {{ render(controller('AppBundle:User:admin')) }}
         </div>
     </div>
     
-    <div class="blockGeneral">
+    <div class="blockGeneral" id="adminProject">
         <h2 class="icoProject">Tous les projets</h2>
         <div class="blockContent">
             {% if messageProject is defined %}
                 {{ messageProject }}
             {% endif %}
+            <div class="search">
+                <h4>Rechercher un projet</h4>
+                <input type="text" id="searchProject" placeholder="Entrer le projet recherché" />
+            </div>
+            <div class="newProject">
+                <a href=" {{path('filrouge_project_add')}} " class="btnAction">Nouveau projet</a>
+            </div>
+            <div class="clear"></div>
             {{ render(controller('AppBundle:Project:admin')) }}
         </div>
     </div>

@@ -12,4 +12,30 @@ use Doctrine\ORM\EntityRepository;
  */
 class SkillRepository extends EntityRepository
 {
+    
+    //Récupérer la liste de toutes les compétences trièes par catégories
+    public function findAllSkillEager() {
+        return $this->createQueryBuilder('s')
+                    ->addSelect('c')
+                    ->LeftJoin('s.category', 'c')
+                    ->orderBy('c.name')
+                    ->getQuery()
+                    ->getResult();
+    }
+    
+    public function findOneSkillEager($id) {
+        return $this->createQueryBuilder('s')
+                    ->addSelect('c')
+                    ->addSelect('ps')
+                    ->addSelect('us')
+                    ->LeftJoin('s.category', 'c')
+                    ->LeftJoin('s.projectSkills', 'ps')
+                    ->LeftJoin('s.userSkills', 'us')
+                    ->orderBy('c.name')
+                    ->where('s.id = :id')
+                    ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getOneOrNullResult();
+    }
+    
 }

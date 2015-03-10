@@ -1,11 +1,17 @@
-   {% for user in users %}
+{% for user in users %}
     <div class="adminContent">
         <div class="adminName">
             {{ user.lastName ~ " " ~ user.firstName }}
         </div>
         <div class="adminInfo">
             {% if (user.promotions|length != 0) %}
-                {% for promotion in user.promotions %} {{promotion.name ~ ' - ' ~ promotion.school.name}} {% endfor %} 
+                {% for promotion in user.promotions %} 
+                    {% if loop.index < 3 %} 
+                        {{promotion.name ~ ' - ' ~ promotion.school.name}} /
+                    {% elseif loop.index == 3 %}
+                        ...
+                    {% endif %}
+                {% endfor %} 
             {% else %}
                 Staff
             {% endif %}
@@ -25,7 +31,7 @@
                 <img alt="Supprimer le profil" src="{{asset('bundles/app/images/delete.png')}}" />
             </a>
         </div> 
-        <div class="clear"></div>    
+        <div class="clear"></div>
     </div>
     <div class="clear"></div> 
 {% endfor %}      

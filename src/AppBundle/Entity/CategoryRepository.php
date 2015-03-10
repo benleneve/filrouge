@@ -12,4 +12,26 @@ use Doctrine\ORM\EntityRepository;
  */
 class CategoryRepository extends EntityRepository
 {
+    //Récupérer la liste de toutes les catégories trièes par name
+    public function findAllCategoriesEager() {
+        return $this->createQueryBuilder('c')
+                    ->addSelect('s')
+                    ->LeftJoin('c.skills', 's')
+                    ->orderBy('c.name')
+                    ->getQuery()
+                    ->getResult();
+    }
+    
+    public function findOneCategoryEager($id) {
+        return $this->createQueryBuilder('c')
+                    ->addSelect('s')
+                    ->LeftJoin('c.skills', 's')
+                    ->orderBy('c.name')
+                    ->where('c.id = :id')
+                    ->setParameter('id', $id)
+                    ->getQuery()
+                    ->getOneOrNullResult();
+    }
+     
+   
 }

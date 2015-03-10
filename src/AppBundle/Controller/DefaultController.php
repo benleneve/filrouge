@@ -2,7 +2,12 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
+use AppBundle\Entity\Skill;
+use AppBundle\Form\CategoryType;
+use AppBundle\Form\SkillType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller {
     
@@ -69,8 +74,23 @@ class DefaultController extends Controller {
         ));
     }
     
-    public function adminAction() {
-        return $this->render('AppBundle:Admin:administration.html.twig');			
+    public function adminAction(Request $req) {
+        $skill = new Skill();
+        $formSkill = $this->createForm(new SkillType(), $skill, array(
+            'action' => $this->generateUrl('filrouge_admin_add_skill')  . '#adminSkill'
+        ));
+        $formSkill->handleRequest($req);
+
+        $category = new Category();
+        $formCategory = $this->createForm(new CategoryType(), $category, array(
+            'action' => $this->generateUrl('filrouge_admin_add_category')  . '#adminCategory'
+        ));
+        $formCategory->handleRequest($req);
+
+        return $this->render('AppBundle:Admin:administration.html.twig', array(
+                'categoryForm' => $formCategory->createView(),
+                'skillForm' => $formSkill->createView()
+        ));			
     } 
     
     public function generalConditionAction() {
