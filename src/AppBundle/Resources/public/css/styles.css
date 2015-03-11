@@ -103,6 +103,39 @@ h2.icoSkill {
     text-indent: 30px;
 }
 
+h5 {
+    height: 30px;
+    line-height: 35px;
+}
+
+h5.greenLeft {
+    background: url("../images/status_green.png") left no-repeat;
+    text-indent: 20px;
+}
+
+h5.greenRight {
+    background: url("../images/status_green.png") right no-repeat;
+}
+
+h5.orangeLeft {
+    background: url("../images/status_orange.png") left no-repeat;
+    text-indent: 20px;
+}
+
+h5.orangeRight {
+    background: url("../images/status_orange.png") right no-repeat;
+}
+
+h5.redLeft {
+    background: url("../images/status_red.png") left no-repeat;
+    text-indent: 20px;
+}
+
+h5.redRight {
+    background: url("../images/status_red.png") right no-repeat;
+}
+
+
 h3 {
     line-height:30px;
 }

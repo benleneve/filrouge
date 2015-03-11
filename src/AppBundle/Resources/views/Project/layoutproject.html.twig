@@ -6,23 +6,11 @@
         {{project.name}}
     </div>
     <div class="information">
-        {% if active is defined %}
+        {% if myProject is defined %}
             {% if  app.user.id == project.projectManager.id %}
                 Chef de projet
             {% else %}
-                {% for userProject in app.user.worksOnProjects %} 
-                    {% if userProject.active == 1 %}
-                        {% if loop.index < 5 %}
-                            {{ userProject.skill }} /
-                        {% elseif loop.index == 5 %}
-                            ...
-                        {% endif %}
-                    {% else %} 
-                        {% if loop.index == 1 %}
-                            En cours de validation
-                        {% endif %}
-                    {% endif %}
-                {% endfor %}    
+                Membre du projet
             {% endif %}               
         {% else %}    
             {% if  project.projectSkills|length != 0 %}
@@ -43,14 +31,11 @@
     </div>
     <div class="status">
         {% if project.status.name == 'En attente' %}
-            {{project.status.name}}
-            <img alt="En attente" src="{{asset('bundles/app/images/status_orange.png')}}" />
+            <h5 class="orangeRight">{{project.status.name}}</h5>
         {% elseif project.status.name == 'En cours' %}
-            {{project.status.name}}
-            <img alt="En cours" src="{{asset('bundles/app/images/status_green.png')}}" />
+            <h5 class="greenRight">{{project.status.name}}</h5>
         {% elseif project.status.name == 'Terminé' %}
-            {{project.status.name}}
-            <img alt="Terminé" src="{{asset('bundles/app/images/status_red.png')}}" />
+            <h5 class="redRight">{{project.status.name}}</h5>
         {% endif %}
     </div>
     <div class="clear"></div>

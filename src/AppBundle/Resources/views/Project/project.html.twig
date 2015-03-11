@@ -117,7 +117,8 @@
                 
                 {% if (project.projectMembers|length !=0) %}
                     <h4>Membres du projet</h4>
-                    {% for member in project.projectMembers %}
+                    {% set cpt = true %}
+                    {% for member in project.projectMembers %} 
                         {% if member.active %}
                             <div class="projectMember">
                                 <div class="nameMember">
@@ -129,8 +130,13 @@
                                 <div class="clear"></div>
                             </div>
                             <div class="clear"></div>
+                        {% else %} 
+                            {% if cpt %}   
+                                Des membres sont en attente de validation par le chef de project
+                                {% set cpt = false %}
+                            {% endif %}
                         {% endif %}
-                    {% endfor %} 
+                    {% endfor %}
                 {% else %}
                     <h4>Aucun membre n'a rejoint ce projet</h4>
                 {% endif %}
