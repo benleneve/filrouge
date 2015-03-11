@@ -6,6 +6,7 @@ use AppBundle\Entity\Category;
 use AppBundle\Entity\Skill;
 use AppBundle\Form\CategoryType;
 use AppBundle\Form\SkillType;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -97,4 +98,36 @@ class DefaultController extends Controller {
         return $this->render('AppBundle:Default:generalcondition.html.twig');
     }
     
+    public function contactAdminAction() {
+        return $this->render('AppBundle:Default:contactadmin.html.twig');
+    }
+    
+    public function sendMailAdminAction($id) {    
+        $user = $this->getDoctrine()
+                         ->getRepository('AppBundle:User')
+                         ->findOneUserEager($id);
+        $mail = $user->getEmail(); 
+        
+        if(!empty($_POST['title']) && !empty($_POST['message'])) {
+            if (preg_match("#^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $mail)) {
+                $message = Swift_Message::newInstance()
+                    ->setSubject(htmlspecialchars($_POST['title']))
+                    ->setFrom($mail)
+                    ->setTo('benjamin.leneve@gmail.com')
+                    ->setBody(htmlspecialchars($_POST['message']));
+                $this->get('mailer')->send($message);
+                $reponse = 'Votre message a bien été envoyé.';
+            }
+            else {
+                $reponse = 'Votre n\'avez pas d\'adresse mail valide dans votre profil.';
+            }
+        } else {
+            $reponse = 'Merci de remplir tous les champs du formulaire.';
+        }
+ 
+        return $this->render('AppBundle:Default:contactadmin.html.twig', array(
+                'message' => $reponse
+        ));
+    }
+  
 }

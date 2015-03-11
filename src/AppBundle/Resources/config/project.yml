@@ -19,12 +19,6 @@ filrouge_project_update:
     defaults: {_controller:AppBundle:Project:update, id:1 }
     requirements:
         id: \d+
-
-filrouge_project_remove:
-    path: /remove/{id}
-    defaults: {_controller:AppBundle:Project:remove, id:1 }
-    requirements:
-        id: \d+
         
 filrouge_project_apply:
     path: /detail/{id}/apply/{idProjectSkill}

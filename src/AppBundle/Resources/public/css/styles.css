@@ -60,6 +60,11 @@ fieldset {
     font-style: normal;
 }
 
+a.hrefBody {
+    text-decoration:underline;
+    color: #000;
+}
+
 h2 {
     text-transform: uppercase;
     font-size: 20px;
@@ -103,6 +108,16 @@ h2.icoSkill {
     text-indent: 30px;
 }
 
+h2.icoMail {
+    background: url("../images/mail.png") left bottom no-repeat;
+    text-indent: 35px;
+}
+
+h2.icoCategory {
+    background: url("../images/category.png") left bottom no-repeat;
+    text-indent: 30px;
+}
+
 h5 {
     height: 30px;
     line-height: 35px;
@@ -115,6 +130,12 @@ h5.greenLeft {
 
 h5.greenRight {
     background: url("../images/status_green.png") right no-repeat;
+    width: 68px;
+}
+
+h5.greenRightUser {
+    background: url("../images/status_green.png") right no-repeat;
+    width: 85px;
 }
 
 h5.orangeLeft {
@@ -124,6 +145,7 @@ h5.orangeLeft {
 
 h5.orangeRight {
     background: url("../images/status_orange.png") right no-repeat;
+    width: 78px;
 }
 
 h5.redLeft {
@@ -133,11 +155,18 @@ h5.redLeft {
 
 h5.redRight {
     background: url("../images/status_red.png") right no-repeat;
+    width: 68px;
+}
+
+h5.redRightUser {
+    background: url("../images/status_red.png") right no-repeat;
+    width: 95px;
 }
 
 
 h3 {
     line-height:30px;
+    font-size: 15px;
 }
 
 h4 {
@@ -161,6 +190,11 @@ input{
 select{
     height:25px;
     border:1px solid #000;
+}
+
+textarea {
+    border: 1px solid #000;
+    padding: 5px;
 }
 
 /*------------------------------STRUCTURE GLOBALE-----------------------------*/
@@ -450,7 +484,7 @@ aside {
 
 #contentFormLogin{
     width:555px;
-    margin:0 0 0 110px;
+    margin:0 0 0 210px;
 }
 
 #formLogin {
@@ -614,7 +648,6 @@ table.projectsMember td {
 
 .formUser textarea{
     border:1px solid #000;
-    padding-left:5px;
 }
 
 .formUser .headerFormUser{
@@ -673,7 +706,7 @@ table.projectsMember td {
 }
 
 .formUser textarea.description{
-    width:490px;
+    width:485px;
     resize:none;
     height:100px;
 }
@@ -968,7 +1001,6 @@ formProject {
     margin-bottom: 5px;
     font-size:13px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
-    padding: 0 5px;
     resize: none;
 }
 
@@ -1025,42 +1057,46 @@ formProject {
 
 /*------------------Administration--------------------*/
 
+span.message {
+    color: red;
+}
+
 .adminContent {
     width: 670px;
-    height:25px;
-    line-height:27px;
-    margin: 3px 0 ;
+    height:30px;
+    line-height:30px;
+    margin-top: 6px;
     background-color: #e8e8e8; 
 }
 
 .adminContent .adminName {
     float: left;
     width: 220px;
-    height:25px;
-    line-height:27px;
+    height:30px;
+    line-height:30px;
     padding-left: 5px;
 }
 
 .adminContent .adminInfo {
     float: left;
     width: 320px;
-    height:25px;
-    line-height:27px;
+    height:30px;
+    line-height:30px;
 }
 
 .adminContent .adminInfoSkill {
     float: left;
     width: 360px;
-    height:25px;
-    line-height:27px;
+    height:30px;
+    line-height:30px;
 }
 
 .adminContent .adminSee {
     float: left;
     width: 40px;
     text-indent: 10px;
-    height:25px;
-    line-height:30px;
+    height:30px;
+    line-height:35px;
     border-right: 1px solid #000;
 }
 
@@ -1068,8 +1104,8 @@ formProject {
     float: left;
     width: 40px;
     text-indent: 15px;
-    height:25px;
-    line-height:35px;
+    height:30px;
+    line-height:40px;
     border-right: 1px solid #000;
 }
 
@@ -1077,8 +1113,8 @@ formProject {
     float: left;;
     width: 40px;
     text-indent: 15px;
-    height:25px;
-    line-height:37px;
+    height:30px;
+    line-height:40px;
 }
 
 /*------------------Form Administration--------------------*/
@@ -1094,7 +1130,6 @@ formProject {
     float: left;
     width: 125px;
     height: 25px;
-    margin-top:35px;
 }
 
 .csvImport a.btnAction{
@@ -1105,7 +1140,6 @@ formProject {
     float: left;
     width: 125px;
     height: 25px;
-    margin-top:34px;
     margin-bottom:10px;
 }
 
@@ -1113,7 +1147,6 @@ formProject {
     float: left;
     width: 125px;
     height: 25px;
-    margin-top:35px;
     margin-bottom:10px;
 }
 
@@ -1140,6 +1173,28 @@ formProject {
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 15px;
 }
+
+/*----------------------FormContact-----------------------*/
+
+.formContact input{
+    width: 665px;
+}
+
+.formContact textarea{
+    width: 660px;
+    height: 150px;
+    margin-bottom: 5px;
+    resize: none;
+}
+
+.formContact button.btnAction {
+    float: right;
+    border:none;
+    font-size:12px;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    padding:0 15px;
+}
+
 
 /*------------------Mentions Légales--------------------*/
 

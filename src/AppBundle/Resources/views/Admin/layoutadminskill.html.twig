@@ -1,22 +1,38 @@
-{% for skill in skills %}
-    <div class="adminContent">
-        <div class="adminName">
-            {{ skill.name }}
-        </div>
-        <div class="adminInfoSkill">
-            {{ skill.category.name }}
-        </div>
-         <div class="adminEdit">
-            <a href="{{path('filrouge_admin_update_skill', {'id': skill.id })}}">
-                <img alt="Modifier la compétence" src="{{asset('bundles/app/images/modify.png')}}" />
-            </a>
-        </div>
-        <div class="adminDelete">
-            <a href="{{path('filrouge_admin_remove_skill', {'id': skill.id })}}">
-                <img alt="Supprimer la compétence" src="{{asset('bundles/app/images/delete.png')}}" />
-            </a>
-        </div> 
-        <div class="clear"></div>    
+<div class="collapsible">
+    <div class="ico">
+        <span></span> 
     </div>
-    <div class="clear"></div> 
-{% endfor %}      
+    <div class="name">
+        Voir, modifier et effacer les compétences
+    </div>
+    <div class="status">
+        {{  skills|length }} compétence(s) sur le site
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="container">
+    <div class="content">
+        {% for skill in skills %}
+            <div class="adminContent">
+                <div class="adminName">
+                    {{ skill.name }}
+                </div>
+                <div class="adminInfoSkill">
+                    {{ skill.category.name }}
+                </div>
+                 <div class="adminEdit">
+                    <a href="{{path('filrouge_admin_update_skill', {'id': skill.id })}}">
+                        <img alt="Modifier la compétence" src="{{asset('bundles/app/images/modify.png')}}" />
+                    </a>
+                </div>
+                <div class="adminDelete">
+                    <a href="{{path('filrouge_admin_remove_skill', {'id': skill.id })}}">
+                        <img alt="Supprimer la compétence" src="{{asset('bundles/app/images/delete.png')}}" />
+                    </a>
+                </div> 
+                <div class="clear"></div>    
+            </div>
+            <div class="clear"></div> 
+        {% endfor %}      
+    </div>
+</div>

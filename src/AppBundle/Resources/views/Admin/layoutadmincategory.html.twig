@@ -1,22 +1,38 @@
-{% for category in categories %}
-    <div class="adminContent">
-        <div class="adminName">
-            {{ category.name }}
-        </div>
-        <div class="adminInfoSkill">
-            {{ category.skills|length }} compétences  
-        </div>
-         <div class="adminEdit">
-            <a href="{{path('filrouge_admin_update_category', {'id': category.id })}}">
-                <img alt="Modifier la catégorie" src="{{asset('bundles/app/images/modify.png')}}" />
-            </a>
-        </div>
-        <div class="adminDelete">
-            <a href="{{path('filrouge_admin_remove_category', {'id': category.id })}}">
-                <img alt="Supprimer la catégorie" src="{{asset('bundles/app/images/delete.png')}}" />
-            </a>
-        </div> 
-        <div class="clear"></div>    
+<div class="collapsible">
+    <div class="ico">
+        <span></span> 
     </div>
-    <div class="clear"></div> 
-{% endfor %}    
+    <div class="name">
+        Voir, modifier et effacer les catégories
+    </div>
+    <div class="status">
+        {{  categories|length }} catégories(s) sur le site
+    </div>
+    <div class="clear"></div>
+</div>
+<div class="container">
+    <div class="content">
+        {% for category in categories %}
+            <div class="adminContent">
+                <div class="adminName">
+                    {{ category.name }}
+                </div>
+                <div class="adminInfoSkill">
+                    {{ category.skills|length }} compétences  
+                </div>
+                 <div class="adminEdit">
+                    <a href="{{path('filrouge_admin_update_category', {'id': category.id })}}">
+                        <img alt="Modifier la catégorie" src="{{asset('bundles/app/images/modify.png')}}" />
+                    </a>
+                </div>
+                <div class="adminDelete">
+                    <a href="{{path('filrouge_admin_remove_category', {'id': category.id })}}">
+                        <img alt="Supprimer la catégorie" src="{{asset('bundles/app/images/delete.png')}}" />
+                    </a>
+                </div> 
+                <div class="clear"></div>    
+            </div>
+            <div class="clear"></div> 
+        {% endfor %}
+    </div>
+</div>

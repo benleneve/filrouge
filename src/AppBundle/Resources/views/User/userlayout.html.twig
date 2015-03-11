@@ -5,11 +5,9 @@
     {% include('AppBundle:User:userheaderlayout.html.twig') %}
     <div class="status">
         {% if user.availability == true %}
-            Disponible
-            <img alt="Disponible" src="{{asset('bundles/app/images/status_green.png')}}" />
+            <h5 class="greenRightUser">Disponnible</h5>
         {% elseif user.availability == false %}
-            Indisponible
-            <img alt="Indisponible" src="{{asset('bundles/app/images/status_red.png')}}" />
+            <h5 class="redRightUser">Indisponnible</h5>
         {% endif %}
     </div>
     <div class="clear"></div>

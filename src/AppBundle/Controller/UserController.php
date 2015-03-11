@@ -2,9 +2,14 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Message;
+use AppBundle\Entity\Skill;
 use AppBundle\Entity\User;
+use AppBundle\Form\CategoryType;
+use AppBundle\Form\SkillType;
 use AppBundle\Form\UserType;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -42,7 +47,7 @@ class UserController extends Controller {
                          ->getRepository('AppBundle:User')
                          ->findOneUserEager($id);
             
-            $dateInterval = $user->getBirthDate()->diff(new \DateTime());
+            $dateInterval = $user->getBirthDate()->diff(new DateTime());
             $age = $dateInterval->y;
                         
             return $this->render('AppBundle:User:userdetail.html.twig',
@@ -154,7 +159,7 @@ class UserController extends Controller {
                             )); 
         }
     
-    public function removeAction($id) 
+    public function removeAction($id, Request $req) 
         {
             $user = $this->getDoctrine()
                          ->getRepository('AppBundle:User')
@@ -174,9 +179,23 @@ class UserController extends Controller {
             } else {
                 $message = $user->getFirstName() . ' ' . $user->getLastName() . ' ne peut être supprimé car il est en charge d\'un projet';
             }
+            
+            $skill = new Skill();
+            $formSkill = $this->createForm(new SkillType(), $skill, array(
+                'action' => $this->generateUrl('filrouge_admin_add_skill') . '#adminSkill'
+            ));
+            $formSkill->handleRequest($req);
+
+            $newCategory = new Category();
+            $formCategory = $this->createForm(new CategoryType(), $newCategory, array(
+                'action' => $this->generateUrl('filrouge_admin_add_category') . '#adminCategory'
+            ));
+            $formCategory->handleRequest($req);
    
             return $this->render('AppBundle:Admin:Administration.html.twig', array(
-                        'messageUser' => $message
+                        'messageUser' => $message,
+                        'categoryForm' => $formCategory->createView(),
+                        'skillForm' => $formSkill->createView()
             ));
         }
         

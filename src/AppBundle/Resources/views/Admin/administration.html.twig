@@ -12,13 +12,8 @@
         <h2 class="icoSkill">Toutes les compétences</h2>
         <div class="blockContent">
             {% if messageSkill is defined %}
-                {{ messageSkill }}
+                <span class="message">{{ messageSkill }}</span>
             {% endif %}
-            <div class="search">
-                <h4>Rechercher une compétence</h4>
-                <input type="text" id="searchSkill" placeholder="Entrer la compétence recherchée" />
-            </div>
-            <div class="clear"></div>
             <div id="formSkill">
                 <h4>Ajouter une compétence</h4>
                 {{ form_start(skillForm) }}
@@ -41,13 +36,8 @@
         <h2 class="icoCategory">Toutes les catégories</h2>
         <div class="blockContent">
             {% if messageCategory is defined %}
-                {{ messageCategory }}
+                <span class="message">{{ messageCategory }}</span>
             {% endif %}
-            <div class="search">
-                <h4>Rechercher une catégorie</h4>
-                <input type="text" id="searchCategory" placeholder="Entrer la catégorie recherchée" />
-            </div>
-            <div class="clear"></div>
             <div id="formCategory">
                 <h4>Ajouter une catégorie</h4>
                 {{ form_start(categoryForm) }}
@@ -67,16 +57,13 @@
         <h2 class="icoUser">Tous les profils</h2>
         <div class="blockContent">
             {% if messageUser is defined %}
-                {{ messageUser }}
+                <span class="message">{{ messageUser }}</span>
             {% endif %}
-            <div class="search">
-                <h4>Rechercher un profil</h4>
-                <input type="text" id="searchUser" placeholder="Entrer le profil recherché" />
-            </div>
-            {% if is_granted('ROLE_SUPER_ADMIN') %}  
-            <div class="csvImport">
-                <a href=" {{path('filrouge_user_add')}} " class="btnAction">Import CSV</a>
-            </div>
+            <h4>Ajouter un profil</h4>
+            {% if is_granted('ROLE_SUPER_ADMIN') %} 
+                <div class="csvImport">
+                    <a href=" {{path('filrouge_user_add')}} " class="btnAction">Import CSV</a>
+                </div>
             {% endif %}
             <div class="newUser">
                 <a href=" {{path('filrouge_user_add')}} " class="btnAction">Nouveau profil</a>
@@ -90,12 +77,9 @@
         <h2 class="icoProject">Tous les projets</h2>
         <div class="blockContent">
             {% if messageProject is defined %}
-                {{ messageProject }}
+                <span class="message">{{ messageProject }}</span>
             {% endif %}
-            <div class="search">
-                <h4>Rechercher un projet</h4>
-                <input type="text" id="searchProject" placeholder="Entrer le projet recherché" />
-            </div>
+            <h4>Ajouter un projet</h4>
             <div class="newProject">
                 <a href=" {{path('filrouge_project_add')}} " class="btnAction">Nouveau projet</a>
             </div>
@@ -108,4 +92,11 @@
 
 {% block javascripts %}
     {{parent()}}
+    <script type="text/javascript">
+    $(document).ready(function() {
+        $('.collapsible').collapsible({
+            speed: 300
+        });
+    });
+    </script>
 {% endblock %}

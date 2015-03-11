@@ -50,7 +50,7 @@
                         <p><span class="dateAside">{{notification.creationDate|date('d/m/Y H:i')}}<span></p>
                         <p>
                             {{notification.content}}
-                            <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} "> {{notification.project.name}}</a>
+                            <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} " class="hrefBody"> {{notification.project.name}}</a>
                         </p>
                     </div>
                     <div class="clear"></div>

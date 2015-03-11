@@ -19,12 +19,6 @@ filrouge_user_update:
     defaults: {_controller:AppBundle:User:update, id:1 }
     requirements:
         id: \d+
-
-filrouge_user_remove:
-    path: /remove/{id}
-    defaults: {_controller:AppBundle:User:remove, id:1 }
-    requirements:
-        id: \d+
         
 filrouge_user_invite:
     path: /detail/{id}/invite
@@ -32,4 +26,6 @@ filrouge_user_invite:
     requirements:
         id: \d+
     methods: [POST]
+    
+
 

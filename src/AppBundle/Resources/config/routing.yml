@@ -12,8 +12,19 @@ filrouge_notification:
         page: \d+
     
 filrouge_generalCondition:
-    path: /gc
-    defaults: {_controller: AppBundle:Default:generalCondition }    
+    path: /generalCondition
+    defaults: {_controller: AppBundle:Default:generalCondition } 
+
+filrouge_contactAdmin:
+    path: /contactAdmin
+    defaults: {_controller: AppBundle:Default:contactAdmin } 
+    
+filrouge_contactAdmin_send:
+    path: /contactAdmin/{id}
+    defaults: {_controller: AppBundle:Default:sendMailAdmin }
+    requirements:
+        page: \d+
+    methods: [POST]
     
 filrouge_user:
     resource: "@AppBundle/Resources/config/user.yml"

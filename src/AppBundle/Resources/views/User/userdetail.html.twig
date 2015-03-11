@@ -19,11 +19,9 @@
                 {% include('AppBundle:User:userheaderlayout.html.twig')%}
                 <div class="status">
                     {% if user.availability == true %}
-                        Disponible
-                        <img alt="Disponnible" src="{{asset('bundles/app/images/status_green.png')}}" /> 
+                        <h5 class="greenRightUser">Disponnible</h5>
                     {% elseif user.availability == false %}
-                        Indisponible
-                        <img alt="Indisponnible" src="{{asset('bundles/app/images/status_red.png')}}" />
+                        <h5 class="redRightUser">Indisponnible</h5>
                     {% endif %}
                 </div>
                 <div class="clear"></div>
@@ -63,10 +61,18 @@
                                 <th>Date de début</th>
                                 <th>Date de fin</th>
                             </tr>
+                                {% for project in user.managesProjects %}                                    
+                                    <tr>
+                                        <td> <a href=" {{path('filrouge_project_detail', {'id': project.id } )}}" class="hrefBody">{{ project.name }}</a> </td>
+                                        <td> Chef de projet </td>
+                                        <td> {{ project.startDate|date('d/m/Y') }} </td>
+                                        <td> {{ project.endDate|date('d/m/Y') }} </td>
+                                    </tr>
+                                {% endfor %}
                                 {% for worksOnProject in user.worksOnProjects %}
                                     {% if worksOnProject.active == 1 %}                                    
                                         <tr>
-                                            <td> {{ worksOnProject.project.name }} </td>
+                                            <td> <a href=" {{path('filrouge_project_detail', {'id': worksOnProject.project.id } )}}" class="hrefBody">{{ worksOnProject.project.name }}</a> </td>
                                             <td> {{ worksOnProject.skill }} </td>
                                             <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
                                             <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
@@ -88,7 +94,7 @@
                     <div id="formUserInvite">
                         <h4>Inviter ce profil à rejoindre mon projet</h4>
                         <form action="{{ path('filrouge_user_invite', {'id': user.id }) }}" method="POST">              
-                            <label for="card">Choisir le projet</label>
+                            <label for="idProject">Choisir le projet</label>
                             <select id="idProject" name="idProject">
                                 {% for project in app.user.managesProjects %}
                                     <option value="{{project.id}}">{{project.name}}</option>

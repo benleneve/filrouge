@@ -2,11 +2,15 @@
 
 namespace AppBundle\Controller;
 
+use AppBundle\Entity\Category;
 use AppBundle\Entity\Message;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\Project;
+use AppBundle\Entity\Skill;
 use AppBundle\Entity\UserProject;
+use AppBundle\Form\CategoryType;
 use AppBundle\Form\ProjectType;
+use AppBundle\Form\SkillType;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\component\HttpFoundation\Request;
@@ -147,7 +151,7 @@ Class ProjectController extends Controller
             )); 
         }
 
-        public function removeAction($id)
+        public function removeAction($id, Request $req)
         {
             $project = $this->getDoctrine()
                             ->getManager()
@@ -160,8 +164,24 @@ Class ProjectController extends Controller
             $message = 'Le projet ' . $project->getName() . ' vient d\'être effacé';
             $em->remove($project);
             $em->flush();
+            
+            $skill = new Skill();
+            $formSkill = $this->createForm(new SkillType(), $skill, array(
+                'action' => $this->generateUrl('filrouge_admin_add_skill') . '#adminSkill'
+            ));
+            $formSkill->handleRequest($req);
+
+            $newCategory = new Category();
+            $formCategory = $this->createForm(new CategoryType(), $newCategory, array(
+                'action' => $this->generateUrl('filrouge_admin_add_category') . '#adminCategory'
+            ));
+            $formCategory->handleRequest($req);
+            
+            
             return $this->render('AppBundle:Admin:Administration.html.twig', array(
-                        'messageProject' => $message
+                        'messageProject' => $message,
+                        'categoryForm' => $formCategory->createView(),
+                        'skillForm' => $formSkill->createView()
             ));
         }
         
