@@ -9,7 +9,50 @@
     <div class="blockGeneral">
         <h2 class="icoSearch">Rechercher un projet</h2>
         <div class="blockContent">
-            Bla bla bla...
+            <div class="formSearchProject">
+                <form action="#" method="POST"> 
+                    <p>
+                        <label for="nameProject">Nom du projet</label>
+                        <input type="text" id="nameProject" name="nameProject" placeholder="Entrer le nom du projet">
+                    </p>
+                    <p>
+                        <label for="statutProject">Statut</label>
+                        <select id="statutProject" name="statutProject">
+                            <option value="onHold">En attente</option>
+                            <option value="inProgress">En cours</option>
+                            <option value="Finish">Terminé</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="skillProject1">Compétences</label>
+                        <select id="skillProject1" name="skillProject1">
+                            <option value="none" selected>aucune</option>
+                            {% for skill in skills %}
+                                <option value="{{skill.name}}">{{skill.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="skillProject2" name="skillProject2">
+                            <option value="none" selected>aucune</option>
+                            {% for skill in skills %}  
+                                <option value="{{skill.name}}">{{skill.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="skillProject2" name="skillProject2">
+                            <option value="none" selected>aucune</option>
+                            {% for skill in skills %}
+                                <option value="{{skill.name}}">{{skill.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <p>
+                        <label for="recrutProjet">Recrutement</label>
+                        <input type="checkbox" name="recrutProjet" value="yes" id="recrutProjet"/>
+                    <p>
+
+                    <button type="submit" class="btnAction">> rechercher</button>
+                </form>
+                <div class="clear"></div>
+            </div>
         </div>
     </div>
     

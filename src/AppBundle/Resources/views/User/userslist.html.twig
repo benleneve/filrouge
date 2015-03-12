@@ -14,7 +14,44 @@
     <div class="blockGeneral">
         <h2 class="icoSearch">Rechercher un profil</h2>
         <div class="blockContent">
-            Bla bla bla...
+            <div class="formSearchUser">
+                <form action="#" method="POST"> 
+                    <p>
+                        <label for="nameUser">Nom du profil</label>
+                        <input type="text" id="nameUser" name="nameUser" placeholder="Entrer le nom du profil">
+                    </p>
+                    <p>
+                        <label for="statusUser">Statut</label>
+                        <select id="statusUser" name="statusUser">
+                            <option value="yes">Disponnible</option>
+                            <option value="no">Indisponnible</option>
+                        </select>
+                    </p>
+                    <p>
+                        <label for="skillUser1">Compétences</label>
+                        <select id="skillUser1" name="skillUser1">
+                            <option value="none" selected>aucune</option>
+                            {% for skill in skills %}
+                                <option value="{{skill.name}}">{{skill.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="skillUser2" name="skillUser2">
+                            <option value="none" selected>aucune</option>
+                            {% for skill in skills %}  
+                                <option value="{{skill.name}}">{{skill.name}}</option>
+                            {% endfor %}
+                        </select>
+                        <select id="skillUser3" name="skillUser3">
+                            <option value="none" selected>aucune</option>
+                            {% for skill in skills %}
+                                <option value="{{skill.name}}">{{skill.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </p>
+                    <button type="submit" class="btnAction">> rechercher</button>
+                </form>
+                <div class="clear"></div>
+            </div>
         </div>
     </div>
     

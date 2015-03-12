@@ -21,10 +21,14 @@ Class ProjectController extends Controller
         {
             $maxProjects = 5;
             
-            $repository = $this->getDoctrine()
-                            ->getManager()
-                            ->getRepository('AppBundle:Project');
-            $projects = $repository->findAllProjectsPageEager($page, $maxProjects);
+            $projects = $this->getDoctrine()
+                            ->getRepository('AppBundle:Project')
+                            ->findAllProjectsPageEager($page, $maxProjects);
+            
+            $skills = $this->getDoctrine()
+                            ->getRepository('AppBundle:Skill')
+                            ->findAllSkillEager();
+            
             $numberOfProject = count($projects);
             $pagination = array(
                     'page' => $page,
@@ -34,6 +38,7 @@ Class ProjectController extends Controller
             );
             return $this->render('AppBundle:Project:projectslist.html.twig', array(
                     'projects' => $projects,
+                    'skills' => $skills,
                     'pagination' => $pagination
             ));
         }
@@ -255,7 +260,7 @@ Class ProjectController extends Controller
             $userProject->setActive(1);  
             $em->persist($userProject);
    
-            $content =  'Votre candidature au projet ' . $project->getName() . 'a été acceptée.';
+            $content =  'Votre candidature au projet ' . $project->getName() . ' a été acceptée.';
            
             $message = new Message();
             $message->setSender($user);

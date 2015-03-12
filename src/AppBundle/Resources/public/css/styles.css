@@ -100,7 +100,7 @@ h2.icoNotif {
 
 h2.icoLogin {
     background: url("../images/lock.png") left bottom no-repeat;
-    text-indent: 40px;
+    text-indent: 25px;
 }
 
 h2.icoSkill {
@@ -589,7 +589,7 @@ aside {
 
 .bodyBlock .imageProfil {
     float: right;
-    width: 200px;
+    width: 150px;
     margin-top: 10px;
 }
 
@@ -669,6 +669,7 @@ table.projectsMember td {
 
 .formUser .dispo{
     float:right;
+    width: 65px;
     margin-top:35px;
 }
 
@@ -694,6 +695,7 @@ table.projectsMember td {
 
 .formUser .availability {
    float: right;
+   width: 95px;
 }
 
 .formUser input.address{

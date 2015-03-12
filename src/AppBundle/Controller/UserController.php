@@ -20,24 +20,27 @@ class UserController extends Controller {
         {
             $maxUsers = 5;
             
-             $repo = $this->getDoctrine()
-                          ->getManager()
-                          ->getRepository('AppBundle:User');
+            $users = $this->getDoctrine()
+                          ->getRepository('AppBundle:User')
+                          ->findAllUsersPageEager($page, $maxUsers);
              
-             $users = $repo->findAllUsersPageEager($page, $maxUsers);
+            $skills = $this->getDoctrine()
+                           ->getRepository('AppBundle:Skill')
+                           ->findAllSkillEager();
              
-             $numberOfUsers = count($users);
+            $numberOfUsers = count($users);
              
-             $pagination = array(
+            $pagination = array(
                     "page" => $page,
                     "route" => "filrouge_user_list",
                     "pages_count" => ceil($numberOfUsers/$maxUsers),
                     "route_params" => array()
                             );
                   
-             return $this->render('AppBundle:User:userslist.html.twig',
+            return $this->render('AppBundle:User:userslist.html.twig',
                                        array(
                                         'users' => $users,
+                                        'skills' => $skills,
                                         'pagination' => $pagination
                                         ));
     }
