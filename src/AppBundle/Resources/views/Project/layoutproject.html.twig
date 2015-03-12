@@ -17,9 +17,9 @@
                 Recrute :
                 {% for projectSkill in project.projectSkills %}
                     {% if projectSkill.active %}
-                        {% if loop.index < 5 %}
+                        {% if loop.index < 4 %}
                             {{projectSkill.skill.name}} /
-                        {% elseif loop.index == 5 %}
+                        {% elseif loop.index == 4 %}
                             ...
                         {% endif %}  
                     {% endif %}

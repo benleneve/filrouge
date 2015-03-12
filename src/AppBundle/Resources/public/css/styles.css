@@ -629,6 +629,13 @@ table.projectsMember td {
     line-height:25px;
 }
 
+#formUserInvite button{
+    border:none;
+    font-size:12px;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    padding:0 15px; 
+}
+
 #formUserInvite label{
     width:100px;
 }
@@ -1172,6 +1179,7 @@ span.message {
     font-size:13px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 15px;
+    border:none;
 }
 
 /*----------------------FormContact-----------------------*/
@@ -1250,16 +1258,24 @@ aside .dateAside {
 
 .recrutSeeMore  {
     float: right;
-    width: 80px;
+    width: 70px;
     height: 25px;
     margin: 10px 0;
+    border:none;
+    font-size:12px;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    padding:0 15px;
 }
 
 .notifSeeMore {
     float: right;
-    width: 80px;
+    width: 70px;
     height: 25px;
     margin: 10px 0;
+    border:none;
+    font-size:12px;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    padding:0 15px;
 }
 
 /*----------------footer------------------*/
