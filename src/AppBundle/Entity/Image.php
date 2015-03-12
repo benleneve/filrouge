@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Image
@@ -25,6 +26,8 @@ class Image
      * @var string
      *
      * @ORM\Column(name="url", type="string", length=255)
+     * @Assert\Length(min=2, minMessage="L'url doit comporter 2 caractères minimum.", max=255, maxMessage="L'url ne peut comporter plus de 255 caractères.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $url;
 
@@ -32,6 +35,7 @@ class Image
      * @var string
      *
      * @ORM\Column(name="alt", type="string", length=255)
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $alt;
 

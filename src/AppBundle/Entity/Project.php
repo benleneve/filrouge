@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Notification;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Project
@@ -36,6 +37,8 @@ class Project
      * @var string
      *
      * @ORM\Column(name="name", type="string", length=255)
+     * @Assert\Length(min=2, minMessage="Le nom du projet doit comporter au minimum 2 caractères.", max=150, maxMessage="Le nom du projet ne peut comporter plus de 255 caractères maximum.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $name;
 
@@ -43,6 +46,7 @@ class Project
      * @var DateTime
      *
      * @ORM\Column(name="startDate", type="date")
+     * @Assert\Date()
      */
     private $startDate;
 
@@ -50,6 +54,7 @@ class Project
      * @var DateTime
      *
      * @ORM\Column(name="endDate", type="date")
+     * @Assert\Date()
      */
     private $endDate;
 
@@ -57,6 +62,8 @@ class Project
      * @var string
      *
      * @ORM\Column(name="purpose", type="string", length=255)
+     * @Assert\Length(min=10, minMessage="L'objectif doit comporter au minimum 10 caractères.", max=255, maxMessage="L'objectif ne peut comporter plus de 255 caractères maximum.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $purpose;
 

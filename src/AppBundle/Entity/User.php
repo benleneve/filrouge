@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * User
@@ -29,6 +30,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="firstName", type="string", length=255)
+     * @Assert\Length(min=2, minMessage="Le prénom doit comporter 2 caractères minimum.", max=150, maxMessage="Le prénom ne peut comporter plus de 150 caractères.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $firstName;
 
@@ -36,6 +39,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="lastName", type="string", length=255)
+     * @Assert\Length(min=2, minMessage="Le nom doit comporter 2 caractères minimum.", max=150, maxMessage="Le nom ne peut comporter plus de 150 caractères.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $lastName;
 
@@ -43,6 +48,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="username", type="string", length=255, unique=true)
+     * @Assert\Length(min=4, minMessage="Le login doit comporter 4 caractères minimum.", max=20, maxMessage="Le login ne peut comporter plus de 20 caractères.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $username;
 
@@ -50,6 +57,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="password", type="string", length=255)
+     * @Assert\Length(min=4, minMessage="Le mot de passe doit comporter 4 caractères minimum.", max=20, maxMessage="Le mot de passe ne peut comporter plus de 20 caractères.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $password;
     
@@ -69,6 +78,7 @@ class User implements UserInterface
      * @var DateTime
      *
      * @ORM\Column(name="birthDate", type="date")
+     * @Assert\Date()
      */
     private $birthDate;
 
@@ -76,13 +86,17 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="email", type="string", length=255)
+     * @Assert\Email(message = "'{{ value }}' n'est pas un email valide.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $email;
 
     /**
+     * @var string
      * 
-     *
      * @ORM\Column(name="address", type="string", length=255)
+     * @Assert\Length(min=5, minMessage="L'adresse doit comporter au minimum 5 caractères.", max=150, maxMessage="L'adresse doit comporter au maximum 150 caractères")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $address;
 
@@ -90,6 +104,9 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="postCode", type="string", length=255)
+     * @Assert\Length(min=5, max=5, exactMessage="Merci de rentrer un code postal à 5 chiffres.")
+     * @Assert\Regex("/\d/", message="Le code postal ne peut contenir que des chiffres.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $postCode;
 
@@ -97,6 +114,8 @@ class User implements UserInterface
      * @var string
      *
      * @ORM\Column(name="city", type="string", length=255)
+     * @Assert\Length(min=2, minMessage="La ville doit comporter au minimum 2 caractères.", max=150, maxMessage="La ville doit comporter au maximum 150 caractères")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $city;
 
@@ -104,13 +123,16 @@ class User implements UserInterface
      * @var string
      * 
      * @ORM\Column(name="phone", type="string")
+     * @Assert\Length(min=10, max=10, exactMessage="Merci de rentrer votre numéro de téléphone sous la forme : 06XXXXXXXX")
+     * @Assert\Regex("/\d/", message="Le numéro de téléphone ne peut contenir que des chiffres.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $phone;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="description", type="text")
+     * @ORM\Column(name="description", type="text", nullable=true)
      */
     private $description;
 
@@ -120,13 +142,6 @@ class User implements UserInterface
      * @ORM\Column(name="availability", type="boolean")
      */
     private $availability;
-
-    /**
-     * @var boolean
-     *
-     * @ORM\Column(name="firstLog", type="boolean")
-     */
-    private $firstLog = true;
 
     /**
      * @var boolean

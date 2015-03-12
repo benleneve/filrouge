@@ -23,18 +23,18 @@
                 {{ form_start(userForm) }}
 
                     <div class="headerFormUser headerBlock">
-                        {% if is_granted('ROLE_ADMIN') %}  
+                        {% if is_granted('ROLE_ADMIN') %} 
                             {{ form_errors(userForm.firstName) }}
-                            {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'placeholder': 'Prénom'} }) }}
                             {{ form_errors(userForm.lastName) }}
-                            {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'placeholder': 'Nom'} }) }} 
+                            {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'placeholder': 'Prénom'} }) }}
+                            {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'placeholder': 'Nom'} }) }}
                         {% else %}
                             {% include('AppBundle:User:userheaderlayout.html.twig')%}
                             {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'style': 'display:none'} }) }}
                             {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'style': 'display:none'} }) }} 
-                        {% endif %}
-                        {{ form_errors(userForm.availability) }}
+                        {% endif %}  
                         {{ form_widget(userForm.availability, { 'attr': {'class': 'availability'} }) }}
+                        {{ form_errors(userForm.availability) }}
                         <div class="clear"></div>
                     </div>
 
@@ -72,10 +72,10 @@
                         <div class="fieldForm">
                             <h4>Adresse Postale</h4>
                             {{ form_errors(userForm.address) }}
-                            {{ form_widget(userForm.address, { 'attr': {'class': 'address', 'placeholder': 'Adresse'} }) }}
                             {{ form_errors(userForm.postCode) }}
-                            {{ form_widget(userForm.postCode, { 'attr': {'class': 'postcode', 'placeholder': 'Code Postal'} }) }}
                             {{ form_errors(userForm.city) }}
+                            {{ form_widget(userForm.address, { 'attr': {'class': 'address', 'placeholder': 'Adresse'} }) }}
+                            {{ form_widget(userForm.postCode, { 'attr': {'class': 'postcode', 'placeholder': 'Code Postal'} }) }}
                             {{ form_widget(userForm.city, { 'attr': {'class': 'city', 'placeholder': 'Ville'} }) }}      
                             <div class="clear"></div>
                         </div>

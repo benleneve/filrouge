@@ -60,14 +60,14 @@
                 <span class="message">{{ messageUser }}</span>
             {% endif %}
             <h4>Ajouter un profil</h4>
+            <div class="newUser">
+                <a href=" {{path('filrouge_user_add')}} " class="btnAction">Nouveau profil</a>
+            </div>
             {% if is_granted('ROLE_SUPER_ADMIN') %} 
                 <div class="csvImport">
                     <a href=" {{path('filrouge_user_add')}} " class="btnAction">Import CSV</a>
                 </div>
             {% endif %}
-            <div class="newUser">
-                <a href=" {{path('filrouge_user_add')}} " class="btnAction">Nouveau profil</a>
-            </div>
             <div class="clear"></div>
             {{ render(controller('AppBundle:User:admin')) }}
         </div>

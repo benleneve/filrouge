@@ -29,7 +29,7 @@ class UserType extends AbstractType
             ->add('postCode', 'text')
             ->add('city', 'text')
             ->add('phone', 'text')
-            ->add('description', 'textarea')
+            ->add('description', 'textarea', array('required' => false))
             ->add('availability', 'choice', array(
                     'choices' => array(true => "Disponible", false => "Indisponible" )
                  ))

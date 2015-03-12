@@ -22,11 +22,11 @@
                     </div>
                     <div class="content">
                         <p><span class="dateAside">{{notification.creationDate|date('d/m/Y H:i')}}<span></p>
-                        <p>
-                            {{notification.content}}
-                            <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} "> {{notification.project.name}}</a>
-                        </p>
+                        <p>{{notification.content}} {{notification.project.name}}</p>
                     </div>
+                    <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} " class="btnAction">
+                        Voir le projet
+                    </a>
                     <div class="clear"></div>
                 </div>
             {% endfor %}

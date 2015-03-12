@@ -14,15 +14,16 @@
     <div class="blockGeneral">
         <h2 class="icoSearch">Rechercher un profil</h2>
         <div class="blockContent">
-            <div class="formSearchUser">
+            <div id="formSearchUser">
                 <form action="#" method="POST"> 
                     <p>
                         <label for="nameUser">Nom du profil</label>
-                        <input type="text" id="nameUser" name="nameUser" placeholder="Entrer le nom du profil">
+                        <input type="text" id="nameUser" name="nameUser" placeholder="Entrer le nom du profil recherché"/>
                     </p>
                     <p>
                         <label for="statusUser">Statut</label>
                         <select id="statusUser" name="statusUser">
+                            <option value="none" selected>aucun</option>
                             <option value="yes">Disponnible</option>
                             <option value="no">Indisponnible</option>
                         </select>
@@ -48,7 +49,7 @@
                             {% endfor %}
                         </select>
                     </p>
-                    <button type="submit" class="btnAction">> rechercher</button>
+                    <button type="submit" class="btnAction">> Rechercher</button>
                 </form>
                 <div class="clear"></div>
             </div>
