@@ -90,7 +90,7 @@
                     {% endif %}
                 </div>
                 <div class="clear"></div> 
-                {% if app.user.managesProjects|length!=0 %}
+                {% if app.user.managesProjects|length!=0 and app.user.id != user.id %}
                     <div id="formUserInvite">
                         <h4>Inviter ce profil à rejoindre mon projet</h4>
                         <form action="{{ path('filrouge_user_invite', {'id': user.id }) }}" method="POST">              

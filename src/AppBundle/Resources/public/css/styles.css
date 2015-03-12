@@ -519,11 +519,12 @@ aside {
     width: 150px;
     height:35px;
     margin-top: 15px;
-    float:right;
-    display:block;
-    font-size:15px;
-    line-height:30px;
-    margin-right:22px;
+    border: none;
+    float: right;
+    display: block;
+    font-size: 15px;
+    line-height: 30px;
+    margin-right: 22px;
 }
 
 #formLogin input:-webkit-autofill{
