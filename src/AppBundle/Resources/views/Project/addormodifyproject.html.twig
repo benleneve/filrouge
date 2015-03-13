@@ -57,6 +57,7 @@
                         {{ form_errors(projectForm.purpose) }}
                         <h4>{{ form_label(projectForm.description, "Description") }}</h4>
                         {{ form_widget(projectForm.description, { 'attr': {'class': 'descriptionProject'} }) }}
+                        {{ form_errors(projectForm.description) }}
 
                         <h4>{{ form_label(projectForm.projectSkills, "Compétences requises") }}</h4>
                         {{ form_widget(projectForm.projectSkills) }}

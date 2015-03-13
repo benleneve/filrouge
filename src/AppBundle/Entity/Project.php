@@ -71,6 +71,8 @@ class Project
      * @var string
      *
      * @ORM\Column(name="description", type="text")
+     * @Assert\Length(min=10, minMessage="La description doit comporter au minimum 10 caractères.")
+     * @Assert\NotBlank(message="Ce champ ne peut pas être vide.")
      */
     private $description;
     

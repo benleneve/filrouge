@@ -60,17 +60,21 @@
     <div class="blockGeneral">
         <h2 class="icoProject">Tous les Projets</h2>
         <div class="blockContent">
-            {% for project in projects %}
-                {% include('AppBundle:Project:layoutproject.html.twig') %}
-            {% endfor %}
-            {% if pagination is defined %}
-                <div class="pagination">
-                    {% if projects |length != 0 %}
-                        {% include 'AppBundle::pagination.html.twig' %}
-                    {% endif %}
-                </div>
+            {% if projects|length == 0 %}
+                <h4>Aucun projet</h4>
+            {% else %}  
+                {% for project in projects %}
+                    {% include('AppBundle:Project:layoutproject.html.twig') %}
+                {% endfor %}
+                {% if pagination is defined %}
+                    <div class="pagination">
+                        {% if projects |length != 0 %}
+                            {% include 'AppBundle::pagination.html.twig' %}
+                        {% endif %}
+                    </div>
+                    <div class="clear"></div>
+                {% endif %}
             {% endif %}
-            <div class="clear"></div>
         </div>
     </div>
     <div class="projectNew">

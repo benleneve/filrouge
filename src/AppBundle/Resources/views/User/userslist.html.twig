@@ -21,14 +21,6 @@
                         <input type="text" id="nameUser" name="nameUser" placeholder="Entrer le nom du profil recherché"/>
                     </p>
                     <p>
-                        <label for="statusUser">Statut</label>
-                        <select id="statusUser" name="statusUser">
-                            <option value="none" selected>aucun</option>
-                            <option value="1">Disponnible</option>
-                            <option value="2">Indisponnible</option>
-                        </select>
-                    </p>
-                    <p>
                         <label for="skillUser1">Compétences</label>
                         <select id="skillUser1" name="skillUser1">
                             <option value="none" selected>aucune</option>
@@ -49,6 +41,10 @@
                             {% endfor %}
                         </select>
                     </p>
+                    <p>
+                        <label for="statusUser">Disponnible</label>
+                        <input type="checkbox" name="statusUser" value="yes" id="statusUser" />
+                    <p>
                     <button type="submit" class="btnAction">> Rechercher</button>
                 </form>
                 <div class="clear"></div>
@@ -59,16 +55,20 @@
     <div class="blockGeneral">
         <h2 class="icoProject">Tous les Profils</h2>
         <div class="blockContent">
-            {% for user in users %}
-                {% include('AppBundle:User:userlayout.html.twig') %}
-            {% endfor %}
-            {% if pagination is defined %}
-                <div class="pagination">
-                    {% if users |length != 0 %}
-                        {% include 'AppBundle::pagination.html.twig' %}
-                    {% endif %}
-                </div>
-                <div class="clear"></div>
+            {% if users|length == 0 %}
+                <h4>Aucun profil</h4>
+            {% else %}    
+                {% for user in users %}
+                    {% include('AppBundle:User:userlayout.html.twig') %}
+                {% endfor %}
+                {% if pagination is defined %}
+                    <div class="pagination">
+                        {% if users |length != 0 %}
+                            {% include 'AppBundle::pagination.html.twig' %}
+                        {% endif %}
+                    </div>
+                    <div class="clear"></div>
+                {% endif %}
             {% endif %}
         </div>
     </div>

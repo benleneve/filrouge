@@ -48,15 +48,15 @@ class ProjectRepository extends EntityRepository
                   ->setParameter('status', $status);
         }
         if($skill1 != 'none') {
-            $query->andWhere('sk.name = :skill1')
+            $query->orWhere('sk.name = :skill1')
                   ->setParameter('skill1', $skill1);
         }
         if($skill2 != 'none') {
-            $query->andWhere('sk.name = :skill2')
+            $query->orWhere('sk.name = :skill2')
                   ->setParameter('skill2', $skill2);
         }
         if($skill2 != 'none') {
-            $query->andWhere('sk.name = :skill3')
+            $query->orWhere('sk.name = :skill3')
                   ->setParameter('skill3', $skill3);
         }
         if($recrut) {

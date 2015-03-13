@@ -14,18 +14,24 @@
             {% endif %}               
         {% else %}    
             {% if  project.projectSkills|length != 0 %}
-                Recrute :
+                {% set cpt = project.projectSkills|length %}
+                {% set finish = 0 %}
                 {% for projectSkill in project.projectSkills %}
                     {% if projectSkill.active %}
                         {% if loop.index < 4 %}
                             {{projectSkill.skill.name}} /
                         {% elseif loop.index == 4 %}
                             ...
-                        {% endif %}  
+                        {% endif %}
+                    {% else %}
+                        {% set finish = finish + 1 %}
+                        {% if finish == cpt %}
+                            Aucun recrutement en cours
+                        {% endif %}    
                     {% endif %}
                 {% endfor %}
             {% else %}
-                Recrutement terminé
+                Aucun recrutement en cours
             {% endif %}
         {% endif %}
     </div>
