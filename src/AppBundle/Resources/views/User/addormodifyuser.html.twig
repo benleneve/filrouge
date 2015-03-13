@@ -19,138 +19,142 @@
     <div class="blockGeneral">
         <h2 class="icoUser">Profil</h2>
         <div class="blockContent">
-            <div class="formUser"> 
-                {{ form_start(userForm) }}
+            {% if is_granted('ROLE_ADMIN') or app.user == user %} 
+                <div class="formUser"> 
+                    {{ form_start(userForm) }}
 
-                    <div class="headerFormUser headerBlock">
-                        {% if is_granted('ROLE_ADMIN') %} 
-                            {{ form_errors(userForm.firstName) }}
-                            {{ form_errors(userForm.lastName) }}
-                            {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'placeholder': 'Prénom'} }) }}
-                            {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'placeholder': 'Nom'} }) }}
-                        {% else %}
-                            {% include('AppBundle:User:userheaderlayout.html.twig')%}
-                            {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'style': 'display:none'} }) }}
-                            {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'style': 'display:none'} }) }} 
-                        {% endif %}  
-                        {{ form_widget(userForm.availability, { 'attr': {'class': 'availability'} }) }}
-                        {{ form_errors(userForm.availability) }}
-                        <div class="clear"></div>
-                    </div>
-
-                    <div class="birthFormUser containerForm">
-                        <div class="fieldForm">
-                            <h4>{{ form_label(userForm.birthDate, 'Date de naissance') }}</h4>
-                            {{ form_errors(userForm.birthDate) }}
-                            {{ form_widget(userForm.birthDate, { 'attr': {'class': 'birthdate'} }) }}
-                        </div>
-                        {{ form_errors(userForm.dispoBirth) }}
-                        {{ form_widget(userForm.dispoBirth, { 'attr': {'class': 'dispoBirthdate  dispo'} }) }}
-                    </div> 
-
-                    <div class="emailFormUser containerForm">
-                        <div class="fieldForm">
-                            <h4>{{ form_label(userForm.email, 'Email') }}</h4>
-                            {{ form_errors(userForm.email) }}
-                            {{ form_widget(userForm.email, { 'attr': {'class': 'email', 'placeholder': 'Email'} }) }}
-                        </div>
-                        {{ form_errors(userForm.dispoEmail) }}
-                        {{ form_widget(userForm.dispoEmail,  { 'attr': {'class': 'dispoEmail dispo'} }) }}
-                    </div>
-
-                    <div class="phoneFormUser containerForm">
-                        <div class="fieldForm">
-                            <h4>{{ form_label(userForm.phone, 'Téléphone') }}</h4>
-                            {{ form_errors(userForm.phone) }}
-                            {{ form_widget(userForm.phone,  { 'attr': {'class': 'phone', 'placeholder': 'Téléphone'} }) }}
-                        </div>
-                        {{ form_errors(userForm.dispoPhone) }}
-                        {{ form_widget(userForm.dispoPhone, { 'attr': {'class': 'dispoPhone  dispo'} }) }}
-                    </div>        
-
-                    <div class="addressFormUser containerForm">
-                        <div class="fieldForm">
-                            <h4>Adresse Postale</h4>
-                            {{ form_errors(userForm.address) }}
-                            {{ form_errors(userForm.postCode) }}
-                            {{ form_errors(userForm.city) }}
-                            {{ form_widget(userForm.address, { 'attr': {'class': 'address', 'placeholder': 'Adresse'} }) }}
-                            {{ form_widget(userForm.postCode, { 'attr': {'class': 'postcode', 'placeholder': 'Code Postal'} }) }}
-                            {{ form_widget(userForm.city, { 'attr': {'class': 'city', 'placeholder': 'Ville'} }) }}      
+                        <div class="headerFormUser headerBlock">
+                            {% if is_granted('ROLE_ADMIN') %} 
+                                {{ form_errors(userForm.firstName) }}
+                                {{ form_errors(userForm.lastName) }}
+                                {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'placeholder': 'Prénom'} }) }}
+                                {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'placeholder': 'Nom'} }) }}
+                            {% else %}
+                                {% include('AppBundle:User:userheaderlayout.html.twig')%}
+                                {{ form_widget(userForm.firstName, { 'attr': {'class': 'firstname', 'style': 'display:none'} }) }}
+                                {{ form_widget(userForm.lastName, { 'attr': {'class': 'lastname', 'style': 'display:none'} }) }} 
+                            {% endif %}  
+                            {{ form_widget(userForm.availability, { 'attr': {'class': 'availability'} }) }}
+                            {{ form_errors(userForm.availability) }}
                             <div class="clear"></div>
                         </div>
-                        {{ form_errors(userForm.dispoAddress) }}
-                        {{ form_widget(userForm.dispoAddress, { 'attr': {'class': 'dispoAddress  dispo'} }) }}
-                    </div>                  
+
+                        <div class="birthFormUser containerForm">
+                            <div class="fieldForm">
+                                <h4>{{ form_label(userForm.birthDate, 'Date de naissance') }}</h4>
+                                {{ form_errors(userForm.birthDate) }}
+                                {{ form_widget(userForm.birthDate, { 'attr': {'class': 'birthdate'} }) }}
+                            </div>
+                            {{ form_errors(userForm.dispoBirth) }}
+                            {{ form_widget(userForm.dispoBirth, { 'attr': {'class': 'dispoBirthdate  dispo'} }) }}
+                        </div> 
+
+                        <div class="emailFormUser containerForm">
+                            <div class="fieldForm">
+                                <h4>{{ form_label(userForm.email, 'Email') }}</h4>
+                                {{ form_errors(userForm.email) }}
+                                {{ form_widget(userForm.email, { 'attr': {'class': 'email', 'placeholder': 'Email'} }) }}
+                            </div>
+                            {{ form_errors(userForm.dispoEmail) }}
+                            {{ form_widget(userForm.dispoEmail,  { 'attr': {'class': 'dispoEmail dispo'} }) }}
+                        </div>
+
+                        <div class="phoneFormUser containerForm">
+                            <div class="fieldForm">
+                                <h4>{{ form_label(userForm.phone, 'Téléphone') }}</h4>
+                                {{ form_errors(userForm.phone) }}
+                                {{ form_widget(userForm.phone,  { 'attr': {'class': 'phone', 'placeholder': 'Téléphone'} }) }}
+                            </div>
+                            {{ form_errors(userForm.dispoPhone) }}
+                            {{ form_widget(userForm.dispoPhone, { 'attr': {'class': 'dispoPhone  dispo'} }) }}
+                        </div>        
+
+                        <div class="addressFormUser containerForm">
+                            <div class="fieldForm">
+                                <h4>Adresse Postale</h4>
+                                {{ form_errors(userForm.address) }}
+                                {{ form_errors(userForm.postCode) }}
+                                {{ form_errors(userForm.city) }}
+                                {{ form_widget(userForm.address, { 'attr': {'class': 'address', 'placeholder': 'Adresse'} }) }}
+                                {{ form_widget(userForm.postCode, { 'attr': {'class': 'postcode', 'placeholder': 'Code Postal'} }) }}
+                                {{ form_widget(userForm.city, { 'attr': {'class': 'city', 'placeholder': 'Ville'} }) }}      
+                                <div class="clear"></div>
+                            </div>
+                            {{ form_errors(userForm.dispoAddress) }}
+                            {{ form_widget(userForm.dispoAddress, { 'attr': {'class': 'dispoAddress  dispo'} }) }}
+                        </div>                  
+                        <div class="clear"></div>
+
+                        {% if is_granted('ROLE_ADMIN') %} 
+                            <h4>{{ form_label(userForm.username, "Login") }}</h4>
+                            {{ form_errors(userForm.username) }}
+                            {{ form_widget(userForm.username, { 'attr': {'class': 'username'} }) }}
+
+                            <h4>{{ form_label(userForm.password, 'Mot de passe') }}</h4>
+                            {{ form_errors(userForm.password) }}
+                            {{ form_widget(userForm.password, { 'attr': {'class': 'password'} }) }}
+                        {% else %}
+                            {{ form_widget(userForm.username, { 'attr': {'class': 'username', 'style': 'display:none'} }) }}
+                            {{ form_widget(userForm.password, { 'attr': {'class': 'password', 'style': 'display:none'} }) }}
+                        {% endif %}
+
+
+                        <h4>{{ form_label(userForm.promotions, "Promotions") }}</h4>
+                        <div class="promotionContainer">
+                            {{ form_widget(userForm.promotions) }}
+                        </div>
+
+                        <h4>{{ form_label(userForm.UserSkills, "Compétences") }}</h4>
+                        <div class="userSkillContainer">
+                            {{ form_widget(userForm.UserSkills) }}
+                        </div>
+
+                        <h4>{{ form_label(userForm.description, 'Présentation') }}</h4>
+                        {{ form_errors(userForm.description) }}
+                        {{ form_widget(userForm.description, { 'attr': {'class': 'description'} }) }}
+
+                        <h4>{{ form_label(userForm.image.alt, "Description de l'image") }}</h4>
+                        {{ form_errors(userForm.image.alt) }}
+                        {% if user.image is null %}
+                            {{ form_widget(userForm.image.alt, { 'attr': {'class': 'altImage', 'value': 'Image du profil' } }) }}
+                        {% else %}
+                            {{ form_widget(userForm.image.alt, { 'attr': {'class': 'altImage'} }) }}
+                        {% endif %}
+
+                        <h4>{{ form_label(userForm.image.url, "URL de l'image") }}</h4>
+                        {{ form_errors(userForm.image.url) }}
+                        {% if user.image is null %}
+                            {{ form_widget(userForm.image.url, { 'attr': {'class': 'urlImage', 'value': 'bundles/app/images/avatar.png' } }) }}
+                        {% else %}
+                            {{ form_widget(userForm.image.url, { 'attr': {'class': 'urlImage'} }) }}
+                        {% endif %}
+                    {{ form_end(userForm) }}
                     <div class="clear"></div>
+                </div>
 
-                    {% if is_granted('ROLE_ADMIN') %} 
-                        <h4>{{ form_label(userForm.username, "Login") }}</h4>
-                        {{ form_errors(userForm.username) }}
-                        {{ form_widget(userForm.username, { 'attr': {'class': 'username'} }) }}
-
-                        <h4>{{ form_label(userForm.password, 'Mot de passe') }}</h4>
-                        {{ form_errors(userForm.password) }}
-                        {{ form_widget(userForm.password, { 'attr': {'class': 'password'} }) }}
-                    {% else %}
-                        {{ form_widget(userForm.username, { 'attr': {'class': 'username', 'style': 'display:none'} }) }}
-                        {{ form_widget(userForm.password, { 'attr': {'class': 'password', 'style': 'display:none'} }) }}
-                    {% endif %}
-                    
-
-                    <h4>{{ form_label(userForm.promotions, "Promotions") }}</h4>
-                    <div class="promotionContainer">
-                        {{ form_widget(userForm.promotions) }}
-                    </div>
-
-                    <h4>{{ form_label(userForm.UserSkills, "Compétences") }}</h4>
-                    <div class="userSkillContainer">
-                        {{ form_widget(userForm.UserSkills) }}
-                    </div>
-
-                    <h4>{{ form_label(userForm.description, 'Présentation') }}</h4>
-                    {{ form_errors(userForm.description) }}
-                    {{ form_widget(userForm.description, { 'attr': {'class': 'description'} }) }}
-
-                    <h4>{{ form_label(userForm.image.alt, "Description de l'image") }}</h4>
-                    {{ form_errors(userForm.image.alt) }}
-                    {% if user.image is null %}
-                        {{ form_widget(userForm.image.alt, { 'attr': {'class': 'altImage', 'value': 'Image du profil' } }) }}
-                    {% else %}
-                        {{ form_widget(userForm.image.alt, { 'attr': {'class': 'altImage'} }) }}
-                    {% endif %}
-
-                    <h4>{{ form_label(userForm.image.url, "URL de l'image") }}</h4>
-                    {{ form_errors(userForm.image.url) }}
-                    {% if user.image is null %}
-                        {{ form_widget(userForm.image.url, { 'attr': {'class': 'urlImage', 'value': 'bundles/app/images/avatar.png' } }) }}
-                    {% else %}
-                        {{ form_widget(userForm.image.url, { 'attr': {'class': 'urlImage'} }) }}
-                    {% endif %}
-                {{ form_end(userForm) }}
-                <div class="clear"></div>
-            </div>
-
-            {% if (user.worksOnProjects|length!=0) %}
-                <h4>Projets en cours</h4>
-                <table class="projectsMember addOrModify">
-                    <tr>
-                        <th>Projet</th>
-                        <th>Compétence</th>
-                        <th>Date de début</th>
-                        <th>Date de fin</th>
-                    </tr>
-                        {% for worksOnProject in user.worksOnProjects %} 
-                            {% if worksOnProject.active == 1 %}   
-                                <tr>
-                                    <td> {{ worksOnProject.project.name }} </td>
-                                    <td> {{ worksOnProject.skill }} </td>
-                                    <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
-                                    <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
-                </table>
+                {% if (user.worksOnProjects|length!=0) %}
+                    <h4>Projets en cours</h4>
+                    <table class="projectsMember addOrModify">
+                        <tr>
+                            <th>Projet</th>
+                            <th>Compétence</th>
+                            <th>Date de début</th>
+                            <th>Date de fin</th>
+                        </tr>
+                            {% for worksOnProject in user.worksOnProjects %} 
+                                {% if worksOnProject.active == 1 %}   
+                                    <tr>
+                                        <td> {{ worksOnProject.project.name }} </td>
+                                        <td> {{ worksOnProject.skill }} </td>
+                                        <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
+                                        <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
+                                    </tr>
+                                {% endif %}
+                            {% endfor %}
+                    </table>
+                {% endif %}
+            {% else %}
+                <h4>Vous ne possédez pas les droits suffisants pour modifier ce profil.</h4>
             {% endif %}
         </div>    
     </div>                         

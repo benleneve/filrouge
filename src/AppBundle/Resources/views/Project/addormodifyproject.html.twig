@@ -15,87 +15,91 @@
     <div class="blockGeneral">
         <h2 class="icoProject">Projets</h2>
         <div class="blockContent">
-            <div id="formProject">
-                {{ form_start(projectForm) }}
-                    {{ form_errors(projectForm) }}
+            {% if is_granted('ROLE_ADMIN') or project in app.user.managesProjects %} 
+                <div id="formProject">
+                    {{ form_start(projectForm) }}
+                        {{ form_errors(projectForm) }}
 
-                    <div class="nameProject">
-                        <h4>{{ form_label(projectForm.name, "Nom du projet") }}</h4>
-                        {{ form_widget(projectForm.name) }}
-                        {{ form_errors(projectForm.name) }}
-                    </div>
-                    <div class="statusProject">
-                        <h4>{{ form_label(projectForm.name, "Etat du projet") }}</h4>
-                        {{ form_widget(projectForm.status) }}
-                    </div>
-                    <div class="clear"></div>
-                    <div class="startDateProject">
-                        <h4>{{ form_label(projectForm.startDate, "Date de début") }}</h4>
-                        {{ form_widget(projectForm.startDate) }}
-                        {{ form_errors(projectForm.startDate) }}
-                    </div>
-                    <div class="endDateProject">
-                        <h4>{{ form_label(projectForm.endDate, "Date de fin") }}</h4>
-                        {{ form_widget(projectForm.endDate) }}
-                        {{ form_errors(projectForm.endDate) }}
-                    </div>
-                    <div class="clear"></div>
+                        <div class="nameProject">
+                            <h4>{{ form_label(projectForm.name, "Nom du projet") }}</h4>
+                            {{ form_widget(projectForm.name) }}
+                            {{ form_errors(projectForm.name) }}
+                        </div>
+                        <div class="statusProject">
+                            <h4>{{ form_label(projectForm.name, "Etat du projet") }}</h4>
+                            {{ form_widget(projectForm.status) }}
+                        </div>
+                        <div class="clear"></div>
+                        <div class="startDateProject">
+                            <h4>{{ form_label(projectForm.startDate, "Date de début") }}</h4>
+                            {{ form_widget(projectForm.startDate) }}
+                            {{ form_errors(projectForm.startDate) }}
+                        </div>
+                        <div class="endDateProject">
+                            <h4>{{ form_label(projectForm.endDate, "Date de fin") }}</h4>
+                            {{ form_widget(projectForm.endDate) }}
+                            {{ form_errors(projectForm.endDate) }}
+                        </div>
+                        <div class="clear"></div>
 
-                    {% if is_granted('ROLE_ADMIN') %}   
-                        <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
-                        {{ form_widget(projectForm.projectManager, { 'attr': {'class': 'managerProject'} }) }}
-                        {{ form_errors(projectForm.projectManager) }}
-                    {% else %}
-                        <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
-                        {{ app.user.firstName }} {{ app.user.lastName }}
-                        {{ form_widget(projectForm.projectManager, { 'attr': {'style': 'display:none'} }) }}
+                        {% if is_granted('ROLE_ADMIN') %}   
+                            <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
+                            {{ form_widget(projectForm.projectManager, { 'attr': {'class': 'managerProject'} }) }}
+                            {{ form_errors(projectForm.projectManager) }}
+                        {% else %}
+                            <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
+                            {{ app.user.firstName }} {{ app.user.lastName }}
+                            {{ form_widget(projectForm.projectManager, { 'attr': {'style': 'display:none'} }) }}
+                        {% endif %}
+
+                        <h4>{{ form_label(projectForm.purpose, "Objectif") }}</h4>
+                        {{ form_widget(projectForm.purpose, { 'attr': {'class': 'purposeProject'} }) }}
+                        {{ form_errors(projectForm.purpose) }}
+                        <h4>{{ form_label(projectForm.description, "Description") }}</h4>
+                        {{ form_widget(projectForm.description, { 'attr': {'class': 'descriptionProject'} }) }}
+
+                        <h4>{{ form_label(projectForm.projectSkills, "Compétences requises") }}</h4>
+                        {{ form_widget(projectForm.projectSkills) }}
+
+                        <h4>{{ form_label(projectForm.steps, "Avancement du projet") }}</h4>
+                        {{ form_widget(projectForm.steps) }}
+                    {{ form_end(projectForm) }}
+                    <div class="clear"></div>
+                </div>
+
+                <div id="myMember">
+                    {% if project.projectMembers is defined %} 
+                    <h4>Membres du projet</h4>
+                        {% for member in project.projectMembers %}
+                            <div class="projectMember">
+                                <div class="nameMember">
+                                    {{member.user.firstName}} {{member.user.LastName}}
+                                </div>
+                                <div class="skillMember">
+                                    {{member.skill}}
+                                </div>
+                                <div class="statusMember">
+                                    {% if member.active %}
+                                        Recruté
+                                    {% else %}   
+                                        En attente
+                                    {% endif %}          
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="confirmation">
+                                {% if member.active == 0 %}
+                                    <a href=" {{path('filrouge_project_accept', {'id': project.id, 'idMember': member.id } )}} " class="btnAction accepted">> Accepter</a>
+                                    <a href=" {{path('filrouge_project_refuse', {'id': project.id, 'idMember': member.id } )}} " class="btnAction refused">> Refuser</a>
+                                {% endif %}
+                            </div>
+                            <div class="clear"></div> 
+                        {% endfor %}
                     {% endif %}
-                    
-                    <h4>{{ form_label(projectForm.purpose, "Objectif") }}</h4>
-                    {{ form_widget(projectForm.purpose, { 'attr': {'class': 'purposeProject'} }) }}
-                    {{ form_errors(projectForm.purpose) }}
-                    <h4>{{ form_label(projectForm.description, "Description") }}</h4>
-                    {{ form_widget(projectForm.description, { 'attr': {'class': 'descriptionProject'} }) }}
-                    
-                    <h4>{{ form_label(projectForm.projectSkills, "Compétences requises") }}</h4>
-                    {{ form_widget(projectForm.projectSkills) }}
-                    
-                    <h4>{{ form_label(projectForm.steps, "Avancement du projet") }}</h4>
-                    {{ form_widget(projectForm.steps) }}
-                {{ form_end(projectForm) }}
-                <div class="clear"></div>
-            </div>
-   
-            <div id="myMember">
-                {% if project.projectMembers is defined %} 
-                <h4>Membres du projet</h4>
-                    {% for member in project.projectMembers %}
-                        <div class="projectMember">
-                            <div class="nameMember">
-                                {{member.user.firstName}} {{member.user.LastName}}
-                            </div>
-                            <div class="skillMember">
-                                {{member.skill}}
-                            </div>
-                            <div class="statusMember">
-                                {% if member.active %}
-                                    Recruté
-                                {% else %}   
-                                    En attente
-                                {% endif %}          
-                            </div>
-                            <div class="clear"></div>
-                        </div>
-                        <div class="confirmation">
-                            {% if member.active == 0 %}
-                                <a href=" {{path('filrouge_project_accept', {'id': project.id, 'idMember': member.id } )}} " class="btnAction accepted">> Accepter</a>
-                                <a href=" {{path('filrouge_project_refuse', {'id': project.id, 'idMember': member.id } )}} " class="btnAction refused">> Refuser</a>
-                            {% endif %}
-                        </div>
-                        <div class="clear"></div> 
-                    {% endfor %}
-                {% endif %}
-            </div>    
+                </div>
+            {% else %}
+                <h4>Vous ne possédez pas les droits suffisants pour modifier ce projet.</h4>
+            {% endif %}
         </div>    
     </div>
     

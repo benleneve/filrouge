@@ -10,6 +10,7 @@
         <h2 class="icoRecrut">Tous les messages</h2>
         <div class="blockContent">
             {% for message in messages %}
+                {% if is_granted('ROLE_ADMIN') or app.user == message.recipient %}
                 <div class="oneElement">
                     <div class="icon">
                         {% if message.type == 1 %}
@@ -29,6 +30,11 @@
                     </a>
                     <div class="clear"></div>
                 </div>
+                {% else %}
+                    {% if loop.index == 1 %}
+                        <h4>Vous ne possédez pas les droits suffisants pour voir ces messages.</h4>
+                    {% endif %}
+                {% endif %}
             {% endfor %}
             <div class="pagination">
                 {% if messages |length != 0 %}
