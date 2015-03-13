@@ -45,6 +45,53 @@ class UserController extends Controller {
                                         ));
     }
     
+    public function searchAction() {
+
+        if(isset($_POST['nameUser']) && !empty($_POST['nameUser'])) {
+            $name = htmlspecialchars($_POST['nameUser']);
+        } else {
+           $name = 'none'; 
+        }
+        if($_POST['statusUser'] === '0') {
+            $status = 'none';
+        } elseif ($_POST['statusUser'] === '1') {    
+            $status = 1;
+        } else {
+            $status = 0;
+        }
+        if($_POST['skillUser1'] === 'none') {
+            $skill1 = 'none';
+        } else {
+           $skill1 = htmlspecialchars($_POST['skillUser1']); 
+        }
+        if($_POST['skillUser2'] === 'none') {
+            $skill2 = 'none';
+        } else {
+           $skill2 = htmlspecialchars($_POST['skillUser2']); 
+        }
+        if($_POST['skillUser3'] === 'none') {
+            $skill3 = 'none';
+        } else {
+           $skill3 = htmlspecialchars($_POST['skillUser3']); 
+        }
+        
+        echo $name, $status, $skill1, $skill2, $skill3;
+
+
+        $users = $this->getDoctrine()
+                        ->getRepository('AppBundle:User')
+                        ->findSearchUsersPageEager($name, $status, $skill1, $skill2, $skill3);
+
+        $skills = $this->getDoctrine()
+                        ->getRepository('AppBundle:Skill')
+                        ->findAllSkillEager();
+
+        return $this->render('AppBundle:User:userslist.html.twig', array(
+                'users' => $users,
+                'skills' => $skills
+        ));
+    }
+    
     public function detailAction($id) {
             $user = $this->getDoctrine()
                          ->getRepository('AppBundle:User')

@@ -13,7 +13,7 @@ use Doctrine\ORM\Tools\Pagination\Paginator;
  */
 class ProjectRepository extends EntityRepository
 {
-    
+ 
     //Récupérer tous les projet avec le status et compétences
     //triés par date et pagination
     public function findAllProjectsPageEager($page= 1, $maxPerPage = 5) {
@@ -30,6 +30,43 @@ class ProjectRepository extends EntityRepository
         return new Paginator($query);        
     }
     
+    //Fonction du moteur de recherche
+    public function findSearchProjectsPageEager($name, $status, $skill1, $skill2, $skill3, $recrut) {
+        $query = $this->createQueryBuilder('p')
+                    ->addSelect('st')
+                    ->addSelect('ps')
+                    ->addSelect('sk')
+                    ->LeftJoin('p.status', 'st')
+                    ->LeftJoin('p.projectSkills', 'ps')
+                    ->LeftJoin('ps.skill', 'sk');
+        if($name != 'none') {
+            $query->andWhere('p.name LIKE :name')
+                  ->setParameter('name', '%' . $name . '%');
+        }
+        if($status != 'none') {
+            $query->andWhere('st.id = :status')
+                  ->setParameter('status', $status);
+        }
+        if($skill1 != 'none') {
+            $query->andWhere('sk.name = :skill1')
+                  ->setParameter('skill1', $skill1);
+        }
+        if($skill2 != 'none') {
+            $query->andWhere('sk.name = :skill2')
+                  ->setParameter('skill2', $skill2);
+        }
+        if($skill2 != 'none') {
+            $query->andWhere('sk.name = :skill3')
+                  ->setParameter('skill3', $skill3);
+        }
+        if($recrut) {
+            $query->andWhere('ps.active = :recrut')
+                  ->setParameter('recrut', $recrut);
+        }
+        $query->orderBy('p.creationDate', 'DESC');
+        return $query->getQuery()->getResult();
+    }
+ 
     //Récupérer tous les projet d'un utilisateur
     //triés par date et pagination
     public function findAllProjectsByUserPageEager($page= 1, $maxPerPage = 5, $id) {

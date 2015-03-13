@@ -3,6 +3,11 @@ filrouge_project_list:
     defaults: {_controller:AppBundle:Project:list, page:1 }
     requirements:
         page: \d+
+        
+filrouge_project_search:
+    path: /search
+    defaults: {_controller:AppBundle:Project:search }
+    methods: [POST]
 
 filrouge_project_detail:
     path: /detail/{id}

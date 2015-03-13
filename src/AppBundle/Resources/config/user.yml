@@ -3,6 +3,11 @@ filrouge_user_list:
     defaults: {_controller:AppBundle:User:list, page:1}
     requirements:
         page: \d+
+        
+filrouge_user_search:
+    path: /search
+    defaults: {_controller:AppBundle:User:search }
+    methods: [POST]
 
 filrouge_user_detail:
     path: /detail/{id}

@@ -53,6 +53,45 @@ class UserRepository extends EntityRepository
                 
                 return $query->getQuery()->getResult();
             }
+            
+        public function findSearchUsersPageEager($name, $status, $skill1, $skill2, $skill3)
+            {
+                $query = $this->createQueryBuilder('u')
+                        ->leftJoin('u.image', 'i')
+                        ->addSelect('i')
+                        ->leftJoin('u.promotions', 'p')
+                        ->addSelect('p')
+                        ->leftJoin('u.worksOnProjects', 'wp')
+                        ->addSelect('wp')
+                        ->leftJoin('wp.project', 'pr')
+                        ->addSelect('pr')
+                        ->leftJoin('u.userSkills', 'us')
+                        ->addSelect('us')
+                        ->leftJoin('us.skill', 's')
+                        ->addSelect('s');
+                if($name != 'none') {
+                    $query->andWhere('u.firstName LIKE :name')
+                          ->setParameter('name', '%' . $name . '%');
+                }
+                if($status != 'none') {
+                    $query->andWhere('u.availability = :status')
+                          ->setParameter('status', $status);
+                }
+                if($skill1 != 'none') {
+                    $query->andWhere('s.name = :skill1')
+                          ->setParameter('skill1', $skill1);
+                }
+                if($skill2 != 'none') {
+                    $query->andWhere('s.name = :skill2')
+                          ->setParameter('skill2', $skill2);
+                }
+                if($skill2 != 'none') {
+                    $query->andWhere('s.name = :skill3')
+                          ->setParameter('skill3', $skill3);
+                }
+                $query->orderBy('u.lastName');
+                return $query->getQuery()->getResult();
+            }
     
         public function findAllUsersPageEager($page= 1, $maxPerPage = 5)
             {

@@ -145,7 +145,7 @@
                                 {% if worksOnProject.active == 1 %}   
                                     <tr>
                                         <td> {{ worksOnProject.project.name }} </td>
-                                        <td> {{ worksOnProject.skill }} </td>
+                                        <td> {{ worksOnProject.skill.name }} </td>
                                         <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
                                         <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
                                     </tr>

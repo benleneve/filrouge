@@ -21,13 +21,6 @@ class UserProject
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     private $id;
-     
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="skill", type="string", length=255)
-     */
-    private $skill;
     
      /**
      * @var boolean
@@ -49,6 +42,13 @@ class UserProject
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="projectMembers")
      */
     private $project;
+    
+    /**
+     * @var Skill
+     *
+     * @ORM\ManyToOne(targetEntity="Skill", inversedBy="userProjectSkills")
+     */
+    private $skill;
 
     
     /**
@@ -59,29 +59,6 @@ class UserProject
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Set skill
-     *
-     * @param string $skill
-     * @return UserProject
-     */
-    public function setSkill($skill)
-    {
-        $this->skill = $skill;
-
-        return $this;
-    }
-
-    /**
-     * Get skill
-     *
-     * @return string 
-     */
-    public function getSkill()
-    {
-        return $this->skill;
     }
     
     /**
@@ -153,5 +130,29 @@ class UserProject
     public function getProject()
     {
         return $this->project;
+    }
+    
+     /**
+     * Set skill
+     *
+     * @param Skill $skill
+     * @return UserProject
+     */
+    public function setSkill(Skill $skill)
+    {
+        $this->skill = $skill;
+        $skill->addUserProjectSkills($this);
+
+        return $this;
+    }
+
+    /**
+     * Get skill
+     *
+     * @return Skill 
+     */
+    public function getSkill()
+    {
+        return $this->skill;
     }
 }

@@ -17,8 +17,7 @@ use Symfony\component\HttpFoundation\Request;
 
 Class ProjectController extends Controller
     {
-        public function listAction($page)
-        {
+        public function listAction($page) {
             $maxProjects = 5;
             
             $projects = $this->getDoctrine()
@@ -43,10 +42,54 @@ Class ProjectController extends Controller
             ));
         }
         
-        
+        public function searchAction() {
 
-        public function detailAction($id)
-        {
+            if(isset($_POST['nameProject']) && !empty($_POST['nameProject'])) {
+                $name = htmlspecialchars($_POST['nameProject']);
+            } else {
+               $name = 'none'; 
+            }
+            if($_POST['nameProject'] === 'none') {
+                $status = 'none';
+            } else {
+               $status = htmlspecialchars($_POST['statusProject']); 
+            }
+            if($_POST['skillProject1'] === 'none') {
+                $skill1 = 'none';
+            } else {
+               $skill1 = htmlspecialchars($_POST['skillProject1']); 
+            }
+            if($_POST['skillProject2'] === 'none') {
+                $skill2 = 'none';
+            } else {
+               $skill2 = htmlspecialchars($_POST['skillProject2']); 
+            }
+            if($_POST['skillProject3'] === 'none') {
+                $skill3 = 'none';
+            } else {
+               $skill3 = htmlspecialchars($_POST['skillProject3']); 
+            }
+            if(isset($_POST['recrutProject'])) {
+                $recrut = true;
+            } else {
+               $recrut = false; 
+            }
+
+            $projects = $this->getDoctrine()
+                            ->getRepository('AppBundle:Project')
+                            ->findSearchProjectsPageEager($name, $status, $skill1, $skill2, $skill3, $recrut);
+ 
+            $skills = $this->getDoctrine()
+                            ->getRepository('AppBundle:Skill')
+                            ->findAllSkillEager();
+            
+            return $this->render('AppBundle:Project:projectslist.html.twig', array(
+                    'projects' => $projects,
+                    'skills' => $skills
+            ));
+        }
+
+        public function detailAction($id) {
             $repository = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('AppBundle:Project');
@@ -59,8 +102,7 @@ Class ProjectController extends Controller
             ));
         }
 
-        public function addAction(Request $req)
-        {
+        public function addAction(Request $req) {
             $project = new Project();
             $form = $this->createForm(new ProjectType(), $project, array(
                 'action' => $this->generateUrl('filrouge_project_add')
@@ -96,8 +138,7 @@ Class ProjectController extends Controller
             ));  
         }
 
-        public function updateAction($id, Request $req)
-        {
+        public function updateAction($id, Request $req) {
             $project = $this->getDoctrine()
                                 ->getManager()
                                 ->getRepository('AppBundle:Project')
@@ -156,8 +197,7 @@ Class ProjectController extends Controller
             )); 
         }
 
-        public function removeAction($id, Request $req)
-        {
+        public function removeAction($id, Request $req) {
             $project = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('AppBundle:Project')
@@ -212,11 +252,12 @@ Class ProjectController extends Controller
             
             $projectSkill->addApplicants($user->getId());
             
+            $skill = $projectSkill->getSkill();
             $name = $projectSkill->getSkill()->getName();
             
             $userProject = new UserProject();
             $userProject->setActive(0);
-            $userProject->setSkill($name);
+            $userProject->setSkill($skill);
             $userProject->setProject($project);
             $userProject->setUser($user);
             $em->persist($userProject);

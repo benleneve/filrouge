@@ -46,6 +46,13 @@ class Skill
     private $projectSkills;
     
     /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="UserProject", mappedBy="skill")
+     */
+    private $userProjectSkills;
+    
+    /**
      * @var Category
      * 
      * @ORM\ManyToOne(targetEntity="Category", inversedBy="skills")
@@ -60,6 +67,7 @@ class Skill
     {
         $this->userSkills = new ArrayCollection();
         $this->projectSkills = new ArrayCollection();
+        $this->userProjectSkills = new ArrayCollection();
     }
      
     /**
@@ -183,5 +191,38 @@ class Skill
     public function getCategory()
     {
         return $this->category;
+    }
+    
+    /**
+     * Get userProjectSkills
+     *
+     * @return Collection 
+     */
+    public function getUserProjectSkills()
+    {
+        return $this->userProjectSkills;
+    }
+
+    /**
+     * Add userProjectSkills
+     *
+     * @param UserProject $userProjectSkills
+     * @return Skill
+     */
+    public function addUserProjectSkills(UserProject $userProjectSkills)
+    {
+        $this->userProjectSkills[] = $userProjectSkills;
+
+        return $this;
+    }
+
+    /**
+     * Remove userProjectSkills
+     *
+     * @param UserProject $userProjectSkills
+     */
+    public function removeUserProjectSkills(UserProject $userProjectSkills)
+    {
+        $this->userProjectSkills->removeElement($userProjectSkills);
     }
 }

@@ -15,7 +15,7 @@
         <h2 class="icoSearch">Rechercher un profil</h2>
         <div class="blockContent">
             <div id="formSearchUser">
-                <form action="#" method="POST"> 
+                <form action="{{ path('filrouge_user_search') }}" method="POST"> 
                     <p>
                         <label for="nameUser">Nom du profil</label>
                         <input type="text" id="nameUser" name="nameUser" placeholder="Entrer le nom du profil recherché"/>
@@ -24,8 +24,8 @@
                         <label for="statusUser">Statut</label>
                         <select id="statusUser" name="statusUser">
                             <option value="none" selected>aucun</option>
-                            <option value="yes">Disponnible</option>
-                            <option value="no">Indisponnible</option>
+                            <option value="1">Disponnible</option>
+                            <option value="2">Indisponnible</option>
                         </select>
                     </p>
                     <p>
@@ -59,15 +59,17 @@
     <div class="blockGeneral">
         <h2 class="icoProject">Tous les Profils</h2>
         <div class="blockContent">
-                {% for user in users %}
-                    {% include('AppBundle:User:userlayout.html.twig') %}
-                {% endfor %}
-            <div class="pagination">
-                {% if users |length != 0 %}
-                    {% include 'AppBundle::pagination.html.twig' %}
-                {% endif %}
-            </div>
-            <div class="clear"></div>
+            {% for user in users %}
+                {% include('AppBundle:User:userlayout.html.twig') %}
+            {% endfor %}
+            {% if pagination is defined %}
+                <div class="pagination">
+                    {% if users |length != 0 %}
+                        {% include 'AppBundle::pagination.html.twig' %}
+                    {% endif %}
+                </div>
+                <div class="clear"></div>
+            {% endif %}
         </div>
     </div>
     

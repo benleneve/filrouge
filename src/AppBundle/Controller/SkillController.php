@@ -94,7 +94,7 @@ class SkillController extends Controller{
         if($skill === null) {
             throw $this->createNotFoundException('ID' . $id . ' impossible.');
         }
-        if(count($skill->getProjectSkills()) === 0 && count($skill->getUserSkills()) === 0) {
+        if(count($skill->getProjectSkills()) === 0 && count($skill->getUserSkills()) === 0 && count($skill->getUserProjectSkills()) === 0) {
             $message = 'La compétence ' . $skill->getName() . ' vient d\'être effacée';
             $em->remove($skill);
             $em->flush();

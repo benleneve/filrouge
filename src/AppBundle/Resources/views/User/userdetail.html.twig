@@ -73,7 +73,7 @@
                                     {% if worksOnProject.active == 1 %}                                    
                                         <tr>
                                             <td> <a href=" {{path('filrouge_project_detail', {'id': worksOnProject.project.id } )}}" class="hrefBody">{{ worksOnProject.project.name }}</a> </td>
-                                            <td> {{ worksOnProject.skill }} </td>
+                                            <td> {{ worksOnProject.skill.name }} </td>
                                             <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
                                             <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
                                         </tr>
