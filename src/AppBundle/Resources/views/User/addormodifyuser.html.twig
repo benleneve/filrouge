@@ -7,8 +7,9 @@
 {% block breadcrumb %}
     {{parent()}} > 
         <a href="{{path('filrouge_user_list')}}">Profils</a> >
-        {% if user.id is defined %}
-            <a href="{{path('filrouge_user_update', {'id': user.id } )}}">{{user.firstName ~ " " ~ user.lastName}}</a>
+        {% if user is defined and user.id is not null %}
+            <a href="{{path('filrouge_user_detail', {'id': user.id } )}}">{{user.firstName ~ " " ~ user.lastName}}</a> >
+            <a href="{{path('filrouge_user_update', {'id': user.id } )}}">Gérer mon profil</a>
         {% else %}
             <a href="{{path('filrouge_user_add')}}">Nouveau profil</a>
         {% endif%}
@@ -132,26 +133,28 @@
                     <div class="clear"></div>
                 </div>
 
-                {% if (user.worksOnProjects|length!=0) %}
-                    <h4>Projets en cours</h4>
-                    <table class="projectsMember addOrModify">
-                        <tr>
-                            <th>Projet</th>
-                            <th>Compétence</th>
-                            <th>Date de début</th>
-                            <th>Date de fin</th>
-                        </tr>
-                            {% for worksOnProject in user.worksOnProjects %} 
-                                {% if worksOnProject.active == 1 %}   
-                                    <tr>
-                                        <td> {{ worksOnProject.project.name }} </td>
-                                        <td> {{ worksOnProject.skill.name }} </td>
-                                        <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
-                                        <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
-                                    </tr>
-                                {% endif %}
-                            {% endfor %}
-                    </table>
+                {% if user is defined %}
+                    {% if (user.worksOnProjects|length!=0) %}
+                        <h4>Projets en cours</h4>
+                        <table class="projectsMember addOrModify">
+                            <tr>
+                                <th>Projet</th>
+                                <th>Compétence</th>
+                                <th>Date de début</th>
+                                <th>Date de fin</th>
+                            </tr>
+                                {% for worksOnProject in user.worksOnProjects %} 
+                                    {% if worksOnProject.active == 1 %}   
+                                        <tr>
+                                            <td> {{ worksOnProject.project.name }} </td>
+                                            <td> {{ worksOnProject.skill.name }} </td>
+                                            <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
+                                            <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
+                                        </tr>
+                                    {% endif %}
+                                {% endfor %}
+                        </table>
+                    {% endif %}
                 {% endif %}
             {% else %}
                 <h4>Vous ne possédez pas les droits suffisants pour modifier ce profil.</h4>

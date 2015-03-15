@@ -78,6 +78,16 @@ h2.icoProject {
     text-indent: 30px;
 }
 
+#projectDetail h2.icoProject{
+    float:left;
+}
+
+
+#projectDetail .projectUpdate{
+    float:right;
+    padding-top: 10px;
+}
+
 h2.icoRecrut {
     background: url("../images/recrut.png") left bottom no-repeat;
     text-indent: 40px;
@@ -223,6 +233,7 @@ a.btnAction {
     padding:0 10px 0 5px;
     line-height:25px;
     text-align:center;
+    text-transform:lowercase;
 }
 
 button.btnAction {
@@ -231,9 +242,12 @@ button.btnAction {
     height:25px;
     color:#fff;
     background:#000;
-    padding:0 10px 0 5px;
+    padding:0 10px 0 10px;
     line-height:25px;
     text-align:center;
+    font-family: "MyriadPro-Regular", arial, sans-serif;
+    border:none;
+    text-transform:lowercase;
 }
 
 /*------------------HEADER--------------------*/
@@ -414,6 +428,10 @@ aside {
     width: 250px;
 }
 
+#content .headerBlock .name h3{
+   font-weight:bold;
+}
+
 #content .headerBlock .information {
     float: left;
     height: 30px;
@@ -435,6 +453,10 @@ aside {
     float: right;
 }
 
+#content .pagination a{
+    margin-left:10px;
+}
+
 /*----------------------Collapsing-----------------------*/
 
 .collapsible {
@@ -454,6 +476,8 @@ aside {
     height:30px;
     line-height: 35px;
     width: 250px;
+    font-weight:bold;
+    font-size:15px;
 }
 
 .collapsible .information {
@@ -635,6 +659,7 @@ table.projectsMember td {
     font-size:12px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 15px; 
+    line-height:28px;
 }
 
 #formUserInvite label{
@@ -650,6 +675,15 @@ table.projectsMember td {
     display:block;
     margin-top:20px;
     color:red;
+}
+
+#oneProfile .icoUser{
+    float:left;
+}
+
+#oneProfile .userUpdate{
+    float:right;
+    padding-top:10px;
 }
 
 /*----------------------FormUser-----------------------*/
@@ -786,6 +820,7 @@ table.projectsMember td {
     font-size:12px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 15px;
+    line-height:28px;
 }
 
 table.addOrModify {
@@ -831,6 +866,7 @@ table.addOrModify {
     margin-top: 5px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 13px;
+    line-height:28px;
 }
 
 /*------------Content Project----------------*/
@@ -981,6 +1017,64 @@ a.deleteStep, a.deleteSkill {
     background-color: #d13025; 
 }
 
+#commentProject h4{
+   font-size:15px;
+}
+
+#commentProject .contentCommentProject{
+    background:#fff;
+    padding:2%;
+}
+
+#commentProject .oneComment{
+    margin-top:10px;
+    border-top:1px solid #ccc;
+    padding-top:10px;
+}
+
+#commentProject .content{
+    float:left;
+    width:610px;
+}
+
+#commentProject .txt{
+    font-size:14px;
+}
+
+#commentProject .status{
+    float:left;
+    width:60px;
+}
+
+#commentProject .status a{
+    display:block;
+    float:left;
+    width:30px;
+}
+
+#commentProject .formComment h4{
+    margin-top:0;
+}
+
+#commentProject .formComment textarea{
+    width:660px;
+    resize:none;
+    margin-bottom:5px;
+    height:70px;
+}
+
+#commentProject .formComment button.btnAction{
+    float:right;
+}
+
+#allProjects .icoProject{
+    float:left;
+}
+
+#allProjects .projectNew{
+    float:right;
+    padding-top:10px;
+}
 
 /*----------------------FormSearchProject-----------------------*/
 
@@ -1020,6 +1114,7 @@ a.deleteStep, a.deleteSkill {
     margin-top: 5px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 13px;
+    line-height:28px;
 }
 
 /*----------------------FormProject-----------------------*/
@@ -1109,6 +1204,7 @@ formProject {
     font-size:12px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 15px;
+    line-height: 28px;
 }
 
 /*------------------Steps&SkillProject--------------------*/
@@ -1290,8 +1386,69 @@ span.message {
     font-size:12px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 15px;
+    line-height:28px;
 }
 
+/*------------------Recrutement - tout--------------------*/
+
+#recrutAll .oneElement{
+    margin-bottom:10px;
+    border-bottom:1px solid #ccc;
+    padding-bottom:10px;
+}
+
+#recrutAll .icon{
+    float:left;
+    display:block;
+    width:30px;
+}
+
+#recrutAll .content{
+    float:left;
+    width:625px;
+}
+
+#recrutAll .content p{
+    font-size:15px;
+}
+
+#recrutAll .content span {
+    font-size:13px;
+}
+
+#recrutAll a.delete{
+    display:block;
+    width:13px;
+    float:left;
+    margin-top:7px;
+}
+
+/*------------------Notifications - tout--------------------*/
+
+#notifAll .oneElement{
+    margin-bottom:10px;
+    border-bottom:1px solid #ccc;
+    padding-bottom:10px;
+}
+
+#notifAll .icon{
+    float:left;
+    display:block;
+    width:30px;
+}
+
+#notifAll .content{
+    float:left;
+    width:625px;
+}
+
+#notifAll .content p{
+    font-size:15px;
+}
+
+#notifAll .content span {
+    font-size:13px;
+}
 
 /*------------------Mentions Légales--------------------*/
 
@@ -1323,7 +1480,7 @@ span.message {
 
 aside .oneElement {
     padding: 5%;
-    border-bottom: 1px solid #000;
+    border-bottom: 1px solid #ccc;
 }
 
 aside .oneElement .icon {
@@ -1353,7 +1510,11 @@ aside .dateAside {
     border:none;
     font-size:12px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
-    padding:0 15px;
+}
+
+.recrutSeeMore a.btnAction{
+    line-height:29px;
+    padding:0 10px;
 }
 
 .notifSeeMore {
@@ -1364,8 +1525,31 @@ aside .dateAside {
     border:none;
     font-size:12px;
     font-family: "MyriadPro-Regular", arial, sans-serif;
-    padding:0 15px;
 }
+
+.notifSeeMore a.btnAction{
+    line-height:28px;
+    padding:0 10px;
+}
+
+#recrutAside{
+    min-height:63px;
+}
+
+#recrutAside h4{
+    margin-left:10px;
+    margin-top:25px;
+}    
+
+#notifAside{
+    min-height:63px;
+}
+
+#notifAside h4{
+    margin-left:10px;
+    margin-top:25px;
+}    
+
 
 /*----------------footer------------------*/
 

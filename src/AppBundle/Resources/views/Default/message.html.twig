@@ -1,12 +1,12 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block breadcrumb %}
-    {{parent()}} > <a href="{{path('filrouge_message_list', {'id': app.user.id})}}">Message</a>
+    {{parent()}} > <a href="{{path('filrouge_message_list', {'id': app.user.id})}}">Tous les messages</a>
 {% endblock breadcrumb %}
 
 {% block left %}
 
-    <div class="blockGeneral">
+    <div class="blockGeneral" id="recrutAll">
         <h2 class="icoRecrut">Tous les messages</h2>
         <div class="blockContent">
             {% for message in messages %}
@@ -25,7 +25,7 @@
                         <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
                         <p>{{message.content}}</p>
                     </div>
-                    <a href="{{path('filrouge_message_remove', {'id': message.id })}}">
+                    <a href="{{path('filrouge_message_remove', {'id': message.id })}}" class="delete">
                         <img alt="Supprimer le message" src="{{asset('bundles/app/images/delete.png')}}" />
                     </a>
                     <div class="clear"></div>

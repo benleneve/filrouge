@@ -4,7 +4,7 @@ $(document).ready(function() {
     var $containerStep = $('div#appbundle_project_steps');
 
     // On ajoute un lien pour ajouter une nouvelle étape
-    var $addLinkStep = $('<a href="#add_step" id="add_step" class="btnAction newStep">> Ajouter une étape</a>');
+    var $addLinkStep = $('<a href="#add_step" id="add_step" class="btnAction newStep">ajouter une étape</a>');
     $containerStep.append($addLinkStep);
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
@@ -40,7 +40,7 @@ $(document).ready(function() {
     // La fonction qui ajoute un lien de suppression d'une étape
     function addDeleteLinkStep($prototype) {
         // Création du lien
-        $deleteLinkStep = $('<a href="#" class="btnAction deleteStep">> Supprimer</a><div class="clear"></div>');
+        $deleteLinkStep = $('<a href="#" class="btnAction deleteStep">supprimer</a><div class="clear"></div>');
         // Ajout du lien
         $prototype.append($deleteLinkStep);
         // Ajout du listener sur le clic du lien

@@ -12,16 +12,22 @@
 
 {% block left %}
     
-    <div class="blockGeneral">
+    <div class="blockGeneral" id="oneProfile">
         <h2 class="icoUser">Profil</h2>
+        <div class="userUpdate">
+            {% if app.user.id == user.id %} 
+                <a href=" {{path('filrouge_user_update', {'id': user.id } )}} " class="btnAction">modifier mon profil</a>
+            {% endif %}
+        </div>
+        <div class="clear"></div>
         <div class="blockContent">
             <div class="headerBlock">
                 {% include('AppBundle:User:userheaderlayout.html.twig')%}
                 <div class="status">
                     {% if user.availability == true %}
-                        <h5 class="greenRightUser">Disponnible</h5>
+                        <h5 class="greenRightUser">Disponible</h5>
                     {% elseif user.availability == false %}
-                        <h5 class="redRightUser">Indisponnible</h5>
+                        <h5 class="redRightUser">Indisponible</h5>
                     {% endif %}
                 </div>
                 <div class="clear"></div>
@@ -52,8 +58,8 @@
                         {{ user.description }}
                     {% endif %}
                     
+                    <h4>Projets en cours</h4>
                     {% if (user.worksOnProjects|length!=0) %}
-                        <h4>Projets en cours</h4>
                         <table class="projectsMember">
                             <tr>
                                 <th>Projet</th>
@@ -81,7 +87,7 @@
                                 {% endfor %}
                         </table>
                     {% else %}
-                        <h4>Aucun projet en cours</h4>
+                        <p>Ce profil n'a aucun projet en cours.</p>
                     {% endif %}
                 </div>
                 <div class="imageProfil">
@@ -100,7 +106,7 @@
                                     <option value="{{project.id}}">{{project.name}}</option>
                                 {% endfor %}
                             </select>
-                            <button type="submit" class="btnAction">> inviter</button>
+                            <button type="submit" class="btnAction">inviter</button>
                         </form>
                         <div class="clear"></div>
                         {% if  message is defined %}
@@ -110,10 +116,5 @@
                 {% endif %}    
             </div>
         </div>   
-    </div>
-    <div class="userUpdate">
-        {% if app.user.id == user.id %} 
-            <a href=" {{path('filrouge_user_update', {'id': user.id } )}} " class="btnAction">> Modifier mon profil</a>
-        {% endif %}
     </div>
 {% endblock left %}

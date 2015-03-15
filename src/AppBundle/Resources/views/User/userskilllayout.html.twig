@@ -1,6 +1,6 @@
 <div class="userSkill">
+    <h4>Compétences</h4>
     {% if (user.userSkills|length !=0) %}
-        <h4>Compétences</h4>
         {% for userSkill in user.userSkills %}
             <div class="skillContenant">
                 <div class="name">
@@ -25,6 +25,6 @@
             <div class="clear"></div>
         {% endfor %}
     {% else %}
-        <h4>Aucune compétence</h4>
+        <p>Aucune compétence n'a été ajoutée.</p>
     {% endif %}
 </div>

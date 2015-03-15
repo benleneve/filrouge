@@ -8,8 +8,14 @@
 
 {% block left %}
     
-    <div class="blockGeneral">
+    <div class="blockGeneral" id="projectDetail">
         <h2 class="icoProject">Projet</h2>
+        {% if app.user.id == project.projectManager.id %} 
+            <div class="projectUpdate">
+               <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">gérer mon projet</a>
+            </div>
+        {% endif %}
+        <div class="clear"></div>
         <div class="blockContent">
             <div class="headerBlock">
                 <div class="name">
@@ -46,7 +52,7 @@
                 {{project.description}}
                 
                 {% if (project.projectSkills|length !=0) %}
-                    <h4>Compétences manquantes</h4>
+                    <h4>Compétences recherchées</h4>
                     {% for projectSkill in project.projectSkills %}
                         <div class="projectSkill">
                             <div class="name">
@@ -57,17 +63,17 @@
                                 {% if (projectSkill.applicants|length !=0) %}
                                     {% if app.user.id in projectSkill.applicants %}
                                         <div class="validateOnHold">   
-                                            Validation en cours
+                                            validation en cours
                                         </div>
                                     {% else %}    
-                                        <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">> Postuler</a>
+                                        <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">postuler</a>
                                     {% endif %}
                                 {% else %}
-                                    <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">> Postuler</a>
+                                    <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">postuler</a>
                                 {% endif %}     
                             {% else %}
                                 <div class="finish">
-                                    Recruté
+                                    recruté
                                 </div>
                             {% endif %}
                             </div>
@@ -93,15 +99,15 @@
                             <div class="action">
                                 {% if step.status.name == 'En attente' %}
                                     <div class="onHold">
-                                        {{step.status.name}}
+                                        {{step.status.name|lower}}
                                     </div>
                                 {% elseif step.status.name == 'En cours' %}
                                     <div class="inProgress">
-                                        {{step.status.name}}
+                                        {{step.status.name|lower}}
                                     </div>
                                 {% elseif step.status.name == 'Terminé' %}
                                     <div class="finish">
-                                        {{step.status.name}}
+                                        {{step.status.name|lower}}
                                     </div>
                                 {% endif %}
                             </div>
@@ -109,7 +115,7 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <h4>Aucune étape renseignée pour ce projet</h4>
+                    <h4>Aucune étape renseignée pour ce projet.</h4>
                 {% endif %}
                 
                 {% if (project.projectMembers|length !=0) %}
@@ -117,6 +123,7 @@
                     {% set cpt = true %}
                     {% for member in project.projectMembers %} 
                         {% if member.active %}
+                            {% set cpt = false %}
                             <div class="projectMember">
                                 <div class="nameMember">
                                     <a href=" {{path('filrouge_user_detail', {'id': member.user.id } )}}" class="hrefBody">{{member.user.firstName}} {{member.user.LastName}}</a>
@@ -129,21 +136,38 @@
                             <div class="clear"></div>
                         {% else %} 
                             {% if cpt %}   
-                                Des membres sont en attente de validation par le chef de project
+                                Des candidats ont postulé à ce projet.
                                 {% set cpt = false %}
                             {% endif %}
                         {% endif %}
                     {% endfor %}
                 {% else %}
-                    <h4>Aucun membre n'a rejoint ce projet</h4>
+                    <h4>Aucun membre n'a rejoint ce projet.</h4>
                 {% endif %}
             </div>
-        </div>    
-    </div>
-    {% if app.user.id == project.projectManager.id %} 
-        <div class="projectUpdate">
-           <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">> Modifier mon projet</a>
         </div>
-    {% endif %}
-     
+            
+        {% set cptComment = 0 %}
+        {% for member in project.projectMembers %}
+            {% if (member.user.id == app.user.id and cptComment == 0 and member.active) or (app.user.id == project.projectManager.id and cptComment == 0) or (is_granted('ROLE_ADMIN') and cptComment == 0) %} 
+                {% set cptComment = 1 %} 
+                <div id="commentProject">
+                    <h4>Commentaires</h4>
+                    <div class="contentCommentProject">
+                        <div class="formComment">
+                            <h4>Ecrire un commentaire</h4>
+                            {{ form_start(commentForm) }}
+                                {{ form_widget(commentForm.content) }}
+                                {{ form_errors(commentForm.content) }}
+                            {{ form_end(commentForm) }}
+                            <div class=clear></div>
+                        </div>
+                        {{ render(controller('AppBundle:Comment:list', {'id': project.id})) }}  
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+        
+    </div>
+ 
 {% endblock left %}

@@ -50,15 +50,19 @@
                         <input type="checkbox" name="recrutProject" value="yes" id="recrutProject" />
                     <p>
 
-                    <button type="submit" class="btnAction">> Rechercher</button>
+                    <button type="submit" class="btnAction">rechercher</button>
                 </form>
                 <div class="clear"></div>
             </div>
         </div>
     </div>
     
-    <div class="blockGeneral">
+    <div class="blockGeneral" id="allProjects">
         <h2 class="icoProject">Tous les Projets</h2>
+        <div class="projectNew">
+            <a href="{{path('filrouge_project_add')}}" class="btnAction">créer un nouveau projet</a>
+        </div>
+        <div class="clear"></div>
         <div class="blockContent">
             {% if projects|length == 0 %}
                 <h4>Aucun projet</h4>
@@ -77,10 +81,7 @@
             {% endif %}
         </div>
     </div>
-    <div class="projectNew">
-        <a href="{{path('filrouge_project_add')}}" class="btnAction">> Créer un nouveau projet</a>
-    </div>
-      
+ 
 {% endblock left %}
 
 {% block javascripts %}

@@ -9,9 +9,8 @@
 {% block left %}
     
     <div class="blockGeneral">
-        <h2 class="icoMail">Contact</h2>
+        <h2 class="icoMail">Contact Administrateur</h2>
         <div class="blockContent">
-            <h3>Contacter l'administrateur du site</h3>
             {% if message is defined %}
                 <span class="message">{{ message }}</span>
             {% endif %}
@@ -21,7 +20,7 @@
                     <input type="text" id="title" name="title" required>
                     <h4><label for="message">Message</label></h4>
                     <textarea id="message" name="message" required></textarea>
-                    <button type="submit" class="btnAction">> Envoyer</button>
+                    <button type="submit" class="btnAction">envoyer</button>
                 </form>
                 <div class="clear"></div>
             </div>

@@ -4,7 +4,7 @@ $(document).ready(function() {
     var $containerPromotion = $('div#appbundle_user_promotions');
 
     // On ajoute un lien pour ajouter une nouvelle promotion
-    var $addLinkPromotion = $('<a href="#add_userPromotions" id="add_userPromotions" class="btnAction newPromotion">> Ajouter une promotion</a>');
+    var $addLinkPromotion = $('<a href="#add_userPromotions" id="add_userPromotions" class="btnAction newPromotion">ajouter une promotion</a>');
     $containerPromotion.append($addLinkPromotion);
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
@@ -42,7 +42,7 @@ $(document).ready(function() {
     // La fonction qui ajoute un lien de suppression d'une promotion
     function addDeleteLinkPromotion($prototype) {
         // Création du lien
-        $deleteLinkPromotion = $('<a href="#" class="btnAction deletePromotion">> Supprimer</a><div class="clear"></div>');
+        $deleteLinkPromotion = $('<a href="#" class="btnAction deletePromotion">supprimer</a><div class="clear"></div>');
         // Ajout du lien
         $prototype.append($deleteLinkPromotion);
         // Ajout du listener sur le clic du lien

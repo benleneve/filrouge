@@ -5,9 +5,9 @@
     {% include('AppBundle:User:userheaderlayout.html.twig') %}
     <div class="status">
         {% if user.availability == true %}
-            <h5 class="greenRightUser">Disponnible</h5>
+            <h5 class="greenRightUser">Disponible</h5>
         {% elseif user.availability == false %}
-            <h5 class="redRightUser">Indisponnible</h5>
+            <h5 class="redRightUser">Indisponible</h5>
         {% endif %}
     </div>
     <div class="clear"></div>
@@ -18,14 +18,10 @@
         <div class="bodyBlock">
             {% include('AppBundle:User:userskilllayout.html.twig') %}  
             <div>
-                <h4> Nombre de projets en cours : {{ user.worksOnProjects|length }}</h4>
+                <h4>Nombre de projets en cours : {{ user.worksOnProjects|length }}</h4>
             </div>
-            <div class="btnLeft">
-                {% if app.user.id == user.id %} 
-                    <a href=" {{path('filrouge_user_update', {'id': user.id } )}} " class="btnAction userUpdate" >Modifier mon profil</a> 
-                {% else %}
-                    <a href=" {{path('filrouge_user_detail', {'id': user.id } )}} " class="btnAction userSeeMore">Voir le profil</a>
-                {% endif %}     
+            <div class="btnLeft">              
+                <a href=" {{path('filrouge_user_detail', {'id': user.id } )}} " class="btnAction userSeeMore">voir le profil</a>
             </div>
         </div>
     </div>

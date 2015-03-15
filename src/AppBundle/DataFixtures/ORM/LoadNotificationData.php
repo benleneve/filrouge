@@ -39,7 +39,7 @@ class LoadNotificationData extends AbstractFixture implements OrderedFixtureInte
         $manager->persist($notification4);
         
         $notification5 = new Notification();
-        $notification5->setContent('La compétence PHP a été rajouté au projet ')
+        $notification5->setContent('La compétence PHP a été ajoutée au projet ')
                         ->setProject($this->getReference('project6'))
                         ->setType(3);
         $manager->persist($notification5);
@@ -51,7 +51,7 @@ class LoadNotificationData extends AbstractFixture implements OrderedFixtureInte
         $manager->persist($notification6);
         
         $notification7 = new Notification();
-        $notification7->setContent('La compétence Photoshop a été rajouté au projet ')
+        $notification7->setContent('La compétence Photoshop a été ajoutée au projet ')
                         ->setProject($this->getReference('project2'))
                         ->setType(3);
         $manager->persist($notification7);

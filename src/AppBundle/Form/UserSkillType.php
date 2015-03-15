@@ -22,7 +22,7 @@ class UserSkillType extends AbstractType
                 'attr' => array('class'=>'skillName')
             ))
             ->add('level', 'choice', array(
-                'choices' => array(1 => "1", 2 => "2", 3 => "3", 4 => "4", 5 => "5" ),
+                'choices' => array(1 => "notions", 2 => "débutant", 3 => "initié", 4 => "confirmé", 5 => "expert" ),
                 'attr' => array('class'=>'skillLevel')
             ));
     }

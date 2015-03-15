@@ -7,6 +7,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use AppBundle\Entity\Notification;
+use AppBundle\Entity\Comment;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -118,6 +119,13 @@ class Project
      */
     private $notifications;
     
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="project", cascade={"remove"})
+     */
+    private $comments;
+    
     
     /**
      * Constructor
@@ -131,6 +139,7 @@ class Project
         $this->creationDate = new DateTime();
         $this->startDate = new DateTime();
         $this->endDate = new DateTime();
+        $this->comments = new ArrayCollection();
     }
  
     /**
@@ -468,5 +477,38 @@ class Project
     public function getNotifications()
     {
         return $this->notifications;
+    }
+    
+    /**
+     * Add comment
+     *
+     * @param Comment $comments
+     * @return Project
+     */
+    public function addComment(Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param Comment $comments
+     */
+    public function removeComment(Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Collection 
+     */
+    public function getComments()
+    {
+        return $this->comments;
     }
 }

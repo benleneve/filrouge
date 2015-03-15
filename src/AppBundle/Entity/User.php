@@ -221,6 +221,13 @@ class User implements UserInterface
      */
     private $messagesSent;
     
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"remove"})
+     */
+    private $comments;
+    
     
     /**
      * Constructor
@@ -234,6 +241,7 @@ class User implements UserInterface
         $this->userSkills = new ArrayCollection();
         $this->messagesReceived = new ArrayCollection();
         $this->messagesSent = new ArrayCollection();
+        $this->comments = new ArrayCollection();
     }
     
 //    public function __toString() {
@@ -897,4 +905,37 @@ class User implements UserInterface
             $age = date_diff($today, $birthDate, $absolute = false);
             return $age;
         }
+        
+    /**
+     * Add comment
+     *
+     * @param Comment $comments
+     * @return User
+     */
+    public function addComment(Comment $comments)
+    {
+        $this->comments[] = $comments;
+
+        return $this;
+    }
+
+    /**
+     * Remove comments
+     *
+     * @param Comment $comments
+     */
+    public function removeComment(Comment $comments)
+    {
+        $this->comments->removeElement($comments);
+    }
+
+    /**
+     * Get comments
+     *
+     * @return Collection 
+     */
+    public function getComment()
+    {
+        return $this->comments;
+    }
 }

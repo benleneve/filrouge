@@ -4,7 +4,7 @@ $(document).ready(function() {
     var $containerSkill = $('div#appbundle_project_projectSkills');
 
     // On ajoute un lien pour ajouter une nouvelle compétence
-    var $addLinkSkill = $('<a href="#add_projectSkills" id="add_projectSkills" class="btnAction newSkill">> Ajouter une compétence</a>');
+    var $addLinkSkill = $('<a href="#add_projectSkills" id="add_projectSkills" class="btnAction newSkill">ajouter une compétence</a>');
     $containerSkill.append($addLinkSkill);
 
     // On ajoute un nouveau champ à chaque clic sur le lien d'ajout.
@@ -42,7 +42,7 @@ $(document).ready(function() {
     // La fonction qui ajoute un lien de suppression d'une étape
     function addDeleteLinkSkill($prototype) {
         // Création du lien
-        $deleteLinkSkill = $('<a href="#" class="btnAction deleteSkill">> Supprimer</a><div class="clear"></div>');
+        $deleteLinkSkill = $('<a href="#" class="btnAction deleteSkill">supprimer</a><div class="clear"></div>');
         // Ajout du lien
         $prototype.append($deleteLinkSkill);
         // Ajout du listener sur le clic du lien

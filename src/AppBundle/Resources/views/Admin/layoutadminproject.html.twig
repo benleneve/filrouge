@@ -3,7 +3,7 @@
         <span></span> 
     </div>
     <div class="name">
-        Voir, modifier et effacer les projets
+        Gérer les projets
     </div>
     <div class="status">
         {{  projects|length }} projet(s) sur le site
@@ -14,7 +14,6 @@
     <div class="content">
         {% for project in projects %}
             <div class="adminContent">
-
                 <div class="adminName">
                     {{ project.name }}
                 </div>

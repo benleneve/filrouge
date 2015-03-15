@@ -1,5 +1,5 @@
 <div class="name">
-    {{ user.lastName ~ " " ~ user.firstName }}
+    <h3>{{ user.lastName|upper }} {{user.firstName }}</h3>
 </div>
 <div class="information">
     {% if (user.promotions|length != 0) %}      

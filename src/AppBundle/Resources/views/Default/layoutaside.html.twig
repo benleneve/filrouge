@@ -1,6 +1,6 @@
 <div class="blockGeneral">
     <h2 class="icoRecrut">Recrutement</h2>
-    <div class="blockContent">
+    <div class="blockContent" id="recrutAside">
         {% if messages |length != 0 %}
             {% for message in messages %}
                 <div class="oneElement">
@@ -33,7 +33,7 @@
 <div class="blockGeneral">
     <h2 class="icoNotif">Notifications</h2>
     <div class="clear"></div>
-    <div class="blockContent">
+    <div class="blockContent" id="notifAside">
         {% if notifications |length != 0 %}
             {% for notification in notifications %}
                 <div class="oneElement">

@@ -3,12 +3,14 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Comment;
 use AppBundle\Entity\Message;
 use AppBundle\Entity\Notification;
 use AppBundle\Entity\Project;
 use AppBundle\Entity\Skill;
 use AppBundle\Entity\UserProject;
 use AppBundle\Form\CategoryType;
+use AppBundle\Form\CommentType;
 use AppBundle\Form\ProjectType;
 use AppBundle\Form\SkillType;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -97,8 +99,15 @@ Class ProjectController extends Controller
             if($project === null) {
                 throw $this->createNotFoundException('ID ' . $id . ' impossible.');
             }
+            
+            $comment = new Comment();
+            $form = $this->createForm(new CommentType(), $comment, array(
+                'action' => $this->generateUrl('filrouge_project_addComment', array('id' => $id)) . '#commentProject'
+            ));
+            
             return $this->render('AppBundle:Project:project.html.twig', array(
-                    'project' => $project
+                    'project' => $project,
+                    'commentForm' => $form->createView()
             ));
         }
 
@@ -275,10 +284,16 @@ Class ProjectController extends Controller
             
             $validation = true;
             
+            $comment = new Comment();
+            $form = $this->createForm(new CommentType(), $comment, array(
+                'action' => $this->generateUrl('filrouge_project_addComment', array('id' => $id)) . '#commentProject'
+            ));
+            
             return $this->render('AppBundle:Project:project.html.twig', array(
                     'project' => $project,
                     'message' => $validation, 
-                    'skillName' => $name
+                    'skillName' => $name,
+                    'commentForm' => $form->createView()      
             ));
         }
         

@@ -1,0 +1,17 @@
+{%for comment in comments %}
+    <div class="oneComment">
+        <div class="content">
+            <p class="txt">{{comment.content}}</p>
+            <p>{{comment.author.firstName}} {{comment.author.lastName}} - Le {{comment.creationDate|date('d/m/Y H:i')}}</p>
+        </div>
+        <div class="status">
+            <a href="{{path('filrouge_project_updateComment', {'id': project.id, 'idComment': comment.id})}}">
+                <img alt="Modifier le commentaire" src="{{asset('bundles/app/images/modify.png')}}" />
+            </a>
+            <a href="{{path('filrouge_project_removeComment', {'id': project.id, 'idComment': comment.id})}}">
+                <img alt="Supprimer le commentaire" src="{{asset('bundles/app/images/delete.png')}}" />
+            </a>
+        </div>
+        <div class="clear"></div>
+    </div>
+{% endfor %}
