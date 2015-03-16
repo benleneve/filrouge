@@ -59,36 +59,7 @@
                     {% endif %}
                     
                     <h4>Projets en cours</h4>
-                    {% if (user.worksOnProjects|length!=0) %}
-                        <table class="projectsMember">
-                            <tr>
-                                <th>Projet</th>
-                                <th>Compétence</th>
-                                <th>Date de début</th>
-                                <th>Date de fin</th>
-                            </tr>
-                                {% for project in user.managesProjects %}                                    
-                                    <tr>
-                                        <td> <a href=" {{path('filrouge_project_detail', {'id': project.id } )}}" class="hrefBody">{{ project.name }}</a> </td>
-                                        <td> Chef de projet </td>
-                                        <td> {{ project.startDate|date('d/m/Y') }} </td>
-                                        <td> {{ project.endDate|date('d/m/Y') }} </td>
-                                    </tr>
-                                {% endfor %}
-                                {% for worksOnProject in user.worksOnProjects %}
-                                    {% if worksOnProject.active == 1 %}                                    
-                                        <tr>
-                                            <td> <a href=" {{path('filrouge_project_detail', {'id': worksOnProject.project.id } )}}" class="hrefBody">{{ worksOnProject.project.name }}</a> </td>
-                                            <td> {{ worksOnProject.skill.name }} </td>
-                                            <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
-                                            <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
-                                        </tr>
-                                    {% endif %}
-                                {% endfor %}
-                        </table>
-                    {% else %}
-                        <p>Ce profil n'a aucun projet en cours.</p>
-                    {% endif %}
+                    {% include('AppBundle:User:userprojectlayout.html.twig')%}
                 </div>
                 <div class="imageProfil">
                     {% if user.image %}
@@ -99,7 +70,7 @@
                 {% if app.user.managesProjects|length!=0 and app.user.id != user.id %}
                     <div id="formUserInvite">
                         <h4>Inviter ce profil à rejoindre mon projet</h4>
-                        <form action="{{ path('filrouge_user_invite', {'id': user.id }) }}" method="POST">              
+                        <form action="{{ path('filrouge_user_invite', {'id': user.id }) }}#formUserInvite" method="POST">              
                             <label for="idProject">Choisir le projet</label>
                             <select id="idProject" name="idProject">
                                 {% for project in app.user.managesProjects %}
@@ -115,6 +86,26 @@
                     </div>  
                 {% endif %}    
             </div>
-        </div>   
+        </div>
+        {% if app.user.id != user.id %}     
+            <div id="contactUser">
+                <h4>Contacter {{ user.lastName|upper }} {{user.firstName }}</h4>
+                <div class="contentContactUser">
+                    {% if messageMail is defined %}
+                        <span class="message">{{ messageMail }}</span>
+                    {% endif %}
+                    <div class="formContact">
+                        <form action="{{ path('filrouge_user_sendMail', {'id': user.id }) }}#contactUser" method="POST">              
+                            <h4><label for="title">Objet du message</label></h4>
+                            <input type="text" id="title" name="title" required>
+                            <h4><label for="message">Message</label></h4>
+                            <textarea id="message" name="message" required></textarea>
+                            <button type="submit" class="btnAction">envoyer</button>
+                        </form>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
     </div>
 {% endblock left %}

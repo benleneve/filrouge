@@ -4,14 +4,16 @@
             <p class="txt">{{comment.content}}</p>
             <p>{{comment.author.firstName}} {{comment.author.lastName}} - Le {{comment.creationDate|date('d/m/Y H:i')}}</p>
         </div>
-        <div class="status">
-            <a href="{{path('filrouge_project_updateComment', {'id': project.id, 'idComment': comment.id})}}">
-                <img alt="Modifier le commentaire" src="{{asset('bundles/app/images/modify.png')}}" />
-            </a>
-            <a href="{{path('filrouge_project_removeComment', {'id': project.id, 'idComment': comment.id})}}">
-                <img alt="Supprimer le commentaire" src="{{asset('bundles/app/images/delete.png')}}" />
-            </a>
-        </div>
+        {% if app.user.id == comment.author.id or is_granted('ROLE_ADMIN') or app.user.id == project.projectManager.id %}
+            <div class="status">
+                <a href="{{path('filrouge_project_updateComment', {'id': project.id, 'idComment': comment.id, 'page': page })}}">
+                    <img alt="Modifier le commentaire" src="{{asset('bundles/app/images/modify.png')}}" />
+                </a>
+                <a href="{{path('filrouge_project_removeComment', {'id': project.id, 'idComment': comment.id, 'page': page })}}">
+                    <img alt="Supprimer le commentaire" src="{{asset('bundles/app/images/delete.png')}}" />
+                </a>
+            </div>
+        {% endif %}
         <div class="clear"></div>
     </div>
 {% endfor %}

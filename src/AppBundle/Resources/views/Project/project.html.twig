@@ -162,7 +162,7 @@
                             {{ form_end(commentForm) }}
                             <div class=clear></div>
                         </div>
-                        {{ render(controller('AppBundle:Comment:list', {'id': project.id})) }}  
+                        {{ render(controller('AppBundle:Comment:list', {'id': project.id, 'page': 'detail'})) }}  
                     </div>
                 </div>
             {% endif %}

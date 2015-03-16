@@ -102,7 +102,10 @@ Class ProjectController extends Controller
             
             $comment = new Comment();
             $form = $this->createForm(new CommentType(), $comment, array(
-                'action' => $this->generateUrl('filrouge_project_addComment', array('id' => $id)) . '#commentProject'
+                'action' => $this->generateUrl('filrouge_project_addComment', array(
+                    'id' => $id, 
+                    'page' => 'detail' 
+                )) . '#commentProject'
             ));
             
             return $this->render('AppBundle:Project:project.html.twig', array(
@@ -142,8 +145,9 @@ Class ProjectController extends Controller
                     $this->generateUrl('filrouge_project_list')
                 );
             }
+
             return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
-                'projectForm' => $form->createView(),
+                'projectForm' => $form->createView()
             ));  
         }
 
@@ -200,9 +204,22 @@ Class ProjectController extends Controller
                     $this->generateUrl('filrouge_project_detail', array('id' => $id))
                 );
             }
+            
+            $comment = new Comment();
+            $formComment = $this->createForm(new CommentType(), $comment, array(
+                'action' => $this->generateUrl('filrouge_project_addComment', array(
+                    'id' => $id, 
+                    'page' => 'modify'
+                )) . '#commentProject'
+            ));
+            
+            $modify = true;
+            
             return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
                 'projectForm' => $form->createView(),
-                'project' => $project
+                'project' => $project,
+                'commentForm' => $formComment->createView(),
+                'modify' => $modify
             )); 
         }
 
@@ -265,19 +282,20 @@ Class ProjectController extends Controller
             $name = $projectSkill->getSkill()->getName();
             
             $userProject = new UserProject();
-            $userProject->setActive(0);
-            $userProject->setSkill($skill);
-            $userProject->setProject($project);
-            $userProject->setUser($user);
+            $userProject->setActive(0)
+                    ->setSkill($skill)
+                    ->setProject($project)
+                    ->setUser($user);
             $em->persist($userProject);
             
-            $content = $user->getFirstName() . ' a postulé à votre projet ' . $project->getName();
+            $content = ' a postulé à votre projet ';
             
             $message = new Message();
-            $message->setSender($user);
-            $message->setRecipient($project->getProjectManager());
-            $message->setContent($content);
-            $message->setType(1);
+            $message->setSender($user)
+                    ->setRecipient($project->getProjectManager())
+                    ->setContent($content)
+                    ->setProject($project)
+                    ->setType(1);
             $em->persist($message);
             
             $em->flush();
@@ -286,14 +304,17 @@ Class ProjectController extends Controller
             
             $comment = new Comment();
             $form = $this->createForm(new CommentType(), $comment, array(
-                'action' => $this->generateUrl('filrouge_project_addComment', array('id' => $id)) . '#commentProject'
+                'action' => $this->generateUrl('filrouge_project_addComment', array(
+                    'id' => $id, 
+                    'page' => 'detail'
+                )) . '#commentProject'
             ));
-            
+
             return $this->render('AppBundle:Project:project.html.twig', array(
                     'project' => $project,
                     'message' => $validation, 
                     'skillName' => $name,
-                    'commentForm' => $form->createView()      
+                    'commentForm' => $form->createView()
             ));
         }
         
@@ -316,13 +337,14 @@ Class ProjectController extends Controller
             $userProject->setActive(1);  
             $em->persist($userProject);
    
-            $content =  'Votre candidature au projet ' . $project->getName() . ' a été acceptée.';
+            $content =  'Votre candidature a été acceptée pour le projet ';
            
             $message = new Message();
-            $message->setSender($user);
-            $message->setRecipient($userProject->getUSer());
-            $message->setContent($content);
-            $message->setType(2);
+            $message->setSender($user)
+                    ->setRecipient($userProject->getUser())
+                    ->setContent($content)
+                    ->setProject($project)
+                    ->setType(2);
             $em->persist($message);
             
             //Réalisation de la notification création de projet
@@ -339,9 +361,21 @@ Class ProjectController extends Controller
                 'action' => $this->generateUrl('filrouge_project_update', array('id' => $id))
             ));
             
+            $comment = new Comment();
+            $formComment = $this->createForm(new CommentType(), $comment, array(
+                'action' => $this->generateUrl('filrouge_project_addComment', array(
+                    'id' => $id, 
+                    'page' => 'modify'
+                )) . '#commentProject'
+            ));
+            
+            $modify = true;
+            
             return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
                 'projectForm' => $form->createView(),
                 'project' => $project,
+                'modify' => $modify,
+                'commentForm' => $formComment->createView()
             ));     
         }    
         
@@ -363,25 +397,37 @@ Class ProjectController extends Controller
              
             $em->remove($userProject);
    
-            $content =  'Votre candidature au projet ' . $project->getName() . ' a été refusée.';
+            $content =  'Votre candidature a été refusée pour le projet';
            
             $message = new Message();
-            $message->setSender($user);
-            $message->setRecipient($userProject->getUSer());
-            $message->setContent($content);
-            $message->setType(3);
+            $message->setSender($user)
+                    ->setRecipient($userProject->getUser())
+                    ->setContent($content)
+                    ->setProject($project)
+                    ->setType(3);
             $em->persist($message);
             
             $em->flush();
-            
-            
+
             $form = $this->createForm(new ProjectType(), $project, array(
                 'action' => $this->generateUrl('filrouge_project_update', array('id' => $id))
             ));
             
+            $comment = new Comment();
+            $formComment = $this->createForm(new CommentType(), $comment, array(
+                'action' => $this->generateUrl('filrouge_project_addComment', array(
+                    'id' => $id, 
+                    'page' => 'modify'
+                )) . '#commentProject'
+            ));
+            
+            $modify = true;
+            
             return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
                 'projectForm' => $form->createView(),
                 'project' => $project,
+                'modify' => $modify,
+                'commentForm' => $formComment->createView()
             ));     
         }
         

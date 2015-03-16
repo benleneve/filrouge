@@ -13,40 +13,53 @@ class LoadMessageData extends AbstractFixture implements OrderedFixtureInterface
         public function load(ObjectManager $manager) 
             {
                 $message1 = new Message();
-                $message1->setContent("User1 vous invite à rejoindre le projet Projet 8")
+                $message1->setContent(" vous invite à rejoindre le projet ")
                          ->setRecipient($this->getReference("user8"))
                          ->setSender($this->getReference("user1"))
-                         ->setType(1);
+                         ->setType(1)
+                         ->setProject($this->getReference("project6"));
                 $manager->persist($message1);
                       
                 
                 $message2 = new Message();
-                $message2->setContent("Votre candidature au projet Projet 3 a été acceptée")
+                $message2->setContent("Votre candidature a été acceptée pour le projet ")
                          ->setRecipient($this->getReference("user8"))
                          ->setSender($this->getReference("user5"))
-                         ->setType(2);
+                         ->setType(2)
+                         ->setProject($this->getReference("project3"));
                 $manager->persist($message2);
                 
                 $message3 = new Message();
-                $message3->setContent("Votre candidature au projet Projet 5 a été refusée")
+                $message3->setContent("Votre candidature a été refusée pour le projet ")
                          ->setRecipient($this->getReference("user8"))
                          ->setSender($this->getReference("user2"))
-                         ->setType(3);
+                         ->setType(3)
+                         ->setProject($this->getReference("project5"));
                 $manager->persist($message3);
                 
                 $message4 = new Message();
-                $message4->setContent("User6 vous invite à rejoindre le projet Projet 2")
+                $message4->setContent(" vous invite à rejoindre le projet ")
                          ->setRecipient($this->getReference("user8"))
                          ->setSender($this->getReference("user6"))
-                         ->setType(1);
+                         ->setType(1)
+                         ->setProject($this->getReference("project2"));
                 $manager->persist($message4);
                 
                 $message5 = new Message();
-                $message5->setContent("User3 vous invite à rejoindre le projet Projet 1")
+                $message5->setContent(" a postulé à votre projet ")
                          ->setRecipient($this->getReference("user8"))
                          ->setSender($this->getReference("user3"))
-                         ->setType(1);
+                         ->setType(1)
+                         ->setProject($this->getReference("project1"));
                 $manager->persist($message5);
+                
+                $message6 = new Message();
+                $message6->setContent("  a posté un commentaire sur votre projet  ")
+                         ->setRecipient($this->getReference("user8"))
+                         ->setSender($this->getReference("user3"))
+                         ->setType(1)
+                         ->setProject($this->getReference("project3"));
+                $manager->persist($message6);
                 
                 $manager->flush();
             }

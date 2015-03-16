@@ -126,6 +126,13 @@ class Project
      */
     private $comments;
     
+    /**
+     * @var array
+     *
+     * @ORM\OneToMany(targetEntity="Message", mappedBy="project", cascade={"remove"})
+     */
+    private $messages;
+    
     
     /**
      * Constructor
@@ -140,6 +147,7 @@ class Project
         $this->startDate = new DateTime();
         $this->endDate = new DateTime();
         $this->comments = new ArrayCollection();
+        $this->messages = new ArrayCollection();
     }
  
     /**
@@ -511,4 +519,38 @@ class Project
     {
         return $this->comments;
     }
+    
+    /**
+     * Add message
+     *
+     * @param Message $messages
+     * @return Project
+     */
+    public function addMessage(Message $messages)
+    {
+        $this->messages[] = $messages;
+
+        return $this;
+    }
+
+    /**
+     * Remove messages
+     *
+     * @param Message $messages
+     */
+    public function removeMessage(Message $messages)
+    {
+        $this->messages->removeElement($messages);
+    }
+
+    /**
+     * Get messages
+     *
+     * @return Collection 
+     */
+    public function getMessages()
+    {
+        return $this->messages;
+    }
+   
 }

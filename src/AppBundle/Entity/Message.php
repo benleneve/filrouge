@@ -57,6 +57,13 @@ class Message
      */
     private $recipient;
     
+    /**
+     * @var Project
+     *
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="messages")
+     */
+    private $project;
+    
     
     /**
      * Constructor
@@ -191,5 +198,29 @@ class Message
     public function getRecipient()
     {
         return $this->recipient;
+    }
+    
+    /**
+     * Set project
+     *
+     * @param Project $project
+     * @return Message
+     */
+    public function setProject(Project $project)
+    {
+        $this->project = $project;
+        $project->addMessage($this);
+
+        return $this;
+    }
+
+    /**
+     * Get project
+     *
+     * @return Project 
+     */
+    public function getProject()
+    {
+        return $this->project;
     }
 }

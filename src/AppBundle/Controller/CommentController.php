@@ -4,12 +4,14 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Comment;
 use AppBundle\Form\CommentType;
+use AppBundle\Form\ProjectType;
+use AppBundle\Entity\Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
 class CommentController extends Controller{
     
-    public function listAction($id) {
+    public function listAction($id, $page) {
         $comments = $this->getDoctrine()
                         ->getManager()
                         ->getRepository('AppBundle:Comment')
@@ -20,20 +22,24 @@ class CommentController extends Controller{
                         ->findOneProjectEager($id);
         return $this->render('AppBundle:Project:layoutcomment.html.twig', array(
                     'comments' => $comments,
-                    'project' => $project 
+                    'project' => $project,
+                    'page' => $page
             ));
     }
 
-    public function addAction($id, Request $req) {
+    public function addAction($id, $page, Request $req) {
         $user = $this->getUser();
         $project = $this->getDoctrine()
                         ->getManager()
                         ->getRepository('AppBundle:Project')
                         ->findOneProjectEager($id);
-       
+        
         $comment = new Comment();
         $form = $this->createForm(new CommentType(), $comment, array(
-            'action' => $this->generateUrl('filrouge_project_addComment', array('id' => $id)) . '#commentProject'
+            'action' => $this->generateUrl('filrouge_project_addComment', array(
+                'id' => $id, 
+                'page' => $page 
+            )) . '#commentProject'
         ));
 
         $form->handleRequest($req); 
@@ -43,20 +49,49 @@ class CommentController extends Controller{
             if($comment->getId() === null) {
                 $comment->setAuthor($user);
                 $em->persist($comment);
+                
+                $content =  ' a posté un commentaire sur votre projet ';
+                $message = new Message();
+                $message->setSender($user)
+                        ->setRecipient($project->getProjectManager())
+                        ->setContent($content)
+                        ->setProject($project)
+                        ->setType(1);
+                $em->persist($message);
             }
-            $em->flush();  
-            return $this->redirect(
-                $this->generateUrl('filrouge_project_detail', array('id' => $id)) . '#commentProject'
-            );
+            $em->flush();
+
+            if($page == 'detail') {
+                return $this->redirect(
+                    $this->generateUrl('filrouge_project_detail', array('id' => $id)) . '#commentProject'
+                );  
+            } elseif ($page == 'modify') {
+                return $this->redirect(
+                    $this->generateUrl('filrouge_project_update', array('id' => $id)) . '#commentProject'
+                );
+            }   
         }
         
-        return $this->render('AppBundle:Project:project.html.twig', array(
-                    'project' => $project,
-                    'commentForm' => $form->createView()
-               ));       
+        if($page == 'detail') {
+            return $this->render('AppBundle:Project:project.html.twig', array(
+                        'project' => $project,
+                        'commentForm' => $form->createView()
+                   ));
+        } elseif ($page == 'modify') {
+            $formProject = $this->createForm(new ProjectType(), $project, array(
+                'action' => $this->generateUrl('filrouge_project_update', array('id' => $id))
+            ));
+            $modify = true;
+            return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
+                        'projectForm' => $formProject->createView(),
+                        'project' => $project,
+                        'commentForm' => $form->createView(),
+                        'modify' => $modify
+                   ));
+        }       
     }
     
-    public function updateAction($id, $idComment, Request $req) { 
+    public function updateAction($id, $idComment, $page, Request $req) { 
         $comment = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('AppBundle:Comment')
@@ -73,7 +108,10 @@ class CommentController extends Controller{
             throw $this->createNotFoundException('ID' . $idComment . ' impossible.');
         }
         $form = $this->createForm(new CommentType(), $comment, array(
-            'action' => $this->generateUrl('filrouge_project_updateComment', array('id' => $id, 'idComment' => $idComment)) . '#commentProject'
+            'action' => $this->generateUrl('filrouge_project_updateComment', array(
+                'id' => $id, 
+                'idComment' => $idComment, 
+                'page' => $page )) . '#commentProject'
         ));
         
         $form->handleRequest($req); 
@@ -82,19 +120,38 @@ class CommentController extends Controller{
             if($comment->getId() === null) {
                 $em->persist($comment);
             }
-            $em->flush();  
-            return $this->redirect(
-                $this->generateUrl('filrouge_project_detail', array('id' => $id)) . '#commentProject'
-            );
+            $em->flush();
+            if($page == 'detail') {
+                return $this->redirect(
+                    $this->generateUrl('filrouge_project_detail', array('id' => $id)) . '#commentProject'
+                );  
+            } elseif ($page == 'modify') {
+                return $this->redirect(
+                    $this->generateUrl('filrouge_project_update', array('id' => $id)) . '#commentProject'
+                );
+            }   
         }
         
-        return $this->render('AppBundle:Project:project.html.twig', array(
-                    'project' => $project,
-                    'commentForm' => $form->createView()
-               ));       
+        if($page == 'detail') {
+            return $this->render('AppBundle:Project:project.html.twig', array(
+                        'project' => $project,
+                        'commentForm' => $form->createView()
+                   ));
+        } elseif ($page == 'modify') {
+            $formProject = $this->createForm(new ProjectType(), $project, array(
+                'action' => $this->generateUrl('filrouge_project_update', array('id' => $id))
+            ));
+            $modify = true;
+            return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
+                        'projectForm' => $formProject->createView(),
+                        'project' => $project,
+                        'commentForm' => $form->createView(),
+                        'modify' => $modify
+                   ));
+        }
     }
     
-    public function removeAction($id, $idComment, Request $req) {
+    public function removeAction($id, $idComment, $page, Request $req) {
         $comment = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('AppBundle:Comment')
@@ -114,13 +171,29 @@ class CommentController extends Controller{
         
         $newComment = new Comment();
         $form = $this->createForm(new CommentType(), $newComment, array(
-            'action' => $this->generateUrl('filrouge_project_addComment', array('id' => $id)) . '#commentProject'
+            'action' => $this->generateUrl('filrouge_project_addComment', array(
+                'id' => $id, 
+                'page' => $page 
+            )) . '#commentProject'
         ));
         
-        return $this->render('AppBundle:Project:project.html.twig', array(
-                    'project' => $project,
-                    'commentForm' => $form->createView()
-               ));   
+        if($page == 'detail') {
+            return $this->render('AppBundle:Project:project.html.twig', array(
+                        'project' => $project,
+                        'commentForm' => $form->createView()
+                   ));
+        } elseif ($page == 'modify') {
+            $formProject = $this->createForm(new ProjectType(), $project, array(
+                'action' => $this->generateUrl('filrouge_project_update', array('id' => $id))
+            ));
+            $modify = true;
+            return $this->render('AppBundle:Project:addormodifyproject.html.twig', array(
+                        'projectForm' => $formProject->createView(),
+                        'project' => $project,
+                        'commentForm' => $form->createView(),
+                        'modify' => $modify
+                   ));
+        }
     }
     
 }

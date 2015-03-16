@@ -47,20 +47,20 @@ filrouge_project_refuse:
         idMember: \d+
         
 filrouge_project_addComment:
-    path: /detail/{id}/addComment
+    path: /detail/{id}/addComment/{page}
     defaults: {_controller:AppBundle:Comment:add }
     requirements:
         id: \d+
         
 filrouge_project_updateComment:
-    path: /detail/{id}/updateComment/{idComment}
+    path: /detail/{id}/updateComment/{page}/{idComment}
     defaults: {_controller:AppBundle:Comment:update }
     requirements:
         id: \d+
         idComment: \d+ 
 
 filrouge_project_removeComment:
-    path: /detail/{id}/removeComment/{idComment}
+    path: /detail/{id}/removeComment/{page}/{idComment}
     defaults: {_controller:AppBundle:Comment:remove }
     requirements:
         id: \d+

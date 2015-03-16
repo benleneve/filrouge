@@ -15,7 +15,23 @@
                     </div>
                     <div class="content">
                         <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
-                        <p>{{message.content}}</p>
+                        {% if message.type == 1 %}
+                            <p>
+                                <a href=" {{path('filrouge_user_detail', {'id': message.sender.id } )}} " class="hrefBody">{{message.sender.firstName}}</a>
+                                {{message.content}}
+                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
+                            </p>
+                        {% elseif message.type == 2 %}
+                            <p>
+                                {{message.content}}
+                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
+                            </p>
+                        {% elseif message.type == 3 %}
+                            <p>
+                                {{message.content}}
+                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
+                            </p>
+                        {% endif %}  
                     </div>  
                     <div class="clear"></div>
                 </div>

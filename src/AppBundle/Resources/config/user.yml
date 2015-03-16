@@ -31,6 +31,10 @@ filrouge_user_invite:
     requirements:
         id: \d+
     methods: [POST]
-    
-
-
+   
+filrouge_user_sendMail:
+    path: /detail/{id}/send
+    defaults: {_controller: AppBundle:User:sendMail }
+    requirements:
+        id: \d+
+    methods: [POST]

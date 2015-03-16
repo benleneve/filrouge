@@ -11,6 +11,7 @@ use AppBundle\Form\SkillType;
 use AppBundle\Form\UserType;
 use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
+use Swift_Message;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -243,22 +244,27 @@ class UserController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
 
-        $content =  $actualUser->getFirstName() . ' vous invite à rejoindre le projet ' . $project->getName(); 
+        $content = ' vous invite à rejoindre le projet '; 
 
         $message = new Message();
-        $message->setSender($actualUser);
-        $message->setRecipient($user);
-        $message->setContent($content);
-        $message->setType(1);
+        $message->setSender($actualUser)
+                ->setRecipient($user)
+                ->setContent($content)
+                ->setProject($project)
+                ->setType(1);
         $em->persist($message);
 
         $em->flush();
 
         $validation = true;
+        
+        $dateInterval = $user->getBirthDate()->diff(new DateTime());
+        $age = $dateInterval->y;
 
         return $this->render('AppBundle:User:userdetail.html.twig', array(
                     'user' => $user,
-                    'message' => $validation
+                    'message' => $validation,
+                    'age' => $age
         ));
     }
         
@@ -269,6 +275,45 @@ class UserController extends Controller {
         
         return $this->render('AppBundle:Admin:layoutadminuser.html.twig', array(
                 'users' => $users
+        ));
+    }
+    
+    public function sendMailAction($id) {    
+        $user = $this->getDoctrine()
+                         ->getRepository('AppBundle:User')
+                         ->findOneUserEager($id);
+        $mailUser = $user->getEmail(); 
+        $mailSender = $this->getUser()->getEmail();
+
+        if(!empty($_POST['title']) && !empty($_POST['message'])) {
+            if (preg_match("#^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $mailUser)) {
+                if (preg_match("#^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $mailSender)) {
+                    $message = Swift_Message::newInstance()
+                        ->setSubject(htmlspecialchars($_POST['title']))
+                        ->setFrom($mailSender)
+                        ->setTo($mailUser)
+                        ->setBody(htmlspecialchars($_POST['message']));
+                    $this->get('mailer')->send($message);
+                    $reponse = 'Votre message a bien été envoyé.';
+                }
+                else {
+                    $reponse = 'Votre n\'avez pas d\'adresse mail valide dans votre profil.';
+                }
+            }
+            else {
+                $reponse = 'Votre correspondant ne possède pas d\'adresse mail valide dans son profil.';
+            }
+        } else {
+            $reponse = 'Merci de remplir tous les champs du formulaire.';
+        }
+ 
+        $dateInterval = $user->getBirthDate()->diff(new DateTime());
+        $age = $dateInterval->y;
+        
+        return $this->render('AppBundle:User:userdetail.html.twig', array(
+                'messageMail' => $reponse,
+                'user' => $user,
+                'age' => $age
         ));
     }
            

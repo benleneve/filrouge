@@ -59,10 +59,6 @@ class MessageController extends Controller{
                 'messages' => $messages,
                 'pagination' => $pagination
         ));
-        
-        
-        
-        
     }
     
 }

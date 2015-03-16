@@ -686,6 +686,19 @@ table.projectsMember td {
     padding-top:10px;
 }
 
+#contactUser h4{
+   font-size:15px;
+}
+
+#contactUser .contentContactUser{
+    background:#fff;
+    padding:2%;
+}
+
+#contactUser .contentContactUser textarea {
+    height: 100px;
+}
+
 /*----------------------FormUser-----------------------*/
 
 .formUser li {

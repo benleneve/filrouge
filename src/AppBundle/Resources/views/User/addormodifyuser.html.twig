@@ -132,30 +132,8 @@
                     {{ form_end(userForm) }}
                     <div class="clear"></div>
                 </div>
-
-                {% if user is defined %}
-                    {% if (user.worksOnProjects|length!=0) %}
-                        <h4>Projets en cours</h4>
-                        <table class="projectsMember addOrModify">
-                            <tr>
-                                <th>Projet</th>
-                                <th>Compétence</th>
-                                <th>Date de début</th>
-                                <th>Date de fin</th>
-                            </tr>
-                                {% for worksOnProject in user.worksOnProjects %} 
-                                    {% if worksOnProject.active == 1 %}   
-                                        <tr>
-                                            <td> {{ worksOnProject.project.name }} </td>
-                                            <td> {{ worksOnProject.skill.name }} </td>
-                                            <td> {{ worksOnProject.project.startDate|date('d/m/Y') }} </td>
-                                            <td> {{ worksOnProject.project.endDate|date('d/m/Y') }} </td>
-                                        </tr>
-                                    {% endif %}
-                                {% endfor %}
-                        </table>
-                    {% endif %}
-                {% endif %}
+                <h4>Projets en cours</h4>   
+                {% include('AppBundle:User:userprojectlayout.html.twig')%}
             {% else %}
                 <h4>Vous ne possédez pas les droits suffisants pour modifier ce profil.</h4>
             {% endif %}

@@ -14,7 +14,7 @@
                 <div class="oneElement">
                     <div class="icon">
                         {% if message.type == 1 %}
-                            <img alt="invitation" src="{{asset('bundles/app/images/recrut_invitation.png')}}" />
+                            <img alt="invitation et commentaire" src="{{asset('bundles/app/images/recrut_invitation.png')}}" />
                         {% elseif message.type == 2 %}
                             <img alt="Candidature acceptée" src="{{asset('bundles/app/images/recrut_accepted.png')}}" />
                         {% elseif message.type == 3 %}
@@ -23,7 +23,23 @@
                     </div>
                     <div class="content">
                         <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
-                        <p>{{message.content}}</p>
+                        {% if message.type == 1 %}
+                            <p>
+                                <a href=" {{path('filrouge_user_detail', {'id': message.sender.id } )}} " class="hrefBody">{{message.sender.firstName}}</a>
+                                {{message.content}}
+                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
+                            </p>
+                        {% elseif message.type == 2 %}
+                            <p>
+                                {{message.content}}
+                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
+                            </p>
+                        {% elseif message.type == 3 %}
+                            <p>
+                                {{message.content}}
+                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
+                            </p>
+                        {% endif %}         
                     </div>
                     <a href="{{path('filrouge_message_remove', {'id': message.id })}}" class="delete">
                         <img alt="Supprimer le message" src="{{asset('bundles/app/images/delete.png')}}" />
