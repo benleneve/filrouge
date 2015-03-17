@@ -40,13 +40,17 @@ filrouge_admin_remove_category:
         
 filrouge_admin_user_remove:
     path: /user/remove/{id}
-    defaults: {_controller:AppBundle:User:remove, id:1 }
+    defaults: {_controller:AppBundle:User:remove }
     requirements:
         id: \d+
         
 filrouge_admin_project_remove:
     path: /project/remove/{id}
-    defaults: {_controller:AppBundle:Project:remove, id:1 }
+    defaults: {_controller:AppBundle:Project:remove }
     requirements:
         id: \d+
-
+        
+filrouge_admin_user_importCsv:
+    path: /user/importCsv
+    defaults: {_controller:AppBundle:User:importCsv }
+    methods: [POST]

@@ -12,4 +12,12 @@ use Doctrine\ORM\EntityRepository;
  */
 class SchoolRepository extends EntityRepository
 {
+    //Récupérer une école en fonction de son nom d
+    public function findOneSchoolEager($name) {
+        return $this->createQueryBuilder('s')
+                    ->where('s.name = :name')
+                    ->setParameter('name', $name)
+                    ->getQuery()
+                    ->getOneOrNullResult();
+    }
 }

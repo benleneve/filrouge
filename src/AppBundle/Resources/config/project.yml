@@ -11,7 +11,7 @@ filrouge_project_search:
 
 filrouge_project_detail:
     path: /detail/{id}
-    defaults: {_controller:AppBundle:Project:detail, id:1 }
+    defaults: {_controller:AppBundle:Project:detail }
     requirements:
         id: \d+
 
@@ -21,27 +21,27 @@ filrouge_project_add:
 
 filrouge_project_update:
     path: /update/{id}
-    defaults: {_controller:AppBundle:Project:update, id:1 }
+    defaults: {_controller:AppBundle:Project:update }
     requirements:
         id: \d+
         
 filrouge_project_apply:
     path: /detail/{id}/apply/{idProjectSkill}
-    defaults: {_controller:AppBundle:Project:apply, id:1 }
+    defaults: {_controller:AppBundle:Project:apply }
     requirements:
         id: \d+
         idProjectSkill: \d+
        
 filrouge_project_accept:
     path: /update/{id}/accept/{idMember}
-    defaults: {_controller:AppBundle:Project:accept, id:1 }
+    defaults: {_controller:AppBundle:Project:accept }
     requirements:
         id: \d+
         idMember: \d+
         
 filrouge_project_refuse:
     path: /update/{id}/refuse/{idMember}
-    defaults: {_controller:AppBundle:Project:refuse, id:1 }
+    defaults: {_controller:AppBundle:Project:refuse }
     requirements:
         id: \d+
         idMember: \d+

@@ -182,7 +182,7 @@ class User implements UserInterface
     /**
      * @var array
      *
-     * @ORM\ManyToMany(targetEntity="Promotion", mappedBy="users", cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity="Promotion", mappedBy="users", cascade={"persist", "remove"})
      */
     private $promotions;
     
@@ -224,7 +224,7 @@ class User implements UserInterface
     /**
      * @var array
      *
-     * @ORM\OneToMany(targetEntity="Comment", mappedBy="user", cascade={"remove"})
+     * @ORM\OneToMany(targetEntity="Comment", mappedBy="author", cascade={"remove"})
      */
     private $comments;
     

@@ -15,7 +15,7 @@
         {% for user in users %}
             <div class="adminContent">
                 <div class="adminName">
-                    {{ user.lastName ~ " " ~ user.firstName }}
+                    {{ user.lastName|upper }} {{ user.firstName }}
                 </div>
                 <div class="adminInfo">
                     {% if (user.promotions|length != 0) %}

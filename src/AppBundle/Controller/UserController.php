@@ -3,9 +3,12 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\Category;
+use AppBundle\Entity\Image;
 use AppBundle\Entity\Message;
+use AppBundle\Entity\Promotion;
 use AppBundle\Entity\Skill;
 use AppBundle\Entity\User;
+use AppBundle\Entity\School;
 use AppBundle\Form\CategoryType;
 use AppBundle\Form\SkillType;
 use AppBundle\Form\UserType;
@@ -195,10 +198,10 @@ class UserController extends Controller {
         $user = $this->getDoctrine()
                      ->getRepository('AppBundle:User')
                      ->findOneUserEager($id);
-
-        $em = $this->getDoctrine()
-                   ->getManager();
-
+        $em = $this->getDoctrine()->getManager();
+        if($user === null) {
+            throw $this->createNotFoundException('ID' . $id . ' impossible.');
+        }
         if(count($user->getManagesProjects()) === 0) {
             $message = $user->getFirstName() . ' ' . $user->getLastName() . ' vient d\'être effacé';
             $em->remove($user);
@@ -206,6 +209,7 @@ class UserController extends Controller {
                 {
                     $em->remove($user->getImage());
                 }
+            $em->remove($user);
             $em->flush();
         } else {
             $message = $user->getFirstName() . ' ' . $user->getLastName() . ' ne peut être supprimé car il est en charge d\'un projet';
@@ -215,13 +219,11 @@ class UserController extends Controller {
         $formSkill = $this->createForm(new SkillType(), $skill, array(
             'action' => $this->generateUrl('filrouge_admin_add_skill') . '#adminSkill'
         ));
-        $formSkill->handleRequest($req);
 
         $newCategory = new Category();
         $formCategory = $this->createForm(new CategoryType(), $newCategory, array(
             'action' => $this->generateUrl('filrouge_admin_add_category') . '#adminCategory'
         ));
-        $formCategory->handleRequest($req);
 
         return $this->render('AppBundle:Admin:Administration.html.twig', array(
                     'messageUser' => $message,
@@ -316,5 +318,116 @@ class UserController extends Controller {
                 'age' => $age
         ));
     }
-           
+    
+    public function importCsvAction(Request $req) {
+        if ($req->getMethod() == 'POST') {
+            foreach($this->getRequest()->files as $file) {
+                if (($handle = fopen($file->getRealPath(), "r")) !== FALSE) {
+                    $cpt = 0;
+                    $problem = false;
+                    $userExist = false;
+                    while(($row = fgetcsv($handle, 1000, ",")) !== FALSE) {
+                        if(count($row) === 12) {
+                            if ($cpt !== 0) {
+
+                                if(strtoupper(htmlspecialchars($row[1])) === 'NANTES') {
+                                    $name = 'Nantes';
+                                } 
+                                elseif (strtoupper(htmlspecialchars($row[1])) === 'RENNES') {
+                                    $name = 'Rennes';    
+                                }
+                                elseif (strtoupper(htmlspecialchars($row[1])) === 'ANGERS') {
+                                    $name = 'Angers';
+                                }
+                                $school =  $this->getDoctrine()
+                                                    ->getRepository('AppBundle:School')
+                                                    ->findOneSchoolEager($name);  
+
+                                $image = new Image();
+                                $image->setUrl('bundles/app/images/avatar.png')
+                                      ->setAlt('Image du profil');
+                                $promotion = new Promotion();
+
+                                $promotion->setName(htmlspecialchars($row[2]))
+                                      ->setYear(htmlspecialchars($row[3]))
+                                      ->setSchool($school);
+
+                                $user = new User();
+                                $username = strtolower(htmlspecialchars($row[5])).'.'.strtoupper(htmlspecialchars($row[2]));
+                                $user->setFirstName(htmlspecialchars($row[5]))
+                                    ->setLastName(htmlspecialchars($row[4]))
+                                    ->setEmail(htmlspecialchars($row[10]))
+                                    ->setAddress(htmlspecialchars($row[6]))
+                                    ->setPostCode(htmlspecialchars($row[7]))
+                                    ->setCity(htmlspecialchars($row[8]))
+                                    ->setPhone(str_replace(' ', '', htmlspecialchars($row[9])))
+                                    ->setBirthDate(\DateTime::createFromFormat('d/m/Y', $row[11]))
+                                    ->setUsername($username)
+                                    ->setPassword('userpass')
+                                    ->setSalt('')
+                                    ->setImage($image)
+                                    ->addRoles('ROLE_USER')
+                                    ->addPromotion($promotion)
+                                    ->setAvailability(false)
+                                    ->setDispoAddress(false)
+                                    ->setDispoBirth(false)
+                                    ->setDispoEmail(false)
+                                    ->setDispoPhone(false);
+
+                                $em = $this->getDoctrine()->getManager();
+                                $em->persist($user);
+                                try{
+                                    $em->flush();
+                                    $problem = false;
+                                }
+                                catch(\Exception $e){
+                                    error_log($e->getMessage());
+                                    $problem = true;
+                                    $userExist = true;
+                                    break;
+                                }
+                            }
+                            else {
+                                $problem = true;
+                            }
+                            $cpt ++;    
+                        }
+                        else {
+                            $problem = true;
+                        }
+                    }
+                }
+                fclose($handle); 
+            }
+        }
+        else {
+            $problem = true;  
+        }
+        
+        if ($problem) {
+            if($userExist) {
+               $messageCsv = 'Votre fichier CSV ne peut être importé car il contient des profils déjà renseignés.'; 
+            } else {
+               $messageCsv = 'Votre fichier CSV ne peut être importé car il ne respecte pas le format attendu.'; 
+            }
+        } else {
+            $messageCsv = $cpt-1 . ' profil(s) ont été importé(s) dans l\'application.';
+        }
+
+        $skill = new Skill();
+        $formSkill = $this->createForm(new SkillType(), $skill, array(
+            'action' => $this->generateUrl('filrouge_admin_add_skill')  . '#adminSkill'
+        ));
+
+        $category = new Category();
+        $formCategory = $this->createForm(new CategoryType(), $category, array(
+            'action' => $this->generateUrl('filrouge_admin_add_category')  . '#adminCategory'
+        ));
+
+        return $this->render('AppBundle:Admin:administration.html.twig', array(
+                'messageCsv' => $messageCsv,
+                'categoryForm' => $formCategory->createView(),
+                'skillForm' => $formSkill->createView()
+        )); 
+    }         
 }

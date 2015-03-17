@@ -11,7 +11,7 @@ filrouge_user_search:
 
 filrouge_user_detail:
     path: /detail/{id}
-    defaults: {_controller:AppBundle:User:detail, id:1 }
+    defaults: {_controller:AppBundle:User:detail }
     requirements:
         id: \d+
         
@@ -21,7 +21,7 @@ filrouge_user_add:
            
 filrouge_user_update:
     path: /update/{id}
-    defaults: {_controller:AppBundle:User:update, id:1 }
+    defaults: {_controller:AppBundle:User:update }
     requirements:
         id: \d+
         
@@ -34,7 +34,7 @@ filrouge_user_invite:
    
 filrouge_user_sendMail:
     path: /detail/{id}/send
-    defaults: {_controller: AppBundle:User:sendMail }
+    defaults: {_controller:AppBundle:User:sendMail }
     requirements:
         id: \d+
     methods: [POST]

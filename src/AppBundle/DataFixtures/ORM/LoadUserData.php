@@ -274,8 +274,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                 $user11 = new User();
                 $user11->setFirstName("Charline")
                       ->setLastName("La Maline")
-                      ->setUsername("user")
-                      ->setPassword("userpass")
+                      ->setUsername("admin")
+                      ->setPassword("adminpass")
                       ->setSalt('')
                       ->addRoles('ROLE_ADMIN')
                       ->setBirthDate(new \DateTime('11/11/1985'))
@@ -298,8 +298,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface
                 $user12 = new User();
                 $user12->setFirstName("Karina")
                       ->setLastName("Prel")
-                      ->setUsername("admin")
-                      ->setPassword("adminpass")
+                      ->setUsername("superadmin")
+                      ->setPassword("superadminpass")
                       ->setSalt('')
                       ->addRoles('ROLE_SUPER_ADMIN')
                       ->setBirthDate(new \DateTime('04/12/1988'))

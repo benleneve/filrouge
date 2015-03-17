@@ -59,13 +59,23 @@
             {% if messageUser is defined %}
                 <span class="message">{{ messageUser }}</span>
             {% endif %}
+            {% if messageCsv is defined %}
+                <span class="message">{{ messageCsv }}</span>
+            {% endif %}
             <h4>Ajouter un profil</h4>
             <div class="newUser">
-                <a href=" {{path('filrouge_user_add')}} " class="btnAction">Nouveau profil</a>
+                <a href="{{path('filrouge_user_add')}}" class="btnAction">Nouveau profil</a>
             </div>
-            {% if is_granted('ROLE_SUPER_ADMIN') %} 
-                <div class="csvImport">
-                    <a href=" {{path('filrouge_user_add')}} " class="btnAction">Import CSV</a>
+            {% if is_granted('ROLE_SUPER_ADMIN') %}
+                <div id="formCsv">
+                    <h4>Import de fichier CSV</h4>
+                    <form action="{{path('filrouge_admin_user_importCsv')}}" method="POST" enctype="multipart/form-data">
+                        <div class="nameProject">
+                            <input type="file" name="importcsv" class="fileCsv" required/>
+                        </div>
+                        <button type="submit" class="btnAction">Importer</button>
+                        <div class="clear"></div>
+                    </form>
                 </div>
             {% endif %}
             <div class="clear"></div>

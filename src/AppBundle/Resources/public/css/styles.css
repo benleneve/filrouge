@@ -746,7 +746,7 @@ table.projectsMember td {
 
 .formUser .availability {
    float: right;
-   width: 95px;
+   width: 100px;
 }
 
 .formUser input.address{
@@ -1337,19 +1337,7 @@ span.message {
     margin-right: 10px;
 }
 
-.csvImport {
-    float: left;
-    width: 125px;
-    height: 25px;  
-}
-
-.csvImport a.btnAction{
-   width:100px;
-   margin-left: 10px;
-}
-
 .newUser {
-    float: left;
     width: 125px;
     height: 25px;
     margin-bottom:10px;
@@ -1378,6 +1366,15 @@ span.message {
     font-family: "MyriadPro-Regular", arial, sans-serif;
     padding:0 15px;
     border:none;
+}
+
+#formCsv .fileCsv {
+    float: left;
+    width: 260px;
+    height: 23px;
+    border: none;
+    margin-bottom: 10px;
+    padding: 0 5px;
 }
 
 /*----------------------FormContact-----------------------*/
