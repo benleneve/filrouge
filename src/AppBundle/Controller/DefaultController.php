@@ -113,7 +113,7 @@ class DefaultController extends Controller {
                 $message = Swift_Message::newInstance()
                     ->setSubject(htmlspecialchars($_POST['title']))
                     ->setFrom($mail)
-                    ->setTo('benjamin.leneve@gmail.com')
+                    ->setTo('administrateur@filrouge.com')
                     ->setBody(htmlspecialchars($_POST['message']));
                 $this->get('mailer')->send($message);
                 $reponse = 'Votre message a bien été envoyé.';
