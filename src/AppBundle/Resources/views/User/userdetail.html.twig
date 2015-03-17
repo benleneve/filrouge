@@ -24,9 +24,9 @@
             <div class="headerBlock">
                 {% include('AppBundle:User:userheaderlayout.html.twig')%}
                 <div class="status">
-                    {% if user.availability == true %}
+                    {% if user.availability %}
                         <h5 class="greenRightUser">Disponible</h5>
-                    {% elseif user.availability == false %}
+                    {% else %}
                         <h5 class="redRightUser">Indisponible</h5>
                     {% endif %}
                 </div>
@@ -34,19 +34,19 @@
             </div>
             <div class="bodyBlock">
                 <div class="leftProfil">
-                    {% if user.dispoBirth == true %}
+                    {% if user.dispoBirth %}
                         <h4>Age</h4>
                         {{ age }} ans
                     {% endif %}   
-                    {% if user.dispoEmail == true %}
+                    {% if user.dispoEmail %}
                        <h4>Email</h4>
                        {{ user.email }}
                     {% endif %}
-                    {% if user.dispoPhone == true %}
+                    {% if user.dispoPhone %}
                        <h4>Téléphone</h4> 
                        {{ user.phone }}
                     {% endif %}                 
-                    {% if user.dispoAddress == true %}
+                    {% if user.dispoAddress %}
                         <h4>Adresse Postale</h4>
                         {{ user.address }}<br/>
                         {{ user.postCode ~ " " ~ user.city }}
@@ -67,7 +67,7 @@
                     {% endif %}
                 </div>
                 <div class="clear"></div> 
-                {% if app.user.managesProjects|length!=0 and app.user.id != user.id %}
+                {% if app.user.managesProjects|length!=0 and app.user.id != user.id and user.availability %}
                     <div id="formUserInvite">
                         <h4>Inviter ce profil à rejoindre mon projet</h4>
                         <form action="{{ path('filrouge_user_invite', {'id': user.id }) }}#formUserInvite" method="POST">              
@@ -87,7 +87,7 @@
                 {% endif %}    
             </div>
         </div>
-        {% if app.user.id != user.id %}     
+        {% if user.availability and app.user.id != user.id %}     
             <div id="contactUser">
                 <h4>Contacter {{ user.lastName|upper }} {{user.firstName }}</h4>
                 <div class="contentContactUser">
