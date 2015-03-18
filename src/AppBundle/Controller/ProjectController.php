@@ -363,7 +363,7 @@ Class ProjectController extends Controller {
         //Effacement du UserProject d'un candidat refusé
         $em->remove($userProject);
         //Ecriture d'un message de refus pour le candidat  
-        $content =  'Votre candidature a été refusée pour le projet';
+        $content =  'Votre candidature a été refusée pour le projet ';
         $message = new Message();
         $message->setSender($user)
                 ->setRecipient($userProject->getUser())

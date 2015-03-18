@@ -18,14 +18,14 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
         $project1->setName('FilRouge')
                 ->setStartDate(new \DateTime('02/20/2015'))
                 ->setEndDate(new \DateTime('05/20/2015'))
-                ->setPurpose('Réalisation d\'un site de gestion de compétences et de projets pour l\'IMIE')
+                ->setPurpose('Réalisation d\'un site de gestion de compétences et de projets pour l\'IMIE.')
                 ->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, '
                         . 'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
                         . 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
                         . 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. '
                         . 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
                 ->setStatus($this->getReference('status1'))
-                ->setProjectManager($this->getReference('user1'));
+                ->setProjectManager($this->getReference('user3'));
         $manager->persist($project1);
         $this->addReference('project1', $project1);
         
@@ -33,14 +33,14 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
         $project2->setName('CinéBlog')
                 ->setStartDate(new \DateTime('02/15/2015'))
                 ->setEndDate(new \DateTime('04/15/2015'))
-                ->setPurpose('Réalisation d\'un blog sur le cinéma')
+                ->setPurpose('Réalisation d\'un blog sur le cinéma.')
                 ->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, '
                         . 'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
                         . 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
                         . 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. '
                         . 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
                 ->setStatus($this->getReference('status2'))
-                ->setProjectManager($this->getReference('user2'));
+                ->setProjectManager($this->getReference('user4'));
         $manager->persist($project2);
         $this->addReference('project2', $project2);
         
@@ -48,14 +48,14 @@ class LoadProjectData extends AbstractFixture implements OrderedFixtureInterface
         $project3->setName('Geekland')
                 ->setStartDate(new \DateTime('01/20/2015'))
                 ->setEndDate(new \DateTime('03/15/2015'))
-                ->setPurpose('Réalisation d\'une E-boutique d\'accessoires geek')
+                ->setPurpose('Réalisation d\'une E-boutique d\'accessoires geek.')
                 ->setDescription('Lorem ipsum dolor sit amet, consectetur adipiscing elit, '
                         . 'sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. '
                         . 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. '
                         . 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. '
                         . 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.')
                 ->setStatus($this->getReference('status3'))
-                ->setProjectManager($this->getReference('user4'));
+                ->setProjectManager($this->getReference('user5'));
         $manager->persist($project3);
         $this->addReference('project3', $project3);
       

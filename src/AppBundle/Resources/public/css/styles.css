@@ -250,6 +250,10 @@ button.btnAction {
     text-transform:lowercase;
 }
 
+.fixeTitle {
+    height: 35px;
+}
+
 /*------------------HEADER--------------------*/
 
 header {

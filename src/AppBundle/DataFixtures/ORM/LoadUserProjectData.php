@@ -16,51 +16,51 @@ class LoadUserProjectData extends AbstractFixture implements OrderedFixtureInter
        
         $userProject1 = new UserProject();
         $userProject1->setProject($this->getReference('project1'))
-                    ->setUser($this->getReference('user2'))
+                    ->setUser($this->getReference('user4'))
                     ->setSkill($this->getReference('skill1'))
-                    ->setActive(1);
+                    ->setActive(0);
         $manager->persist($userProject1);
         
         $userProject2 = new UserProject();
-        $userProject2->setProject($this->getReference('project1'))
-                    ->setUser($this->getReference('user3'))
-                    ->setSkill($this->getReference('skill21'))
+        $userProject2->setProject($this->getReference('project2'))
+                    ->setUser($this->getReference('user4'))
+                    ->setSkill($this->getReference('skill5'))
                     ->setActive(1);
         $manager->persist($userProject2);
         
         $userProject3 = new UserProject();
-        $userProject3->setProject($this->getReference('project3'))
-                    ->setUser($this->getReference('user9'))
-                    ->setSkill($this->getReference('skill18'))
+        $userProject3->setProject($this->getReference('project2'))
+                    ->setUser($this->getReference('user3'))
+                    ->setSkill($this->getReference('skill8'))
                     ->setActive(1);
         $manager->persist($userProject3);
         
         $userProject4 = new UserProject();
-        $userProject4->setProject($this->getReference('project6'))
+        $userProject4->setProject($this->getReference('project2'))
                     ->setUser($this->getReference('user5'))
-                    ->setSkill($this->getReference('skill21'))
+                    ->setSkill($this->getReference('skill4'))
                     ->setActive(1);
         $manager->persist($userProject4);
         
         $userProject5 = new UserProject();
-        $userProject5->setProject($this->getReference('project6'))
-                    ->setUser($this->getReference('user3'))
-                    ->setSkill($this->getReference('skill21'))
+        $userProject5->setProject($this->getReference('project3'))
+                    ->setUser($this->getReference('user6'))
+                    ->setSkill($this->getReference('skill1'))
                     ->setActive(1);
         $manager->persist($userProject5);
         
         $userProject6 = new UserProject();
-        $userProject6->setProject($this->getReference('project6'))
-                    ->setUser($this->getReference('user6'))
+        $userProject6->setProject($this->getReference('project3'))
+                    ->setUser($this->getReference('user5'))
                     ->setSkill($this->getReference('skill3'))
                     ->setActive(1);
         $manager->persist($userProject6);
         
         $userProject7 = new UserProject();
-        $userProject7->setProject($this->getReference('project4'))
-                    ->setUser($this->getReference('user8'))
-                    ->setSkill($this->getReference('skill5'))
-                    ->setActive(0);
+        $userProject7->setProject($this->getReference('project3'))
+                    ->setUser($this->getReference('user6'))
+                    ->setSkill($this->getReference('skill4'))
+                    ->setActive(1);
         $manager->persist($userProject7);
         
         $manager->flush(); 

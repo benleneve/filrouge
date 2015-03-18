@@ -63,11 +63,15 @@
                 <div class="clear"></div>
             </div>     
             {% if  project.projectSkills|length != 0 %}
-                <h4>Compétences manquantes</h4>
+                <h4>Compétences recherchées</h4>
                 {% for projectSkill in project.projectSkills %}
-                     {% if projectSkill.active %}
+                    {% if projectSkill.active %}
                         {{projectSkill.skill.name}} /
-                     {% endif %}
+                    {% else %}
+                        {% if loop.index == 1 %}
+                            <p>Aucune compétence demandée pour ce projet</p>
+                        {% endif %}
+                    {% endif %}
                 {% endfor %}
             {% else %}
                 <h4>Recrutement terminé</h4>

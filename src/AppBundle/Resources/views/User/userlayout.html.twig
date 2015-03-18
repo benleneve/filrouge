@@ -17,7 +17,7 @@
         <div class="bodyBlock">
             {% include('AppBundle:User:userskilllayout.html.twig') %}  
             <div>
-                <h4>Nombre de projets en cours : {{ user.worksOnProjects|length }}</h4>
+                <h4>Nombre de projets attribués : {{ user.worksOnProjects|length }}</h4>
             </div>
             <div class="btnLeft">              
                 <a href=" {{path('filrouge_user_detail', {'id': user.id } )}} " class="btnAction userSeeMore">voir le profil</a>

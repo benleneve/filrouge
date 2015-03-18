@@ -56,7 +56,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
               ->setDispoEmail(true)
               ->setDispoPhone(false)
               ->setDispoAddress(false)
-              ->setImage($this->getReference("image1"));
+              ->setImage($this->getReference("image2"));
         $manager->persist($user2);
         $this->addReference("user2", $user2);
 
@@ -81,7 +81,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
               ->setDispoPhone(true)
               ->setDispoEmail(true)
               ->setDispoAddress(true)
-              ->setImage($this->getReference("image2"))
+              ->setImage($this->getReference("image3"))
               ->addPromotion($this->getReference("promotion2"))
               ->addPromotion($this->getReference("promotion4"));
         $manager->persist($user3);
@@ -107,7 +107,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
               ->setDispoPhone(false)
               ->setDispoEmail(true)
               ->setDispoAddress(true)
-              ->setImage($this->getReference("image3"))
+              ->setImage($this->getReference("image4"))
               ->addPromotion($this->getReference("promotion1"));
         $manager->persist($user4);
         $this->addReference("user4", $user4);
@@ -126,13 +126,13 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
               ->setCity("Saint-Herblain")
               ->setPhone("0687414522")
               ->setDescription("Je suis avant tout développeur front"
-                      . " et je suis disponible pour des projets Javascript")
+                      . " et je suis disponible pour des projets Javascript.")
               ->setAvailability(true)
               ->setDispoBirth(false)
               ->setDispoPhone(false)
               ->setDispoEmail(true)
               ->setDispoAddress(false)
-              ->setImage($this->getReference("image4"))
+              ->setImage($this->getReference("image5"))
               ->addPromotion($this->getReference("promotion3"));
         $manager->persist($user5);
         $this->addReference("user5", $user5);
@@ -157,7 +157,7 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
               ->setDispoPhone(false)
               ->setDispoEmail(true)
               ->setDispoAddress(false)
-              ->setImage($this->getReference("image5"))
+              ->setImage($this->getReference("image6"))
               ->addPromotion($this->getReference("promotion1"));
         $manager->persist($user6);
         $this->addReference("user6", $user6);
