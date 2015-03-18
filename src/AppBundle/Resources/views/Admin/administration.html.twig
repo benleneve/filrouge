@@ -1,13 +1,12 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}Administration{% endblock title %}
+{% block title %}{{parent()}}Administration{% endblock title %}
 
 {% block breadcrumb %}
     {{parent()}} > <a href="{{path('filrouge_admin_list')}}">Administration</a>
 {% endblock breadcrumb %}
 
-{% block left %}
-    
+{% block left %}  
     <div class="blockGeneral" id="adminSkill">
         <h2 class="icoSkill">Toutes les compétences</h2>
         <div class="blockContent">
@@ -30,8 +29,7 @@
             </div>
             {{ render(controller('AppBundle:Skill:list')) }}
         </div>
-    </div>
-        
+    </div>     
     <div class="blockGeneral" id="adminCategory">
         <h2 class="icoCategory">Toutes les catégories</h2>
         <div class="blockContent">
@@ -52,7 +50,6 @@
             {{ render(controller('AppBundle:Category:list')) }}
         </div>
     </div>
-
     <div class="blockGeneral" id="adminUser">
         <h2 class="icoUser">Tous les profils</h2>
         <div class="blockContent">
@@ -81,8 +78,7 @@
             <div class="clear"></div>
             {{ render(controller('AppBundle:User:admin')) }}
         </div>
-    </div>
-    
+    </div>  
     <div class="blockGeneral" id="adminProject">
         <h2 class="icoProject">Tous les projets</h2>
         <div class="blockContent">
@@ -96,8 +92,7 @@
             <div class="clear"></div>
             {{ render(controller('AppBundle:Project:admin')) }}
         </div>
-    </div>
-  
+    </div> 
 {% endblock left %}
 
 {% block javascripts %}

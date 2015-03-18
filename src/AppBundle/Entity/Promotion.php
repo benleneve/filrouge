@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Promotion
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="PromotionRepository")
+ * @ORM\Entity
  */
 class Promotion
 {

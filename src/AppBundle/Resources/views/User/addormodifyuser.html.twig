@@ -1,15 +1,23 @@
 {% extends "AppBundle::layout.html.twig" %}
 
 {% block title %}
-	{{ userForm.vars.value.id is null? "Ajout d'un profil" : "Modification du profil" }}
+    {% if user is defined and user.id is not null %}
+        {{parent()}}Gérer mon profil
+    {% else %}
+        {{parent()}}Nouveau profil
+    {% endif%}
 {%endblock title %}
 
 {% block breadcrumb %}
     {{parent()}} > 
         <a href="{{path('filrouge_user_list')}}">Profils</a> >
         {% if user is defined and user.id is not null %}
-            <a href="{{path('filrouge_user_detail', {'id': user.id } )}}">{{user.firstName ~ " " ~ user.lastName}}</a> >
-            <a href="{{path('filrouge_user_update', {'id': user.id } )}}">Gérer mon profil</a>
+            <a href="{{path('filrouge_user_detail', {'id': user.id } )}}">
+                {{user.firstName ~ " " ~ user.lastName}}
+            </a> >
+            <a href="{{path('filrouge_user_update', {'id': user.id } )}}">
+                Gérer mon profil
+            </a>
         {% else %}
             <a href="{{path('filrouge_user_add')}}">Nouveau profil</a>
         {% endif%}
@@ -23,7 +31,6 @@
             {% if is_granted('ROLE_ADMIN') or app.user == user %} 
                 <div class="formUser"> 
                     {{ form_start(userForm) }}
-
                         <div class="headerFormUser headerBlock">
                             {% if is_granted('ROLE_ADMIN') %} 
                                 {{ form_errors(userForm.firstName) }}
@@ -39,7 +46,6 @@
                             {{ form_errors(userForm.availability) }}
                             <div class="clear"></div>
                         </div>
-
                         <div class="birthFormUser containerForm">
                             <div class="fieldForm">
                                 <h4>{{ form_label(userForm.birthDate, 'Date de naissance') }}</h4>
@@ -49,7 +55,6 @@
                             {{ form_errors(userForm.dispoBirth) }}
                             {{ form_widget(userForm.dispoBirth, { 'attr': {'class': 'dispoBirthdate  dispo'} }) }}
                         </div> 
-
                         <div class="emailFormUser containerForm">
                             <div class="fieldForm">
                                 <h4>{{ form_label(userForm.email, 'Email') }}</h4>
@@ -59,7 +64,6 @@
                             {{ form_errors(userForm.dispoEmail) }}
                             {{ form_widget(userForm.dispoEmail,  { 'attr': {'class': 'dispoEmail dispo'} }) }}
                         </div>
-
                         <div class="phoneFormUser containerForm">
                             <div class="fieldForm">
                                 <h4>{{ form_label(userForm.phone, 'Téléphone') }}</h4>
@@ -69,7 +73,6 @@
                             {{ form_errors(userForm.dispoPhone) }}
                             {{ form_widget(userForm.dispoPhone, { 'attr': {'class': 'dispoPhone  dispo'} }) }}
                         </div>        
-
                         <div class="addressFormUser containerForm">
                             <div class="fieldForm">
                                 <h4>Adresse Postale</h4>
@@ -85,35 +88,29 @@
                             {{ form_widget(userForm.dispoAddress, { 'attr': {'class': 'dispoAddress  dispo'} }) }}
                         </div>                  
                         <div class="clear"></div>
-
                         {% if is_granted('ROLE_ADMIN') %} 
                             <h4>{{ form_label(userForm.username, "Login") }}</h4>
                             {{ form_errors(userForm.username) }}
-                            {{ form_widget(userForm.username, { 'attr': {'class': 'username'} }) }}
+                            {{ form_widget(userForm.username, { 'attr': {'class': 'username', 'placeholder': 'prénom.promo'} }) }}
 
                             <h4>{{ form_label(userForm.password, 'Mot de passe') }}</h4>
                             {{ form_errors(userForm.password) }}
-                            {{ form_widget(userForm.password, { 'attr': {'class': 'password'} }) }}
+                            {{ form_widget(userForm.password, { 'attr': {'class': 'password', 'placeholder': '20 caractères maximum'} }) }}
                         {% else %}
                             {{ form_widget(userForm.username, { 'attr': {'class': 'username', 'style': 'display:none'} }) }}
                             {{ form_widget(userForm.password, { 'attr': {'class': 'password', 'style': 'display:none'} }) }}
                         {% endif %}
-
-
                         <h4>{{ form_label(userForm.promotions, "Promotions") }}</h4>
                         <div class="promotionContainer">
                             {{ form_widget(userForm.promotions) }}
                         </div>
-
                         <h4>{{ form_label(userForm.UserSkills, "Compétences") }}</h4>
                         <div class="userSkillContainer">
                             {{ form_widget(userForm.UserSkills) }}
                         </div>
-
                         <h4>{{ form_label(userForm.description, 'Présentation') }}</h4>
                         {{ form_errors(userForm.description) }}
                         {{ form_widget(userForm.description, { 'attr': {'class': 'description'} }) }}
-
                         <h4>{{ form_label(userForm.image.alt, "Description de l'image") }}</h4>
                         {{ form_errors(userForm.image.alt) }}
                         {% if user.image is null %}
@@ -121,7 +118,6 @@
                         {% else %}
                             {{ form_widget(userForm.image.alt, { 'attr': {'class': 'altImage'} }) }}
                         {% endif %}
-
                         <h4>{{ form_label(userForm.image.url, "URL de l'image") }}</h4>
                         {{ form_errors(userForm.image.url) }}
                         {% if user.image is null %}

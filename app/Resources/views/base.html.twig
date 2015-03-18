@@ -2,21 +2,21 @@
 <html>
     <head>
         <meta charset="UTF-8" />
-        <title>{% block title %}Bienvenue{% endblock title %}</title>
+        <title>{% block title %}FilRouge - {% endblock title %}</title>
         {% block stylesheets %}
             <link rel="stylesheet" href=" {{ asset('bundles/app/css/styles.css') }} ">
         {% endblock stylesheets %}
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
-        
         <div id="global">
-
             <header>
                 <div class="container">
                     {% block header %}
                         <div id="logoIMIE">
-                            <a href="{{path('filrouge_homepage')}}"><img alt="Logo_IMIE" src="{{asset('bundles/app/images/logo_imie.png')}}" /></a>
+                            <a href="{{path('filrouge_homepage')}}">
+                                <img alt="Logo_IMIE" src="{{asset('bundles/app/images/logo_imie.png')}}" />
+                            </a>
                         </div>
                         <div id="logoCity">
                             <div id="nantes">
@@ -34,33 +34,44 @@
                     {% endblock header %}
                 </div>
             </header>
-
             <nav>
                 <div class="container">
                     {% if is_granted('ROLE_USER') %}
                         {% block menu %}
                             <ul id="menuHeader">
                                 <li class="first-child">
-                                    <a href="{{path('filrouge_homepage')}}">Accueil</a>
+                                    <a href="{{path('filrouge_homepage')}}">
+                                        Accueil
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="{{path('filrouge_project_list')}}">Projets</a>
+                                    <a href="{{path('filrouge_project_list')}}">
+                                        Projets
+                                    </a>
                                 </li>
                                 <li>
-                                    <a href="{{path('filrouge_user_list')}}">Profils</a>
+                                    <a href="{{path('filrouge_user_list')}}">
+                                        Profils
+                                    </a>
                                 </li>
                                 {% if is_granted('ROLE_ADMIN') %}
                                     <li>
-                                        <a href="{{path('filrouge_admin_list')}}">Administration</a>
+                                        <a href="{{path('filrouge_admin_list')}}">
+                                            Administration
+                                        </a>
                                     </li>
                                 {% endif %}
                             </ul>
                             <div class="connexionBlock">
                                 <div class="myProfilBlock">
-                                    <a href="{{path('filrouge_user_update', {'id': app.user.id })}}" class="icoDecoUser">{{ app.user.firstName }} {{ app.user.lastName|upper }}</a>
+                                    <a href="{{path('filrouge_user_update', {'id': app.user.id })}}" class="icoDecoUser">
+                                        {{ app.user.firstName }} {{ app.user.lastName|upper }}
+                                    </a>
                                 </div>
                                 <div class="deconnexionBlock">
-                                    <a href="{{path('logout')}}" class="icoDeconnexion">Déconnexion</a>
+                                    <a href="{{path('logout')}}" class="icoDeconnexion">
+                                        Déconnexion
+                                    </a>
                                 </div> 
                             </div>
                             <div class="clear"></div>
@@ -68,45 +79,47 @@
                     {% endif %}
                 </div>
             </nav>
-
             <div class="container">
                 <div class="breadcrumb">
                     {% block breadcrumb %} 
                     {% endblock breadcrumb %} 
                 </div>
             </div>  
-
             <div id="content">
                 {% block content %}
                 {% endblock %}
             </div>    
         </div>
-
         {% if is_granted('ROLE_USER') %}
             <footer>
                 <div class="container">
                     {% block footer %}
                         <ul id="menuFooter">
                             <li role="presentation" class="first-child">
-                                <a href="http://www.imie-ecole-informatique.fr/" target="_blank">Site de l'imie</a>
+                                <a href="http://www.imie-ecole-informatique.fr/" target="_blank">
+                                    Site de l'imie
+                                </a>
                             </li>
                             <li role="presentation">
-                                <a href="{{path('filrouge_generalCondition')}}">Mentions légales</a>
+                                <a href="{{path('filrouge_generalCondition')}}">
+                                    Mentions légales
+                                </a>
                             </li>
                             <li role="presentation">
-                                <a href="{{path('filrouge_contactAdmin')}}">Contact Administrateur</a>
+                                <a href="{{path('filrouge_contactAdmin')}}">
+                                    Contact Administrateur
+                                </a>
                             </li>
                         </ul>
                     {% endblock footer %}
                 </div>
             </footer>
         {% endif %}
-
+        
         {% block javascripts %}
             <script  type="text/javascript" src=" {{ asset('bundles/app/js/jquery-2.1.3.min.js') }}"></script>
             <script  type="text/javascript" src=" {{ asset('bundles/app/js/jquery-ui.min.js') }}"></script>
             <script  type="text/javascript" src=" {{ asset('bundles/app/js/jquery.collapsible.js') }}"></script>
         {% endblock %}
-   
     </body>
 </html>

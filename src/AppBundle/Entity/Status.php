@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Status
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="StatusRepository")
+ * @ORM\Entity
  */
 class Status
 {

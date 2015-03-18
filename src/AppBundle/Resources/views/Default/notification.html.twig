@@ -1,44 +1,50 @@
 {% extends "AppBundle::layout.html.twig" %}
 
+{% block title %}{{parent()}}Toutes les notifications{% endblock title %}
+
 {% block breadcrumb %}
     {{parent()}} > <a href="{{path('filrouge_notification')}}">Toutes les notifications</a>
 {% endblock breadcrumb %}
 
 {% block left %}
-
     <div class="blockGeneral" id="notifAll">
         <h2 class="icoNotif">Toutes les notifications</h2>
         <div class="blockContent">
-            {% for notification in notifications %}
-                <div class="oneElement">
-                    <div class="icon">
-                        {% if notification.type == 1 %}
-                            <img alt="Création de projet" src="{{asset('bundles/app/images/notif_project.png')}}" />
-                        {% elseif notification.type == 2 %}
-                            <img alt="Ajout de membre" src="{{asset('bundles/app/images/notif_user.png')}}" />
-                        {% elseif notification.type == 3 %}
-                            <img alt="Ajout de compétence" src="{{asset('bundles/app/images/notif_skill.png')}}" />
-                        {% endif %}
+            {% if notifications|length == 0 %}
+                <h4>Aucune notification.</h4>
+            {% else %}    
+                {% for notification in notifications %}
+                    <div class="oneElement">
+                        <div class="icon">
+                            {% if notification.type == 1 %}
+                                <img alt="Création de projet" src="{{asset('bundles/app/images/notif_project.png')}}" />
+                            {% elseif notification.type == 2 %}
+                                <img alt="Ajout de membre" src="{{asset('bundles/app/images/notif_user.png')}}" />
+                            {% elseif notification.type == 3 %}
+                                <img alt="Ajout de compétence" src="{{asset('bundles/app/images/notif_skill.png')}}" />
+                            {% endif %}
+                        </div>
+                        <div class="content">
+                            <p><span class="dateAside">{{notification.creationDate|date('d/m/Y H:i')}}<span></p>
+                            <p>
+                                {{notification.content}}
+                                <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} " class="hrefBody"> 
+                                    {{notification.project.name}}
+                                </a>
+                            </p>
+                        </div>
+                        <div class="clear"></div>
                     </div>
-                    <div class="content">
-                        <p><span class="dateAside">{{notification.creationDate|date('d/m/Y H:i')}}<span></p>
-                        <p>
-                            {{notification.content}}
-                            <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} " class="hrefBody"> {{notification.project.name}}</a>
-                        </p>
+                {% endfor %}
+                {% if pagination is defined %} 
+                    <div class="pagination">               
+                        {% include 'AppBundle::pagination.html.twig' %}
                     </div>
-                    <div class="clear"></div>
-                </div>
-            {% endfor %}
-            <div class="pagination">
-                {% if notifications |length != 0 %}
-                    {% include 'AppBundle::pagination.html.twig' %}
-                {% endif %}
-            </div>
+                {% endif %} 
+            {% endif %} 
             <div class="clear"></div> 
         </div>
     </div>
-  
 {% endblock left %}
 
 {% block javascripts %}

@@ -1,66 +1,78 @@
 {% extends "AppBundle::layout.html.twig" %}
 
+{% block title %}{{parent()}}Tous les messages{% endblock title %}
+
 {% block breadcrumb %}
     {{parent()}} > <a href="{{path('filrouge_message_list', {'id': app.user.id})}}">Tous les messages</a>
 {% endblock breadcrumb %}
 
 {% block left %}
-
     <div class="blockGeneral" id="recrutAll">
         <h2 class="icoRecrut">Tous les messages</h2>
         <div class="blockContent">
-            {% for message in messages %}
-                {% if is_granted('ROLE_ADMIN') or app.user == message.recipient %}
-                <div class="oneElement">
-                    <div class="icon">
-                        {% if message.type == 1 %}
-                            <img alt="invitation et commentaire" src="{{asset('bundles/app/images/recrut_invitation.png')}}" />
-                        {% elseif message.type == 2 %}
-                            <img alt="Candidature acceptée" src="{{asset('bundles/app/images/recrut_accepted.png')}}" />
-                        {% elseif message.type == 3 %}
-                            <img alt="Candidature refusée" src="{{asset('bundles/app/images/recrut_refused.png')}}" />
+            {% if messages|length == 0 %}
+                <h4>Vous n'avez aucun message.</h4>
+            {% else %} 
+                {% for message in messages %}
+                    {% if app.user == message.recipient %}
+                        <div class="oneElement">
+                            <div class="icon">
+                                {% if message.type == 1 %}
+                                    <img alt="invitation et commentaire" src="{{asset('bundles/app/images/recrut_invitation.png')}}" />
+                                {% elseif message.type == 2 %}
+                                    <img alt="Candidature acceptée" src="{{asset('bundles/app/images/recrut_accepted.png')}}" />
+                                {% elseif message.type == 3 %}
+                                    <img alt="Candidature refusée" src="{{asset('bundles/app/images/recrut_refused.png')}}" />
+                                {% endif %}
+                            </div>
+                            <div class="content">
+                                <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
+                                {% if message.type == 1 %}
+                                    <p>
+                                        <a href=" {{path('filrouge_user_detail', {'id': message.sender.id } )}} " class="hrefBody">
+                                            {{message.sender.firstName}}
+                                        </a>
+                                        {{message.content}}
+                                        <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">
+                                            {{message.project.name}}
+                                        </a>
+                                    </p>
+                                {% elseif message.type == 2 %}
+                                    <p>
+                                        {{message.content}}
+                                        <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">
+                                            {{message.project.name}}
+                                        </a>
+                                    </p>
+                                {% elseif message.type == 3 %}
+                                    <p>
+                                        {{message.content}}
+                                        <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">
+                                            {{message.project.name}}
+                                        </a>
+                                    </p>
+                                {% endif %}         
+                            </div>
+                            <a href="{{path('filrouge_message_remove', {'id': message.id })}}" class="delete">
+                                <img alt="Supprimer le message" src="{{asset('bundles/app/images/delete.png')}}" />
+                            </a>
+                            <div class="clear"></div>
+                        </div>
+                    {% else %}
+                        {% if loop.index == 1 %}
+                            <h4>Vous ne possédez pas les droits suffisants pour voir ces messages.</h4>
                         {% endif %}
-                    </div>
-                    <div class="content">
-                        <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
-                        {% if message.type == 1 %}
-                            <p>
-                                <a href=" {{path('filrouge_user_detail', {'id': message.sender.id } )}} " class="hrefBody">{{message.sender.firstName}}</a>
-                                {{message.content}}
-                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
-                            </p>
-                        {% elseif message.type == 2 %}
-                            <p>
-                                {{message.content}}
-                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
-                            </p>
-                        {% elseif message.type == 3 %}
-                            <p>
-                                {{message.content}}
-                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
-                            </p>
-                        {% endif %}         
-                    </div>
-                    <a href="{{path('filrouge_message_remove', {'id': message.id })}}" class="delete">
-                        <img alt="Supprimer le message" src="{{asset('bundles/app/images/delete.png')}}" />
-                    </a>
-                    <div class="clear"></div>
-                </div>
-                {% else %}
-                    {% if loop.index == 1 %}
-                        <h4>Vous ne possédez pas les droits suffisants pour voir ces messages.</h4>
                     {% endif %}
+                {% endfor %}
+                {% if pagination is defined %}    
+                    <div class="pagination">
+                        {% include 'AppBundle::pagination.html.twig' %}
+                    </div>
                 {% endif %}
-            {% endfor %}
-            <div class="pagination">
-                {% if messages |length != 0 %}
-                    {% include 'AppBundle::pagination.html.twig' %}
-                {% endif %}
-            </div>
+            {% endif %}
             <div class="clear"></div> 
         </div>
     </div>
-  
 {% endblock left %}
 
 {% block javascripts %}

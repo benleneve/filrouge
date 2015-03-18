@@ -17,19 +17,27 @@
                         <p><span class="dateAside">{{message.creationDate|date('d/m/Y H:i')}}<span></p>
                         {% if message.type == 1 %}
                             <p>
-                                <a href=" {{path('filrouge_user_detail', {'id': message.sender.id } )}} " class="hrefBody">{{message.sender.firstName}}</a>
+                                <a href=" {{path('filrouge_user_detail', {'id': message.sender.id } )}} " class="hrefBody">
+                                    {{message.sender.firstName}}
+                                </a>
                                 {{message.content}}
-                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
+                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">
+                                    {{message.project.name}}
+                                </a>
                             </p>
                         {% elseif message.type == 2 %}
                             <p>
                                 {{message.content}}
-                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
+                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">
+                                    {{message.project.name}}
+                                </a>
                             </p>
                         {% elseif message.type == 3 %}
                             <p>
                                 {{message.content}}
-                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">{{message.project.name}}</a>
+                                <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">
+                                    {{message.project.name}}
+                                </a>
                             </p>
                         {% endif %}  
                     </div>  
@@ -37,15 +45,16 @@
                 </div>
             {% endfor %}
             <div class="recrutSeeMore">
-                <a href=" {{path('filrouge_message_list', {'id': app.user.id})}} " class="btnAction">Voir tout</a>  
+                <a href=" {{path('filrouge_message_list', {'id': app.user.id})}} " class="btnAction">
+                    Voir tout
+                </a>  
             </div>
         {% else %}    
-           <h4>Vous n'avez aucun message</h4>  
+           <h4>Vous n'avez aucun message.</h4>  
         {% endif %}
         <div class="clear"></div>
     </div>
 </div>
-
 <div class="blockGeneral">
     <h2 class="icoNotif">Notifications</h2>
     <div class="clear"></div>
@@ -66,17 +75,21 @@
                         <p><span class="dateAside">{{notification.creationDate|date('d/m/Y H:i')}}<span></p>
                         <p>
                             {{notification.content}}
-                            <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} " class="hrefBody"> {{notification.project.name}}</a>
+                            <a href=" {{path('filrouge_project_detail', {'id': notification.project.id } )}} " class="hrefBody">
+                                {{notification.project.name}}
+                            </a>
                         </p>
                     </div>
                     <div class="clear"></div>
                 </div>
             {% endfor %}
             <div class="notifSeeMore">
-                <a href=" {{path('filrouge_notification')}} " class="btnAction">Voir tout</a>  
+                <a href=" {{path('filrouge_notification')}} " class="btnAction">
+                    Voir tout
+                </a>  
             </div>
         {% else %}    
-            <h4>Aucune notification</h4> 
+            <h4>Aucune notification.</h4> 
         {% endif %}
         <div class="clear"></div>
     </div>

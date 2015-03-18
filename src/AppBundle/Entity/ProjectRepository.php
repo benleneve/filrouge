@@ -44,7 +44,7 @@ class ProjectRepository extends EntityRepository
                   ->setParameter('name', '%' . $name . '%');
         }
         if($status != 'none') {
-            $query->andWhere('st.id = :status')
+            $query->andWhere('st.name = :status')
                   ->setParameter('status', $status);
         }
         if($skill1 != 'none') {

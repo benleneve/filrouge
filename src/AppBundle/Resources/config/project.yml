@@ -45,6 +45,13 @@ filrouge_project_refuse:
     requirements:
         id: \d+
         idMember: \d+
+
+filrouge_project_fire:
+    path: /update/{id}/fire/{idMember}
+    defaults: {_controller:AppBundle:Project:fire }
+    requirements:
+        id: \d+
+        idMember: \d+
         
 filrouge_project_addComment:
     path: /detail/{id}/addComment/{page}

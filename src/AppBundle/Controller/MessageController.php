@@ -11,12 +11,12 @@ class MessageController extends Controller{
     
     public function listAction($page, $id) {
         $maxMessages = 20;
-
         $repository = $this->getDoctrine()
                         ->getManager()
                         ->getRepository('AppBundle:Message');
         $messages = $repository->findAllMessagesPageEager($page, $maxMessages, $id);
         $numberOfMessages = count($messages);
+        //Parametrage de la pagination Doctrine
         $pagination = array(
                 'page' => $page,
                 'route' => 'filrouge_message_list',
@@ -34,21 +34,18 @@ class MessageController extends Controller{
                             ->getManager()
                             ->getRepository('AppBundle:Message');
         $em = $this->getDoctrine()->getManager();
-        
         $message = $repository->findOneMessageEager($id);
-
         if($message === null) {
             throw $this->createNotFoundException('ID' . $id . ' impossible.');
         }
         $em->remove($message);
         $em->flush();
-        
         $idUser = $this->getUser()->getId();
-        
         $maxMessages = 20;
         $page = 1;
         $messages = $repository->findAllMessagesPageEager($page, $maxMessages, $idUser);
         $numberOfMessages = count($messages);
+        //Parametrage de la pagination Doctrine
         $pagination = array(
                 'page' => $page,
                 'route' => 'filrouge_message_list',

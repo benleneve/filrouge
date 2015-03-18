@@ -1,11 +1,12 @@
 {% extends "AppBundle::layout.html.twig" %}
 
+{% block title %}{{parent()}}Mentions Légales{% endblock title %}
+
 {% block breadcrumb %}
     {{parent()}} > <a href="{{path('filrouge_generalCondition')}}">Mentions légales</a>
 {% endblock breadcrumb %}
 
 {% block left %}
-
     <div class="blockGeneral">
         <h2 class="icoRecrut">Mentions Légales</h2>
         <div class="blockContent">
@@ -65,9 +66,4 @@
             </div>
         </div>
     </div>
-  
 {% endblock left %}
-
-{% block javascripts %}
-    {{parent()}}
-{% endblock %}

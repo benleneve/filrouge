@@ -8,7 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
  * UserSkill
  *
  * @ORM\Table()
- * @ORM\Entity(repositoryClass="AppBundle\Entity\UserSkillRepository")
+ * @ORM\Entity
  */
 class UserSkill
 {

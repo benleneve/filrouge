@@ -33,7 +33,7 @@ class CommentController extends Controller{
                         ->getManager()
                         ->getRepository('AppBundle:Project')
                         ->findOneProjectEager($id);
-        
+        //Chargement du formulaire Comment
         $comment = new Comment();
         $form = $this->createForm(new CommentType(), $comment, array(
             'action' => $this->generateUrl('filrouge_project_addComment', array(
@@ -41,7 +41,6 @@ class CommentController extends Controller{
                 'page' => $page 
             )) . '#commentProject'
         ));
-
         $form->handleRequest($req); 
         if($form->isValid()) {
             $comment->setProject($project);
@@ -49,7 +48,7 @@ class CommentController extends Controller{
             if($comment->getId() === null) {
                 $comment->setAuthor($user);
                 $em->persist($comment);
-                
+                //Ecriture d'un Message pour annoncer un nouveau commentaire
                 $content =  ' a posté un commentaire sur votre projet ';
                 $message = new Message();
                 $message->setSender($user)
@@ -60,7 +59,8 @@ class CommentController extends Controller{
                 $em->persist($message);
             }
             $em->flush();
-
+            //Renvoi de la requête soit sur la page project ou addormodifyproject...
+            //Après validation du formulaire
             if($page == 'detail') {
                 return $this->redirect(
                     $this->generateUrl('filrouge_project_detail', array('id' => $id)) . '#commentProject'
@@ -71,7 +71,7 @@ class CommentController extends Controller{
                 );
             }   
         }
-        
+        //Renvoi de la requête soit sur la page project ou addormodifyproject
         if($page == 'detail') {
             return $this->render('AppBundle:Project:project.html.twig', array(
                         'project' => $project,
@@ -95,25 +95,23 @@ class CommentController extends Controller{
         $comment = $this->getDoctrine()
                             ->getManager()
                             ->getRepository('AppBundle:Comment')
-                            ->findOneCommentEager($idComment);
-        
+                            ->findOneCommentEager($idComment);   
         $project = $this->getDoctrine()
                         ->getManager()
                         ->getRepository('AppBundle:Project')
                         ->findOneProjectEager($id);
-        
         $em = $this->getDoctrine()->getManager();
-
         if($comment === null) {
             throw $this->createNotFoundException('ID' . $idComment . ' impossible.');
         }
+        //Chargement du formulaire Comment
         $form = $this->createForm(new CommentType(), $comment, array(
             'action' => $this->generateUrl('filrouge_project_updateComment', array(
                 'id' => $id, 
                 'idComment' => $idComment, 
                 'page' => $page )) . '#commentProject'
         ));
-        
+        //Validation du formulaire et modification du commentaire
         $form->handleRequest($req); 
         if($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
@@ -121,6 +119,8 @@ class CommentController extends Controller{
                 $em->persist($comment);
             }
             $em->flush();
+            //Renvoi de la requête soit sur la page project ou addormodifyproject...
+            //Après validation du formulaire
             if($page == 'detail') {
                 return $this->redirect(
                     $this->generateUrl('filrouge_project_detail', array('id' => $id)) . '#commentProject'
@@ -131,7 +131,7 @@ class CommentController extends Controller{
                 );
             }   
         }
-        
+        //Renvoi de la requête soit sur la page project ou addormodifyproject
         if($page == 'detail') {
             return $this->render('AppBundle:Project:project.html.twig', array(
                         'project' => $project,
@@ -156,19 +156,18 @@ class CommentController extends Controller{
                             ->getManager()
                             ->getRepository('AppBundle:Comment')
                             ->findOneCommentEager($idComment);
-        $em = $this->getDoctrine()->getManager();
-        
-        if($comment === null) {
-            throw $this->createNotFoundException('ID' . $idComment . ' impossible.');
-        }
-        $em->remove($comment);
-        $em->flush();
-        
         $project = $this->getDoctrine()
                         ->getManager()
                         ->getRepository('AppBundle:Project')
                         ->findOneProjectEager($id);
-        
+        $em = $this->getDoctrine()->getManager();
+        if($comment === null) {
+            throw $this->createNotFoundException('ID' . $idComment . ' impossible.');
+        }
+        //Effacement du commentaire ciblé
+        $em->remove($comment);
+        $em->flush();
+        //Chargement du formulaire Commetn
         $newComment = new Comment();
         $form = $this->createForm(new CommentType(), $newComment, array(
             'action' => $this->generateUrl('filrouge_project_addComment', array(
@@ -176,7 +175,7 @@ class CommentController extends Controller{
                 'page' => $page 
             )) . '#commentProject'
         ));
-        
+        //Renvoi de la requête soit sur la page project ou addormodifyproject
         if($page == 'detail') {
             return $this->render('AppBundle:Project:project.html.twig', array(
                         'project' => $project,

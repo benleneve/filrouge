@@ -1,17 +1,15 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}Connexion{% endblock title %}
+{% block title %}{{parent()}}Connexion{% endblock title %}
 
 {% block breadcrumb %}
 {% endblock breadcrumb %}
 
-{% block left %}
-    
+{% block left %} 
     <div id="contentFormLogin">
         <h2 class="icoLogin">CONNEXION</h2>
         <div id="formLogin"> 
             <form action="{{ path('login_check') }}" method="post">
-
                 <p>
                     <label for="username">Login</label>
                     <input type="text" id="username" name="_username" value="{{ last_username }}" required />
@@ -27,7 +25,6 @@
                 <div>{{ error.message }}</div>
             {% endif %}
         </div>
-    </div> 
-           
+    </div>            
 {% endblock left %}
 

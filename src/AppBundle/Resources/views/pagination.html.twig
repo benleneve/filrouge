@@ -1,4 +1,4 @@
- <div class="pagination">
+<div class="pagination">
     <div class="pagination-buttons">
         {% if pagination.page>1 %}
             <a href="{{ path(pagination.route, pagination.route_params|merge({'page': pagination.page-1})) }}">

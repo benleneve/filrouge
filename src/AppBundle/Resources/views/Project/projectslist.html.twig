@@ -1,11 +1,12 @@
 {% extends "AppBundle::layout.html.twig" %}
 
+{% block title %}{{parent()}}Projets{% endblock title %}
+
 {% block breadcrumb %}
     {{parent()}} > <a href="{{path('filrouge_project_list')}}">Projets</a>
 {% endblock breadcrumb %}
 
 {% block left %}
-    
     <div class="blockGeneral">
         <h2 class="icoSearch">Rechercher un projet</h2>
         <div class="blockContent">
@@ -19,9 +20,9 @@
                         <label for="statusProject">Statut</label>
                         <select id="statusProject" name="statusProject">
                             <option value="none" selected>aucun</option>
-                            <option value="1">En attente</option>
-                            <option value="2">En cours</option>
-                            <option value="3">Terminé</option>
+                            <option value="En attente">En attente</option>
+                            <option value="En cours">En cours</option>
+                            <option value="Terminé">Terminé</option>
                         </select>
                     </p>
                     <p>
@@ -49,18 +50,18 @@
                         <label for="recrutProject">Recrutement</label>
                         <input type="checkbox" name="recrutProject" value="yes" id="recrutProject" />
                     <p>
-
                     <button type="submit" class="btnAction">rechercher</button>
                 </form>
                 <div class="clear"></div>
             </div>
         </div>
-    </div>
-    
+    </div>  
     <div class="blockGeneral" id="allProjects">
         <h2 class="icoProject">Tous les Projets</h2>
         <div class="projectNew">
-            <a href="{{path('filrouge_project_add')}}" class="btnAction">créer un nouveau projet</a>
+            <a href="{{path('filrouge_project_add')}}" class="btnAction">
+                créer un nouveau projet
+            </a>
         </div>
         <div class="clear"></div>
         <div class="blockContent">
@@ -81,7 +82,6 @@
             {% endif %}
         </div>
     </div>
- 
 {% endblock left %}
 
 {% block javascripts %}

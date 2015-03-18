@@ -46,7 +46,6 @@
     </div>
     <div class="clear"></div>
 </div>
-
 <div class="container">
     <div class="content"> 
         <div class="bodyBlock">
@@ -75,9 +74,13 @@
             {% endif %} 
             <div class="projectSeeMore">
                 {% if app.user.id == project.projectManager.id %} 
-                    <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">Gérer mon projet</a>  
+                    <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">
+                        Gérer mon projet
+                    </a>  
                 {% else %}
-                    <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} " class="btnAction">Voir la fiche projet</a>
+                    <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} " class="btnAction">
+                        Voir la fiche projet
+                    </a>
                 {% endif %}
             </div>
         </div>

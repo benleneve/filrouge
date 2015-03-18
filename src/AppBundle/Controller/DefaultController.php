@@ -12,20 +12,19 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DefaultController extends Controller {
     
-    public function indexAction($pageMP, $page)
-    {
-        $maxProjects = 5;
-            
+    public function indexAction($pageMP, $page) {
+        $maxProjects = 5;  
         $repository = $this->getDoctrine()
                         ->getManager()
                         ->getRepository('AppBundle:Project');
+        //Récupérer tous les nouveaux projets
         $projects = $repository->findAllProjectsPageEager($page, $maxProjects);
         $numberOfProject = count($projects);
-        
+        //Récupérer tous les projets de l'utilisateur
         $idUser = $this->getUser()->getId();
         $myProjects = $repository->findAllProjectsByUserPageEager($pageMP, $maxProjects, $idUser);
         $numberOfMyProject = count($myProjects);
-        
+        //Parametrage de la pagination Doctrine
         $pagination = array(
                 'page' => $page,
                 'pageMP' => $pageMP,
@@ -34,7 +33,6 @@ class DefaultController extends Controller {
                 'pagesMP_count' => ceil($numberOfMyProject/$maxProjects),
                 'route_params' => array()
         );
-        
         return $this->render('AppBundle:Default:index.html.twig', array(
                 'projects' => $projects,
                 'pagination' => $pagination,
@@ -42,8 +40,7 @@ class DefaultController extends Controller {
         ));
     }
 
-    public function asideAction($id) 
-    {
+    public function asideAction($id) {
         $em = $this->getDoctrine()->getManager();
         $repoMess = $em->getRepository('AppBundle:Message');
         $repoNoti = $em->getRepository('AppBundle:Notification');
@@ -57,7 +54,6 @@ class DefaultController extends Controller {
     
     public function listNotificationAction($page) {
         $maxNotifications = 20;
-
         $repository = $this->getDoctrine()
                         ->getManager()
                         ->getRepository('AppBundle:Notification');
@@ -76,18 +72,16 @@ class DefaultController extends Controller {
     }
     
     public function adminAction(Request $req) {
+        //Chargement du formulaire Skill
         $skill = new Skill();
         $formSkill = $this->createForm(new SkillType(), $skill, array(
             'action' => $this->generateUrl('filrouge_admin_add_skill')  . '#adminSkill'
         ));
-        $formSkill->handleRequest($req);
-
+        //Chargement du formulaire Category
         $category = new Category();
         $formCategory = $this->createForm(new CategoryType(), $category, array(
             'action' => $this->generateUrl('filrouge_admin_add_category')  . '#adminCategory'
         ));
-        $formCategory->handleRequest($req);
-
         return $this->render('AppBundle:Admin:administration.html.twig', array(
                 'categoryForm' => $formCategory->createView(),
                 'skillForm' => $formSkill->createView()
@@ -107,7 +101,7 @@ class DefaultController extends Controller {
                          ->getRepository('AppBundle:User')
                          ->findOneUserEager($id);
         $mail = $user->getEmail(); 
-        
+        //Création et vérification de l'envoi de mail
         if(!empty($_POST['title']) && !empty($_POST['message'])) {
             if (preg_match("#^[a-zA-Z0-9._-]+@[a-z0-9._-]{2,}\.[a-z]{2,4}$#", $mail)) {
                 $message = Swift_Message::newInstance()
@@ -124,7 +118,6 @@ class DefaultController extends Controller {
         } else {
             $reponse = 'Merci de remplir tous les champs du formulaire.';
         }
- 
         return $this->render('AppBundle:Default:contactadmin.html.twig', array(
                 'message' => $reponse
         ));

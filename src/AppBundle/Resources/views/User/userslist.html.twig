@@ -1,16 +1,14 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-
 {% block title %}
-       Tous les profils
+    {{parent()}}Profils
 {% endblock title %}
 
 {% block breadcrumb %}
     {{parent()}} > <a href="{{path('filrouge_user_list')}}">Profils</a>
 {% endblock breadcrumb %}
 
-{% block left %}
-    
+{% block left %}  
     <div class="blockGeneral">
         <h2 class="icoSearch">Rechercher un profil</h2>
         <div class="blockContent">
@@ -51,7 +49,6 @@
             </div>
         </div>
     </div>
-    
     <div class="blockGeneral">
         <h2 class="icoUser">Tous les Profils</h2>
         <div class="blockContent">
@@ -71,9 +68,7 @@
                 {% endif %}
             {% endif %}
         </div>
-    </div>
-    
-   
+    </div>  
 {% endblock left %}
 
 {% block javascripts %}

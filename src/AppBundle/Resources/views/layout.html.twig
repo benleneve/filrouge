@@ -1,19 +1,15 @@
 {% extends "::base.html.twig" %}
 
-{% block title %}IMIE - Fil Rouge{% endblock title %}
-
 {% block breadcrumb %}
     <a href="{{path('filrouge_homepage')}}">Accueil</a>
 {% endblock breadcrumb %}
 
 {% block content %}
     <div class="container">
-
         <div id="left">
             {% block left %}
             {% endblock left %}
-        </div>
-        
+        </div>      
         {% if is_granted('ROLE_USER') %}
             <aside>
                 {% block right %}
@@ -22,8 +18,7 @@
                     })) }}
                 {% endblock right %} 
             </aside>           
-        {% endif %}
-        
+        {% endif %} 
         <div class="clear"></div>     
     </div>
 {% endblock content %}

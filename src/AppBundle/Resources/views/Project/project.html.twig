@@ -1,5 +1,7 @@
 {% extends "AppBundle::layout.html.twig" %}
 
+{% block title %}{{parent()}}{{project.name}}{% endblock title %}
+
 {% block breadcrumb %}
     {{parent()}} > 
         <a href="{{path('filrouge_project_list')}}">Projets</a> >
@@ -7,12 +9,13 @@
 {% endblock breadcrumb %}
 
 {% block left %}
-    
     <div class="blockGeneral" id="projectDetail">
         <h2 class="icoProject">Projet</h2>
         {% if app.user.id == project.projectManager.id %} 
             <div class="projectUpdate">
-               <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">gérer mon projet</a>
+               <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">
+                   gérer mon projet
+               </a>
             </div>
         {% endif %}
         <div class="clear"></div>
@@ -45,12 +48,13 @@
                     <div class="clear"></div>
                 </div>
                 <h4>Chef de projet</h4>
-                <a href=" {{path('filrouge_user_detail', {'id': project.projectManager.id } )}}" class="hrefBody">{{project.projectManager.firstName}} {{project.projectManager.lastName}}</a>
+                <a href=" {{path('filrouge_user_detail', {'id': project.projectManager.id } )}}" class="hrefBody">
+                    {{project.projectManager.lastName|upper}} {{project.projectManager.firstName}}
+                </a>
                 <h4>Objectif</h4>
                 {{project.purpose}}
                 <h4>Description</h4>
                 {{project.description}}
-                
                 {% if (project.projectSkills|length !=0) %}
                     <h4>Compétences recherchées</h4>
                     {% for projectSkill in project.projectSkills %}
@@ -63,13 +67,17 @@
                                 {% if (projectSkill.applicants|length !=0) %}
                                     {% if app.user.id in projectSkill.applicants %}
                                         <div class="validateOnHold">   
-                                            validation en cours
+                                            candidature envoyée
                                         </div>
                                     {% else %}    
-                                        <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">postuler</a>
+                                        <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">
+                                            postuler
+                                        </a>
                                     {% endif %}
                                 {% else %}
-                                    <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">postuler</a>
+                                    <a href=" {{path('filrouge_project_apply', {'id': project.id, 'idProjectSkill': projectSkill.id } )}}" class="btnAction">
+                                        postuler
+                                    </a>
                                 {% endif %}     
                             {% else %}
                                 <div class="finish">
@@ -88,9 +96,8 @@
                 {% else %}
                     <h4>Aucune compétence demandée pour ce projet</h4>
                 {% endif %}
-                
+                <h4>Avancement du projet</h4>
                 {% if (project.steps|length !=0) %}
-                    <h4>Avancement du projet</h4>
                     {% for step in project.steps %}
                         <div class="projectStep">
                             <div class="name">
@@ -115,18 +122,19 @@
                         </div>
                     {% endfor %}
                 {% else %}
-                    <h4>Aucune étape renseignée pour ce projet.</h4>
-                {% endif %}
-                
+                    <p>Aucune étape n'est renseignée pour ce projet.</p>
+                {% endif %}     
+                <h4>Membres du projet</h4>
                 {% if (project.projectMembers|length !=0) %}
-                    <h4>Membres du projet</h4>
                     {% set cpt = true %}
                     {% for member in project.projectMembers %} 
                         {% if member.active %}
                             {% set cpt = false %}
                             <div class="projectMember">
                                 <div class="nameMember">
-                                    <a href=" {{path('filrouge_user_detail', {'id': member.user.id } )}}" class="hrefBody">{{member.user.firstName}} {{member.user.LastName}}</a>
+                                    <a href=" {{path('filrouge_user_detail', {'id': member.user.id } )}}" class="hrefBody">
+                                        {{member.user.lastName|upper}} {{member.user.firstName}}
+                                    </a>
                                 </div>
                                 <div class="skillMember">
                                     {{member.skill.name}}
@@ -136,17 +144,16 @@
                             <div class="clear"></div>
                         {% else %} 
                             {% if cpt %}   
-                                Des candidats ont postulé à ce projet.
+                                <p>Des candidats ont postulé à ce projet.</p>
                                 {% set cpt = false %}
                             {% endif %}
                         {% endif %}
                     {% endfor %}
                 {% else %}
-                    <h4>Aucun membre n'a rejoint ce projet.</h4>
+                    <p>Aucun membre n'a rejoint ce projet.</p>
                 {% endif %}
             </div>
-        </div>
-            
+        </div>     
         {% set cptComment = 0 %}
         {% for member in project.projectMembers %}
             {% if (member.user.id == app.user.id and cptComment == 0 and member.active) or (app.user.id == project.projectManager.id and cptComment == 0) or (is_granted('ROLE_ADMIN') and cptComment == 0) %} 
@@ -166,8 +173,6 @@
                     </div>
                 </div>
             {% endif %}
-        {% endfor %}
-        
+        {% endfor %}    
     </div>
- 
 {% endblock left %}

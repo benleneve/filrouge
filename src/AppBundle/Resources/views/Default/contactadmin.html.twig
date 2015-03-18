@@ -1,13 +1,12 @@
 {% extends "AppBundle::layout.html.twig" %}
 
-{% block title %}Contact administrateur{% endblock title %}
+{% block title %}{{parent()}}Contact administrateur{% endblock title %}
 
 {% block breadcrumb %}
     {{parent()}} > <a href="{{path('filrouge_contactAdmin')}}">Contact administrateur</a>
 {% endblock breadcrumb %}
 
 {% block left %}
-    
     <div class="blockGeneral">
         <h2 class="icoMail">Contact Administrateur</h2>
         <div class="blockContent">
@@ -26,5 +25,4 @@
             </div>
         </div>
     </div>
-
 {% endblock left %}

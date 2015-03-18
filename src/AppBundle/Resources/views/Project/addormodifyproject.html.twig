@@ -1,18 +1,29 @@
 {% extends "AppBundle::layout.html.twig" %}
 
+{% block title %}
+    {% if project is defined and project.id is not null %}
+        {{parent()}}Gérer mon projet
+    {% else %}
+        {{parent()}}Nouveau projet
+    {% endif%}
+{% endblock title %}
+
 {% block breadcrumb %}
     {{parent()}} > 
         <a href="{{path('filrouge_project_list')}}">Projets</a> >
         {% if project is defined and project.id is not null %}
-            <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} ">{{project.name}}</a> >
-            <a href=" {{path('filrouge_project_update', {'id': project.id } )}} ">Gérer mon projet</a>
+            <a href=" {{path('filrouge_project_detail', {'id': project.id } )}} ">
+                {{project.name}}
+            </a> >
+            <a href=" {{path('filrouge_project_update', {'id': project.id } )}} ">
+                Gérer mon projet
+            </a>
         {% else %}
             <a href="{{path('filrouge_project_add')}}">Nouveau projet</a>
         {% endif%}
 {% endblock breadcrumb %}
 
 {% block left %}
-
     <div class="blockGeneral">
         <h2 class="icoProject">Projets</h2>
         <div class="blockContent">
@@ -20,10 +31,9 @@
                 <div id="formProject">
                     {{ form_start(projectForm) }}
                         {{ form_errors(projectForm) }}
-
                         <div class="nameProject">
                             <h4>{{ form_label(projectForm.name, "Nom du projet") }}</h4>
-                            {{ form_widget(projectForm.name) }}
+                            {{ form_widget(projectForm.name, { 'attr': {'placeholder': 'Nom du projet'} }) }}
                             {{ form_errors(projectForm.name) }}
                         </div>
                         <div class="statusProject">
@@ -42,33 +52,28 @@
                             {{ form_errors(projectForm.endDate) }}
                         </div>
                         <div class="clear"></div>
-
                         {% if is_granted('ROLE_ADMIN') %}   
                             <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
-                            {{ form_widget(projectForm.projectManager, { 'attr': {'class': 'managerProject'} }) }}
+                            {{ form_widget(projectForm.projectManager, { 'attr': {'class': 'managerProject', 'style': 'text-transform:uppercase'} }) }}
                             {{ form_errors(projectForm.projectManager) }}
                         {% else %}
                             <h4>{{ form_label(projectForm.projectManager, "Chef de projet") }}</h4>
-                            {{ app.user.firstName }} {{ app.user.lastName }}
+                            {{ app.user.lastName|upper }} {{ app.user.firstName }}
                             {{ form_widget(projectForm.projectManager, { 'attr': {'style': 'display:none'} }) }}
                         {% endif %}
-
                         <h4>{{ form_label(projectForm.purpose, "Objectif") }}</h4>
-                        {{ form_widget(projectForm.purpose, { 'attr': {'class': 'purposeProject'} }) }}
+                        {{ form_widget(projectForm.purpose, { 'attr': {'class': 'purposeProject', 'placeholder': 'Objectif du projet'} }) }}
                         {{ form_errors(projectForm.purpose) }}
                         <h4>{{ form_label(projectForm.description, "Description") }}</h4>
                         {{ form_widget(projectForm.description, { 'attr': {'class': 'descriptionProject'} }) }}
                         {{ form_errors(projectForm.description) }}
-
                         <h4>{{ form_label(projectForm.projectSkills, "Compétences recherchées") }}</h4>
                         {{ form_widget(projectForm.projectSkills) }}
-
                         <h4>{{ form_label(projectForm.steps, "Avancement du projet") }}</h4>
                         {{ form_widget(projectForm.steps) }}
                     {{ form_end(projectForm) }}
                     <div class="clear"></div>
                 </div>
-
                 <div id="myMember">
                     {% if project is defined and project.id is not null %}
                         <h4>Membres du projet</h4>
@@ -77,7 +82,9 @@
                                 {% for member in project.projectMembers %}
                                     <div class="projectMember">
                                         <div class="nameMember">
-                                            <a href=" {{path('filrouge_user_detail', {'id': member.user.id } )}}" class="hrefBody">{{member.user.firstName}} {{member.user.LastName}}</a>
+                                            <a href=" {{path('filrouge_user_detail', {'id': member.user.id } )}}" class="hrefBody">
+                                                {{member.user.LastName|upper}} {{member.user.firstName}}
+                                            </a>
                                         </div>
                                         <div class="skillMember">
                                             {{member.skill.name}}
@@ -93,8 +100,16 @@
                                     </div>
                                     <div class="confirmation">
                                         {% if member.active == 0 %}
-                                            <a href=" {{path('filrouge_project_accept', {'id': project.id, 'idMember': member.id } )}} " class="btnAction accepted">accepter</a>
-                                            <a href=" {{path('filrouge_project_refuse', {'id': project.id, 'idMember': member.id } )}} " class="btnAction refused">refuser</a>
+                                            <a href=" {{path('filrouge_project_accept', {'id': project.id, 'idMember': member.id } )}} " class="btnAction accepted">
+                                                accepter
+                                            </a>
+                                            <a href=" {{path('filrouge_project_refuse', {'id': project.id, 'idMember': member.id } )}} " class="btnAction refused">
+                                                refuser
+                                            </a>
+                                        {% elseif member.active == 1 %} 
+                                            <a href=" {{path('filrouge_project_fire', {'id': project.id, 'idMember': member.id } )}} " class="btnAction">
+                                                retirer du projet
+                                            </a>
                                         {% endif %}
                                     </div>
                                     <div class="clear"></div> 
@@ -129,10 +144,8 @@
                 {% endif %}
             </div>
         {% endif %}   
-    </div>
-    
+    </div>   
 {% endblock left %}
-
 
 {% block javascripts %}
     {{parent()}}
