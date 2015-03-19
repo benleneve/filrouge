@@ -33,7 +33,7 @@ class LoadSkillData extends AbstractFixture implements OrderedFixtureInterface {
         $this->addReference('skill3', $skill3);
         
         $skill4 = new Skill();
-        $skill4->setName('HTML5 / CSS3')
+        $skill4->setName('HTML5-CSS3')
                 ->setCategory($this->getReference('category1'));
         $manager->persist($skill4);
         $this->addReference('skill4', $skill4);

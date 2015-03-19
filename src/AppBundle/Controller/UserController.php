@@ -186,18 +186,51 @@ class UserController extends Controller {
         if($user === null) {
             throw $this->createNotFoundException('ID' . $id . ' impossible.');
         }
+        $actualUser = $this->getUser();
         //Effacement d'un User s'il n'est pas en charge d'un project
-        if(count($user->getManagesProjects()) === 0) {
-            $message = $user->getFirstName() . ' ' . $user->getLastName() . ' vient d\'être effacé';
-            $em->remove($user);
-            if ($user->getImage() !== null)
-                {
-                    $em->remove($user->getImage());
+        if($this->get('security.context')->isGranted('ROLE_SUPER_ADMIN')) {
+            if($user != $actualUser) {
+                if(count($user->getManagesProjects()) === 0) {
+                    $message = $user->getFirstName() . ' ' . $user->getLastName() . ' vient d\'être effacé.';
+                    $em->remove($user);
+                    if ($user->getImage() !== null) {
+                        $em->remove($user->getImage());
+                    }
+                    $em->flush();
+                } else {
+                    $message = $user->getFirstName() . ' ' . $user->getLastName() . ' ne peut être supprimé car il est en charge d\'un projet.';
                 }
-            $em->remove($user);
-            $em->flush();
-        } else {
-            $message = $user->getFirstName() . ' ' . $user->getLastName() . ' ne peut être supprimé car il est en charge d\'un projet';
+            } else {
+                $message = 'Vous n\'avez pas les droits nécessaires pour supprimer ce profil.';
+            }  
+        }
+        else if ($this->get('security.context')->isGranted('ROLE_ADMIN')) {
+            if(in_array("ROLE_SUPER_ADMIN", $user->getRoles())) {
+                $message = $user->getFirstName() . ' ' . $user->getLastName() . ' ne peut être supprimé car il est SuperAdmin.';
+            } else {
+                if(in_array("ROLE_ADMIN", $user->getRoles())) {
+                    $message = 'Vous n\'avez pas les droits nécessaires pour supprimer ce profil.';
+                }
+                else {
+                    if($user != $actualUser) {
+                        if(count($user->getManagesProjects()) === 0) {
+                            $message = $user->getFirstName() . ' ' . $user->getLastName() . ' vient d\'être effacé.';
+                            $em->remove($user);
+                            if ($user->getImage() !== null) {
+                                $em->remove($user->getImage());
+                            }
+                            $em->flush();
+                        } else {
+                            $message = $user->getFirstName() . ' ' . $user->getLastName() . ' ne peut être supprimé car il est en charge d\'un projet.';
+                        }
+                    } else {
+                        $message = 'Vous n\'avez pas les droits nécessaires pour supprimer ce profil.';
+                  }  
+                }   
+            }
+        }
+        else {
+            $message = 'Vous n\'avez pas les droits nécessaires pour supprimer ce profil.'; 
         }
         //Chargement du formulaire Skill
         $skill = new Skill();

@@ -2,7 +2,7 @@
     <div class="oneComment">
         <div class="content">
             <p class="txt">{{comment.content}}</p>
-            <p>{{comment.author.firstName}} {{comment.author.lastName}} - Le {{comment.creationDate|date('d/m/Y H:i')}}</p>
+            <p>{{comment.author.lastName|upper}} {{comment.author.firstName}} - Le {{comment.creationDate|date('d/m/Y H:i')}}</p>
         </div>
         {% if app.user.id == comment.author.id or is_granted('ROLE_ADMIN') or app.user.id == project.projectManager.id %}
             <div class="status">

@@ -127,7 +127,7 @@ Class ProjectController extends Controller {
             $em->flush();
             //Ecriture d'une notification de création de projet
             $notif = new Notification();
-            $message = $project->getProjectManager()->getFirstName() . ' a créé le projet ';
+            $message = strtoupper($project->getProjectManager()->getLastName()).' '.$project->getProjectManager()->getFirstName().' a créé le projet ';
             $notif->setProject($project)
                     ->setType(1)
                     ->setContent($message);
@@ -319,7 +319,7 @@ Class ProjectController extends Controller {
         $em->persist($message);
         //Ecriture de la notification création de projet
         $notif = new Notification();
-        $message = $userProject->getUser()->getFirstName() . ' a rejoint le projet ';
+        $message = strtoupper($userProject->getUser()->getLastName()).' '.$userProject->getUser()->getFirstName().' a rejoint le projet ';
         $notif->setProject($project)
                 ->setType(2)
                 ->setContent($message);
@@ -397,6 +397,7 @@ Class ProjectController extends Controller {
     }
         
     public function fireAction($id, $idMember) {
+        $user = $this->getUser();
         $repoUser = $this->getDoctrine()
                         ->getManager()
                         ->getRepository('AppBundle:Project');
@@ -408,6 +409,15 @@ Class ProjectController extends Controller {
         $em = $this->getDoctrine()->getManager();
         //Effacement du UserProject d'un candidat licencié
         $em->remove($userProject);
+        $em->flush();
+        $content =  'Votre avez été retiré du projet ';
+        $message = new Message();
+        $message->setSender($user)
+                ->setRecipient($userProject->getUser())
+                ->setContent($content)
+                ->setProject($project)
+                ->setType(3);
+        $em->persist($message);
         $em->flush();
         //Chargement du formulaire Project
         $form = $this->createForm(new ProjectType(), $project, array(

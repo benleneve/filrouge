@@ -18,7 +18,7 @@
                         {% if message.type == 1 %}
                             <p>
                                 <a href=" {{path('filrouge_user_detail', {'id': message.sender.id } )}} " class="hrefBody">
-                                    {{message.sender.firstName}}
+                                    {{message.sender.lastName|upper}} {{message.sender.firstName}}
                                 </a>
                                 {{message.content}}
                                 <a href=" {{path('filrouge_project_detail', {'id': message.project.id } )}} " class="hrefBody">

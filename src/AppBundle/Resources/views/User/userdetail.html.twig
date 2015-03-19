@@ -60,8 +60,10 @@
                         <h4>Présentation</h4>
                         {{ user.description }}
                     {% endif %}
-                    <h4>Projets attribués</h4>
+                    <h4>Projets en cours</h4>
                     {% include('AppBundle:User:userprojectlayout.html.twig')%}
+                    <h4>Projets terminés</h4>
+                    {% include('AppBundle:User:userprojectfinishlayout.html.twig')%}
                 </div>
                 <div class="imageProfil">
                     {% if user.image %}

@@ -46,6 +46,12 @@ class LoadImageData extends AbstractFixture implements OrderedFixtureInterface {
                 ->setAlt("Image de profil");
         $manager->persist($image6);
         $this->addReference("image6", $image6);
+        
+        $image7 = new Image();
+        $image7->setUrl("bundles/app/images/avatar.png")
+                ->setAlt("Image de profil");
+        $manager->persist($image7);
+        $this->addReference("image7", $image7);
 
         $manager->flush();           
     }

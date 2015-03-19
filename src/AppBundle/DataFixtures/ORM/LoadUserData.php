@@ -24,8 +24,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
               ->setPostCode("44100")
               ->setCity("Nantes")
               ->setPhone("0655478412")
-              ->setDescription("Bonjour, je suis administrateur de ce site "
-                      . "et je peux répondre à vos questions via "
+              ->setDescription("Bonjour, je suis administrateur de ce site. "
+                      . "Je peux répondre à vos questions via "
                       . "le formulaire de contact administrateur.")
               ->setAvailability(false)
               ->setDispoBirth(false)
@@ -125,8 +125,8 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
               ->setPostCode("44800")
               ->setCity("Saint-Herblain")
               ->setPhone("0687414522")
-              ->setDescription("Je suis avant tout développeur front"
-                      . " et je suis disponible pour des projets Javascript.")
+              ->setDescription("Je suis avant tout développeur front."
+                      . " Je suis disponible pour tout type de projets Javascript.")
               ->setAvailability(true)
               ->setDispoBirth(false)
               ->setDispoPhone(false)
@@ -161,6 +161,30 @@ class LoadUserData extends AbstractFixture implements OrderedFixtureInterface {
               ->addPromotion($this->getReference("promotion1"));
         $manager->persist($user6);
         $this->addReference("user6", $user6);
+        
+        $user7 = new User();
+        $user7->setFirstName("Gabriel")
+              ->setLastName("BLOCK")
+              ->setUsername("gabriel.admin")
+              ->setPassword("adminpass")
+              ->setSalt('')
+              ->addRoles('ROLE_ADMIN')
+              ->setBirthDate(new \DateTime('10/02/1983'))
+              ->setEmail("gabriel.block@imie.fr")
+              ->setAddress("135 rue des chameaux")
+              ->setPostCode("44000")
+              ->setCity("Nantes")
+              ->setPhone("0636897452")
+              ->setDescription("Bonjour, je suis enseignant à L'IMIE."
+                      . " Vous pouvez me poser des questions techniques via mon adresse mail.")
+              ->setAvailability(false)
+              ->setDispoBirth(true)
+              ->setDispoPhone(false)
+              ->setDispoEmail(true)
+              ->setDispoAddress(false)
+              ->setImage($this->getReference("image7"));
+        $manager->persist($user7);
+        $this->addReference("user7", $user7);
 
         $manager->flush();      
     }

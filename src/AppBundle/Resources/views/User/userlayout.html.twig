@@ -17,7 +17,27 @@
         <div class="bodyBlock">
             {% include('AppBundle:User:userskilllayout.html.twig') %}  
             <div>
-                <h4>Nombre de projets attribués : {{ user.worksOnProjects|length }}</h4>
+                <h4>Nombre de projets en cours :</h4>
+                <p>
+                    En tant que chef de projet :
+                    {% set cpt2 = 0 %}
+                    {% for project in user.managesProjects  %}    
+                        {% if project.status.name == 'En attente' or project.status.name == 'En cours' %}
+                            {% set cpt2 = cpt2 + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ cpt2 }}
+                </p>
+                <p>
+                    En tant que membre :
+                    {% set cpt1 = 0 %}
+                    {% for worksOnProject in user.worksOnProjects %}
+                        {% if worksOnProject.active == 1 and worksOnProject.project.status.name == 'Terminé' %}                                    
+                            {% set cpt1 = cpt1 + 1 %}
+                        {% endif %}
+                    {% endfor %}
+                    {{ cpt1 }}
+                </p>
             </div>
             <div class="btnLeft">              
                 <a href=" {{path('filrouge_user_detail', {'id': user.id } )}} " class="btnAction userSeeMore">voir le profil</a>

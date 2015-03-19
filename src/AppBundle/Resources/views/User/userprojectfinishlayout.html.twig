@@ -7,7 +7,7 @@
             <th>Date de fin</th>
         </tr>
             {% for project in user.managesProjects  %}    
-                {% if (project.status.name == 'En attente' or project.status.name == 'En cours') %}
+                {% if project.status.name == 'Terminé' %}
                     <tr>
                         <td> 
                             <a href=" {{path('filrouge_project_detail', {'id': project.id } )}}" class="hrefBody">
@@ -21,7 +21,7 @@
                 {% endif %}
             {% endfor %}
             {% for worksOnProject in user.worksOnProjects %}
-                {% if worksOnProject.active == 1 and (worksOnProject.project.status.name == 'En attente' or worksOnProject.project.status.name == 'En cours') %}                                    
+                {% if worksOnProject.active == 1 and worksOnProject.project.status.name == 'Terminé' %}                                    
                     <tr>
                         <td>
                             <a href=" {{path('filrouge_project_detail', {'id': worksOnProject.project.id } )}}" class="hrefBody">
@@ -37,8 +37,8 @@
     </table>
 {% else %}
     {% if app.user.id == user.id %}
-        <p>Vous n'avez aucun projet en cours.</p>
+        <p>Vous n'avez aucun projet terminé.</p>
     {% else %}  
-        <p>Ce profil n'a aucun projet en cours.</p>
+        <p>Ce profil n'a aucun projet terminé.</p>
     {% endif %} 
 {% endif %}

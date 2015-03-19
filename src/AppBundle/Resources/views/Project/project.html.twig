@@ -10,15 +10,16 @@
 
 {% block left %}
     <div class="blockGeneral" id="projectDetail">
-        <h2 class="icoProject">Projet</h2>
-        {% if app.user.id == project.projectManager.id %} 
-            <div class="projectUpdate">
-               <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">
-                   gérer mon projet
-               </a>
-            </div>
-        {% endif %}
-        <div class="clear"></div>
+        <div class="fixeTitle">
+            <h2 class="icoProject">Projet</h2>
+            {% if app.user.id == project.projectManager.id %} 
+                <div class="projectUpdate">
+                   <a href=" {{path('filrouge_project_update', {'id': project.id } )}} " class="btnAction">
+                       gérer mon projet
+                   </a>
+                </div>
+            {% endif %}
+        </div>
         <div class="blockContent">
             <div class="headerBlock">
                 <div class="name">
